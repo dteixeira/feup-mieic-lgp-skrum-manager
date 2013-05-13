@@ -13,7 +13,7 @@ namespace WPF_sKrum
         {
             InitializeComponent();
             backdata = ApplicationController.Instance;
-            backdata.currentPage = this.GetType().Name;
+            backdata.CurrentPage = this.GetType().Name;
         }
     }
 }

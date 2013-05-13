@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace WPF_sKrum
 {
-    public class ApplicationController
+    public class ApplicationController : NotificationService.INotificationServiceCallback
     {
         private static ApplicationController instance;
 
@@ -16,20 +16,34 @@ namespace WPF_sKrum
             get
             {
                 if (ApplicationController.instance == null)
+                {
                     ApplicationController.instance = new ApplicationController();
+                }
                 return ApplicationController.instance;
             }
         }
 
+        /// <summary>
+        /// Method signature to register to data changed events.
+        /// </summary>
+        /// <param name="sender">Object that triggered the event</param>
+        /// <param name="type">Type of the data modification event that occured.</param>
+        public delegate void DataModificationHandler(object sender, NotificationService.NotificationType type);
+
+        public event DataModificationHandler DataChangedEvent; 
+
         private KinectSensorController sensor;
-        private int tracking;
+        private int trackingId;
         private bool grip;
-        private Dictionary<string, string> orders_right;
-        private Dictionary<string, string> orders_left;
-        private Dictionary<string, string> orders_up;
-        private Dictionary<string, string> orders_down;
-        private string cpage;
-        private Skeleton[] skeletons_array;
+        private Dictionary<string, string> ordersRight;
+        private Dictionary<string, string> ordersLeft;
+        private Dictionary<string, string> ordersUp;
+        private Dictionary<string, string> ordersDown;
+        private string currentPage;
+        private Skeleton[] skeletons;
+        private NotificationService.NotificationServiceClient notifications;
+        private ProjectService.ProjectServiceClient projects;
+        private UserService.UserServiceClient users;
 
         public KinectSensorController KinectSensor
         {
@@ -37,10 +51,25 @@ namespace WPF_sKrum
             set { this.sensor = value; }
         }
 
+        public NotificationService.NotificationServiceClient Notifications
+        {
+            get { return this.notifications; }
+        }
+
+        public ProjectService.ProjectServiceClient Projects
+        {
+            get { return this.projects; }
+        }
+
+        public UserService.UserServiceClient Users
+        {
+            get { return this.users; }
+        }
+
         public int TrackingId
         {
-            get { return this.tracking; }
-            set { this.tracking = value; }
+            get { return this.trackingId; }
+            set { this.trackingId = value; }
         }
 
         public bool Gripping
@@ -51,85 +80,113 @@ namespace WPF_sKrum
 
         public Dictionary<string, string> SwipeOrdersLeftToRight
         {
-            get { return this.orders_left; }
-            set { this.orders_left = value; }
+            get { return this.ordersLeft; }
+            set { this.ordersLeft = value; }
         }
 
         public Dictionary<string, string> SwipeOrdersRightToLeft
         {
-            get { return this.orders_right; }
-            set { this.orders_right = value; }
+            get { return this.ordersRight; }
+            set { this.ordersRight = value; }
         }
 
         public Dictionary<string, string> SwipeOrdersUptoDown
         {
-            get { return this.orders_up; }
-            set { this.orders_up = value; }
+            get { return this.ordersUp; }
+            set { this.ordersUp = value; }
         }
 
         public Dictionary<string, string> SwipeOrdersDowntoUp
         {
-            get { return this.orders_down; }
-            set { this.orders_down = value; }
+            get { return this.ordersDown; }
+            set { this.ordersDown = value; }
         }
 
-        public string currentPage
+        public string CurrentPage
         {
-            get { return this.cpage; }
-            set { this.cpage = value; }
+            get { return this.currentPage; }
+            set { this.currentPage = value; }
         }
 
-        public Skeleton[] skeletons
+        public Skeleton[] Skeletons
         {
-            get { return this.skeletons_array; }
-            set { this.skeletons_array = value; }
+            get { return this.skeletons; }
+            set { this.skeletons = value; }
         }
 
         private ApplicationController()
         {
             this.sensor = new KinectSensorController(KinectSensorType.Xbox360Sensor);
-            tracking = -1;
+            trackingId = -1;
             grip = false;
-            orders_down = new Dictionary<string, string>();
-            orders_left = new Dictionary<string, string>();
-            orders_up = new Dictionary<string, string>();
-            orders_right = new Dictionary<string, string>();
-            cpage = "sKrum";
+            ordersDown = new Dictionary<string, string>();
+            ordersLeft = new Dictionary<string, string>();
+            ordersUp = new Dictionary<string, string>();
+            ordersRight = new Dictionary<string, string>();
+            currentPage = "sKrum";
 
-            orders_right.Add("sKrum", "MainPage");
+            // Service clients initialisation.
+            this.notifications = new NotificationService.NotificationServiceClient(new System.ServiceModel.InstanceContext(this));
+            this.users = new UserService.UserServiceClient();
+            this.projects = new ProjectService.ProjectServiceClient();
 
-            orders_right.Add("ProjectsPage", "MainPage");
-            orders_up.Add("ProjectsPage", "UsersPage");
-            orders_down.Add("ProjectsPage", "UsersPage");
+            // sKrum page possible transitions.
+            ordersRight.Add("sKrum", "MainPage");
 
-            orders_right.Add("UsersPage", "MainPage");
-            orders_up.Add("UsersPage", "ProjectsPage");
-            orders_down.Add("UsersPage", "ProjectsPage");
+            // ProjectsPage page possible transitions.
+            ordersRight.Add("ProjectsPage", "MainPage");
+            ordersUp.Add("ProjectsPage", "UsersPage");
+            ordersDown.Add("ProjectsPage", "UsersPage");
 
-            orders_left.Add("MainPage", "ProjectsPage");
-            orders_right.Add("MainPage", "TaskBoardPage");
+            // UsersPage page possible transitions.
+            ordersRight.Add("UsersPage", "MainPage");
+            ordersUp.Add("UsersPage", "ProjectsPage");
+            ordersDown.Add("UsersPage", "ProjectsPage");
 
-            orders_left.Add("TaskBoardPage", "MainPage");
-            orders_up.Add("TaskBoardPage", "StatsUser");
-            orders_down.Add("TaskBoardPage", "StatsUser");
+            // MainPage page possible transitions.
+            ordersLeft.Add("MainPage", "ProjectsPage");
+            ordersRight.Add("MainPage", "TaskBoardPage");
 
-            orders_left.Add("StatsUser", "MainPage");
-            orders_up.Add("StatsUser", "TaskBoardPage");
-            orders_down.Add("StatsUser", "TaskBoardPage");
+            // TaskboardPage page possible transitions.
+            ordersLeft.Add("TaskBoardPage", "MainPage");
+            ordersUp.Add("TaskBoardPage", "StatsUser");
+            ordersDown.Add("TaskBoardPage", "StatsUser");
 
-            if (!sensor.FoundSensor())
+            // StatsUser page possible transitions.
+            ordersLeft.Add("StatsUser", "MainPage");
+            ordersUp.Add("StatsUser", "TaskBoardPage");
+            ordersDown.Add("StatsUser", "TaskBoardPage");
+
+            // Setup gestures if a sensor was found.
+            if (sensor.FoundSensor())
             {
-                //this.Close();
-                return;
+                sensor.Gestures.AddGesture(new KinectGestureWaveRightHand());
+                sensor.Gestures.AddGesture(new KinectGestureWaveLeftHand());
+                sensor.Gestures.AddGesture(new KinectGestureSwipeRightToLeft());
+                sensor.Gestures.AddGesture(new KinectGestureSwipeLeftToRight());
+                sensor.Gestures.AddGesture(new KinectGestureCircleRightHand());
+                sensor.Gestures.AddGesture(new KinectGestureCircleLeftHand());
             }
+        }
 
-            // Setup gestures.
-            sensor.Gestures.AddGesture(new KinectGestureWaveRightHand());
-            sensor.Gestures.AddGesture(new KinectGestureWaveLeftHand());
-            sensor.Gestures.AddGesture(new KinectGestureSwipeRightToLeft());
-            sensor.Gestures.AddGesture(new KinectGestureSwipeLeftToRight());
-            sensor.Gestures.AddGesture(new KinectGestureCircleRightHand());
-            sensor.Gestures.AddGesture(new KinectGestureCircleLeftHand());
+        public void DataChanged(NotificationService.NotificationType notification)
+        {
+            if (DataChangedEvent != null)
+            {
+                System.Delegate[] delegateList = DataChangedEvent.GetInvocationList();
+                foreach (DataModificationHandler handler in delegateList)
+                {
+                    try
+                    {
+                        handler(this, notification);
+                    }
+                    catch (System.Exception e)
+                    {
+                        System.Console.WriteLine(e.Message);
+                        DataChangedEvent -= handler;
+                    }
+                }
+            }
         }
     }
 }

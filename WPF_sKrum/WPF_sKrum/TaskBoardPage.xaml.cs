@@ -25,7 +25,7 @@ namespace WPF_sKrum
         {
             InitializeComponent();
             this.backdata = ApplicationController.Instance;
-            this.backdata.currentPage = this.GetType().Name;
+            this.backdata.CurrentPage = this.GetType().Name;
 
             this.PopulateTaskboard();
 

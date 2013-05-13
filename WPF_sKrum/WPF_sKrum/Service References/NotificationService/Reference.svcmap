@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="64ddac12-78cc-49a8-8f64-8d1b9cd95355" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://skrum.fe.up.pt/NotificationService.svc/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="70b81689-d9ad-404a-a505-a9bfa1d15388" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt/NotificationService.svc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="1ed68dd1-da96-4cc2-8351-589023d98955" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt/NotificationService.svc/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="c6c4ad0c-6291-4151-a876-9e0ba6e79c65" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt/NotificationService.svc/mex" />
+    <MetadataFile FileName="ServiceDataTypes.xsd" MetadataType="Schema" ID="efb52284-3a68-4fc4-b041-9e644c070742" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt/NotificationService.svc/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

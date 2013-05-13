@@ -115,47 +115,47 @@ namespace WPF_sKrum
                 switch (e.GestureType)
                 {
                     case KinectGestureType.SwipeRightToLeft:
-                        if (backdata.SwipeOrdersRightToLeft.ContainsKey(backdata.currentPage))
+                        if (backdata.SwipeOrdersRightToLeft.ContainsKey(backdata.CurrentPage))
                         {
                             this.Window_Every.Background = Brushes.Transparent;
                             this.Logo.Visibility = Visibility.Collapsed;
                             this.Transition = "SlideRight";
-                            var newPage = Activator.CreateInstance(Type.GetType(this.namespace_pages + backdata.SwipeOrdersRightToLeft[backdata.currentPage]));
+                            var newPage = Activator.CreateInstance(Type.GetType(this.namespace_pages + backdata.SwipeOrdersRightToLeft[backdata.CurrentPage]));
                             this.pageTransitionControl.ShowPage((UserControl)newPage);
                         }
                         break;
 
                     case KinectGestureType.SwipeLeftToRight:
-                        if (backdata.SwipeOrdersLeftToRight.ContainsKey(backdata.currentPage))
+                        if (backdata.SwipeOrdersLeftToRight.ContainsKey(backdata.CurrentPage))
                         {
                             this.Window_Every.Background = Brushes.Transparent;
                             this.Logo.Visibility = Visibility.Collapsed;
                             this.Transition = "SlideLeft";
-                            var newPage = Activator.CreateInstance(Type.GetType(this.namespace_pages + backdata.SwipeOrdersLeftToRight[backdata.currentPage]));
+                            var newPage = Activator.CreateInstance(Type.GetType(this.namespace_pages + backdata.SwipeOrdersLeftToRight[backdata.CurrentPage]));
                             this.pageTransitionControl.ShowPage((UserControl)newPage);
                         }
 
                         break;
 
                     case KinectGestureType.CircleLeftHand:
-                        if (backdata.SwipeOrdersDowntoUp.ContainsKey(backdata.currentPage))
+                        if (backdata.SwipeOrdersDowntoUp.ContainsKey(backdata.CurrentPage))
                         {
                             this.Window_Every.Background = Brushes.Transparent;
                             this.Logo.Visibility = Visibility.Collapsed;
                             this.Transition = "SlideUp";
-                            var newPage = Activator.CreateInstance(Type.GetType(this.namespace_pages + backdata.SwipeOrdersDowntoUp[backdata.currentPage]));
+                            var newPage = Activator.CreateInstance(Type.GetType(this.namespace_pages + backdata.SwipeOrdersDowntoUp[backdata.CurrentPage]));
                             this.pageTransitionControl.ShowPage((UserControl)newPage);
                         }
 
                         break;
 
                     case KinectGestureType.CircleRightHand:
-                        if (backdata.SwipeOrdersUptoDown.ContainsKey(backdata.currentPage))
+                        if (backdata.SwipeOrdersUptoDown.ContainsKey(backdata.CurrentPage))
                         {
                             this.Window_Every.Background = Brushes.Transparent;
                             this.Logo.Visibility = Visibility.Collapsed;
                             this.Transition = "SlideDown";
-                            var newPage = Activator.CreateInstance(Type.GetType(this.namespace_pages + backdata.SwipeOrdersUptoDown[backdata.currentPage]));
+                            var newPage = Activator.CreateInstance(Type.GetType(this.namespace_pages + backdata.SwipeOrdersUptoDown[backdata.CurrentPage]));
                             this.pageTransitionControl.ShowPage((UserControl)newPage);
                         }
 
@@ -185,8 +185,8 @@ namespace WPF_sKrum
                 }
                 else
                 {
-                    backdata.skeletons = new Skeleton[SFrame.SkeletonArrayLength];
-                    SFrame.CopySkeletonDataTo(backdata.skeletons);
+                    backdata.Skeletons = new Skeleton[SFrame.SkeletonArrayLength];
+                    SFrame.CopySkeletonDataTo(backdata.Skeletons);
                     receivedData = true;
                 }
             }
@@ -196,7 +196,7 @@ namespace WPF_sKrum
                 // No skeleton engaged, draw all.
                 if (backdata.TrackingId != -1)
                 {
-                    var skeleton = backdata.skeletons.FirstOrDefault(s => s.TrackingId == backdata.TrackingId);
+                    var skeleton = backdata.Skeletons.FirstOrDefault(s => s.TrackingId == backdata.TrackingId);
                     if (skeleton == null)
                     {
                         this.GestureRegognized(this, new KinectGestureEventArgs(KinectGestureType.WaveLeftHand, backdata.TrackingId));
@@ -267,19 +267,19 @@ namespace WPF_sKrum
         {
             this.pagesStatTimer.Stop();
             this.pagesStatDissapearTimer.Stop();
-            if (this.backdata.SwipeOrdersDowntoUp.ContainsKey(this.backdata.currentPage))
+            if (this.backdata.SwipeOrdersDowntoUp.ContainsKey(this.backdata.CurrentPage))
             {
                 this.DownPage.Visibility = Visibility.Visible;
             }
-            if (this.backdata.SwipeOrdersUptoDown.ContainsKey(this.backdata.currentPage))
+            if (this.backdata.SwipeOrdersUptoDown.ContainsKey(this.backdata.CurrentPage))
             {
                 this.UpPage.Visibility = Visibility.Visible;
             }
-            if (this.backdata.SwipeOrdersRightToLeft.ContainsKey(this.backdata.currentPage))
+            if (this.backdata.SwipeOrdersRightToLeft.ContainsKey(this.backdata.CurrentPage))
             {
                 this.RightPage.Visibility = Visibility.Visible;
             }
-            if (this.backdata.SwipeOrdersLeftToRight.ContainsKey(this.backdata.currentPage))
+            if (this.backdata.SwipeOrdersLeftToRight.ContainsKey(this.backdata.CurrentPage))
             {
                 this.LeftPage.Visibility = Visibility.Visible;
             }
@@ -322,40 +322,40 @@ namespace WPF_sKrum
 
         private void HoverPagesStatLeft_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (this.LeftPage.Visibility == Visibility.Visible && backdata.SwipeOrdersLeftToRight.ContainsKey(backdata.currentPage))
+            if (this.LeftPage.Visibility == Visibility.Visible && backdata.SwipeOrdersLeftToRight.ContainsKey(backdata.CurrentPage))
             {
                 KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-                MainWindow.Instance.GestureRegognized(backdata.SwipeOrdersLeftToRight[backdata.currentPage], userGeneratedSignal);
+                MainWindow.Instance.GestureRegognized(backdata.SwipeOrdersLeftToRight[backdata.CurrentPage], userGeneratedSignal);
                 this.PagesInfoDisappearAction(null, null);
             }
         }
 
         private void HoverPagesStatRight_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (this.RightPage.Visibility == Visibility.Visible && backdata.SwipeOrdersRightToLeft.ContainsKey(backdata.currentPage))
+            if (this.RightPage.Visibility == Visibility.Visible && backdata.SwipeOrdersRightToLeft.ContainsKey(backdata.CurrentPage))
             {
                 KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-                MainWindow.Instance.GestureRegognized(backdata.SwipeOrdersRightToLeft[backdata.currentPage], userGeneratedSignal);
+                MainWindow.Instance.GestureRegognized(backdata.SwipeOrdersRightToLeft[backdata.CurrentPage], userGeneratedSignal);
                 this.PagesInfoDisappearAction(null, null);
             }
         }
 
         private void HoverPagesStatUp_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (this.UpPage.Visibility == Visibility.Visible && backdata.SwipeOrdersUptoDown.ContainsKey(backdata.currentPage))
+            if (this.UpPage.Visibility == Visibility.Visible && backdata.SwipeOrdersUptoDown.ContainsKey(backdata.CurrentPage))
             {
                 KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-                MainWindow.Instance.GestureRegognized(backdata.SwipeOrdersUptoDown[backdata.currentPage], userGeneratedSignal);
+                MainWindow.Instance.GestureRegognized(backdata.SwipeOrdersUptoDown[backdata.CurrentPage], userGeneratedSignal);
                 this.PagesInfoDisappearAction(null, null);
             }
         }
 
         private void HoverPagesStatDown_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (this.DownPage.Visibility == Visibility.Visible && backdata.SwipeOrdersDowntoUp.ContainsKey(backdata.currentPage))
+            if (this.DownPage.Visibility == Visibility.Visible && backdata.SwipeOrdersDowntoUp.ContainsKey(backdata.CurrentPage))
             {
                 KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-                MainWindow.Instance.GestureRegognized(backdata.SwipeOrdersDowntoUp[backdata.currentPage], userGeneratedSignal);
+                MainWindow.Instance.GestureRegognized(backdata.SwipeOrdersDowntoUp[backdata.CurrentPage], userGeneratedSignal);
                 this.PagesInfoDisappearAction(null, null);
             }
         }

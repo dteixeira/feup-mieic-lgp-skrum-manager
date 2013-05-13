@@ -14,8 +14,17 @@ namespace WPF_sKrum
         public MainPage()
         {
             InitializeComponent();
-            backdata = ApplicationController.Instance;
-            backdata.currentPage = this.GetType().Name;
+            this.backdata = ApplicationController.Instance;
+            this.backdata.CurrentPage = this.GetType().Name;
+
+            // Subscribe project to notify.
+            this.backdata.Notifications.Subscribe(-1);
+            this.backdata.DataChangedEvent += backdata_DataChangedEvent;
+        }
+
+        private void backdata_DataChangedEvent(object sender, NotificationService.NotificationType type)
+        {
+            // TODO Notification handling goes here.
         }
 
         private void DailyScrum_PreviewMouseLeftButtonDown(object sender, RoutedEventArgs e)
