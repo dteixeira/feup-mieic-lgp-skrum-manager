@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="WPF_sKrum.TaskBoardPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      xmlns:UserStoryLib="clr-namespace:UserStoryLib;assembly=UserStoryLib"
+      xmlns:TaskLib="clr-namespace:TaskLib;assembly=TaskLib"
+      Background="White"
+
+      d:DesignWidth="800" d:DesignHeight="600"
+      Width="auto"
+      Height="auto">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="16*" />
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="TopTaskboard" Margin="0" Grid.Row="0" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="3*" />
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="User Stories" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
+            <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="To Do" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
+            <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Doing" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
+            <TextBlock Grid.Column="3" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Done" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
+        </Grid>
+
+        <ScrollViewer x:Name="TaskboardScroll" Margin="0" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
+            <Grid x:Name="Taskboard">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</UserControl>
