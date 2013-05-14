@@ -9,31 +9,26 @@
 		<Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
 			<Setter Property="Template">
 				<Setter.Value>
-					<ControlTemplate>
-						<Border x:Name="border" CornerRadius="15" BorderThickness="6.5" Margin="0">
-							<Border.Background>
-								<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-									<GradientStop Color="White" Offset="0"/>
-									<GradientStop Color="#FFE8E8E8" Offset="1"/>
-								</LinearGradientBrush>
-							</Border.Background>
-							<Border.BorderBrush>
-								<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-									<GradientStop Color="#FFABABAB" Offset="1"/>
-									<GradientStop Color="WhiteSmoke"/>
-								</LinearGradientBrush>
-							</Border.BorderBrush>
-						</Border>
+					<ControlTemplate TargetType="{x:Type Button}">
+						<Grid>
+							<Border x:Name="border" Background="#FFE6E6E6" />
+							<ContentControl x:Name="wrapper" Foreground="#FF4EA6EA">
+								<ContentPresenter x:Name="presenter" HorizontalAlignment="Center" VerticalAlignment="Center">
+									<ContentPresenter.Resources>
+										<Style TargetType="{x:Type TextBlock}">
+											<Setter Property="TextWrapping" Value="Wrap" />
+											<Setter Property="FontSize" Value="50" />
+											<Setter Property="FontWeight" Value="Bold" />
+											<Setter Property="TextAlignment" Value="Center" />
+										</Style>
+									</ContentPresenter.Resources>
+								</ContentPresenter>
+							</ContentControl>
+						</Grid>
 						<ControlTemplate.Triggers>
 							<Trigger Property="IsMouseOver" Value="True">
-								<Setter Property="Background" TargetName="border">
-									<Setter.Value>
-										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-											<GradientStop Color="White" Offset="1"/>
-											<GradientStop Color="#FFE8E8E8" Offset="0"/>
-										</LinearGradientBrush>
-									</Setter.Value>
-								</Setter>
+								<Setter Property="Background" TargetName="border" Value="#FF4EA6EA"/>
+								<Setter Property="Foreground" TargetName="wrapper" Value="White"/>
 							</Trigger>
 						</ControlTemplate.Triggers>
 					</ControlTemplate>
@@ -41,7 +36,7 @@
 			</Setter>
 		</Style>
 	</UserControl.Resources>
-    <Grid Background="#FFE5E5E5">
+    <Grid Background="#FFF7F7F7">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*" />
             <ColumnDefinition Width="1*" />
@@ -50,21 +45,9 @@
             <RowDefinition Height="1*" />
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
-		<Grid Grid.Column="0" Grid.Row="0" Margin="20,30,15,10">
-			<Button x:Name="ProjectStart" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Style="{StaticResource ButtonStyle}" Margin="0" />
-			<TextBlock TextAlignment="Center" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Source Sans Pro" FontSize="49.333" Foreground="#FF3D81FC" FontWeight="Bold" Text="INICIO&#xA;PROJECTO" ScrollViewer.VerticalScrollBarVisibility="Disabled" IsHitTestVisible="False" />
-		</Grid>
-		<Grid Grid.Column="1" Grid.Row="0" Margin="15,30,20,10">
-			<Button x:Name="SprintStart" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Style="{StaticResource ButtonStyle}" Margin="0" />
-			<TextBlock TextAlignment="Center" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Source Sans Pro" FontSize="49.333" Foreground="#FF3D81FC" FontWeight="Bold" Text="INICIO&#xD;&#xA;SPRINT" ScrollViewer.VerticalScrollBarVisibility="Disabled" IsHitTestVisible="False" />
-		</Grid>
-		<Grid Grid.Column="0" Grid.Row="1" Margin="20,10,10,30">
-			<Button x:Name="DailyScrum" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Style="{StaticResource ButtonStyle}" Click="DailyScrum_PreviewMouseLeftButtonDown" Margin="0" />
-			<TextBlock TextAlignment="Center" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Source Sans Pro" FontSize="49.333" Foreground="#FF3D81FC" FontWeight="Bold" Text="DAILY&#xD;&#xA;SCRUM" ScrollViewer.VerticalScrollBarVisibility="Disabled" IsHitTestVisible="False" />
-		</Grid>
-		<Grid Grid.Column="1" Grid.Row="1" Margin="10,10,20,30">
-			<Button x:Name="ProjectFinish" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Style="{StaticResource ButtonStyle}" Margin="0"/>
-			<TextBlock TextAlignment="Center" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Source Sans Pro" FontSize="49.333" Foreground="#FF3D81FC" FontWeight="Bold" Text="FIM&#xD;&#xA;PROJECTO" ScrollViewer.VerticalScrollBarVisibility="Disabled" IsHitTestVisible="False" />
-		</Grid>
+		<Button x:Name="ProjectStart" Grid.Row="0" Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Style="{StaticResource ButtonStyle}" Content="INICIO PROJECTO" Margin="30,30,10,10"/>
+		<Button x:Name="SprintStart" Grid.Row="0" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Style="{StaticResource ButtonStyle}" Content="INICIO SPRINT" Margin="10,30,30,10" />
+		<Button x:Name="DailyScrum" Grid.Row="1" Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Style="{StaticResource ButtonStyle}" Content="DAILY SCRUM" Click="DailyScrum_PreviewMouseLeftButtonDown" Margin="30,10,10,30" />
+		<Button x:Name="ProjectFinish" Grid.Row="1" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Style="{StaticResource ButtonStyle}"  Content="FINAL SPRINT" Margin="10,10,30,30"/>
 	</Grid>
 </UserControl>

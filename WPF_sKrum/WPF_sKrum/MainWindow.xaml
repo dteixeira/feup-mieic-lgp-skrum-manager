@@ -50,13 +50,13 @@
             <Rectangle x:Name="RightPage" Fill="#FFB66B6B" Margin="0,5" Grid.Column="2" Visibility="Collapsed" Width="auto" Height="auto"  MouseLeave="HoverPagesStat_MouseLeave"  MouseEnter="HoverPagesStat_MouseEnter" />
         </Grid>
 
-        <Grid Name="Window_Every" Background="#22A0CF" Panel.ZIndex="1">
+        <Grid Name="Window_Every" Background="#FF4EA6EA" Panel.ZIndex="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*" />
                 <RowDefinition Height="90*" />
             </Grid.RowDefinitions>
 
-            <Grid x:Name="UpperBar" Margin="0" Grid.Row="0" Background="Gray">
+            <Grid x:Name="UpperBar" Margin="0" Grid.Row="0" Background="#FF494949">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="25*" />
                     <ColumnDefinition Width="50*" />

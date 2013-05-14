@@ -126,12 +126,11 @@ namespace WPFApplication
             if (e.GestureType == KinectGestureType.WaveRightHand && backdata.TrackingId == -1)
             {
                 this.Cursor = Cursors.None;
-
                 this.backdata.TrackingId = e.TrackingId;
                 this.backdata.KinectSensor.StartTrackingSkeleton(backdata.TrackingId);
                 this.RightOpen.Visibility = Visibility.Visible;
                 this.RightClosed.Visibility = Visibility.Collapsed;
-                this.UpperBar.Background = Brushes.Blue;
+                this.UpperBar.Background = new SolidColorBrush(Color.FromRgb(0x4E, 0xA6, 0xEA));
             }
 
             // Disengage previous skeleton.
