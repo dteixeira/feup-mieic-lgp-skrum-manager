@@ -1,5 +1,8 @@
-﻿namespace WpfPageTransitions
+﻿namespace PageTransitions
 {
+    /// <summary>
+    /// Represents the type of possible page transitions.
+    /// </summary>
     public enum PageTransitionType
     {
         SlideRight,

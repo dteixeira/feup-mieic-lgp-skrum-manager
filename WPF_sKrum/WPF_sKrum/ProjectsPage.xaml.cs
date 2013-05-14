@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WPF_sKrum
+namespace WPFApplication
 {
     /// <summary>
     /// Interaction logic for ProjectsPage.xaml
@@ -12,8 +12,8 @@ namespace WPF_sKrum
         public ProjectsPage()
         {
             InitializeComponent();
-            backdata = ApplicationController.Instance;
-            backdata.CurrentPage = this.GetType().Name;
+            this.backdata = ApplicationController.Instance;
+            this.backdata.CurrentPage = ApplicationPages.ProjectsPage;
         }
     }
 }

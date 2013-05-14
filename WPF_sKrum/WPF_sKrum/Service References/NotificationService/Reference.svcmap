@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="64ddac12-78cc-49a8-8f64-8d1b9cd95355" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="bc5b3032-b4de-40ed-b541-7d4deba2917e" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -18,13 +18,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="net.tcp://skrum.fe.up.pt/NotificationService.svc/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="net.tcp://skrum.fe.up.pt:8003/NotificationService.svc/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="70b81689-d9ad-404a-a505-a9bfa1d15388" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt/NotificationService.svc/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="1ed68dd1-da96-4cc2-8351-589023d98955" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt/NotificationService.svc/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="c6c4ad0c-6291-4151-a876-9e0ba6e79c65" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt/NotificationService.svc/mex" />
-    <MetadataFile FileName="ServiceDataTypes.xsd" MetadataType="Schema" ID="efb52284-3a68-4fc4-b041-9e644c070742" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt/NotificationService.svc/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="dc52d413-37c9-40d6-9fd9-a16c7d40db85" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/NotificationService.svc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="f189a381-e381-4ae9-a4c1-4b9ca4cfd68a" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/NotificationService.svc/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="f791f26d-c311-4ed0-9dd3-a64485191e56" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/NotificationService.svc/mex" />
+    <MetadataFile FileName="ServiceDataTypes.xsd" MetadataType="Schema" ID="a5b90947-5dcc-4033-aa92-ba52d9b2b523" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/NotificationService.svc/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

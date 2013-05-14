@@ -3,17 +3,17 @@
 namespace WPFApplication
 {
     /// <summary>
-    /// Interaction logic for UsersPage.xaml
+    /// Interaction logic for StatsUser.xaml
     /// </summary>
-    public partial class UsersPage : UserControl
+    public partial class UserStatsPage : UserControl
     {
         private ApplicationController backdata;
 
-        public UsersPage()
+        public UserStatsPage()
         {
             InitializeComponent();
             this.backdata = ApplicationController.Instance;
-            this.backdata.CurrentPage = ApplicationPages.UsersPage;
+            this.backdata.CurrentPage = ApplicationPages.UserStatsPage;
         }
     }
 }

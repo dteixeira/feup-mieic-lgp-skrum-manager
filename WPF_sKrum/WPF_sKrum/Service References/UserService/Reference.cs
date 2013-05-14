@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WPF_sKrum.UserService {
+namespace WPFApplication.UserService {
     using System.Runtime.Serialization;
     using System;
     
@@ -41,10 +41,10 @@ namespace WPF_sKrum.UserService {
         private string PhotoURLField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.UserService.Role[] RolesField;
+        private WPFApplication.UserService.Role[] RolesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.UserService.Task[] TasksField;
+        private WPFApplication.UserService.Task[] TasksField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -135,7 +135,7 @@ namespace WPF_sKrum.UserService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.UserService.Role[] Roles {
+        public WPFApplication.UserService.Role[] Roles {
             get {
                 return this.RolesField;
             }
@@ -148,7 +148,7 @@ namespace WPF_sKrum.UserService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.UserService.Task[] Tasks {
+        public WPFApplication.UserService.Task[] Tasks {
             get {
                 return this.TasksField;
             }
@@ -192,7 +192,7 @@ namespace WPF_sKrum.UserService {
         private int ProjectIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.UserService.RoleDescription RoleDescriptionField;
+        private WPFApplication.UserService.RoleDescription RoleDescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int RoleIDField;
@@ -260,7 +260,7 @@ namespace WPF_sKrum.UserService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.UserService.RoleDescription RoleDescription {
+        public WPFApplication.UserService.RoleDescription RoleDescription {
             get {
                 return this.RoleDescriptionField;
             }
@@ -314,10 +314,10 @@ namespace WPF_sKrum.UserService {
         private int EstimationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.UserService.PersonTask[] PersonTasksField;
+        private WPFApplication.UserService.PersonTask[] PersonTasksField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.UserService.TaskState StateField;
+        private WPFApplication.UserService.TaskState StateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StoryIDField;
@@ -375,7 +375,7 @@ namespace WPF_sKrum.UserService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.UserService.PersonTask[] PersonTasks {
+        public WPFApplication.UserService.PersonTask[] PersonTasks {
             get {
                 return this.PersonTasksField;
             }
@@ -388,7 +388,7 @@ namespace WPF_sKrum.UserService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.UserService.TaskState State {
+        public WPFApplication.UserService.TaskState State {
             get {
                 return this.StateField;
             }
@@ -568,70 +568,70 @@ namespace WPF_sKrum.UserService {
     public interface IUserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreatePerson", ReplyAction="http://tempuri.org/IUserService/CreatePersonResponse")]
-        WPF_sKrum.UserService.Person CreatePerson(WPF_sKrum.UserService.Person person);
+        WPFApplication.UserService.Person CreatePerson(WPFApplication.UserService.Person person);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdatePerson", ReplyAction="http://tempuri.org/IUserService/UpdatePersonResponse")]
-        WPF_sKrum.UserService.Person UpdatePerson(WPF_sKrum.UserService.Person person);
+        WPFApplication.UserService.Person UpdatePerson(WPFApplication.UserService.Person person);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdatePersonPassword", ReplyAction="http://tempuri.org/IUserService/UpdatePersonPasswordResponse")]
-        WPF_sKrum.UserService.Person UpdatePersonPassword(int personID, string password);
+        WPFApplication.UserService.Person UpdatePersonPassword(int personID, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeletePerson", ReplyAction="http://tempuri.org/IUserService/DeletePersonResponse")]
         bool DeletePerson(int personID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetPersonByID", ReplyAction="http://tempuri.org/IUserService/GetPersonByIDResponse")]
-        WPF_sKrum.UserService.Person GetPersonByID(int personID);
+        WPFApplication.UserService.Person GetPersonByID(int personID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetPersonByEmail", ReplyAction="http://tempuri.org/IUserService/GetPersonByEmailResponse")]
-        WPF_sKrum.UserService.Person GetPersonByEmail(string email);
+        WPFApplication.UserService.Person GetPersonByEmail(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateRole", ReplyAction="http://tempuri.org/IUserService/CreateRoleResponse")]
-        WPF_sKrum.UserService.Role CreateRole(WPF_sKrum.UserService.Role role);
+        WPFApplication.UserService.Role CreateRole(WPFApplication.UserService.Role role);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateRole", ReplyAction="http://tempuri.org/IUserService/UpdateRoleResponse")]
-        WPF_sKrum.UserService.Role UpdateRole(WPF_sKrum.UserService.Role role);
+        WPFApplication.UserService.Role UpdateRole(WPFApplication.UserService.Role role);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateRolePassword", ReplyAction="http://tempuri.org/IUserService/UpdateRolePasswordResponse")]
-        WPF_sKrum.UserService.Role UpdateRolePassword(int roleID, string password);
+        WPFApplication.UserService.Role UpdateRolePassword(int roleID, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteRole", ReplyAction="http://tempuri.org/IUserService/DeleteRoleResponse")]
         bool DeleteRole(int roleID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetRoleByID", ReplyAction="http://tempuri.org/IUserService/GetRoleByIDResponse")]
-        WPF_sKrum.UserService.Role GetRoleByID(int roleID);
+        WPFApplication.UserService.Role GetRoleByID(int roleID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAllPeopleInProject", ReplyAction="http://tempuri.org/IUserService/GetAllPeopleInProjectResponse")]
-        WPF_sKrum.UserService.Person[] GetAllPeopleInProject(int projectID);
+        WPFApplication.UserService.Person[] GetAllPeopleInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAllRolesInProject", ReplyAction="http://tempuri.org/IUserService/GetAllRolesInProjectResponse")]
-        WPF_sKrum.UserService.Role[] GetAllRolesInProject(int projectID);
+        WPFApplication.UserService.Role[] GetAllRolesInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAllPeople", ReplyAction="http://tempuri.org/IUserService/GetAllPeopleResponse")]
-        WPF_sKrum.UserService.Person[] GetAllPeople();
+        WPFApplication.UserService.Person[] GetAllPeople();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/LoginAdmin", ReplyAction="http://tempuri.org/IUserService/LoginAdminResponse")]
         bool LoginAdmin(int personID, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAllTasksInPerson", ReplyAction="http://tempuri.org/IUserService/GetAllTasksInPersonResponse")]
-        WPF_sKrum.UserService.Task[] GetAllTasksInPerson(int personID);
+        WPFApplication.UserService.Task[] GetAllTasksInPerson(int personID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAllRolesInPerson", ReplyAction="http://tempuri.org/IUserService/GetAllRolesInPersonResponse")]
-        WPF_sKrum.UserService.Role[] GetAllRolesInPerson(int personID);
+        WPFApplication.UserService.Role[] GetAllRolesInPerson(int personID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/LoginProjectAdmin", ReplyAction="http://tempuri.org/IUserService/LoginProjectAdminResponse")]
         bool LoginProjectAdmin(int roleID, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAllPeopleWorkingInTask", ReplyAction="http://tempuri.org/IUserService/GetAllPeopleWorkingInTaskResponse")]
-        WPF_sKrum.UserService.Person[] GetAllPeopleWorkingInTask(int taskID);
+        WPFApplication.UserService.Person[] GetAllPeopleWorkingInTask(int taskID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IUserServiceChannel : WPF_sKrum.UserService.IUserService, System.ServiceModel.IClientChannel {
+    public interface IUserServiceChannel : WPFApplication.UserService.IUserService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UserServiceClient : System.ServiceModel.ClientBase<WPF_sKrum.UserService.IUserService>, WPF_sKrum.UserService.IUserService {
+    public partial class UserServiceClient : System.ServiceModel.ClientBase<WPFApplication.UserService.IUserService>, WPFApplication.UserService.IUserService {
         
         public UserServiceClient() {
         }
@@ -652,15 +652,15 @@ namespace WPF_sKrum.UserService {
                 base(binding, remoteAddress) {
         }
         
-        public WPF_sKrum.UserService.Person CreatePerson(WPF_sKrum.UserService.Person person) {
+        public WPFApplication.UserService.Person CreatePerson(WPFApplication.UserService.Person person) {
             return base.Channel.CreatePerson(person);
         }
         
-        public WPF_sKrum.UserService.Person UpdatePerson(WPF_sKrum.UserService.Person person) {
+        public WPFApplication.UserService.Person UpdatePerson(WPFApplication.UserService.Person person) {
             return base.Channel.UpdatePerson(person);
         }
         
-        public WPF_sKrum.UserService.Person UpdatePersonPassword(int personID, string password) {
+        public WPFApplication.UserService.Person UpdatePersonPassword(int personID, string password) {
             return base.Channel.UpdatePersonPassword(personID, password);
         }
         
@@ -668,23 +668,23 @@ namespace WPF_sKrum.UserService {
             return base.Channel.DeletePerson(personID);
         }
         
-        public WPF_sKrum.UserService.Person GetPersonByID(int personID) {
+        public WPFApplication.UserService.Person GetPersonByID(int personID) {
             return base.Channel.GetPersonByID(personID);
         }
         
-        public WPF_sKrum.UserService.Person GetPersonByEmail(string email) {
+        public WPFApplication.UserService.Person GetPersonByEmail(string email) {
             return base.Channel.GetPersonByEmail(email);
         }
         
-        public WPF_sKrum.UserService.Role CreateRole(WPF_sKrum.UserService.Role role) {
+        public WPFApplication.UserService.Role CreateRole(WPFApplication.UserService.Role role) {
             return base.Channel.CreateRole(role);
         }
         
-        public WPF_sKrum.UserService.Role UpdateRole(WPF_sKrum.UserService.Role role) {
+        public WPFApplication.UserService.Role UpdateRole(WPFApplication.UserService.Role role) {
             return base.Channel.UpdateRole(role);
         }
         
-        public WPF_sKrum.UserService.Role UpdateRolePassword(int roleID, string password) {
+        public WPFApplication.UserService.Role UpdateRolePassword(int roleID, string password) {
             return base.Channel.UpdateRolePassword(roleID, password);
         }
         
@@ -692,19 +692,19 @@ namespace WPF_sKrum.UserService {
             return base.Channel.DeleteRole(roleID);
         }
         
-        public WPF_sKrum.UserService.Role GetRoleByID(int roleID) {
+        public WPFApplication.UserService.Role GetRoleByID(int roleID) {
             return base.Channel.GetRoleByID(roleID);
         }
         
-        public WPF_sKrum.UserService.Person[] GetAllPeopleInProject(int projectID) {
+        public WPFApplication.UserService.Person[] GetAllPeopleInProject(int projectID) {
             return base.Channel.GetAllPeopleInProject(projectID);
         }
         
-        public WPF_sKrum.UserService.Role[] GetAllRolesInProject(int projectID) {
+        public WPFApplication.UserService.Role[] GetAllRolesInProject(int projectID) {
             return base.Channel.GetAllRolesInProject(projectID);
         }
         
-        public WPF_sKrum.UserService.Person[] GetAllPeople() {
+        public WPFApplication.UserService.Person[] GetAllPeople() {
             return base.Channel.GetAllPeople();
         }
         
@@ -712,11 +712,11 @@ namespace WPF_sKrum.UserService {
             return base.Channel.LoginAdmin(personID, password);
         }
         
-        public WPF_sKrum.UserService.Task[] GetAllTasksInPerson(int personID) {
+        public WPFApplication.UserService.Task[] GetAllTasksInPerson(int personID) {
             return base.Channel.GetAllTasksInPerson(personID);
         }
         
-        public WPF_sKrum.UserService.Role[] GetAllRolesInPerson(int personID) {
+        public WPFApplication.UserService.Role[] GetAllRolesInPerson(int personID) {
             return base.Channel.GetAllRolesInPerson(personID);
         }
         
@@ -724,7 +724,7 @@ namespace WPF_sKrum.UserService {
             return base.Channel.LoginProjectAdmin(roleID, password);
         }
         
-        public WPF_sKrum.UserService.Person[] GetAllPeopleWorkingInTask(int taskID) {
+        public WPFApplication.UserService.Person[] GetAllPeopleWorkingInTask(int taskID) {
             return base.Channel.GetAllPeopleWorkingInTask(taskID);
         }
     }

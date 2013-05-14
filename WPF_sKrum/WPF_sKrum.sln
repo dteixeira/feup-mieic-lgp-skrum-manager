@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_sKrum", "WPF_sKrum\WPF_sKrum.csproj", "{46C1FD7C-4FC3-46EB-A532-DA79B0D83231}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFApplication", "WPF_sKrum\WPFApplication.csproj", "{46C1FD7C-4FC3-46EB-A532-DA79B0D83231}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserStoryLib", "UserStoryLib\UserStoryLib.csproj", "{55FF83E6-EAC0-4993-A1B2-4DEBC866E777}"
 EndProject

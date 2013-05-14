@@ -9,7 +9,7 @@ using TaskboardRowLib;
 using TaskLib;
 using UserStoryLib;
 
-namespace WPF_sKrum
+namespace WPFApplication
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -18,24 +18,21 @@ namespace WPF_sKrum
     {
         private float scroll_value = 0.0f;
         private DispatcherTimer CountdownTimer;
-
         private ApplicationController backdata;
 
         public TaskBoardPage()
         {
             InitializeComponent();
-            this.backdata = ApplicationController.Instance;
-            this.backdata.CurrentPage = this.GetType().Name;
-
             this.PopulateTaskboard();
-
+            this.backdata = ApplicationController.Instance;
+            this.backdata.CurrentPage = ApplicationPages.TaskBoardPage;
             this.CountdownTimer = new DispatcherTimer();
             this.CountdownTimer.Tick += new EventHandler(ScrollAction);
             this.CountdownTimer.Interval = TimeSpan.FromSeconds(0.01);
             this.CountdownTimer.Start();
         }
 
-        public void PopulateTaskboard()
+        private void PopulateTaskboard()
         {
             int number_us = 10;
             Random random = new Random();

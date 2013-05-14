@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WPF_sKrum.ProjectService {
+namespace WPFApplication.ProjectService {
     using System.Runtime.Serialization;
     using System;
     
@@ -26,7 +26,7 @@ namespace WPF_sKrum.ProjectService {
         private int AlertLimitField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.ProjectService.Meeting[] MeetingsField;
+        private WPFApplication.ProjectService.Meeting[] MeetingsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -44,7 +44,7 @@ namespace WPF_sKrum.ProjectService {
         private int SprintDurationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.ProjectService.Sprint[] SprintsField;
+        private WPFApplication.ProjectService.Sprint[] SprintsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -70,7 +70,7 @@ namespace WPF_sKrum.ProjectService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.ProjectService.Meeting[] Meetings {
+        public WPFApplication.ProjectService.Meeting[] Meetings {
             get {
                 return this.MeetingsField;
             }
@@ -148,7 +148,7 @@ namespace WPF_sKrum.ProjectService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.ProjectService.Sprint[] Sprints {
+        public WPFApplication.ProjectService.Sprint[] Sprints {
             get {
                 return this.SprintsField;
             }
@@ -307,7 +307,7 @@ namespace WPF_sKrum.ProjectService {
         private int SprintIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.ProjectService.Story[] StoriesField;
+        private WPFApplication.ProjectService.Story[] StoriesField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -398,7 +398,7 @@ namespace WPF_sKrum.ProjectService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.ProjectService.Story[] Stories {
+        public WPFApplication.ProjectService.Story[] Stories {
             get {
                 return this.StoriesField;
             }
@@ -445,16 +445,16 @@ namespace WPF_sKrum.ProjectService {
         private int ProjectIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.ProjectService.StoryState StateField;
+        private WPFApplication.ProjectService.StoryState StateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StoryIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.ProjectService.StorySprint[] StorySprintsField;
+        private WPFApplication.ProjectService.StorySprint[] StorySprintsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.ProjectService.Task[] TasksField;
+        private WPFApplication.ProjectService.Task[] TasksField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -532,7 +532,7 @@ namespace WPF_sKrum.ProjectService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.ProjectService.StoryState State {
+        public WPFApplication.ProjectService.StoryState State {
             get {
                 return this.StateField;
             }
@@ -558,7 +558,7 @@ namespace WPF_sKrum.ProjectService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.ProjectService.StorySprint[] StorySprints {
+        public WPFApplication.ProjectService.StorySprint[] StorySprints {
             get {
                 return this.StorySprintsField;
             }
@@ -571,7 +571,7 @@ namespace WPF_sKrum.ProjectService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.ProjectService.Task[] Tasks {
+        public WPFApplication.ProjectService.Task[] Tasks {
             get {
                 return this.TasksField;
             }
@@ -620,7 +620,7 @@ namespace WPF_sKrum.ProjectService {
         private int PointsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.ProjectService.StoryPriority PriorityField;
+        private WPFApplication.ProjectService.StoryPriority PriorityField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int SprintIDField;
@@ -652,7 +652,7 @@ namespace WPF_sKrum.ProjectService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.ProjectService.StoryPriority Priority {
+        public WPFApplication.ProjectService.StoryPriority Priority {
             get {
                 return this.PriorityField;
             }
@@ -719,10 +719,10 @@ namespace WPF_sKrum.ProjectService {
         private int EstimationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.ProjectService.PersonTask[] PersonTasksField;
+        private WPFApplication.ProjectService.PersonTask[] PersonTasksField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPF_sKrum.ProjectService.TaskState StateField;
+        private WPFApplication.ProjectService.TaskState StateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StoryIDField;
@@ -780,7 +780,7 @@ namespace WPF_sKrum.ProjectService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.ProjectService.PersonTask[] PersonTasks {
+        public WPFApplication.ProjectService.PersonTask[] PersonTasks {
             get {
                 return this.PersonTasksField;
             }
@@ -793,7 +793,7 @@ namespace WPF_sKrum.ProjectService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPF_sKrum.ProjectService.TaskState State {
+        public WPFApplication.ProjectService.TaskState State {
             get {
                 return this.StateField;
             }
@@ -973,124 +973,124 @@ namespace WPF_sKrum.ProjectService {
     public interface IProjectService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/CreateProject", ReplyAction="http://tempuri.org/IProjectService/CreateProjectResponse")]
-        WPF_sKrum.ProjectService.Project CreateProject(WPF_sKrum.ProjectService.Project project);
+        WPFApplication.ProjectService.Project CreateProject(WPFApplication.ProjectService.Project project);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/UpdateProject", ReplyAction="http://tempuri.org/IProjectService/UpdateProjectResponse")]
-        WPF_sKrum.ProjectService.Project UpdateProject(WPF_sKrum.ProjectService.Project project);
+        WPFApplication.ProjectService.Project UpdateProject(WPFApplication.ProjectService.Project project);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/UpdateProjectPassword", ReplyAction="http://tempuri.org/IProjectService/UpdateProjectPasswordResponse")]
-        WPF_sKrum.ProjectService.Project UpdateProjectPassword(int projectID, string password);
+        WPFApplication.ProjectService.Project UpdateProjectPassword(int projectID, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/DeleteProject", ReplyAction="http://tempuri.org/IProjectService/DeleteProjectResponse")]
         bool DeleteProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetProjectByID", ReplyAction="http://tempuri.org/IProjectService/GetProjectByIDResponse")]
-        WPF_sKrum.ProjectService.Project GetProjectByID(int projectID);
+        WPFApplication.ProjectService.Project GetProjectByID(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetProjectByName", ReplyAction="http://tempuri.org/IProjectService/GetProjectByNameResponse")]
-        WPF_sKrum.ProjectService.Project GetProjectByName(string name);
+        WPFApplication.ProjectService.Project GetProjectByName(string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/CreateSprint", ReplyAction="http://tempuri.org/IProjectService/CreateSprintResponse")]
-        WPF_sKrum.ProjectService.Sprint CreateSprint(WPF_sKrum.ProjectService.Sprint sprint);
+        WPFApplication.ProjectService.Sprint CreateSprint(WPFApplication.ProjectService.Sprint sprint);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/DeleteSprint", ReplyAction="http://tempuri.org/IProjectService/DeleteSprintResponse")]
         bool DeleteSprint(int sprintID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/UpdateSprint", ReplyAction="http://tempuri.org/IProjectService/UpdateSprintResponse")]
-        WPF_sKrum.ProjectService.Sprint UpdateSprint(WPF_sKrum.ProjectService.Sprint sprint);
+        WPFApplication.ProjectService.Sprint UpdateSprint(WPFApplication.ProjectService.Sprint sprint);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetSprintByID", ReplyAction="http://tempuri.org/IProjectService/GetSprintByIDResponse")]
-        WPF_sKrum.ProjectService.Sprint GetSprintByID(int sprintID);
+        WPFApplication.ProjectService.Sprint GetSprintByID(int sprintID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/CreateStory", ReplyAction="http://tempuri.org/IProjectService/CreateStoryResponse")]
-        WPF_sKrum.ProjectService.Story CreateStory(WPF_sKrum.ProjectService.Story story);
+        WPFApplication.ProjectService.Story CreateStory(WPFApplication.ProjectService.Story story);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/DeleteStory", ReplyAction="http://tempuri.org/IProjectService/DeleteStoryResponse")]
         bool DeleteStory(int storyID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/UpdateStory", ReplyAction="http://tempuri.org/IProjectService/UpdateStoryResponse")]
-        WPF_sKrum.ProjectService.Story UpdateStory(WPF_sKrum.ProjectService.Story story);
+        WPFApplication.ProjectService.Story UpdateStory(WPFApplication.ProjectService.Story story);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetStoryByID", ReplyAction="http://tempuri.org/IProjectService/GetStoryByIDResponse")]
-        WPF_sKrum.ProjectService.Story GetStoryByID(int storyID);
+        WPFApplication.ProjectService.Story GetStoryByID(int storyID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/CreateTask", ReplyAction="http://tempuri.org/IProjectService/CreateTaskResponse")]
-        WPF_sKrum.ProjectService.Task CreateTask(WPF_sKrum.ProjectService.Task task);
+        WPFApplication.ProjectService.Task CreateTask(WPFApplication.ProjectService.Task task);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/DeleteTask", ReplyAction="http://tempuri.org/IProjectService/DeleteTaskResponse")]
         bool DeleteTask(int taskID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/UpdateTask", ReplyAction="http://tempuri.org/IProjectService/UpdateTaskResponse")]
-        WPF_sKrum.ProjectService.Task UpdateTask(WPF_sKrum.ProjectService.Task task);
+        WPFApplication.ProjectService.Task UpdateTask(WPFApplication.ProjectService.Task task);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetTaskByID", ReplyAction="http://tempuri.org/IProjectService/GetTaskByIDResponse")]
-        WPF_sKrum.ProjectService.Task GetTaskByID(int taskID);
+        WPFApplication.ProjectService.Task GetTaskByID(int taskID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/CreateMeeting", ReplyAction="http://tempuri.org/IProjectService/CreateMeetingResponse")]
-        WPF_sKrum.ProjectService.Meeting CreateMeeting(WPF_sKrum.ProjectService.Meeting meeting);
+        WPFApplication.ProjectService.Meeting CreateMeeting(WPFApplication.ProjectService.Meeting meeting);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/DeleteMeeting", ReplyAction="http://tempuri.org/IProjectService/DeleteMeetingResponse")]
         bool DeleteMeeting(int meetingID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/UpdateMeeting", ReplyAction="http://tempuri.org/IProjectService/UpdateMeetingResponse")]
-        WPF_sKrum.ProjectService.Meeting UpdateMeeting(WPF_sKrum.ProjectService.Meeting meeting);
+        WPFApplication.ProjectService.Meeting UpdateMeeting(WPFApplication.ProjectService.Meeting meeting);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetMeetingByID", ReplyAction="http://tempuri.org/IProjectService/GetMeetingByIDResponse")]
-        WPF_sKrum.ProjectService.Meeting GetMeetingByID(int meetingID);
+        WPFApplication.ProjectService.Meeting GetMeetingByID(int meetingID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetAllProjects", ReplyAction="http://tempuri.org/IProjectService/GetAllProjectsResponse")]
-        WPF_sKrum.ProjectService.Project[] GetAllProjects();
+        WPFApplication.ProjectService.Project[] GetAllProjects();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/LoginProject", ReplyAction="http://tempuri.org/IProjectService/LoginProjectResponse")]
         bool LoginProject(int projectID, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetAllSprintsInProject", ReplyAction="http://tempuri.org/IProjectService/GetAllSprintsInProjectResponse")]
-        WPF_sKrum.ProjectService.Sprint[] GetAllSprintsInProject(int projectID);
+        WPFApplication.ProjectService.Sprint[] GetAllSprintsInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetAllStoriesInProject", ReplyAction="http://tempuri.org/IProjectService/GetAllStoriesInProjectResponse")]
-        WPF_sKrum.ProjectService.Story[] GetAllStoriesInProject(int projectID);
+        WPFApplication.ProjectService.Story[] GetAllStoriesInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetAllTasksInProject", ReplyAction="http://tempuri.org/IProjectService/GetAllTasksInProjectResponse")]
-        WPF_sKrum.ProjectService.Task[] GetAllTasksInProject(int projectID);
+        WPFApplication.ProjectService.Task[] GetAllTasksInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetAllStoriesWithoutSprintInProject", ReplyAction="http://tempuri.org/IProjectService/GetAllStoriesWithoutSprintInProjectResponse")]
-        WPF_sKrum.ProjectService.Story[] GetAllStoriesWithoutSprintInProject(int projectID);
+        WPFApplication.ProjectService.Story[] GetAllStoriesWithoutSprintInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetAllMeetingsInProject", ReplyAction="http://tempuri.org/IProjectService/GetAllMeetingsInProjectResponse")]
-        WPF_sKrum.ProjectService.Meeting[] GetAllMeetingsInProject(int projectID);
+        WPFApplication.ProjectService.Meeting[] GetAllMeetingsInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetAllTasksInProjectByState", ReplyAction="http://tempuri.org/IProjectService/GetAllTasksInProjectByStateResponse")]
-        WPF_sKrum.ProjectService.Task[] GetAllTasksInProjectByState(int projectID, WPF_sKrum.ProjectService.TaskState state);
+        WPFApplication.ProjectService.Task[] GetAllTasksInProjectByState(int projectID, WPFApplication.ProjectService.TaskState state);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetAllStoriesInProjectByState", ReplyAction="http://tempuri.org/IProjectService/GetAllStoriesInProjectByStateResponse")]
-        WPF_sKrum.ProjectService.Story[] GetAllStoriesInProjectByState(int projectID, WPF_sKrum.ProjectService.StoryState state);
+        WPFApplication.ProjectService.Story[] GetAllStoriesInProjectByState(int projectID, WPFApplication.ProjectService.StoryState state);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetAllStoriesInSprint", ReplyAction="http://tempuri.org/IProjectService/GetAllStoriesInSprintResponse")]
-        WPF_sKrum.ProjectService.Story[] GetAllStoriesInSprint(int sprintID);
+        WPFApplication.ProjectService.Story[] GetAllStoriesInSprint(int sprintID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetAllTasksInSprint", ReplyAction="http://tempuri.org/IProjectService/GetAllTasksInSprintResponse")]
-        WPF_sKrum.ProjectService.Task[] GetAllTasksInSprint(int sprintID);
+        WPFApplication.ProjectService.Task[] GetAllTasksInSprint(int sprintID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/AddStoryInSprint", ReplyAction="http://tempuri.org/IProjectService/AddStoryInSprintResponse")]
-        WPF_sKrum.ProjectService.StorySprint AddStoryInSprint(WPF_sKrum.ProjectService.StorySprint storySprint);
+        WPFApplication.ProjectService.StorySprint AddStoryInSprint(WPFApplication.ProjectService.StorySprint storySprint);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/GetAllTasksInStory", ReplyAction="http://tempuri.org/IProjectService/GetAllTasksInStoryResponse")]
-        WPF_sKrum.ProjectService.Task[] GetAllTasksInStory(int storyID);
+        WPFApplication.ProjectService.Task[] GetAllTasksInStory(int storyID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/UpdateStoryOrder", ReplyAction="http://tempuri.org/IProjectService/UpdateStoryOrderResponse")]
-        WPF_sKrum.ProjectService.Story[] UpdateStoryOrder(int projectID, int[] ordered);
+        WPFApplication.ProjectService.Story[] UpdateStoryOrder(int projectID, int[] ordered);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IProjectService/AddWorkInTask", ReplyAction="http://tempuri.org/IProjectService/AddWorkInTaskResponse")]
-        WPF_sKrum.ProjectService.PersonTask AddWorkInTask(WPF_sKrum.ProjectService.PersonTask personTask);
+        WPFApplication.ProjectService.PersonTask AddWorkInTask(WPFApplication.ProjectService.PersonTask personTask);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IProjectServiceChannel : WPF_sKrum.ProjectService.IProjectService, System.ServiceModel.IClientChannel {
+    public interface IProjectServiceChannel : WPFApplication.ProjectService.IProjectService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class ProjectServiceClient : System.ServiceModel.ClientBase<WPF_sKrum.ProjectService.IProjectService>, WPF_sKrum.ProjectService.IProjectService {
+    public partial class ProjectServiceClient : System.ServiceModel.ClientBase<WPFApplication.ProjectService.IProjectService>, WPFApplication.ProjectService.IProjectService {
         
         public ProjectServiceClient() {
         }
@@ -1111,15 +1111,15 @@ namespace WPF_sKrum.ProjectService {
                 base(binding, remoteAddress) {
         }
         
-        public WPF_sKrum.ProjectService.Project CreateProject(WPF_sKrum.ProjectService.Project project) {
+        public WPFApplication.ProjectService.Project CreateProject(WPFApplication.ProjectService.Project project) {
             return base.Channel.CreateProject(project);
         }
         
-        public WPF_sKrum.ProjectService.Project UpdateProject(WPF_sKrum.ProjectService.Project project) {
+        public WPFApplication.ProjectService.Project UpdateProject(WPFApplication.ProjectService.Project project) {
             return base.Channel.UpdateProject(project);
         }
         
-        public WPF_sKrum.ProjectService.Project UpdateProjectPassword(int projectID, string password) {
+        public WPFApplication.ProjectService.Project UpdateProjectPassword(int projectID, string password) {
             return base.Channel.UpdateProjectPassword(projectID, password);
         }
         
@@ -1127,15 +1127,15 @@ namespace WPF_sKrum.ProjectService {
             return base.Channel.DeleteProject(projectID);
         }
         
-        public WPF_sKrum.ProjectService.Project GetProjectByID(int projectID) {
+        public WPFApplication.ProjectService.Project GetProjectByID(int projectID) {
             return base.Channel.GetProjectByID(projectID);
         }
         
-        public WPF_sKrum.ProjectService.Project GetProjectByName(string name) {
+        public WPFApplication.ProjectService.Project GetProjectByName(string name) {
             return base.Channel.GetProjectByName(name);
         }
         
-        public WPF_sKrum.ProjectService.Sprint CreateSprint(WPF_sKrum.ProjectService.Sprint sprint) {
+        public WPFApplication.ProjectService.Sprint CreateSprint(WPFApplication.ProjectService.Sprint sprint) {
             return base.Channel.CreateSprint(sprint);
         }
         
@@ -1143,15 +1143,15 @@ namespace WPF_sKrum.ProjectService {
             return base.Channel.DeleteSprint(sprintID);
         }
         
-        public WPF_sKrum.ProjectService.Sprint UpdateSprint(WPF_sKrum.ProjectService.Sprint sprint) {
+        public WPFApplication.ProjectService.Sprint UpdateSprint(WPFApplication.ProjectService.Sprint sprint) {
             return base.Channel.UpdateSprint(sprint);
         }
         
-        public WPF_sKrum.ProjectService.Sprint GetSprintByID(int sprintID) {
+        public WPFApplication.ProjectService.Sprint GetSprintByID(int sprintID) {
             return base.Channel.GetSprintByID(sprintID);
         }
         
-        public WPF_sKrum.ProjectService.Story CreateStory(WPF_sKrum.ProjectService.Story story) {
+        public WPFApplication.ProjectService.Story CreateStory(WPFApplication.ProjectService.Story story) {
             return base.Channel.CreateStory(story);
         }
         
@@ -1159,15 +1159,15 @@ namespace WPF_sKrum.ProjectService {
             return base.Channel.DeleteStory(storyID);
         }
         
-        public WPF_sKrum.ProjectService.Story UpdateStory(WPF_sKrum.ProjectService.Story story) {
+        public WPFApplication.ProjectService.Story UpdateStory(WPFApplication.ProjectService.Story story) {
             return base.Channel.UpdateStory(story);
         }
         
-        public WPF_sKrum.ProjectService.Story GetStoryByID(int storyID) {
+        public WPFApplication.ProjectService.Story GetStoryByID(int storyID) {
             return base.Channel.GetStoryByID(storyID);
         }
         
-        public WPF_sKrum.ProjectService.Task CreateTask(WPF_sKrum.ProjectService.Task task) {
+        public WPFApplication.ProjectService.Task CreateTask(WPFApplication.ProjectService.Task task) {
             return base.Channel.CreateTask(task);
         }
         
@@ -1175,15 +1175,15 @@ namespace WPF_sKrum.ProjectService {
             return base.Channel.DeleteTask(taskID);
         }
         
-        public WPF_sKrum.ProjectService.Task UpdateTask(WPF_sKrum.ProjectService.Task task) {
+        public WPFApplication.ProjectService.Task UpdateTask(WPFApplication.ProjectService.Task task) {
             return base.Channel.UpdateTask(task);
         }
         
-        public WPF_sKrum.ProjectService.Task GetTaskByID(int taskID) {
+        public WPFApplication.ProjectService.Task GetTaskByID(int taskID) {
             return base.Channel.GetTaskByID(taskID);
         }
         
-        public WPF_sKrum.ProjectService.Meeting CreateMeeting(WPF_sKrum.ProjectService.Meeting meeting) {
+        public WPFApplication.ProjectService.Meeting CreateMeeting(WPFApplication.ProjectService.Meeting meeting) {
             return base.Channel.CreateMeeting(meeting);
         }
         
@@ -1191,15 +1191,15 @@ namespace WPF_sKrum.ProjectService {
             return base.Channel.DeleteMeeting(meetingID);
         }
         
-        public WPF_sKrum.ProjectService.Meeting UpdateMeeting(WPF_sKrum.ProjectService.Meeting meeting) {
+        public WPFApplication.ProjectService.Meeting UpdateMeeting(WPFApplication.ProjectService.Meeting meeting) {
             return base.Channel.UpdateMeeting(meeting);
         }
         
-        public WPF_sKrum.ProjectService.Meeting GetMeetingByID(int meetingID) {
+        public WPFApplication.ProjectService.Meeting GetMeetingByID(int meetingID) {
             return base.Channel.GetMeetingByID(meetingID);
         }
         
-        public WPF_sKrum.ProjectService.Project[] GetAllProjects() {
+        public WPFApplication.ProjectService.Project[] GetAllProjects() {
             return base.Channel.GetAllProjects();
         }
         
@@ -1207,55 +1207,55 @@ namespace WPF_sKrum.ProjectService {
             return base.Channel.LoginProject(projectID, password);
         }
         
-        public WPF_sKrum.ProjectService.Sprint[] GetAllSprintsInProject(int projectID) {
+        public WPFApplication.ProjectService.Sprint[] GetAllSprintsInProject(int projectID) {
             return base.Channel.GetAllSprintsInProject(projectID);
         }
         
-        public WPF_sKrum.ProjectService.Story[] GetAllStoriesInProject(int projectID) {
+        public WPFApplication.ProjectService.Story[] GetAllStoriesInProject(int projectID) {
             return base.Channel.GetAllStoriesInProject(projectID);
         }
         
-        public WPF_sKrum.ProjectService.Task[] GetAllTasksInProject(int projectID) {
+        public WPFApplication.ProjectService.Task[] GetAllTasksInProject(int projectID) {
             return base.Channel.GetAllTasksInProject(projectID);
         }
         
-        public WPF_sKrum.ProjectService.Story[] GetAllStoriesWithoutSprintInProject(int projectID) {
+        public WPFApplication.ProjectService.Story[] GetAllStoriesWithoutSprintInProject(int projectID) {
             return base.Channel.GetAllStoriesWithoutSprintInProject(projectID);
         }
         
-        public WPF_sKrum.ProjectService.Meeting[] GetAllMeetingsInProject(int projectID) {
+        public WPFApplication.ProjectService.Meeting[] GetAllMeetingsInProject(int projectID) {
             return base.Channel.GetAllMeetingsInProject(projectID);
         }
         
-        public WPF_sKrum.ProjectService.Task[] GetAllTasksInProjectByState(int projectID, WPF_sKrum.ProjectService.TaskState state) {
+        public WPFApplication.ProjectService.Task[] GetAllTasksInProjectByState(int projectID, WPFApplication.ProjectService.TaskState state) {
             return base.Channel.GetAllTasksInProjectByState(projectID, state);
         }
         
-        public WPF_sKrum.ProjectService.Story[] GetAllStoriesInProjectByState(int projectID, WPF_sKrum.ProjectService.StoryState state) {
+        public WPFApplication.ProjectService.Story[] GetAllStoriesInProjectByState(int projectID, WPFApplication.ProjectService.StoryState state) {
             return base.Channel.GetAllStoriesInProjectByState(projectID, state);
         }
         
-        public WPF_sKrum.ProjectService.Story[] GetAllStoriesInSprint(int sprintID) {
+        public WPFApplication.ProjectService.Story[] GetAllStoriesInSprint(int sprintID) {
             return base.Channel.GetAllStoriesInSprint(sprintID);
         }
         
-        public WPF_sKrum.ProjectService.Task[] GetAllTasksInSprint(int sprintID) {
+        public WPFApplication.ProjectService.Task[] GetAllTasksInSprint(int sprintID) {
             return base.Channel.GetAllTasksInSprint(sprintID);
         }
         
-        public WPF_sKrum.ProjectService.StorySprint AddStoryInSprint(WPF_sKrum.ProjectService.StorySprint storySprint) {
+        public WPFApplication.ProjectService.StorySprint AddStoryInSprint(WPFApplication.ProjectService.StorySprint storySprint) {
             return base.Channel.AddStoryInSprint(storySprint);
         }
         
-        public WPF_sKrum.ProjectService.Task[] GetAllTasksInStory(int storyID) {
+        public WPFApplication.ProjectService.Task[] GetAllTasksInStory(int storyID) {
             return base.Channel.GetAllTasksInStory(storyID);
         }
         
-        public WPF_sKrum.ProjectService.Story[] UpdateStoryOrder(int projectID, int[] ordered) {
+        public WPFApplication.ProjectService.Story[] UpdateStoryOrder(int projectID, int[] ordered) {
             return base.Channel.UpdateStoryOrder(projectID, ordered);
         }
         
-        public WPF_sKrum.ProjectService.PersonTask AddWorkInTask(WPF_sKrum.ProjectService.PersonTask personTask) {
+        public WPFApplication.ProjectService.PersonTask AddWorkInTask(WPFApplication.ProjectService.PersonTask personTask) {
             return base.Channel.AddWorkInTask(personTask);
         }
     }

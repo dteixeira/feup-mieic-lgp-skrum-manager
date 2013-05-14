@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="1L91b5aKVHuDhGm6w4raToOg6p0=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="VMc27QgJ7UI8vVUFdgx7RCs+9SE=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="UserServiceEndpoint">
       <properties>
@@ -118,10 +118,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="UserServiceEndpoint" contract="UserService.IUserService" bindingType="netTcpBinding" address="net.tcp://skrum.fe.up.pt/UserService.svc" bindingConfiguration="UserServiceEndpoint">
+    <endpoint name="UserServiceEndpoint" contract="UserService.IUserService" bindingType="netTcpBinding" address="net.tcp://skrum.fe.up.pt:8003/UserService.svc" bindingConfiguration="UserServiceEndpoint">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://skrum.fe.up.pt/UserService.svc</serializedValue>
+          <serializedValue>net.tcp://skrum.fe.up.pt:8003/UserService.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

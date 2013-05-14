@@ -5,7 +5,7 @@ using Kinect.Sensor;
 using Microsoft.Kinect;
 using System.Collections.Generic;
 
-namespace WPF_sKrum
+namespace WPFApplication
 {
     public class ApplicationController : NotificationService.INotificationServiceCallback
     {
@@ -30,16 +30,19 @@ namespace WPF_sKrum
         /// <param name="type">Type of the data modification event that occured.</param>
         public delegate void DataModificationHandler(object sender, NotificationService.NotificationType type);
 
-        public event DataModificationHandler DataChangedEvent; 
+        /// <summary>
+        /// Used to register for service data change notification.
+        /// </summary>
+        public event DataModificationHandler DataChangedEvent;
 
         private KinectSensorController sensor;
         private int trackingId;
         private bool grip;
-        private Dictionary<string, string> ordersRight;
-        private Dictionary<string, string> ordersLeft;
-        private Dictionary<string, string> ordersUp;
-        private Dictionary<string, string> ordersDown;
-        private string currentPage;
+        private Dictionary<ApplicationPages, ApplicationPages> pagesRight;
+        private Dictionary<ApplicationPages, ApplicationPages> pagesLeft;
+        private Dictionary<ApplicationPages, ApplicationPages> pagesUp;
+        private Dictionary<ApplicationPages, ApplicationPages> pagesDown;
+        private ApplicationPages currentPage;
         private Skeleton[] skeletons;
         private NotificationService.NotificationServiceClient notifications;
         private ProjectService.ProjectServiceClient projects;
@@ -48,7 +51,6 @@ namespace WPF_sKrum
         public KinectSensorController KinectSensor
         {
             get { return this.sensor; }
-            set { this.sensor = value; }
         }
 
         public NotificationService.NotificationServiceClient Notifications
@@ -78,31 +80,27 @@ namespace WPF_sKrum
             set { this.grip = value; }
         }
 
-        public Dictionary<string, string> SwipeOrdersLeftToRight
+        public Dictionary<ApplicationPages, ApplicationPages> PagesLeft
         {
-            get { return this.ordersLeft; }
-            set { this.ordersLeft = value; }
+            get { return this.pagesLeft; }
         }
 
-        public Dictionary<string, string> SwipeOrdersRightToLeft
+        public Dictionary<ApplicationPages, ApplicationPages> PagesRight
         {
-            get { return this.ordersRight; }
-            set { this.ordersRight = value; }
+            get { return this.pagesRight; }
         }
 
-        public Dictionary<string, string> SwipeOrdersUptoDown
+        public Dictionary<ApplicationPages, ApplicationPages> PagesUp
         {
-            get { return this.ordersUp; }
-            set { this.ordersUp = value; }
+            get { return this.pagesUp; }
         }
 
-        public Dictionary<string, string> SwipeOrdersDowntoUp
+        public Dictionary<ApplicationPages, ApplicationPages> PagesDown
         {
-            get { return this.ordersDown; }
-            set { this.ordersDown = value; }
+            get { return this.pagesDown; }
         }
 
-        public string CurrentPage
+        public ApplicationPages CurrentPage
         {
             get { return this.currentPage; }
             set { this.currentPage = value; }
@@ -117,45 +115,48 @@ namespace WPF_sKrum
         private ApplicationController()
         {
             this.sensor = new KinectSensorController(KinectSensorType.Xbox360Sensor);
-            trackingId = -1;
-            grip = false;
-            ordersDown = new Dictionary<string, string>();
-            ordersLeft = new Dictionary<string, string>();
-            ordersUp = new Dictionary<string, string>();
-            ordersRight = new Dictionary<string, string>();
-            currentPage = "sKrum";
+            this.trackingId = -1;
+            this.grip = false;
+            this.pagesDown = new Dictionary<ApplicationPages, ApplicationPages>();
+            this.pagesLeft = new Dictionary<ApplicationPages, ApplicationPages>();
+            this.pagesUp = new Dictionary<ApplicationPages, ApplicationPages>();
+            this.pagesRight = new Dictionary<ApplicationPages, ApplicationPages>();
+            this.currentPage = ApplicationPages.sKrum;
 
             // Service clients initialisation.
             this.notifications = new NotificationService.NotificationServiceClient(new System.ServiceModel.InstanceContext(this));
             this.users = new UserService.UserServiceClient();
             this.projects = new ProjectService.ProjectServiceClient();
 
+            // Register for global notifications.
+            this.notifications.Subscribe(-1);
+
             // sKrum page possible transitions.
-            ordersRight.Add("sKrum", "MainPage");
+            this.pagesRight.Add(ApplicationPages.sKrum, ApplicationPages.MainPage);
 
             // ProjectsPage page possible transitions.
-            ordersRight.Add("ProjectsPage", "MainPage");
-            ordersUp.Add("ProjectsPage", "UsersPage");
-            ordersDown.Add("ProjectsPage", "UsersPage");
+            this.pagesRight.Add(ApplicationPages.ProjectsPage, ApplicationPages.MainPage);
+            this.pagesUp.Add(ApplicationPages.ProjectsPage, ApplicationPages.UsersPage);
+            this.pagesDown.Add(ApplicationPages.ProjectsPage, ApplicationPages.UsersPage);
 
             // UsersPage page possible transitions.
-            ordersRight.Add("UsersPage", "MainPage");
-            ordersUp.Add("UsersPage", "ProjectsPage");
-            ordersDown.Add("UsersPage", "ProjectsPage");
+            this.pagesRight.Add(ApplicationPages.UsersPage, ApplicationPages.MainPage);
+            this.pagesUp.Add(ApplicationPages.UsersPage, ApplicationPages.ProjectsPage);
+            this.pagesDown.Add(ApplicationPages.UsersPage, ApplicationPages.ProjectsPage);
 
             // MainPage page possible transitions.
-            ordersLeft.Add("MainPage", "ProjectsPage");
-            ordersRight.Add("MainPage", "TaskBoardPage");
+            this.pagesLeft.Add(ApplicationPages.MainPage, ApplicationPages.ProjectsPage);
+            this.pagesRight.Add(ApplicationPages.MainPage, ApplicationPages.TaskBoardPage);
 
             // TaskboardPage page possible transitions.
-            ordersLeft.Add("TaskBoardPage", "MainPage");
-            ordersUp.Add("TaskBoardPage", "StatsUser");
-            ordersDown.Add("TaskBoardPage", "StatsUser");
+            this.pagesLeft.Add(ApplicationPages.TaskBoardPage, ApplicationPages.MainPage);
+            this.pagesUp.Add(ApplicationPages.TaskBoardPage, ApplicationPages.UserStatsPage);
+            this.pagesDown.Add(ApplicationPages.TaskBoardPage, ApplicationPages.UserStatsPage);
 
             // StatsUser page possible transitions.
-            ordersLeft.Add("StatsUser", "MainPage");
-            ordersUp.Add("StatsUser", "TaskBoardPage");
-            ordersDown.Add("StatsUser", "TaskBoardPage");
+            this.pagesLeft.Add(ApplicationPages.UserStatsPage, ApplicationPages.MainPage);
+            this.pagesUp.Add(ApplicationPages.UserStatsPage, ApplicationPages.TaskBoardPage);
+            this.pagesDown.Add(ApplicationPages.UserStatsPage, ApplicationPages.TaskBoardPage);
 
             // Setup gestures if a sensor was found.
             if (sensor.FoundSensor())
@@ -169,6 +170,10 @@ namespace WPF_sKrum
             }
         }
 
+        /// <summary>
+        /// Notifies all registered clients of a service data modification.
+        /// </summary>
+        /// <param name="notification">The type of modification to be notified</param>
         public void DataChanged(NotificationService.NotificationType notification)
         {
             if (DataChangedEvent != null)

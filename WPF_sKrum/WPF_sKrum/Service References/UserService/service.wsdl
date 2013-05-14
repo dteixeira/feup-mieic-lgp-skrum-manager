@@ -387,9 +387,9 @@
   </wsdl:binding>
   <wsdl:service name="UserService">
     <wsdl:port name="UserServiceEndpoint" binding="tns:UserServiceEndpoint">
-      <soap12:address location="net.tcp://skrum.fe.up.pt/UserService.svc" />
+      <soap12:address location="net.tcp://skrum.fe.up.pt:8003/UserService.svc" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://skrum.fe.up.pt/UserService.svc</wsa10:Address>
+        <wsa10:Address>net.tcp://skrum.fe.up.pt:8003/UserService.svc</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
           <Dns>localhost</Dns>
         </Identity>

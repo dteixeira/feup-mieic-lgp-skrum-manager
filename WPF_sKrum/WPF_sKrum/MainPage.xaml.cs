@@ -2,7 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 
-namespace WPF_sKrum
+namespace WPFApplication
 {
     /// <summary>
     /// Interaction logic for MainPage.xaml
@@ -15,22 +15,13 @@ namespace WPF_sKrum
         {
             InitializeComponent();
             this.backdata = ApplicationController.Instance;
-            this.backdata.CurrentPage = this.GetType().Name;
-
-            // Subscribe project to notify.
-            this.backdata.Notifications.Subscribe(-1);
-            this.backdata.DataChangedEvent += backdata_DataChangedEvent;
-        }
-
-        private void backdata_DataChangedEvent(object sender, NotificationService.NotificationType type)
-        {
-            // TODO Notification handling goes here.
+            this.backdata.CurrentPage = ApplicationPages.MainPage;
         }
 
         private void DailyScrum_PreviewMouseLeftButtonDown(object sender, RoutedEventArgs e)
         {
             KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-            MainWindow.Instance.GestureRegognized("TaskBoardPage", userGeneratedSignal);
+            MainWindow.Instance.GestureRegognized(ApplicationPages.TaskBoardPage, userGeneratedSignal);
         }
     }
 }

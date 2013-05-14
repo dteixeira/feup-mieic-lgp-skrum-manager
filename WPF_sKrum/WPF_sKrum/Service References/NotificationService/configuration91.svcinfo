@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="AAeMcsudDscpLW8Ugw/CGOxP58o=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="wjK9lecfXJUfWIp/DscPEB9qY4Y=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NotificationServiceEndpoint">
       <properties>
@@ -118,10 +118,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NotificationServiceEndpoint" contract="NotificationService.INotificationService" bindingType="netTcpBinding" address="net.tcp://skrum.fe.up.pt/NotificationService.svc" bindingConfiguration="NotificationServiceEndpoint">
+    <endpoint name="NotificationServiceEndpoint" contract="NotificationService.INotificationService" bindingType="netTcpBinding" address="net.tcp://skrum.fe.up.pt:8003/NotificationService.svc" bindingConfiguration="NotificationServiceEndpoint">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://skrum.fe.up.pt/NotificationService.svc</serializedValue>
+          <serializedValue>net.tcp://skrum.fe.up.pt:8003/NotificationService.svc</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

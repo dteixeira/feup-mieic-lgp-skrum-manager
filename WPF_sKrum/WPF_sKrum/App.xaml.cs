@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 
-namespace WPF_sKrum
+namespace WPFApplication
 {
     /// <summary>
     /// Interaction logic for App.xaml

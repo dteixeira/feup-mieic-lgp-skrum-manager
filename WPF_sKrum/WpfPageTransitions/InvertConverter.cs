@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace WpfPageTransitions
+namespace PageTransitions
 {
-    internal class InvertConverter : IValueConverter
+    public class InvertConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

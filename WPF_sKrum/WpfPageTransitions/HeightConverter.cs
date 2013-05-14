@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Data;
 
-namespace WpfPageTransitions
+namespace PageTransitions
 {
     public class HeightConverter : IValueConverter
     {

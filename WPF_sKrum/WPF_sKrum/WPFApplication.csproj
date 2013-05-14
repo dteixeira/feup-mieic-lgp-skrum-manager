@@ -7,8 +7,8 @@
     <ProjectGuid>{46C1FD7C-4FC3-46EB-A532-DA79B0D83231}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WPF_sKrum</RootNamespace>
-    <AssemblyName>WPF_sKrum</AssemblyName>
+    <RootNamespace>WPFApplication</RootNamespace>
+    <AssemblyName>WPFApplication</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -36,7 +36,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>WPF_sKrum.App</StartupObject>
+    <StartupObject>WPFApplication.App</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Kinect, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -75,6 +75,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ApplicationController.cs" />
+    <Compile Include="EnumTypes.cs" />
     <Compile Include="ProjectsPage.xaml.cs">
       <DependentUpon>ProjectsPage.xaml</DependentUpon>
     </Compile>
@@ -96,8 +97,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="StatsUser.xaml.cs">
-      <DependentUpon>StatsUser.xaml</DependentUpon>
+    <Compile Include="UserStatsPage.xaml.cs">
+      <DependentUpon>UserStatsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="TaskBoardPage.xaml.cs">
       <DependentUpon>TaskBoardPage.xaml</DependentUpon>
@@ -125,7 +126,7 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="StatsUser.xaml">
+    <Page Include="UserStatsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -185,25 +186,25 @@
     <None Include="Service References\ProjectService\ServiceDataTypes.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProjectService\WPF_sKrum.ProjectService.Meeting.datasource">
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.Meeting.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ProjectService\WPF_sKrum.ProjectService.PersonTask.datasource">
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.PersonTask.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ProjectService\WPF_sKrum.ProjectService.Project.datasource">
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.Project.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ProjectService\WPF_sKrum.ProjectService.Sprint.datasource">
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.Sprint.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ProjectService\WPF_sKrum.ProjectService.Story.datasource">
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.Story.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ProjectService\WPF_sKrum.ProjectService.StorySprint.datasource">
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.StorySprint.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ProjectService\WPF_sKrum.ProjectService.Task.datasource">
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.Task.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\UserService\service.wsdl" />
@@ -216,13 +217,13 @@
     <None Include="Service References\UserService\ServiceDataTypes.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\UserService\WPF_sKrum.UserService.Person.datasource">
+    <None Include="Service References\UserService\WPFApplication.UserService.Person.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UserService\WPF_sKrum.UserService.Role.datasource">
+    <None Include="Service References\UserService\WPFApplication.UserService.Role.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\UserService\WPF_sKrum.UserService.Task.datasource">
+    <None Include="Service References\UserService\WPFApplication.UserService.Task.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
   </ItemGroup>

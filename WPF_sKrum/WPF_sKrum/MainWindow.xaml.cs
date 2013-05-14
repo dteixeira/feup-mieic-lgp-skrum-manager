@@ -2,6 +2,7 @@
 using Kinect.Pointers;
 using Microsoft.Kinect;
 using Microsoft.Kinect.Toolkit.Interaction;
+using PageTransitions;
 using System;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -10,63 +11,97 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using WpfPageTransitions;
 
-namespace WPF_sKrum
+namespace WPFApplication
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static MainWindow instance;
+        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
+        public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
 
+        private static MainWindow instance;
+        private static int pagesInfoSemaphore = 0;
+
+        /// <summary>
+        /// Returns a reference to the singleton MainWindow instance.
+        /// </summary>
         public static MainWindow Instance
         {
             get { return MainWindow.instance; }
         }
 
         private ApplicationController backdata;
-        public string namespace_pages = "WPF_sKrum.";
-
-        public static int pagesInfoSemaphore = 0;
         private DispatcherTimer pagesStatTimer;
         private DispatcherTimer pagesStatDissapearTimer;
+        private const int MOUSEEVENTF_LEFTDOWN = 0x00000002;
+        private const int MOUSEEVENTF_LEFTUP = 0x00000004;
+        private const int MOUSEEVENTF_MIDDLEDOWN = 0x00000020;
+        private const int MOUSEEVENTF_MIDDLEUP = 0x00000040;
+        private const int MOUSEEVENTF_MOVE = 0x00000001;
+        private const int MOUSEEVENTF_ABSOLUTE = 0x00008000;
+        private const int MOUSEEVENTF_RIGHTDOWN = 0x00000008;
+        private const int MOUSEEVENTF_RIGHTUP = 0x00000010;
+        private const int MOUSEEVENTF_WHEEL = 0x00000800;
+        private const int MOUSEEVENTF_XDOWN = 0x00000080;
+        private const int MOUSEEVENTF_XUP = 0x00000100;
 
-        public string Transition
+        public PageTransitionType Transition
         {
-            get { return this.pageTransitionControl.TransitionType.ToString(); }
-            set { Dispatcher.Invoke(new Action(() => { this.pageTransitionControl.TransitionType = (PageTransitionType)Enum.Parse(typeof(PageTransitionType), value, true); })); }
+            set { Dispatcher.Invoke(new Action(() => { this.pageTransitionControl.TransitionType = value; })); }
         }
 
         public MainWindow()
         {
-            MainWindow.instance = this;
-
             InitializeComponent();
+            MainWindow.instance = this;
             this.backdata = ApplicationController.Instance;
 
+            // Register for callbacks if sensor is ready and
+            // start the sensor.
             if (this.backdata.KinectSensor.FoundSensor())
             {
                 this.backdata.KinectSensor.Gestures.KinectGestureRecognized += new EventHandler<KinectGestureEventArgs>(this.GestureRegognized);
-
-                // Setup pointer controller.
                 this.backdata.KinectSensor.Pointers.KinectPointerMoved += new EventHandler<KinectPointerEventArgs>(this.PointerMoved);
-
-                // Register skeleton frame ready callback;
                 this.backdata.KinectSensor.Sensor.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(this.runtime_SkeletonFrameReady);
-
-                // Start the sensor.
                 this.backdata.KinectSensor.StartSensor();
             }
 
+            // Starts the needed transition timers.
             this.pagesStatTimer = new DispatcherTimer();
             this.pagesStatTimer.Tick += new EventHandler(PagesInfoAppearAction);
             this.pagesStatTimer.Interval = TimeSpan.FromSeconds(1);
-
             this.pagesStatDissapearTimer = new DispatcherTimer();
             this.pagesStatDissapearTimer.Tick += new EventHandler(PagesInfoDisappearAction);
             this.pagesStatDissapearTimer.Interval = TimeSpan.FromSeconds(0.1);
+        }
+
+        /// <summary>
+        /// Creates new application pages.
+        /// </summary>
+        /// <param name="page">Type of page to be created</param>
+        /// <returns>New page.</returns>
+        private UserControl CreatePage(ApplicationPages page)
+        {
+            switch (page)
+            {
+                case ApplicationPages.sKrum:
+                    return null;
+                case ApplicationPages.MainPage:
+                    return new MainPage();
+                case ApplicationPages.ProjectsPage:
+                    return new ProjectsPage();
+                case ApplicationPages.TaskBoardPage:
+                    return new TaskBoardPage();
+                case ApplicationPages.UsersPage:
+                    return new UsersPage();
+                case ApplicationPages.UserStatsPage:
+                    return new UserStatsPage();
+                default:
+                    return null;
+            }
         }
 
         /// <summary>
@@ -81,9 +116,9 @@ namespace WPF_sKrum
             {
                 this.Window_Every.Background = Brushes.Transparent;
                 this.Logo.Visibility = Visibility.Collapsed;
-                this.Transition = "Fade";
-                var UsernewPage = Activator.CreateInstance(Type.GetType(this.namespace_pages + sender.ToString()));
-                this.pageTransitionControl.ShowPage((UserControl)UsernewPage);
+                this.Transition = PageTransitionType.Fade;
+                var page = this.CreatePage((ApplicationPages)sender);
+                this.pageTransitionControl.ShowPage(page);
                 return;
             }
 
@@ -109,56 +144,53 @@ namespace WPF_sKrum
                 this.UpperBar.Background = Brushes.Gray;
             }
 
-            else if (backdata.TrackingId != -1)
+            else if (this.backdata.TrackingId != -1)
             {
                 // Process event modifications.
                 switch (e.GestureType)
                 {
                     case KinectGestureType.SwipeRightToLeft:
-                        if (backdata.SwipeOrdersRightToLeft.ContainsKey(backdata.CurrentPage))
+                        if (this.backdata.PagesRight.ContainsKey(this.backdata.CurrentPage))
                         {
                             this.Window_Every.Background = Brushes.Transparent;
                             this.Logo.Visibility = Visibility.Collapsed;
-                            this.Transition = "SlideRight";
-                            var newPage = Activator.CreateInstance(Type.GetType(this.namespace_pages + backdata.SwipeOrdersRightToLeft[backdata.CurrentPage]));
-                            this.pageTransitionControl.ShowPage((UserControl)newPage);
+                            this.Transition = PageTransitionType.SlideRight;
+                            UserControl page = this.CreatePage(this.backdata.PagesRight[this.backdata.CurrentPage]);
+                            this.pageTransitionControl.ShowPage(page);
                         }
                         break;
 
                     case KinectGestureType.SwipeLeftToRight:
-                        if (backdata.SwipeOrdersLeftToRight.ContainsKey(backdata.CurrentPage))
+                        if (this.backdata.PagesLeft.ContainsKey(this.backdata.CurrentPage))
                         {
                             this.Window_Every.Background = Brushes.Transparent;
                             this.Logo.Visibility = Visibility.Collapsed;
-                            this.Transition = "SlideLeft";
-                            var newPage = Activator.CreateInstance(Type.GetType(this.namespace_pages + backdata.SwipeOrdersLeftToRight[backdata.CurrentPage]));
-                            this.pageTransitionControl.ShowPage((UserControl)newPage);
+                            this.Transition = PageTransitionType.SlideLeft;
+                            UserControl page = this.CreatePage(this.backdata.PagesLeft[this.backdata.CurrentPage]);
+                            this.pageTransitionControl.ShowPage(page);
                         }
-
                         break;
 
                     case KinectGestureType.CircleLeftHand:
-                        if (backdata.SwipeOrdersDowntoUp.ContainsKey(backdata.CurrentPage))
+                        if (this.backdata.PagesDown.ContainsKey(this.backdata.CurrentPage))
                         {
                             this.Window_Every.Background = Brushes.Transparent;
                             this.Logo.Visibility = Visibility.Collapsed;
-                            this.Transition = "SlideUp";
-                            var newPage = Activator.CreateInstance(Type.GetType(this.namespace_pages + backdata.SwipeOrdersDowntoUp[backdata.CurrentPage]));
-                            this.pageTransitionControl.ShowPage((UserControl)newPage);
+                            this.Transition = PageTransitionType.SlideUp;
+                            UserControl page = this.CreatePage(this.backdata.PagesDown[this.backdata.CurrentPage]);
+                            this.pageTransitionControl.ShowPage(page);
                         }
-
                         break;
 
                     case KinectGestureType.CircleRightHand:
-                        if (backdata.SwipeOrdersUptoDown.ContainsKey(backdata.CurrentPage))
+                        if (this.backdata.PagesUp.ContainsKey(this.backdata.CurrentPage))
                         {
                             this.Window_Every.Background = Brushes.Transparent;
                             this.Logo.Visibility = Visibility.Collapsed;
-                            this.Transition = "SlideDown";
-                            var newPage = Activator.CreateInstance(Type.GetType(this.namespace_pages + backdata.SwipeOrdersUptoDown[backdata.CurrentPage]));
-                            this.pageTransitionControl.ShowPage((UserControl)newPage);
+                            this.Transition = PageTransitionType.SlideDown;
+                            UserControl page = this.CreatePage(this.backdata.PagesUp[this.backdata.CurrentPage]);
+                            this.pageTransitionControl.ShowPage(page);
                         }
-
                         break;
 
                     default:
@@ -168,15 +200,13 @@ namespace WPF_sKrum
         }
 
         /// <summary>
-        /// Callback for SkeletonFrameReady event. Draws the tracked skeleton
-        /// and updates the gesture recognition
+        /// Used to automatically disengage out of frame skeletons.
         /// </summary>
         /// <param name="sender">Object that triggered the event</param>
         /// <param name="e">Event arguments</param>
         public void runtime_SkeletonFrameReady(object sender, SkeletonFrameReadyEventArgs e)
         {
             bool receivedData = false;
-
             using (SkeletonFrame SFrame = e.OpenSkeletonFrame())
             {
                 if (SFrame == null)
@@ -190,7 +220,6 @@ namespace WPF_sKrum
                     receivedData = true;
                 }
             }
-
             if (receivedData)
             {
                 // No skeleton engaged, draw all.
@@ -248,38 +277,23 @@ namespace WPF_sKrum
             mouse_event(flag, X, Y, 0, 0);
         }
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
-        public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
-
-        private const int MOUSEEVENTF_LEFTDOWN = 0x00000002;
-        private const int MOUSEEVENTF_LEFTUP = 0x00000004;
-        private const int MOUSEEVENTF_MIDDLEDOWN = 0x00000020;
-        private const int MOUSEEVENTF_MIDDLEUP = 0x00000040;
-        private const int MOUSEEVENTF_MOVE = 0x00000001;
-        private const int MOUSEEVENTF_ABSOLUTE = 0x00008000;
-        private const int MOUSEEVENTF_RIGHTDOWN = 0x00000008;
-        private const int MOUSEEVENTF_RIGHTUP = 0x00000010;
-        private const int MOUSEEVENTF_WHEEL = 0x00000800;
-        private const int MOUSEEVENTF_XDOWN = 0x00000080;
-        private const int MOUSEEVENTF_XUP = 0x00000100;
-
         private void PagesInfoAppearAction(object sender, EventArgs e)
         {
             this.pagesStatTimer.Stop();
             this.pagesStatDissapearTimer.Stop();
-            if (this.backdata.SwipeOrdersDowntoUp.ContainsKey(this.backdata.CurrentPage))
+            if (this.backdata.PagesDown.ContainsKey(this.backdata.CurrentPage))
             {
                 this.DownPage.Visibility = Visibility.Visible;
             }
-            if (this.backdata.SwipeOrdersUptoDown.ContainsKey(this.backdata.CurrentPage))
+            if (this.backdata.PagesUp.ContainsKey(this.backdata.CurrentPage))
             {
                 this.UpPage.Visibility = Visibility.Visible;
             }
-            if (this.backdata.SwipeOrdersRightToLeft.ContainsKey(this.backdata.CurrentPage))
+            if (this.backdata.PagesRight.ContainsKey(this.backdata.CurrentPage))
             {
                 this.RightPage.Visibility = Visibility.Visible;
             }
-            if (this.backdata.SwipeOrdersLeftToRight.ContainsKey(this.backdata.CurrentPage))
+            if (this.backdata.PagesLeft.ContainsKey(this.backdata.CurrentPage))
             {
                 this.LeftPage.Visibility = Visibility.Visible;
             }
@@ -311,7 +325,10 @@ namespace WPF_sKrum
         private void HoverPagesStat_MouseEnter(object sender, MouseEventArgs e)
         {
             pagesInfoSemaphore++;
-            if (pagesInfoSemaphore != 1) return;
+            if (pagesInfoSemaphore != 1)
+            {
+                return;
+            }
             else
             {
                 //Start/Continue appearing and stop the action of dissapearing
@@ -322,40 +339,40 @@ namespace WPF_sKrum
 
         private void HoverPagesStatLeft_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (this.LeftPage.Visibility == Visibility.Visible && backdata.SwipeOrdersLeftToRight.ContainsKey(backdata.CurrentPage))
+            if (this.LeftPage.Visibility == Visibility.Visible && this.backdata.PagesLeft.ContainsKey(this.backdata.CurrentPage))
             {
                 KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-                MainWindow.Instance.GestureRegognized(backdata.SwipeOrdersLeftToRight[backdata.CurrentPage], userGeneratedSignal);
+                MainWindow.Instance.GestureRegognized(this.backdata.PagesLeft[backdata.CurrentPage], userGeneratedSignal);
                 this.PagesInfoDisappearAction(null, null);
             }
         }
 
         private void HoverPagesStatRight_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (this.RightPage.Visibility == Visibility.Visible && backdata.SwipeOrdersRightToLeft.ContainsKey(backdata.CurrentPage))
+            if (this.RightPage.Visibility == Visibility.Visible && this.backdata.PagesRight.ContainsKey(this.backdata.CurrentPage))
             {
                 KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-                MainWindow.Instance.GestureRegognized(backdata.SwipeOrdersRightToLeft[backdata.CurrentPage], userGeneratedSignal);
+                MainWindow.Instance.GestureRegognized(this.backdata.PagesRight[this.backdata.CurrentPage], userGeneratedSignal);
                 this.PagesInfoDisappearAction(null, null);
             }
         }
 
         private void HoverPagesStatUp_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (this.UpPage.Visibility == Visibility.Visible && backdata.SwipeOrdersUptoDown.ContainsKey(backdata.CurrentPage))
+            if (this.UpPage.Visibility == Visibility.Visible && backdata.PagesUp.ContainsKey(backdata.CurrentPage))
             {
                 KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-                MainWindow.Instance.GestureRegognized(backdata.SwipeOrdersUptoDown[backdata.CurrentPage], userGeneratedSignal);
+                MainWindow.Instance.GestureRegognized(this.backdata.PagesUp[this.backdata.CurrentPage], userGeneratedSignal);
                 this.PagesInfoDisappearAction(null, null);
             }
         }
 
         private void HoverPagesStatDown_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (this.DownPage.Visibility == Visibility.Visible && backdata.SwipeOrdersDowntoUp.ContainsKey(backdata.CurrentPage))
+            if (this.DownPage.Visibility == Visibility.Visible && backdata.PagesDown.ContainsKey(backdata.CurrentPage))
             {
                 KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-                MainWindow.Instance.GestureRegognized(backdata.SwipeOrdersDowntoUp[backdata.CurrentPage], userGeneratedSignal);
+                MainWindow.Instance.GestureRegognized(this.backdata.PagesDown[this.backdata.CurrentPage], userGeneratedSignal);
                 this.PagesInfoDisappearAction(null, null);
             }
         }
