@@ -16,7 +16,7 @@ namespace WPFApplication
     /// </summary>
     public partial class TaskBoardPage : UserControl
     {
-        private float scroll_value = 0.0f;
+        private float scrollValue = 0.0f;
         private DispatcherTimer CountdownTimer;
         private ApplicationController backdata;
 
@@ -136,15 +136,15 @@ namespace WPFApplication
             if (mouse_pos.X == 0 && mouse_pos.Y == 0) return;
             if (mouse_pos.Y < 80)
             {
-                scroll_value -= 10.0f;
-                if (scroll_value < 0.0f) scroll_value = 0.0f;
+                scrollValue -= 10.0f;
+                if (scrollValue < 0.0f) scrollValue = 0.0f;
             }
             else if (mouse_pos.Y > this.RenderSize.Height - 80)
             {
-                scroll_value += 10.0f;
-                if (scroll_value > TaskboardScroll.ScrollableHeight) scroll_value = (float)TaskboardScroll.ScrollableHeight;
+                scrollValue += 10.0f;
+                if (scrollValue > TaskboardScroll.ScrollableHeight) scrollValue = (float)TaskboardScroll.ScrollableHeight;
             }
-            TaskboardScroll.ScrollToVerticalOffset(scroll_value);
+            TaskboardScroll.ScrollToVerticalOffset(scrollValue);
         }
     }
 }
