@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WPFApplication.NotificationService {
+namespace ServiceLib.NotificationService {
     using System.Runtime.Serialization;
     
     
@@ -27,7 +27,7 @@ namespace WPFApplication.NotificationService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="NotificationService.INotificationService", CallbackContract=typeof(WPFApplication.NotificationService.INotificationServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="NotificationService.INotificationService", CallbackContract=typeof(ServiceLib.NotificationService.INotificationServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface INotificationService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/Subscribe", ReplyAction="http://tempuri.org/INotificationService/SubscribeResponse")]
@@ -41,16 +41,16 @@ namespace WPFApplication.NotificationService {
     public interface INotificationServiceCallback {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/DataChanged", ReplyAction="http://tempuri.org/INotificationService/DataChangedResponse")]
-        void DataChanged(WPFApplication.NotificationService.NotificationType notification);
+        void DataChanged(ServiceLib.NotificationService.NotificationType notification);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface INotificationServiceChannel : WPFApplication.NotificationService.INotificationService, System.ServiceModel.IClientChannel {
+    public interface INotificationServiceChannel : ServiceLib.NotificationService.INotificationService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class NotificationServiceClient : System.ServiceModel.DuplexClientBase<WPFApplication.NotificationService.INotificationService>, WPFApplication.NotificationService.INotificationService {
+    public partial class NotificationServiceClient : System.ServiceModel.DuplexClientBase<ServiceLib.NotificationService.INotificationService>, ServiceLib.NotificationService.INotificationService {
         
         public NotificationServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {

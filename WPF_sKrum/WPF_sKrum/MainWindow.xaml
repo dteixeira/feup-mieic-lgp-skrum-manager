@@ -5,77 +5,77 @@
         xmlns:UserStoryLib="clr-namespace:UserStoryLib;assembly=UserStoryLib"
         xmlns:TaskLib="clr-namespace:TaskLib;assembly=TaskLib"
         xmlns:pageTransitions="clr-namespace:PageTransitions;assembly=WpfPageTransitions"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WPFApplication.MainWindow"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:TaskBoardControlLib="clr-namespace:TaskBoardControlLib;assembly=TaskBoardControlLib" mc:Ignorable="d" x:Class="WPFApplication.MainWindow"
         Title="sKrum"
         WindowStyle = "None"
         WindowState="Maximized"
         x:Name="sKrum">
 
-    <Grid x:Name="PagesStat">
-        <Grid x:Name="HoverPagesStatGrid" Panel.ZIndex="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="3" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="3" />
-            </Grid.RowDefinitions>
+	<Grid x:Name="PagesStat">
+		<Grid x:Name="HoverPagesStatGrid" Panel.ZIndex="3">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="3" />
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="3" />
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="3" />
+				<RowDefinition Height="*" />
+				<RowDefinition Height="3" />
+			</Grid.RowDefinitions>
 
-            <Rectangle x:Name="HoverPagesStatLeft" Fill="Transparent" Visibility="Visible" MouseEnter="HoverPagesStat_MouseEnter" Grid.Column="0" Grid.Row="1" MouseLeave="HoverPagesStat_MouseLeave" PreviewMouseLeftButtonDown="HoverPagesStatLeft_PreviewMouseLeftButtonDown" />
-            <Rectangle x:Name="HoverPagesStatRight" Fill="Transparent" Visibility="Visible" MouseEnter="HoverPagesStat_MouseEnter" Grid.Column="2" Grid.Row="1" MouseLeave="HoverPagesStat_MouseLeave" PreviewMouseLeftButtonDown="HoverPagesStatRight_PreviewMouseLeftButtonDown" />
-            <Rectangle x:Name="HoverPagesStatUp" Fill="Transparent" Visibility="Visible" MouseEnter="HoverPagesStat_MouseEnter" Grid.Column="1" Grid.Row="0" MouseLeave="HoverPagesStat_MouseLeave" PreviewMouseLeftButtonDown="HoverPagesStatUp_PreviewMouseLeftButtonDown" />
-            <Rectangle x:Name="HoverPagesStatDown" Fill="Transparent" Visibility="Visible" MouseEnter="HoverPagesStat_MouseEnter" Grid.Column="1" Grid.Row="2" MouseLeave="HoverPagesStat_MouseLeave" PreviewMouseLeftButtonDown="HoverPagesStatDown_PreviewMouseLeftButtonDown" />
-        </Grid>
+			<Rectangle x:Name="HoverPagesStatLeft" Fill="Transparent" Visibility="Visible" MouseEnter="HoverPagesStat_MouseEnter" Grid.Column="0" Grid.Row="1" MouseLeave="HoverPagesStat_MouseLeave" PreviewMouseLeftButtonDown="HoverPagesStatLeft_PreviewMouseLeftButtonDown" />
+			<Rectangle x:Name="HoverPagesStatRight" Fill="Transparent" Visibility="Visible" MouseEnter="HoverPagesStat_MouseEnter" Grid.Column="2" Grid.Row="1" MouseLeave="HoverPagesStat_MouseLeave" PreviewMouseLeftButtonDown="HoverPagesStatRight_PreviewMouseLeftButtonDown" />
+			<Rectangle x:Name="HoverPagesStatUp" Fill="Transparent" Visibility="Visible" MouseEnter="HoverPagesStat_MouseEnter" Grid.Column="1" Grid.Row="0" MouseLeave="HoverPagesStat_MouseLeave" PreviewMouseLeftButtonDown="HoverPagesStatUp_PreviewMouseLeftButtonDown" />
+			<Rectangle x:Name="HoverPagesStatDown" Fill="Transparent" Visibility="Visible" MouseEnter="HoverPagesStat_MouseEnter" Grid.Column="1" Grid.Row="2" MouseLeave="HoverPagesStat_MouseLeave" PreviewMouseLeftButtonDown="HoverPagesStatDown_PreviewMouseLeftButtonDown" />
+		</Grid>
 
-        <Grid x:Name="UpDownPagesStat" Panel.ZIndex="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10*" />
-                <RowDefinition Height="80*" />
-                <RowDefinition Height="10*" />
-            </Grid.RowDefinitions>
+		<Grid x:Name="UpDownPagesStat" Panel.ZIndex="2">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="10*" />
+				<RowDefinition Height="80*" />
+				<RowDefinition Height="10*" />
+			</Grid.RowDefinitions>
 
-            <Rectangle x:Name="UpPage" Fill="#FFB66B6B" Margin="5,0" Grid.Row="0" Visibility="Collapsed" Width="auto" Height="auto"  MouseLeave="HoverPagesStat_MouseLeave"  MouseEnter="HoverPagesStat_MouseEnter" />
-            <Rectangle x:Name="DownPage" Fill="#FFB66B6B" Margin="5,0" Grid.Row="2" Visibility="Collapsed" Width="auto" Height="auto"  MouseLeave="HoverPagesStat_MouseLeave"  MouseEnter="HoverPagesStat_MouseEnter" />
-        </Grid>
-        <Grid x:Name="LeftRightPagesStat" Panel.ZIndex="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*" />
-                <ColumnDefinition Width="80*" />
-                <ColumnDefinition Width="10*" />
-            </Grid.ColumnDefinitions>
-            <Rectangle x:Name="LeftPage" Fill="#FFB66B6B" Margin="0,5" Grid.Column="0" Visibility="Collapsed" Width="auto" Height="auto"  MouseLeave="HoverPagesStat_MouseLeave"  MouseEnter="HoverPagesStat_MouseEnter" />
-            <Rectangle x:Name="RightPage" Fill="#FFB66B6B" Margin="0,5" Grid.Column="2" Visibility="Collapsed" Width="auto" Height="auto"  MouseLeave="HoverPagesStat_MouseLeave"  MouseEnter="HoverPagesStat_MouseEnter" />
-        </Grid>
+			<Rectangle x:Name="UpPage" Fill="#FFB66B6B" Margin="5,0" Grid.Row="0" Visibility="Collapsed" Width="auto" Height="auto"  MouseLeave="HoverPagesStat_MouseLeave"  MouseEnter="HoverPagesStat_MouseEnter" />
+			<Rectangle x:Name="DownPage" Fill="#FFB66B6B" Margin="5,0" Grid.Row="2" Visibility="Collapsed" Width="auto" Height="auto"  MouseLeave="HoverPagesStat_MouseLeave"  MouseEnter="HoverPagesStat_MouseEnter" />
+		</Grid>
+		<Grid x:Name="LeftRightPagesStat" Panel.ZIndex="2">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="10*" />
+				<ColumnDefinition Width="80*" />
+				<ColumnDefinition Width="10*" />
+			</Grid.ColumnDefinitions>
+			<Rectangle x:Name="LeftPage" Fill="#FFB66B6B" Margin="0,5" Grid.Column="0" Visibility="Collapsed" Width="auto" Height="auto"  MouseLeave="HoverPagesStat_MouseLeave"  MouseEnter="HoverPagesStat_MouseEnter" />
+			<Rectangle x:Name="RightPage" Fill="#FFB66B6B" Margin="0,5" Grid.Column="2" Visibility="Collapsed" Width="auto" Height="auto"  MouseLeave="HoverPagesStat_MouseLeave"  MouseEnter="HoverPagesStat_MouseEnter" />
+		</Grid>
 
-        <Grid Name="Window_Every" Background="#FF4EA6EA" Panel.ZIndex="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="10*" />
-                <RowDefinition Height="90*" />
-            </Grid.RowDefinitions>
+		<Grid x:Name="Window_Every" Background="#FF4EA6EA" Panel.ZIndex="1">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="10*" />
+				<RowDefinition Height="90*" />
+			</Grid.RowDefinitions>
 
-            <Grid x:Name="UpperBar" Margin="0" Grid.Row="0" Background="#FF494949">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="25*" />
-                    <ColumnDefinition Width="50*" />
-                    <ColumnDefinition Width="25*" />
-                </Grid.ColumnDefinitions>
-                <Image x:Name="UpperBar_Config" Margin="5" Grid.Column="0" VerticalAlignment="Center" Source="Images/configicon.png" HorizontalAlignment="Center" />
-                <Image x:Name="UpperBar_Home" Margin="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/homeicon.png" />
-                <TextBlock x:Name="UpperBar_Proj" Margin="5" Grid.Column="2" Text="sKrum" FontSize="48" Foreground="White" FontFamily="Source Sans Pro" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
-            </Grid>
+			<Grid x:Name="UpperBar" Margin="0" Grid.Row="0" Background="#FF494949">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="25*" />
+					<ColumnDefinition Width="50*" />
+					<ColumnDefinition Width="25*" />
+				</Grid.ColumnDefinitions>
+				<Image x:Name="UpperBar_Config" Margin="5" Grid.Column="0" VerticalAlignment="Center" Source="Images/configicon.png" HorizontalAlignment="Center" />
+				<Image x:Name="UpperBar_Home" Margin="5" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/homeicon.png" />
+				<TextBlock x:Name="UpperBar_Proj" Margin="5" Grid.Column="2" Text="sKrum" FontSize="48" Foreground="White" FontFamily="Source Sans Pro" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+			</Grid>
 
-            <Canvas x:Name="dragdropadornerLayer" Visibility="Collapsed" Panel.ZIndex="2" HorizontalAlignment="Left" VerticalAlignment="Top" />
-            <Canvas x:Name="kinectLayer" Visibility="Visible" Panel.ZIndex="100">
-                <Image x:Name="RightOpen" Source="Images/right_open.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
-                <Image x:Name="RightClosed" Source="Images/right_closed.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
-            </Canvas>
+			<Canvas x:Name="dragdropadornerLayer" Visibility="Collapsed" Panel.ZIndex="2" HorizontalAlignment="Left" VerticalAlignment="Top" />
+			<Canvas x:Name="kinectLayer" Visibility="Visible" Panel.ZIndex="100">
+				<Image x:Name="RightOpen" Source="Images/right_open.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
+				<Image x:Name="RightClosed" Source="Images/right_closed.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
+			</Canvas>
 
-            <pageTransitions:PageTransition Grid.Row="1" Background="Transparent" Name="pageTransitionControl" Margin="0,0" TransitionType="Fade" />
+			<pageTransitions:PageTransition Grid.Row="1" Background="Transparent" x:Name="pageTransitionControl" Margin="0,0" TransitionType="Fade" />
 
-            <TextBlock Grid.Row="1" Name="Logo" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="sKrum" VerticalAlignment="Center" FontFamily="Source Sans Pro Black" FontSize="150" Foreground="White" />
-        </Grid>
-    </Grid>
+			<TextBlock Grid.Row="1" x:Name="Logo" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="sKrum" VerticalAlignment="Center" FontFamily="Source Sans Pro Black" FontSize="150" Foreground="White" />
+		</Grid>
+	</Grid>
 </Window>

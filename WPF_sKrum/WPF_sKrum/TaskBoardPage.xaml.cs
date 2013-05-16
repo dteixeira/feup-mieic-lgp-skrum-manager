@@ -45,6 +45,7 @@ namespace WPFApplication
 
                 UserStoryControl us = new UserStoryControl();
                 us.Nome = "US" + i.ToString();
+                us.Descricao = "asdadad adasdasd sdasd as dasd sdasda ad asds asdasd asdas dasdasd asdasd asdas dasdasdasda sda sdas dasd asdasd asd asd asd asd asd asd asd asd asd asd asda sdas d asdasd asd as dasd asd asd asd as dasd asd asdas dasd asd asdas dasd sad asd asd asas  asd asdasdsadas dasd asd asdasda sdasd asd asd asdasd asdasdasd asdas dasdsdasd asdasd asda s dasdas dasdasd asd a";
                 us.Width = Double.NaN;
                 us.Height = Double.NaN;
                 us.SetValue(Grid.RowProperty, i);

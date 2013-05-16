@@ -4,10 +4,13 @@ using Kinect.Gestures.Waves;
 using Kinect.Sensor;
 using Microsoft.Kinect;
 using System.Collections.Generic;
+using ServiceLib.NotificationService;
+using ServiceLib.ProjectService;
+using ServiceLib.UserService;
 
 namespace WPFApplication
 {
-    public class ApplicationController : NotificationService.INotificationServiceCallback
+    public class ApplicationController : INotificationServiceCallback
     {
         private static ApplicationController instance;
 
@@ -28,7 +31,7 @@ namespace WPFApplication
         /// </summary>
         /// <param name="sender">Object that triggered the event</param>
         /// <param name="type">Type of the data modification event that occured.</param>
-        public delegate void DataModificationHandler(object sender, NotificationService.NotificationType type);
+        public delegate void DataModificationHandler(object sender, NotificationType type);
 
         /// <summary>
         /// Used to register for service data change notification.
@@ -44,26 +47,26 @@ namespace WPFApplication
         private Dictionary<ApplicationPages, ApplicationPages> pagesDown;
         private ApplicationPages currentPage;
         private Skeleton[] skeletons;
-        private NotificationService.NotificationServiceClient notifications;
-        private ProjectService.ProjectServiceClient projects;
-        private UserService.UserServiceClient users;
+        private NotificationServiceClient notifications;
+        private ProjectServiceClient projects;
+        private UserServiceClient users;
 
         public KinectSensorController KinectSensor
         {
             get { return this.sensor; }
         }
 
-        public NotificationService.NotificationServiceClient Notifications
+        public NotificationServiceClient Notifications
         {
             get { return this.notifications; }
         }
 
-        public ProjectService.ProjectServiceClient Projects
+        public ProjectServiceClient Projects
         {
             get { return this.projects; }
         }
 
-        public UserService.UserServiceClient Users
+        public UserServiceClient Users
         {
             get { return this.users; }
         }
@@ -124,9 +127,9 @@ namespace WPFApplication
             this.currentPage = ApplicationPages.sKrum;
 
             // Service clients initialisation.
-            this.notifications = new NotificationService.NotificationServiceClient(new System.ServiceModel.InstanceContext(this));
-            this.users = new UserService.UserServiceClient();
-            this.projects = new ProjectService.ProjectServiceClient();
+            this.notifications = new NotificationServiceClient(new System.ServiceModel.InstanceContext(this));
+            this.users = new UserServiceClient();
+            this.projects = new ProjectServiceClient();
 
             // Register for global notifications.
             this.notifications.Subscribe(-1);
@@ -174,7 +177,7 @@ namespace WPFApplication
         /// Notifies all registered clients of a service data modification.
         /// </summary>
         /// <param name="notification">The type of modification to be notified</param>
-        public void DataChanged(NotificationService.NotificationType notification)
+        public void DataChanged(NotificationType notification)
         {
             if (DataChangedEvent != null)
             {

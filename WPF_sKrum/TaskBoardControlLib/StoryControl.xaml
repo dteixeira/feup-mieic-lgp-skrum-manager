@@ -1,0 +1,43 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="TaskBoardControlLib.StoryControl"
+	x:Name="UserControl"
+	d:DesignWidth="640" d:DesignHeight="480">
+
+	<Grid x:Name="LayoutRoot">
+		<Border BorderThickness="1" Background="#FF4EA6EA">
+			<Grid>
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition/>
+					<ColumnDefinition Width="25"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="30"/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Grid Grid.Column="0" Grid.Row="0" Margin="10,0,0,0" UseLayoutRounding="False" Height="30">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="5*"/>
+						<ColumnDefinition/>
+					</Grid.ColumnDefinitions>
+					<Label Grid.Column="0" x:Name="StoryNameLabel" VerticalContentAlignment="Center" Content="{Binding StoryName}" Foreground="White" FontSize="21.333" Margin="0" Padding="0"/>
+					<Label Grid.Column="1" x:Name="StoryEstimationLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="{Binding StoryEstimation}" Foreground="White" FontSize="21.333" Padding="0" Margin="0,0,10,0"/>
+				</Grid>
+				<Grid Grid.Column="0" Grid.Row="1" Margin="10,0,0,10">
+					<TextBlock Grid.Column="0" x:Name="StoryDescriptionTextBlock" TextWrapping="Wrap" Background="#FFF7F7F7" Text="{Binding StoryDescription}" FontSize="16" Padding="10,5" />
+				</Grid>
+				<Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Background="{Binding StoryPriorityColor}">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="30"/>
+						<RowDefinition/>
+					</Grid.RowDefinitions>
+					<Label Grid.Row="0" x:Name="StoryPriorityLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding StoryPriority}" Foreground="White" FontSize="14.667" UseLayoutRounding="False" FontWeight="Bold" Background="{Binding StoryPriorityColor}" BorderThickness="0" Margin="0" Padding="0" />
+				</Grid>
+			</Grid>
+		</Border>
+	</Grid>
+</UserControl>

@@ -59,6 +59,7 @@
       <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Number" type="xs:int" />
       <xs:element minOccurs="0" name="PreviousStory" nillable="true" type="xs:int" />
+      <xs:element minOccurs="0" name="Priority" type="tns:StoryPriority" />
       <xs:element minOccurs="0" name="ProjectID" type="xs:int" />
       <xs:element minOccurs="0" name="State" type="tns:StoryState" />
       <xs:element minOccurs="0" name="StoryID" type="xs:int" />
@@ -67,6 +68,15 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Story" nillable="true" type="tns:Story" />
+  <xs:simpleType name="StoryPriority">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Must" />
+      <xs:enumeration value="Should" />
+      <xs:enumeration value="Could" />
+      <xs:enumeration value="Would" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="StoryPriority" nillable="true" type="tns:StoryPriority" />
   <xs:simpleType name="StoryState">
     <xs:restriction base="xs:string">
       <xs:enumeration value="InProgress" />
@@ -84,21 +94,11 @@
   <xs:complexType name="StorySprint">
     <xs:sequence>
       <xs:element minOccurs="0" name="Points" type="xs:int" />
-      <xs:element minOccurs="0" name="Priority" type="tns:StoryPriority" />
       <xs:element minOccurs="0" name="SprintID" type="xs:int" />
       <xs:element minOccurs="0" name="StoryID" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="StorySprint" nillable="true" type="tns:StorySprint" />
-  <xs:simpleType name="StoryPriority">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Must" />
-      <xs:enumeration value="Should" />
-      <xs:enumeration value="Could" />
-      <xs:enumeration value="Wont" />
-    </xs:restriction>
-  </xs:simpleType>
-  <xs:element name="StoryPriority" nillable="true" type="tns:StoryPriority" />
   <xs:complexType name="ArrayOfTask">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Task" nillable="true" type="tns:Task" />

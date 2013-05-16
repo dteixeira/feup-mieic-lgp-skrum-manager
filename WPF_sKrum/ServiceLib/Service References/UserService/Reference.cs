@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WPFApplication.UserService {
+namespace ServiceLib.UserService {
     using System.Runtime.Serialization;
     using System;
     
@@ -41,10 +41,10 @@ namespace WPFApplication.UserService {
         private string PhotoURLField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPFApplication.UserService.Role[] RolesField;
+        private ServiceLib.UserService.Role[] RolesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPFApplication.UserService.Task[] TasksField;
+        private ServiceLib.UserService.Task[] TasksField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -135,7 +135,7 @@ namespace WPFApplication.UserService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPFApplication.UserService.Role[] Roles {
+        public ServiceLib.UserService.Role[] Roles {
             get {
                 return this.RolesField;
             }
@@ -148,7 +148,7 @@ namespace WPFApplication.UserService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPFApplication.UserService.Task[] Tasks {
+        public ServiceLib.UserService.Task[] Tasks {
             get {
                 return this.TasksField;
             }
@@ -192,7 +192,7 @@ namespace WPFApplication.UserService {
         private int ProjectIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPFApplication.UserService.RoleDescription RoleDescriptionField;
+        private ServiceLib.UserService.RoleDescription RoleDescriptionField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int RoleIDField;
@@ -260,7 +260,7 @@ namespace WPFApplication.UserService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPFApplication.UserService.RoleDescription RoleDescription {
+        public ServiceLib.UserService.RoleDescription RoleDescription {
             get {
                 return this.RoleDescriptionField;
             }
@@ -314,10 +314,10 @@ namespace WPFApplication.UserService {
         private int EstimationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPFApplication.UserService.PersonTask[] PersonTasksField;
+        private ServiceLib.UserService.PersonTask[] PersonTasksField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private WPFApplication.UserService.TaskState StateField;
+        private ServiceLib.UserService.TaskState StateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StoryIDField;
@@ -375,7 +375,7 @@ namespace WPFApplication.UserService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPFApplication.UserService.PersonTask[] PersonTasks {
+        public ServiceLib.UserService.PersonTask[] PersonTasks {
             get {
                 return this.PersonTasksField;
             }
@@ -388,7 +388,7 @@ namespace WPFApplication.UserService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public WPFApplication.UserService.TaskState State {
+        public ServiceLib.UserService.TaskState State {
             get {
                 return this.StateField;
             }
@@ -568,70 +568,70 @@ namespace WPFApplication.UserService {
     public interface IUserService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreatePerson", ReplyAction="http://tempuri.org/IUserService/CreatePersonResponse")]
-        WPFApplication.UserService.Person CreatePerson(WPFApplication.UserService.Person person);
+        ServiceLib.UserService.Person CreatePerson(ServiceLib.UserService.Person person);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdatePerson", ReplyAction="http://tempuri.org/IUserService/UpdatePersonResponse")]
-        WPFApplication.UserService.Person UpdatePerson(WPFApplication.UserService.Person person);
+        ServiceLib.UserService.Person UpdatePerson(ServiceLib.UserService.Person person);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdatePersonPassword", ReplyAction="http://tempuri.org/IUserService/UpdatePersonPasswordResponse")]
-        WPFApplication.UserService.Person UpdatePersonPassword(int personID, string password);
+        ServiceLib.UserService.Person UpdatePersonPassword(int personID, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeletePerson", ReplyAction="http://tempuri.org/IUserService/DeletePersonResponse")]
         bool DeletePerson(int personID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetPersonByID", ReplyAction="http://tempuri.org/IUserService/GetPersonByIDResponse")]
-        WPFApplication.UserService.Person GetPersonByID(int personID);
+        ServiceLib.UserService.Person GetPersonByID(int personID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetPersonByEmail", ReplyAction="http://tempuri.org/IUserService/GetPersonByEmailResponse")]
-        WPFApplication.UserService.Person GetPersonByEmail(string email);
+        ServiceLib.UserService.Person GetPersonByEmail(string email);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/CreateRole", ReplyAction="http://tempuri.org/IUserService/CreateRoleResponse")]
-        WPFApplication.UserService.Role CreateRole(WPFApplication.UserService.Role role);
+        ServiceLib.UserService.Role CreateRole(ServiceLib.UserService.Role role);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateRole", ReplyAction="http://tempuri.org/IUserService/UpdateRoleResponse")]
-        WPFApplication.UserService.Role UpdateRole(WPFApplication.UserService.Role role);
+        ServiceLib.UserService.Role UpdateRole(ServiceLib.UserService.Role role);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/UpdateRolePassword", ReplyAction="http://tempuri.org/IUserService/UpdateRolePasswordResponse")]
-        WPFApplication.UserService.Role UpdateRolePassword(int roleID, string password);
+        ServiceLib.UserService.Role UpdateRolePassword(int roleID, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/DeleteRole", ReplyAction="http://tempuri.org/IUserService/DeleteRoleResponse")]
         bool DeleteRole(int roleID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetRoleByID", ReplyAction="http://tempuri.org/IUserService/GetRoleByIDResponse")]
-        WPFApplication.UserService.Role GetRoleByID(int roleID);
+        ServiceLib.UserService.Role GetRoleByID(int roleID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAllPeopleInProject", ReplyAction="http://tempuri.org/IUserService/GetAllPeopleInProjectResponse")]
-        WPFApplication.UserService.Person[] GetAllPeopleInProject(int projectID);
+        ServiceLib.UserService.Person[] GetAllPeopleInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAllRolesInProject", ReplyAction="http://tempuri.org/IUserService/GetAllRolesInProjectResponse")]
-        WPFApplication.UserService.Role[] GetAllRolesInProject(int projectID);
+        ServiceLib.UserService.Role[] GetAllRolesInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAllPeople", ReplyAction="http://tempuri.org/IUserService/GetAllPeopleResponse")]
-        WPFApplication.UserService.Person[] GetAllPeople();
+        ServiceLib.UserService.Person[] GetAllPeople();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/LoginAdmin", ReplyAction="http://tempuri.org/IUserService/LoginAdminResponse")]
         bool LoginAdmin(int personID, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAllTasksInPerson", ReplyAction="http://tempuri.org/IUserService/GetAllTasksInPersonResponse")]
-        WPFApplication.UserService.Task[] GetAllTasksInPerson(int personID);
+        ServiceLib.UserService.Task[] GetAllTasksInPerson(int personID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAllRolesInPerson", ReplyAction="http://tempuri.org/IUserService/GetAllRolesInPersonResponse")]
-        WPFApplication.UserService.Role[] GetAllRolesInPerson(int personID);
+        ServiceLib.UserService.Role[] GetAllRolesInPerson(int personID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/LoginProjectAdmin", ReplyAction="http://tempuri.org/IUserService/LoginProjectAdminResponse")]
         bool LoginProjectAdmin(int roleID, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetAllPeopleWorkingInTask", ReplyAction="http://tempuri.org/IUserService/GetAllPeopleWorkingInTaskResponse")]
-        WPFApplication.UserService.Person[] GetAllPeopleWorkingInTask(int taskID);
+        ServiceLib.UserService.Person[] GetAllPeopleWorkingInTask(int taskID);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IUserServiceChannel : WPFApplication.UserService.IUserService, System.ServiceModel.IClientChannel {
+    public interface IUserServiceChannel : ServiceLib.UserService.IUserService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class UserServiceClient : System.ServiceModel.ClientBase<WPFApplication.UserService.IUserService>, WPFApplication.UserService.IUserService {
+    public partial class UserServiceClient : System.ServiceModel.ClientBase<ServiceLib.UserService.IUserService>, ServiceLib.UserService.IUserService {
         
         public UserServiceClient() {
         }
@@ -652,15 +652,15 @@ namespace WPFApplication.UserService {
                 base(binding, remoteAddress) {
         }
         
-        public WPFApplication.UserService.Person CreatePerson(WPFApplication.UserService.Person person) {
+        public ServiceLib.UserService.Person CreatePerson(ServiceLib.UserService.Person person) {
             return base.Channel.CreatePerson(person);
         }
         
-        public WPFApplication.UserService.Person UpdatePerson(WPFApplication.UserService.Person person) {
+        public ServiceLib.UserService.Person UpdatePerson(ServiceLib.UserService.Person person) {
             return base.Channel.UpdatePerson(person);
         }
         
-        public WPFApplication.UserService.Person UpdatePersonPassword(int personID, string password) {
+        public ServiceLib.UserService.Person UpdatePersonPassword(int personID, string password) {
             return base.Channel.UpdatePersonPassword(personID, password);
         }
         
@@ -668,23 +668,23 @@ namespace WPFApplication.UserService {
             return base.Channel.DeletePerson(personID);
         }
         
-        public WPFApplication.UserService.Person GetPersonByID(int personID) {
+        public ServiceLib.UserService.Person GetPersonByID(int personID) {
             return base.Channel.GetPersonByID(personID);
         }
         
-        public WPFApplication.UserService.Person GetPersonByEmail(string email) {
+        public ServiceLib.UserService.Person GetPersonByEmail(string email) {
             return base.Channel.GetPersonByEmail(email);
         }
         
-        public WPFApplication.UserService.Role CreateRole(WPFApplication.UserService.Role role) {
+        public ServiceLib.UserService.Role CreateRole(ServiceLib.UserService.Role role) {
             return base.Channel.CreateRole(role);
         }
         
-        public WPFApplication.UserService.Role UpdateRole(WPFApplication.UserService.Role role) {
+        public ServiceLib.UserService.Role UpdateRole(ServiceLib.UserService.Role role) {
             return base.Channel.UpdateRole(role);
         }
         
-        public WPFApplication.UserService.Role UpdateRolePassword(int roleID, string password) {
+        public ServiceLib.UserService.Role UpdateRolePassword(int roleID, string password) {
             return base.Channel.UpdateRolePassword(roleID, password);
         }
         
@@ -692,19 +692,19 @@ namespace WPFApplication.UserService {
             return base.Channel.DeleteRole(roleID);
         }
         
-        public WPFApplication.UserService.Role GetRoleByID(int roleID) {
+        public ServiceLib.UserService.Role GetRoleByID(int roleID) {
             return base.Channel.GetRoleByID(roleID);
         }
         
-        public WPFApplication.UserService.Person[] GetAllPeopleInProject(int projectID) {
+        public ServiceLib.UserService.Person[] GetAllPeopleInProject(int projectID) {
             return base.Channel.GetAllPeopleInProject(projectID);
         }
         
-        public WPFApplication.UserService.Role[] GetAllRolesInProject(int projectID) {
+        public ServiceLib.UserService.Role[] GetAllRolesInProject(int projectID) {
             return base.Channel.GetAllRolesInProject(projectID);
         }
         
-        public WPFApplication.UserService.Person[] GetAllPeople() {
+        public ServiceLib.UserService.Person[] GetAllPeople() {
             return base.Channel.GetAllPeople();
         }
         
@@ -712,11 +712,11 @@ namespace WPFApplication.UserService {
             return base.Channel.LoginAdmin(personID, password);
         }
         
-        public WPFApplication.UserService.Task[] GetAllTasksInPerson(int personID) {
+        public ServiceLib.UserService.Task[] GetAllTasksInPerson(int personID) {
             return base.Channel.GetAllTasksInPerson(personID);
         }
         
-        public WPFApplication.UserService.Role[] GetAllRolesInPerson(int personID) {
+        public ServiceLib.UserService.Role[] GetAllRolesInPerson(int personID) {
             return base.Channel.GetAllRolesInPerson(personID);
         }
         
@@ -724,7 +724,7 @@ namespace WPFApplication.UserService {
             return base.Channel.LoginProjectAdmin(roleID, password);
         }
         
-        public WPFApplication.UserService.Person[] GetAllPeopleWorkingInTask(int taskID) {
+        public ServiceLib.UserService.Person[] GetAllPeopleWorkingInTask(int taskID) {
             return base.Channel.GetAllPeopleWorkingInTask(taskID);
         }
     }
