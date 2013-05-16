@@ -28,7 +28,7 @@
 					<Label Grid.Column="1" x:Name="StoryEstimationLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="{Binding StoryEstimation}" Foreground="White" FontSize="21.333" Padding="0" Margin="0,0,10,0"/>
 				</Grid>
 				<Grid Grid.Column="0" Grid.Row="1" Margin="10,0,0,10">
-					<TextBlock Grid.Column="0" x:Name="StoryDescriptionTextBlock" TextWrapping="Wrap" Background="#FFF7F7F7" Text="{Binding StoryDescription}" FontSize="16" Padding="10,5" />
+					<TextBlock Grid.Column="0" x:Name="StoryDescriptionTextBlock" TextWrapping="Wrap" Background="#FFF7F7F7" Text="{Binding StoryDescription}" FontSize="16" Padding="10,5" Foreground="#FF353535" />
 				</Grid>
 				<Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Background="{Binding StoryPriorityColor}">
 					<Grid.RowDefinitions>

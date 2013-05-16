@@ -1,0 +1,33 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="GenericControlLib.ButtonControl"
+	x:Name="UserControl"
+	d:DesignWidth="640" d:DesignHeight="480">
+	<UserControl.Resources>
+		<Style x:Key="BorderStyle" TargetType="{x:Type Border}">
+			<Setter Property="Background" Value="#FFE6E6E6"/>
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Background" Value="#4EA6EA"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+		<Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+			<Setter Property="Foreground" Value="#FF4EA6EA"/>
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
+					<Setter Property="Foreground" Value="White" />
+				</DataTrigger >
+			</Style.Triggers>
+		</Style>
+	</UserControl.Resources>
+	<Grid x:Name="LayoutRoot">
+		<Border x:Name="OuterBorder" BorderThickness="1" Style="{DynamicResource BorderStyle}">
+			<TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}"/>
+		</Border>
+	</Grid>
+</UserControl>

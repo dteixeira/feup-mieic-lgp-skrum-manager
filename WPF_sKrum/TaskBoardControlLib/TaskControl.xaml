@@ -1,0 +1,16 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="TaskBoardControlLib.TaskControl"
+	x:Name="UserControl"
+	d:DesignWidth="640" d:DesignHeight="480">
+
+	<Grid x:Name="LayoutRoot">
+		<Border BorderThickness="1" Background="#FF969696">
+			<TextBlock TextWrapping="Wrap" Background="#FFF7F7F7" Foreground="#FF353535" Margin="10,30,10,10" Text="{Binding TaskDescription}" Padding="10,5" FontSize="16"/>
+		</Border>
+	</Grid>
+</UserControl>
