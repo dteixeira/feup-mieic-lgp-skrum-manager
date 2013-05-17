@@ -81,9 +81,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\TaskLib\TaskLib.csproj">
-      <Project>{0bc94bb8-4aad-41e0-af2b-ffda4dd39a02}</Project>
-      <Name>TaskLib</Name>
+    <ProjectReference Include="..\TaskBoardControlLib\TaskBoardControlLib.csproj">
+      <Project>{733e757f-308e-4039-947b-b6f867c07ffb}</Project>
+      <Name>TaskBoardControlLib</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

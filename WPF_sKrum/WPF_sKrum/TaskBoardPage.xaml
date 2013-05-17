@@ -4,8 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      xmlns:UserStoryLib="clr-namespace:UserStoryLib;assembly=UserStoryLib"
-      xmlns:TaskLib="clr-namespace:TaskLib;assembly=TaskLib"
+      xmlns:TaskBoardControlLib="clr-namespace:TaskBoardControlLib;assembly=TaskBoardControlLib"
       Background="White"
 
       d:DesignWidth="800" d:DesignHeight="600"
@@ -26,10 +25,10 @@
 
 			<Grid x:Name="TopTaskboard" Margin="0" Grid.Row="0">
 				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="2*" />
-					<ColumnDefinition Width="3*" />
-					<ColumnDefinition Width="3*" />
-					<ColumnDefinition Width="3*" />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
+					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
 				<TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="User Stories" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
 				<TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="To Do" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />

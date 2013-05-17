@@ -8,8 +8,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using TaskboardRowLib;
-using TaskLib;
-using UserStoryLib;
+using TaskBoardControlLib;
 
 namespace WPFApplication
 {
@@ -76,16 +75,16 @@ namespace WPFApplication
                 TaskboardLine.SetValue(Grid.ColumnProperty, 0);
 
                 ColumnDefinition coldef = new ColumnDefinition();
-                coldef.Width = new GridLength(2, GridUnitType.Star);
+                coldef.Width = new GridLength(1, GridUnitType.Star);
                 TaskboardLine.ColumnDefinitions.Add(coldef);
                 coldef = new ColumnDefinition();
-                coldef.Width = new GridLength(3, GridUnitType.Star);
+                coldef.Width = new GridLength(1, GridUnitType.Star);
                 TaskboardLine.ColumnDefinitions.Add(coldef);
                 coldef = new ColumnDefinition();
-                coldef.Width = new GridLength(3, GridUnitType.Star);
+                coldef.Width = new GridLength(1, GridUnitType.Star);
                 TaskboardLine.ColumnDefinitions.Add(coldef);
                 coldef = new ColumnDefinition();
-                coldef.Width = new GridLength(3, GridUnitType.Star);
+                coldef.Width = new GridLength(1, GridUnitType.Star);
                 TaskboardLine.ColumnDefinitions.Add(coldef);
                 
                 line_change = !line_change;
@@ -93,11 +92,13 @@ namespace WPFApplication
                     TaskboardLine.Background = BackFirstGrayColor;
                 else
                     TaskboardLine.Background = BackSecondGrayColor;
-                
 
-                UserStoryControl us = new UserStoryControl();
-                us.Nome = "US" + i.ToString();
-                us.Descricao = "asdadad adasdasd sdasd as dasd sdasda ad asds asdasd asdas dasdasd asdasd asdas dasdasdasda sda sdas dasd asdasd asd asd asd asd asd asd asd asd asd asd asda sdas d asdasd asd as dasd asd asd asd as dasd asd asdas dasd asd asdas dasd sad asd asd asas  asd asdasdsadas dasd asd asdasda sdasd asd asd asdasd asdasdasd asdas dasdsdasd asdasd asda s dasdas dasdasd asd a";
+
+                StoryControl us = new StoryControl();
+                us.StoryName = "US" + i.ToString();
+                us.StoryDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id sodales libero. Sed purus nibh, vehicula id fringilla in, viverra ac elit. Integer ultrices imperdiet nunc, ut iaculis est tempus vitae. Donec tortor orci, tempus mollis sagittis volutpat, mattis sed nisi. Integer velit mauris, fringilla vel ullamcorper non, adipiscing eu lectus. ";
+                us.StoryEstimation = 2;
+                us.StoryPriority = "M";
                 us.Width = Double.NaN;
                 us.Height = Double.NaN;
                 us.SetValue(Grid.RowProperty, 0);
@@ -138,7 +139,7 @@ namespace WPFApplication
                 {
                     TaskControl us2 = new TaskControl();
                     us2.USID = i;
-                    us2.Nome = i.ToString() + "Task";
+                    us2.TaskDescription = i.ToString() + "Task";
                     us2.Width = Double.NaN;
                     us2.Height = Double.NaN;
                     us2.State = TasksState.TODO;
@@ -150,7 +151,7 @@ namespace WPFApplication
                 {
                     TaskControl us2 = new TaskControl();
                     us2.USID = i;
-                    us2.Nome = i.ToString() + "Task" + i2.ToString();
+                    us2.TaskDescription = i.ToString() + "Task" + i2.ToString();
                     us2.Width = Double.NaN;
                     us2.Height = Double.NaN;
                     us2.State = TasksState.DOING;
@@ -162,7 +163,7 @@ namespace WPFApplication
                 {
                     TaskControl us2 = new TaskControl();
                     us2.USID = i;
-                    us2.Nome = i.ToString() + "Task" + i2.ToString();
+                    us2.TaskDescription = i.ToString() + "Task" + i2.ToString();
                     us2.Width = Double.NaN;
                     us2.Height = Double.NaN;
                     us2.State = TasksState.DONE;
@@ -222,9 +223,6 @@ namespace WPFApplication
         {
             this.CountdownTimerDelayScrollDown.Stop();
             this.CountdownTimerScrollDown.Stop();
-        }
-        
-        
-            
+        }    
     }
 }

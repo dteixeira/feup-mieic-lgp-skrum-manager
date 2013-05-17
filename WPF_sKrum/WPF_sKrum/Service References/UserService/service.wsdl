@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="UserService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="UserServiceEndpoint_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IUserService_CreatePerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePerson" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_CreatePerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreatePersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdatePerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePerson" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdatePerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdatePersonPassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePersonPassword" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdatePersonPassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePersonPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_DeletePerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePerson" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_DeletePerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetPersonByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPersonByID" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetPersonByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPersonByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetPersonByEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPersonByEmail" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetPersonByEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPersonByEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_CreateRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRole" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_CreateRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CreateRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRole" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateRolePassword_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRolePassword" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_UpdateRolePassword_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRolePasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_DeleteRole_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRole" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_DeleteRole_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRoleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetRoleByID_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleByID" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetRoleByID_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRoleByIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetAllPeopleInProject_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPeopleInProject" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetAllPeopleInProject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPeopleInProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetAllRolesInProject_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRolesInProject" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetAllRolesInProject_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRolesInProjectResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetAllPeople_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPeople" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetAllPeople_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPeopleResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_LoginAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_LoginAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetAllTasksInPerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTasksInPerson" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetAllTasksInPerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTasksInPersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetAllRolesInPerson_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRolesInPerson" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetAllRolesInPerson_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRolesInPersonResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_LoginProjectAdmin_InputMessage">
+    <wsdl:part name="parameters" element="tns:LoginProjectAdmin" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_LoginProjectAdmin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginProjectAdminResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetAllPeopleWorkingInTask_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPeopleWorkingInTask" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetAllPeopleWorkingInTask_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPeopleWorkingInTaskResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IUserService">
+    <wsdl:operation name="CreatePerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/CreatePerson" message="tns:IUserService_CreatePerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/CreatePersonResponse" message="tns:IUserService_CreatePerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdatePerson" message="tns:IUserService_UpdatePerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdatePersonResponse" message="tns:IUserService_UpdatePerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePersonPassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdatePersonPassword" message="tns:IUserService_UpdatePersonPassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdatePersonPasswordResponse" message="tns:IUserService_UpdatePersonPassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/DeletePerson" message="tns:IUserService_DeletePerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/DeletePersonResponse" message="tns:IUserService_DeletePerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPersonByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetPersonByID" message="tns:IUserService_GetPersonByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetPersonByIDResponse" message="tns:IUserService_GetPersonByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPersonByEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetPersonByEmail" message="tns:IUserService_GetPersonByEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetPersonByEmailResponse" message="tns:IUserService_GetPersonByEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CreateRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/CreateRole" message="tns:IUserService_CreateRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/CreateRoleResponse" message="tns:IUserService_CreateRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateRole" message="tns:IUserService_UpdateRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateRoleResponse" message="tns:IUserService_UpdateRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRolePassword">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/UpdateRolePassword" message="tns:IUserService_UpdateRolePassword_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/UpdateRolePasswordResponse" message="tns:IUserService_UpdateRolePassword_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/DeleteRole" message="tns:IUserService_DeleteRole_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/DeleteRoleResponse" message="tns:IUserService_DeleteRole_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleByID">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetRoleByID" message="tns:IUserService_GetRoleByID_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetRoleByIDResponse" message="tns:IUserService_GetRoleByID_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPeopleInProject">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetAllPeopleInProject" message="tns:IUserService_GetAllPeopleInProject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetAllPeopleInProjectResponse" message="tns:IUserService_GetAllPeopleInProject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRolesInProject">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetAllRolesInProject" message="tns:IUserService_GetAllRolesInProject_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetAllRolesInProjectResponse" message="tns:IUserService_GetAllRolesInProject_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPeople">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetAllPeople" message="tns:IUserService_GetAllPeople_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetAllPeopleResponse" message="tns:IUserService_GetAllPeople_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/LoginAdmin" message="tns:IUserService_LoginAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/LoginAdminResponse" message="tns:IUserService_LoginAdmin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTasksInPerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetAllTasksInPerson" message="tns:IUserService_GetAllTasksInPerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetAllTasksInPersonResponse" message="tns:IUserService_GetAllTasksInPerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRolesInPerson">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetAllRolesInPerson" message="tns:IUserService_GetAllRolesInPerson_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetAllRolesInPersonResponse" message="tns:IUserService_GetAllRolesInPerson_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LoginProjectAdmin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/LoginProjectAdmin" message="tns:IUserService_LoginProjectAdmin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/LoginProjectAdminResponse" message="tns:IUserService_LoginProjectAdmin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPeopleWorkingInTask">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetAllPeopleWorkingInTask" message="tns:IUserService_GetAllPeopleWorkingInTask_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetAllPeopleWorkingInTaskResponse" message="tns:IUserService_GetAllPeopleWorkingInTask_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="UserServiceEndpoint" type="tns:IUserService">
+    <wsp:PolicyReference URI="#UserServiceEndpoint_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="CreatePerson">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/CreatePerson" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePerson">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/UpdatePerson" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePersonPassword">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/UpdatePersonPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePerson">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/DeletePerson" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPersonByID">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetPersonByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPersonByEmail">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetPersonByEmail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CreateRole">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/CreateRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRole">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/UpdateRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRolePassword">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/UpdateRolePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRole">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/DeleteRole" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRoleByID">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetRoleByID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPeopleInProject">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetAllPeopleInProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRolesInProject">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetAllRolesInProject" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPeople">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetAllPeople" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginAdmin">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/LoginAdmin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllTasksInPerson">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetAllTasksInPerson" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllRolesInPerson">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetAllRolesInPerson" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="LoginProjectAdmin">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/LoginProjectAdmin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPeopleWorkingInTask">
+      <soap12:operation soapAction="http://tempuri.org/IUserService/GetAllPeopleWorkingInTask" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="UserService">
+    <wsdl:port name="UserServiceEndpoint" binding="tns:UserServiceEndpoint">
+      <soap12:address location="net.tcp://skrum.fe.up.pt:8003/UserService.svc" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://skrum.fe.up.pt:8003/UserService.svc</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Dns>localhost</Dns>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

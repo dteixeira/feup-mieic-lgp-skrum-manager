@@ -8,7 +8,7 @@
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
 
-	<Grid x:Name="LayoutRoot">
+	<Grid x:Name="LayoutRoot" MinHeight="125" MinWidth="200">
 		<Border BorderThickness="1" Background="#FF969696">
 			<TextBlock TextWrapping="Wrap" Background="#FFF7F7F7" Foreground="#FF353535" Margin="10,30,10,10" Text="{Binding TaskDescription}" Padding="10,5" FontSize="16"/>
 		</Border>

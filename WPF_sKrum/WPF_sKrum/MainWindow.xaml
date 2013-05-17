@@ -2,8 +2,6 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:WPFApplication"
-        xmlns:UserStoryLib="clr-namespace:UserStoryLib;assembly=UserStoryLib"
-        xmlns:TaskLib="clr-namespace:TaskLib;assembly=TaskLib"
         xmlns:pageTransitions="clr-namespace:PageTransitions;assembly=WpfPageTransitions"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:TaskBoardControlLib="clr-namespace:TaskBoardControlLib;assembly=TaskBoardControlLib" xmlns:GenericControlLib="clr-namespace:GenericControlLib;assembly=GenericControlLib" mc:Ignorable="d" x:Class="WPFApplication.MainWindow"
         Title="sKrum"

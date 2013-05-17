@@ -82,6 +82,21 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Service References\NotificationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\ProjectService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Service References\UserService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="UserStatsPage.xaml.cs">
       <DependentUpon>UserStatsPage.xaml</DependentUpon>
     </Compile>
@@ -148,6 +163,69 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\NotificationService\service.wsdl" />
+    <None Include="Service References\NotificationService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\NotificationService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\NotificationService\ServiceDataTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProjectService\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProjectService\service.wsdl" />
+    <None Include="Service References\ProjectService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProjectService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProjectService\ServiceDataTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.Meeting.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.PersonTask.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.Project.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.Sprint.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.Story.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.StorySprint.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ProjectService\WPFApplication.ProjectService.Task.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserService\service.wsdl" />
+    <None Include="Service References\UserService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserService\ServiceDataTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\UserService\WPFApplication.UserService.Person.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserService\WPFApplication.UserService.Role.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\UserService\WPFApplication.UserService.Task.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -163,10 +241,6 @@
       <Project>{7041af5b-ad01-4e03-ad77-1202a3befe12}</Project>
       <Name>Kinect</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ServiceLib\ServiceLib.csproj">
-      <Project>{7802f7f1-9d1a-4e9c-b885-47291a1022c1}</Project>
-      <Name>ServiceLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\TaskBoardControlLib\TaskBoardControlLib.csproj">
       <Project>{733E757F-308E-4039-947B-B6F867C07FFB}</Project>
       <Name>TaskBoardControlLib</Name>
@@ -175,20 +249,30 @@
       <Project>{28874d51-6654-42e1-8053-4bed4aa8275f}</Project>
       <Name>TaskboardRowLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TaskLib\TaskLib.csproj">
-      <Project>{0bc94bb8-4aad-41e0-af2b-ffda4dd39a02}</Project>
-      <Name>TaskLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\UserStoryLib\UserStoryLib.csproj">
-      <Project>{55ff83e6-eac0-4993-a1b2-4debc866e777}</Project>
-      <Name>UserStoryLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WpfPageTransitions\PageTransitions.csproj">
       <Project>{22a46d61-1d40-43a9-802c-b9d43dadd9ec}</Project>
       <Name>PageTransitions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\NotificationService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\NotificationService\configuration.svcinfo" />
+    <None Include="Service References\NotificationService\configuration91.svcinfo" />
+    <None Include="Service References\ProjectService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\ProjectService\configuration.svcinfo" />
+    <None Include="Service References\ProjectService\configuration91.svcinfo" />
+    <None Include="Service References\UserService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Service References\UserService\configuration.svcinfo" />
+    <None Include="Service References\UserService\configuration91.svcinfo" />
     <Resource Include="Images\check.png" />
     <Resource Include="Images\left_closed.png" />
     <Resource Include="Images\left_open.png" />
@@ -210,6 +294,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Fonts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\NotificationService\" />
+    <WCFMetadataStorage Include="Service References\ProjectService\" />
+    <WCFMetadataStorage Include="Service References\UserService\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />
