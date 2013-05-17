@@ -48,13 +48,13 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Themes\Generic.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Compile Include="TaskboardRowControl.cs">
-      <SubType>Code</SubType>
+    <Compile Include="TaskboardRowControl.xaml.cs">
+      <DependentUpon>TaskboardRowControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="TaskboardRowControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

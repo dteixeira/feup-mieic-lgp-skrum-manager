@@ -12,34 +12,41 @@
       Width="auto"
       Height="auto">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="16*" />
-        </Grid.RowDefinitions>
+    <Grid x:Name="GoodArea" Margin="0">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="90*" />
+			<ColumnDefinition Width="10*" />
+		</Grid.ColumnDefinitions>
+    
+		<Grid x:Name="WholeTaskboard">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="1*" />
+				<RowDefinition Height="16*" />
+			</Grid.RowDefinitions>
 
-        <Grid x:Name="TopTaskboard" Margin="0" Grid.Row="0" ShowGridLines="True">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*" />
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="3*" />
-                <ColumnDefinition Width="3*" />
-            </Grid.ColumnDefinitions>
-            <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="User Stories" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
-            <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="To Do" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
-            <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Doing" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
-            <TextBlock Grid.Column="3" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Done" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
-        </Grid>
-
-        <ScrollViewer x:Name="TaskboardScroll" Margin="0" Grid.Row="1" VerticalScrollBarVisibility="Hidden">
-            <Grid x:Name="Taskboard">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="3*" />
-                    <ColumnDefinition Width="3*" />
-                </Grid.ColumnDefinitions>
-            </Grid>
-        </ScrollViewer>
-    </Grid>
+			<Grid x:Name="TopTaskboard" Margin="0" Grid.Row="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="2*" />
+					<ColumnDefinition Width="3*" />
+					<ColumnDefinition Width="3*" />
+					<ColumnDefinition Width="3*" />
+				</Grid.ColumnDefinitions>
+				<TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="User Stories" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
+				<TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="To Do" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
+				<TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Doing" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
+				<TextBlock Grid.Column="3" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Done" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
+			</Grid>
+			<ScrollViewer x:Name="TaskboardScroll" Margin="0" VerticalScrollBarVisibility="Hidden" Grid.Row="1">
+				<Grid x:Name="Taskboard"/>
+			</ScrollViewer>
+		</Grid>
+		<Grid x:Name="ScrollButtons" Grid.Column="1" Margin="0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="50*" />
+				<RowDefinition Height="50*" />
+			</Grid.RowDefinitions>
+			<Rectangle x:Name="ScrollUpButton" Fill="#FF969696" Margin="0" Stroke="#FF353535" StrokeThickness="2" MouseEnter="ScrollUp_Start" MouseLeave="ScrollUp_Cancel"/>
+			<Rectangle x:Name="ScrollDownButton" Fill="#FF969696" Margin="0" Grid.Row="1" Stroke="#FF353535" StrokeThickness="2" MouseEnter="ScrollDown_Start" MouseLeave="ScrollDown_Cancel"/>
+		</Grid>
+	</Grid>
 </UserControl>
