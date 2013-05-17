@@ -27,7 +27,6 @@ namespace TaskBoardControlLib
         private string storyName;
         private string storyPriority;
         private int storyEstimation;
-        private Brush storyPriorityColor;
 
 		public StoryControl()
 		{

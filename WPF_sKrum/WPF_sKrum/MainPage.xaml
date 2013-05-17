@@ -1,8 +1,9 @@
-﻿<UserControl x:Class="WPFApplication.MainPage"
+﻿<UserControl
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:GenericControlLib="clr-namespace:GenericControlLib;assembly=GenericControlLib" x:Class="WPFApplication.MainPage"
       mc:Ignorable="d"
       d:DesignWidth="1024" d:DesignHeight="768">
 	<UserControl.Resources>
@@ -36,15 +37,15 @@
 			</Setter>
 		</Style>
 	</UserControl.Resources>
-    <Grid Background="#FFF7F7F7">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
+	<Grid Background="#FFF7F7F7">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="1*" />
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="1*" />
+			<RowDefinition Height="1*" />
+		</Grid.RowDefinitions>
 		<Button x:Name="ProjectStart" Grid.Row="0" Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Style="{StaticResource ButtonStyle}" Content="INICIO PROJECTO" Margin="30,30,10,10"/>
 		<Button x:Name="SprintStart" Grid.Row="0" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Style="{StaticResource ButtonStyle}" Content="INICIO SPRINT" Margin="10,30,30,10" />
 		<Button x:Name="DailyScrum" Grid.Row="1" Grid.Column="0" Background="Transparent" BorderBrush="Transparent" Foreground="Transparent" Style="{StaticResource ButtonStyle}" Content="DAILY SCRUM" Click="DailyScrum_PreviewMouseLeftButtonDown" Margin="30,10,10,30" />
