@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskBoardControlLib", "Task
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericControlLib", "GenericControlLib\GenericControlLib.csproj", "{66C3F1E6-C160-47B7-8C0C-B53A975226AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLib", "ServiceLib\ServiceLib.csproj", "{00F9C426-8516-404C-B085-DE09790EFFC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{66C3F1E6-C160-47B7-8C0C-B53A975226AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66C3F1E6-C160-47B7-8C0C-B53A975226AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66C3F1E6-C160-47B7-8C0C-B53A975226AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00F9C426-8516-404C-B085-DE09790EFFC1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00F9C426-8516-404C-B085-DE09790EFFC1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00F9C426-8516-404C-B085-DE09790EFFC1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00F9C426-8516-404C-B085-DE09790EFFC1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

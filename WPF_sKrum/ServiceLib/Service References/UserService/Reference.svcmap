@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="12d21e1e-bd79-4e1b-a4f2-bb0c2ccf77a7" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="d51f1bc7-830d-45a6-9720-74de4f1dc961" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <EnableDataBinding>true</EnableDataBinding>
@@ -21,10 +21,10 @@
     <MetadataSource Address="net.tcp://skrum.fe.up.pt:8003/UserService.svc/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="b4e73f98-dd4e-4bc0-a2c8-3c83add69e5a" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/UserService.svc/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="ec22e83a-9d6a-463c-9ece-6ffa6dd694fc" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/UserService.svc/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="17591e33-9ed5-4ee2-bbac-04dc54d7fada" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/UserService.svc/mex" />
-    <MetadataFile FileName="ServiceDataTypes.xsd" MetadataType="Schema" ID="25e8187d-4226-4be1-802a-45ca70839a41" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/UserService.svc/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="b560bf54-9c83-4429-bac3-c1544105332c" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/UserService.svc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="3e1c7357-7304-4706-9140-8a767cc2a187" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/UserService.svc/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="ee7c604d-6bf4-48bd-a4ad-c73425cad311" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/UserService.svc/mex" />
+    <MetadataFile FileName="ServiceDataTypes.xsd" MetadataType="Schema" ID="2ee35c36-56a8-4c92-9800-a50b967c24b7" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/UserService.svc/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

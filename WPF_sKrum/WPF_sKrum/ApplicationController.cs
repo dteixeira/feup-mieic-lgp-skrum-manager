@@ -4,9 +4,9 @@ using Kinect.Gestures.Waves;
 using Kinect.Sensor;
 using Microsoft.Kinect;
 using System.Collections.Generic;
-using WPFApplication.NotificationService;
-using WPFApplication.ProjectService;
-using WPFApplication.UserService;
+using ServiceLib.NotificationService;
+using ServiceLib.ProjectService;
+using ServiceLib.UserService;
 
 namespace WPFApplication
 {
@@ -127,12 +127,12 @@ namespace WPFApplication
             this.currentPage = ApplicationPages.sKrum;
 
             // Service clients initialisation.
-            //this.notifications = new NotificationServiceClient(new System.ServiceModel.InstanceContext(this));
-            //this.users = new UserServiceClient();
-            //this.projects = new ProjectServiceClient();
+            this.notifications = new NotificationServiceClient(new System.ServiceModel.InstanceContext(this));
+            this.users = new UserServiceClient();
+            this.projects = new ProjectServiceClient();
 
             // Register for global notifications.
-            //this.notifications.Subscribe(-1);
+            this.notifications.Subscribe(-1);
 
             // sKrum page possible transitions.
             this.pagesRight.Add(ApplicationPages.sKrum, ApplicationPages.MainPage);
