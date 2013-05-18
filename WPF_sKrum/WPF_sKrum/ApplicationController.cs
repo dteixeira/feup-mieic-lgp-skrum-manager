@@ -51,6 +51,13 @@ namespace WPFApplication
         private ProjectServiceClient projects;
         private UserServiceClient users;
 
+        private Project[] data_projects;
+        private Person[] data_users;
+        private Story[] userstories;
+        private int cur_project;
+        private int cur_user;
+
+
         public KinectSensorController KinectSensor
         {
             get { return this.sensor; }
@@ -115,6 +122,12 @@ namespace WPFApplication
             set { this.skeletons = value; }
         }
 
+        public Story[] UserStories
+        {
+            get { return this.userstories; }
+            set { this.userstories = value; }
+        }
+
         private ApplicationController()
         {
             this.sensor = new KinectSensorController(KinectSensorType.Xbox360Sensor);
@@ -126,6 +139,9 @@ namespace WPFApplication
             this.pagesRight = new Dictionary<ApplicationPages, ApplicationPages>();
             this.currentPage = ApplicationPages.sKrum;
 
+            this.cur_project = 0;
+            this.cur_user = 0;
+
             // Service clients initialisation.
             this.notifications = new NotificationServiceClient(new System.ServiceModel.InstanceContext(this));
             this.users = new UserServiceClient();
@@ -133,6 +149,13 @@ namespace WPFApplication
 
             // Register for global notifications.
             this.notifications.Subscribe(-1);
+
+
+            this.data_projects = this.projects.GetAllProjects();
+            this.data_users = this.users.GetAllPeople();
+
+            this.userstories = this.projects.GetAllStoriesInProject(this.data_projects[this.cur_project].ProjectID);            
+            
 
             // sKrum page possible transitions.
             this.pagesRight.Add(ApplicationPages.sKrum, ApplicationPages.MainPage);

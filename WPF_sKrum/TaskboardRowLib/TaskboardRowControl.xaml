@@ -8,7 +8,7 @@
              d:DesignHeight="600" d:DesignWidth="800" Foreground="Transparent">
     <Grid>
         <Grid x:Name="LayoutRoot" Background="Transparent">
-            <ListView Width="Auto" HorizontalContentAlignment="Stretch" Height="Auto" ItemsSource="{Binding Tasks}" AllowDrop="True" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" >
+            <ListView Width="Auto" HorizontalContentAlignment="Stretch" Height="Auto" ItemsSource="{Binding Tasks}" AllowDrop="True" BorderBrush="Transparent" Background="Transparent" BorderThickness="2" Foreground="Transparent" >
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="1" Width="auto" Height="auto" HorizontalAlignment="Stretch"  VerticalAlignment="Top" ScrollViewer.VerticalScrollBarVisibility="Hidden" ScrollViewer.HorizontalScrollBarVisibility="Hidden"/>

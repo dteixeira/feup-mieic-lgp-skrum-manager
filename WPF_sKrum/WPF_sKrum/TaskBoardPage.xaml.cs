@@ -28,9 +28,10 @@ namespace WPFApplication
         public TaskBoardPage()
         {
             InitializeComponent();
-            this.PopulateTaskboard();
             this.backdata = ApplicationController.Instance;
             this.backdata.CurrentPage = ApplicationPages.TaskBoardPage;
+
+            this.PopulateTaskboard();
 
             this.CountdownTimerDelayScrollUp = new DispatcherTimer();
             this.CountdownTimerDelayScrollUp.Tick += new EventHandler(ScrollActionDelayUp);
@@ -53,7 +54,6 @@ namespace WPFApplication
 
         private void PopulateTaskboard()
         {
-            int number_us = 10;
             Random random = new Random();
             bool line_change = true;
 
@@ -63,7 +63,7 @@ namespace WPFApplication
 
 
 
-            for (int i = 0; i < number_us; i++)
+            for (int i = 0; i < this.backdata.UserStories.Length; i++)
             {
                 //create line that holds UserStory info
                 RowDefinition rowdef = new RowDefinition();
@@ -95,10 +95,12 @@ namespace WPFApplication
 
 
                 StoryControl us = new StoryControl();
-                us.StoryName = "US" + i.ToString();
-                us.StoryDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque id sodales libero. Sed purus nibh, vehicula id fringilla in, viverra ac elit. Integer ultrices imperdiet nunc, ut iaculis est tempus vitae. Donec tortor orci, tempus mollis sagittis volutpat, mattis sed nisi. Integer velit mauris, fringilla vel ullamcorper non, adipiscing eu lectus. ";
-                us.StoryEstimation = 2;
-                us.StoryPriority = "M";
+                us.StoryName = "US" + backdata.UserStories[i].Number;
+                us.StoryDescription = backdata.UserStories[i].Description;
+
+                // us.StoryEstimation = backdata.UserStories[i].StorySprints[backdata.cur_sprint].Points;
+                us.StoryEstimation = 3;
+                us.StoryPriority = backdata.UserStories[i].Priority.ToString().Substring(0,1);
                 us.Width = Double.NaN;
                 us.Height = Double.NaN;
                 us.SetValue(Grid.RowProperty, 0);
@@ -108,7 +110,6 @@ namespace WPFApplication
                 TaskboardLine.Children.Add(us);
 
                 TaskboardRowControl listtasks = new TaskboardRowControl();
-                listtasks.Name = "TaskDropTarget";
                 listtasks.Width = Double.NaN;
                 listtasks.Height = Double.NaN;
                 listtasks.SetValue(Grid.RowProperty, 0);
@@ -116,7 +117,6 @@ namespace WPFApplication
                 listtasks.State = TasksState.TODO;
 
                 TaskboardRowControl listtasksstate2 = new TaskboardRowControl();
-                listtasksstate2.Name = "TaskDropTarget";
                 listtasksstate2.Width = Double.NaN;
                 listtasksstate2.Height = Double.NaN;
                 listtasksstate2.SetValue(Grid.RowProperty, 0);
@@ -124,7 +124,6 @@ namespace WPFApplication
                 listtasksstate2.State = TasksState.DOING;
 
                 TaskboardRowControl listtasksstate3 = new TaskboardRowControl();
-                listtasksstate3.Name = "TaskDropTarget";
                 listtasksstate3.Width = Double.NaN;
                 listtasksstate3.Height = Double.NaN;
                 listtasksstate3.SetValue(Grid.RowProperty, 0);
@@ -133,41 +132,29 @@ namespace WPFApplication
 
                 TaskboardRowControl.CreateLine(i);
 
-                int tasks_siz = random.Next(0, 7);
+                TaskControl tasktmp = new TaskControl();
+                tasktmp.USID = 1;
+                tasktmp.TaskDescription = "Teste";
+                tasktmp.Width = Double.NaN;
+                tasktmp.Height = Double.NaN;
+                TaskboardRowControl.all_static_tasks[i][TasksState.TODO].Add(tasktmp);
+                
 
-                for (int i2 = 0; i2 < tasks_siz; i2++)
+                for (int i2 = 0; i2 < backdata.UserStories[i].Tasks.Length; i2++)
                 {
                     TaskControl us2 = new TaskControl();
-                    us2.USID = i;
-                    us2.TaskDescription = i.ToString() + "Task";
+                    us2.USID = backdata.UserStories[i].Tasks[i2].StoryID;
+                    us2.TaskDescription = backdata.UserStories[i].Tasks[i2].Description;
                     us2.Width = Double.NaN;
                     us2.Height = Double.NaN;
-                    us2.State = TasksState.TODO;
-                    TaskboardRowControl.all_static_tasks[i][TasksState.TODO].Add(us2);
-                }
-
-                tasks_siz = random.Next(0, 7);
-                for (int i2 = 0; i2 < tasks_siz; i2++)
-                {
-                    TaskControl us2 = new TaskControl();
-                    us2.USID = i;
-                    us2.TaskDescription = i.ToString() + "Task" + i2.ToString();
-                    us2.Width = Double.NaN;
-                    us2.Height = Double.NaN;
-                    us2.State = TasksState.DOING;
-                    TaskboardRowControl.all_static_tasks[i][TasksState.DOING].Add(us2);
-                }
-
-                tasks_siz = random.Next(0, 7);
-                for (int i2 = 0; i2 < tasks_siz; i2++)
-                {
-                    TaskControl us2 = new TaskControl();
-                    us2.USID = i;
-                    us2.TaskDescription = i.ToString() + "Task" + i2.ToString();
-                    us2.Width = Double.NaN;
-                    us2.Height = Double.NaN;
-                    us2.State = TasksState.DONE;
-                    TaskboardRowControl.all_static_tasks[i][TasksState.DONE].Add(us2);
+                    if (backdata.UserStories[i].Tasks[i2].State == ServiceLib.ProjectService.TaskState.Waiting)
+                        TaskboardRowControl.all_static_tasks[i][TasksState.TODO].Add(us2);
+                    else if (backdata.UserStories[i].Tasks[i2].State == ServiceLib.ProjectService.TaskState.InProgress)
+                        TaskboardRowControl.all_static_tasks[i][TasksState.DOING].Add(us2);
+                    else if (backdata.UserStories[i].Tasks[i2].State == ServiceLib.ProjectService.TaskState.Testing)
+                        TaskboardRowControl.all_static_tasks[i][TasksState.TESTING].Add(us2);
+                    else 
+                        TaskboardRowControl.all_static_tasks[i][TasksState.DONE].Add(us2);                    
                 }
 
                 TaskboardLine.Children.Add(listtasks);
