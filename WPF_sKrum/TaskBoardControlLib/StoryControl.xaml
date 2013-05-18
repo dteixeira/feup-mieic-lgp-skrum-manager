@@ -8,36 +8,36 @@
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
 
-	<Grid x:Name="LayoutRoot">
-		<Border BorderThickness="1" Background="#FF4EA6EA">
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition/>
-					<ColumnDefinition Width="25"/>
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="30"/>
-					<RowDefinition/>
-				</Grid.RowDefinitions>
-				<Grid Grid.Column="0" Grid.Row="0" Margin="10,0,0,0" UseLayoutRounding="False" Height="30">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="5*"/>
-						<ColumnDefinition/>
-					</Grid.ColumnDefinitions>
-					<Label Grid.Column="0" x:Name="StoryNameLabel" VerticalContentAlignment="Center" Content="{Binding StoryName}" Foreground="White" FontSize="21.333" Margin="0" Padding="0"/>
-					<Label Grid.Column="1" x:Name="StoryEstimationLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="{Binding StoryEstimation}" Foreground="White" FontSize="21.333" Padding="0" Margin="0,0,10,0"/>
-				</Grid>
-				<Grid Grid.Column="0" Grid.Row="1" Margin="10,0,0,10">
-					<TextBlock Grid.Column="0" x:Name="StoryDescriptionTextBlock" TextWrapping="Wrap" Background="#FFF7F7F7" Text="{Binding StoryDescription}" FontSize="16" Padding="10,5" Foreground="#FF353535" />
-				</Grid>
-				<Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Background="{Binding StoryPriorityColor}">
-					<Grid.RowDefinitions>
-						<RowDefinition Height="30"/>
-						<RowDefinition/>
-					</Grid.RowDefinitions>
-					<Label Grid.Row="0" x:Name="StoryPriorityLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding StoryPriority}" Foreground="White" FontSize="14.667" UseLayoutRounding="False" FontWeight="Bold" Background="{Binding StoryPriorityColor}" BorderThickness="0" Margin="0" Padding="0" />
-				</Grid>
-			</Grid>
-		</Border>
-	</Grid>
+    <Grid x:Name="LayoutRoot" MinHeight="146">
+        <Grid Margin="1" Background="#FFC3C3C3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="25"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Column="0" Grid.Row="1" Margin="0">
+                <TextBlock Grid.Column="0" x:Name="StoryDescriptionTextBlock" TextWrapping="Wrap" Background="#FFC3C3C3" Text="{Binding StoryDescription}" FontSize="16" Padding="20,10" Foreground="#FF242424" />
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Background="{Binding StoryPriorityColor}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" x:Name="StoryPriorityLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding StoryPriority}" Foreground="#FF242424" FontSize="18.667" UseLayoutRounding="False" FontWeight="Bold" Background="{Binding StoryPriorityColor}" BorderThickness="0" Margin="0" Padding="0" />
+            </Grid>
+            <Border Grid.Row="0" BorderBrush="#FF959595" BorderThickness="0,0,0,1">
+                <Grid UseLayoutRounding="False" Margin="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" x:Name="StoryNameLabel" VerticalContentAlignment="Center" Content="{Binding StoryName}" Foreground="#FF242424" FontSize="18.667" Margin="0" Padding="20,0,0,0"/>
+                    <Label Grid.Column="1" x:Name="StoryEstimationLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="{Binding StoryEstimation}" Foreground="#FF242424" FontSize="18.667" Padding="0,0,10,0" Margin="0"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
 </UserControl>
