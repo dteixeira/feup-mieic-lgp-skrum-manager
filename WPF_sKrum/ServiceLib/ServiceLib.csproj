@@ -42,17 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\DataService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\NotificationService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\ProjectService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
-    <Compile Include="Service References\UserService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -63,6 +58,46 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="Service References\DataService\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataService\service.wsdl" />
+    <None Include="Service References\DataService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataService\ServiceDataTypes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\DataService\ServiceLib.DataService.Meeting.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataService\ServiceLib.DataService.Person.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataService\ServiceLib.DataService.PersonTask.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataService\ServiceLib.DataService.Project.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataService\ServiceLib.DataService.Role.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataService\ServiceLib.DataService.Sprint.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataService\ServiceLib.DataService.Story.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataService\ServiceLib.DataService.StorySprint.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\DataService\ServiceLib.DataService.Task.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\NotificationService\service.wsdl" />
     <None Include="Service References\NotificationService\service.xsd">
       <SubType>Designer</SubType>
@@ -73,64 +108,10 @@
     <None Include="Service References\NotificationService\ServiceDataTypes.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\ProjectService\Arrays.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProjectService\service.wsdl" />
-    <None Include="Service References\ProjectService\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProjectService\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProjectService\ServiceDataTypes.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ProjectService\ServiceLib.ProjectService.Meeting.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProjectService\ServiceLib.ProjectService.PersonTask.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProjectService\ServiceLib.ProjectService.Project.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProjectService\ServiceLib.ProjectService.Sprint.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProjectService\ServiceLib.ProjectService.Story.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProjectService\ServiceLib.ProjectService.StorySprint.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\ProjectService\ServiceLib.ProjectService.Task.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\UserService\service.wsdl" />
-    <None Include="Service References\UserService\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UserService\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UserService\ServiceDataTypes.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\UserService\ServiceLib.UserService.Person.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\UserService\ServiceLib.UserService.Role.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\UserService\ServiceLib.UserService.Task.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\DataService\" />
     <WCFMetadataStorage Include="Service References\NotificationService\" />
-    <WCFMetadataStorage Include="Service References\ProjectService\" />
-    <WCFMetadataStorage Include="Service References\UserService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\NotificationService\configuration91.svcinfo" />
@@ -145,25 +126,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UserService\configuration91.svcinfo" />
+    <None Include="Service References\DataService\configuration91.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UserService\configuration.svcinfo" />
+    <None Include="Service References\DataService\configuration.svcinfo" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Service References\UserService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ProjectService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ProjectService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ProjectService\Reference.svcmap">
+    <None Include="Service References\DataService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

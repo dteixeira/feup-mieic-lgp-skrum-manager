@@ -5,8 +5,7 @@ using Kinect.Sensor;
 using Microsoft.Kinect;
 using System.Collections.Generic;
 using ServiceLib.NotificationService;
-using ServiceLib.ProjectService;
-using ServiceLib.UserService;
+using ServiceLib.DataService;
 
 namespace WPFApplication
 {
@@ -48,8 +47,7 @@ namespace WPFApplication
         private ApplicationPages currentPage;
         private Skeleton[] skeletons;
         private NotificationServiceClient notifications;
-        private ProjectServiceClient projects;
-        private UserServiceClient users;
+        private DataServiceClient data;
 
         private Project[] data_projects;
         private Person[] data_users;
@@ -68,14 +66,9 @@ namespace WPFApplication
             get { return this.notifications; }
         }
 
-        public ProjectServiceClient Projects
+        public DataServiceClient Data
         {
-            get { return this.projects; }
-        }
-
-        public UserServiceClient Users
-        {
-            get { return this.users; }
+            get { return this.data; }
         }
 
         public int TrackingId
@@ -138,23 +131,21 @@ namespace WPFApplication
             this.pagesUp = new Dictionary<ApplicationPages, ApplicationPages>();
             this.pagesRight = new Dictionary<ApplicationPages, ApplicationPages>();
             this.currentPage = ApplicationPages.sKrum;
-
             this.cur_project = 0;
             this.cur_user = 0;
 
             // Service clients initialisation.
             this.notifications = new NotificationServiceClient(new System.ServiceModel.InstanceContext(this));
-            this.users = new UserServiceClient();
-            this.projects = new ProjectServiceClient();
+            this.data = new DataServiceClient();
 
             // Register for global notifications.
             this.notifications.Subscribe(-1);
 
 
-            this.data_projects = this.projects.GetAllProjects();
-            this.data_users = this.users.GetAllPeople();
+            this.data_projects = this.data.GetAllProjects();
+            this.data_users = this.data.GetAllPeople();
 
-            this.userstories = this.projects.GetAllStoriesInProject(this.data_projects[this.cur_project].ProjectID);            
+            //this.userstories = this.data.GetAllStoriesInProject(this.data_projects[this.cur_project].ProjectID);      
             
 
             // sKrum page possible transitions.

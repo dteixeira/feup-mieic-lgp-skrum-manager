@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="75f9e1dc-f31f-4f46-a292-10d7f3a61600" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.tcp://skrum.fe.up.pt:8003/DataService.svc/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="5b16a0cf-e553-43fd-b47a-a8362e35d5c6" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/DataService.svc/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="77b7150c-1d3a-4dc0-9795-5affc53f5ccb" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/DataService.svc/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="4ff80f11-0ce1-4ab0-b8b7-8a747fb6e9da" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/DataService.svc/mex" />
+    <MetadataFile FileName="ServiceDataTypes.xsd" MetadataType="Schema" ID="5a15c823-bd06-4905-ab67-6d088f65e940" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/DataService.svc/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="71cdc331-782a-45d5-83ee-d9789885a3a4" SourceId="1" SourceUrl="net.tcp://skrum.fe.up.pt:8003/DataService.svc/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -147,11 +147,11 @@ namespace WPFApplication
                     us2.TaskDescription = backdata.UserStories[i].Tasks[i2].Description;
                     us2.Width = Double.NaN;
                     us2.Height = Double.NaN;
-                    if (backdata.UserStories[i].Tasks[i2].State == ServiceLib.ProjectService.TaskState.Waiting)
+                    if (backdata.UserStories[i].Tasks[i2].State == ServiceLib.DataService.TaskState.Waiting)
                         TaskboardRowControl.all_static_tasks[i][TasksState.TODO].Add(us2);
-                    else if (backdata.UserStories[i].Tasks[i2].State == ServiceLib.ProjectService.TaskState.InProgress)
+                    else if (backdata.UserStories[i].Tasks[i2].State == ServiceLib.DataService.TaskState.InProgress)
                         TaskboardRowControl.all_static_tasks[i][TasksState.DOING].Add(us2);
-                    else if (backdata.UserStories[i].Tasks[i2].State == ServiceLib.ProjectService.TaskState.Testing)
+                    else if (backdata.UserStories[i].Tasks[i2].State == ServiceLib.DataService.TaskState.Testing)
                         TaskboardRowControl.all_static_tasks[i][TasksState.TESTING].Add(us2);
                     else 
                         TaskboardRowControl.all_static_tasks[i][TasksState.DONE].Add(us2);                    
