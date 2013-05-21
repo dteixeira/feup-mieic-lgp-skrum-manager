@@ -9,8 +9,8 @@
 	d:DesignWidth="640" d:DesignHeight="480">
 
     <Grid x:Name="LayoutRoot" MinHeight="125" MinWidth="200">
-        <Border BorderThickness="1" Background="#FFC3C3C3">
-            <TextBlock TextWrapping="Wrap" Background="#FFC3C3C3" Foreground="#FF242424" Margin="20,10" Text="{Binding TaskDescription}" Padding="0" FontSize="16"/>
+        <Border BorderThickness="1" Background="{StaticResource Gray3Brush}">
+            <TextBlock TextWrapping="Wrap" Background="{StaticResource Gray3Brush}" Foreground="Black" Margin="20,10" Text="{Binding TaskDescription}" Padding="0" FontSize="16" FontFamily="Open Sans"/>
         </Border>
     </Grid>
 </UserControl>

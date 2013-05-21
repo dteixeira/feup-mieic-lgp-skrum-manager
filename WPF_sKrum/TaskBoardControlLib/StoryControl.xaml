@@ -9,7 +9,7 @@
 	d:DesignWidth="640" d:DesignHeight="480">
 
     <Grid x:Name="LayoutRoot" MinHeight="146">
-        <Grid Margin="1" Background="#FFC3C3C3">
+        <Grid Margin="1" Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="25"/>
@@ -19,14 +19,14 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid Grid.Column="0" Grid.Row="1" Margin="0">
-                <TextBlock Grid.Column="0" x:Name="StoryDescriptionTextBlock" TextWrapping="Wrap" Background="#FFC3C3C3" Text="{Binding StoryDescription}" FontSize="16" Padding="20,10" Foreground="#FF242424" />
+                <TextBlock Grid.Column="0" x:Name="StoryDescriptionTextBlock" TextWrapping="Wrap" Background="White" Text="{Binding StoryDescription}" FontSize="16" Padding="20,10" Foreground="Black" FontFamily="Open Sans" />
             </Grid>
             <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Background="{Binding StoryPriorityColor}">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="40"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" x:Name="StoryPriorityLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding StoryPriority}" Foreground="#FF242424" FontSize="18.667" UseLayoutRounding="False" FontWeight="Bold" Background="{Binding StoryPriorityColor}" BorderThickness="0" Margin="0" Padding="0" />
+                <Label Grid.Row="0" x:Name="StoryPriorityLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding StoryPriority}" Foreground="White" FontSize="18.667" UseLayoutRounding="False" Background="{Binding StoryPriorityColor}" BorderThickness="0" Margin="0" Padding="0" FontFamily="Open Sans" />
             </Grid>
             <Border Grid.Row="0" BorderBrush="#FF959595" BorderThickness="0,0,0,1">
                 <Grid UseLayoutRounding="False" Margin="0">
@@ -34,8 +34,8 @@
                         <ColumnDefinition Width="5*"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" x:Name="StoryNameLabel" VerticalContentAlignment="Center" Content="{Binding StoryName}" Foreground="#FF242424" FontSize="18.667" Margin="0" Padding="20,0,0,0"/>
-                    <Label Grid.Column="1" x:Name="StoryEstimationLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="{Binding StoryEstimation}" Foreground="#FF242424" FontSize="18.667" Padding="0,0,10,0" Margin="0"/>
+                    <Label Grid.Column="0" x:Name="StoryNameLabel" VerticalContentAlignment="Center" Content="{Binding StoryName}" Foreground="Black" FontSize="18.667" Margin="0" Padding="20,0,0,0" FontFamily="Open Sans"/>
+                    <Label Grid.Column="1" x:Name="StoryEstimationLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="{Binding StoryEstimation}" Foreground="Black" FontSize="18.667" Padding="0,0,10,0" Margin="0" FontFamily="Open Sans"/>
                 </Grid>
             </Border>
         </Grid>

@@ -18,11 +18,6 @@ namespace TaskBoardControlLib
 	/// </summary>
 	public partial class StoryControl : UserControl
 	{
-        private static Brush PriorityMustColor = new SolidColorBrush(Color.FromRgb(0x5A, 0x5A, 0x5A));
-        private static Brush PriorityShouldColor = new SolidColorBrush(Color.FromRgb(0x78, 0x78, 0x78));
-        private static Brush PriorityCouldColor = new SolidColorBrush(Color.FromRgb(0xB3, 0xB3, 0xB3));
-        private static Brush PriorityWouldColor = new SolidColorBrush(Color.FromRgb(0xCD, 0xCD, 0xCD));
-
         private string storyDescription;
         private string storyName;
         private string storyPriority;
@@ -65,15 +60,15 @@ namespace TaskBoardControlLib
                 switch (this.storyPriority)
                 {
                     case "M":
-                        return StoryControl.PriorityMustColor;
+                        return (Brush)this.FindResource("MustPriorityBrush");
                     case "S":
-                        return StoryControl.PriorityShouldColor;
+                        return (Brush)this.FindResource("ShouldPriorityBrush");
                     case "C":
-                        return StoryControl.PriorityCouldColor;
+                        return (Brush)this.FindResource("CouldPriorityBrush");
                     case "W":
-                        return StoryControl.PriorityWouldColor;
+                        return (Brush)this.FindResource("WouldPriorityBrush");
                     default:
-                        return StoryControl.PriorityMustColor;
+                        return (Brush)this.FindResource("MustPriorityBrush");
                 }
             }
         }
