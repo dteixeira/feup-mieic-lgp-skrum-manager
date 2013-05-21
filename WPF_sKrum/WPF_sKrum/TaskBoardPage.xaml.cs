@@ -96,7 +96,7 @@ namespace WPFApplication
 
                     // Create a row control to todo tasks.
                     TaskboardRowControl.CreateLine(story.Value.StoryID);
-                    TaskboardRowControl todo = new TaskboardRowControl { Width = Double.NaN, Height = Double.NaN, State = TasksState.Todo };
+                    TaskboardRowControl todo = new TaskboardRowControl { Width = Double.NaN, Height = Double.NaN };
                     todo.SetValue(Grid.ColumnProperty, 3);
                     todo.Tasks = TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Todo];
 
