@@ -191,6 +191,9 @@
     <Resource Include="Images\configicon.png" />
     <Resource Include="Images\homeicon.png" />
     <Resource Include="Images\arrow.png" />
+    <Resource Include="Images\casa.png" />
+    <Resource Include="Images\cruz.png" />
+    <Resource Include="Images\definicoes.png" />
     <Content Include="KinectInteraction170_32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using ServiceLib.DataService;
 
 namespace WPFApplication
 {
@@ -58,6 +59,10 @@ namespace WPFApplication
             InitializeComponent();
             MainWindow.instance = this;
             this.backdata = ApplicationController.Instance;
+
+            //Sets the name of the project on the top bar
+            /*Project[] currentProjects = this.backdata.Projects;
+            this.UpperBar_ProjectName.Text = currentProjects[this.backdata.CurrentProject].Name;*/
 
             // Register for callbacks if sensor is ready and
             // start the sensor.
@@ -130,7 +135,8 @@ namespace WPFApplication
                 this.backdata.KinectSensor.StartTrackingSkeleton(backdata.TrackingId);
                 this.RightOpen.Visibility = Visibility.Visible;
                 this.RightClosed.Visibility = Visibility.Collapsed;
-                this.UpperBar.Background = new SolidColorBrush(Color.FromRgb(0x4E, 0xA6, 0xEA));
+                //this.UpperBar.Background = new SolidColorBrush(Color.FromRgb(0x4E, 0xA6, 0xEA));
+                this.UpperBar.Background = (Brush)Resources.FindName("KinectOnBarBrush");
             }
 
             // Disengage previous skeleton.
@@ -140,7 +146,8 @@ namespace WPFApplication
                 this.backdata.KinectSensor.StopTrackingSkeleton();
                 this.RightOpen.Visibility = Visibility.Collapsed;
                 this.RightClosed.Visibility = Visibility.Collapsed;
-                this.UpperBar.Background = Brushes.Gray;
+                //this.UpperBar.Background = Brushes.Gray;
+                this.UpperBar.Background = (Brush)Resources.FindName("KinectOffBarBrush");
             }
 
             else if (this.backdata.TrackingId != -1)
