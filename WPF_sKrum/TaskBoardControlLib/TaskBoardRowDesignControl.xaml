@@ -1,0 +1,27 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="TaskBoardControlLib.TaskBoardRowDesignControl"
+	x:Name="UserControl"
+	d:DesignWidth="640" d:DesignHeight="480">
+
+	<Grid x:Name="LayoutRoot" Margin="0">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="6"/>
+			<ColumnDefinition/>
+			<ColumnDefinition Width="25"/>
+			<ColumnDefinition/>
+			<ColumnDefinition Width="25"/>
+			<ColumnDefinition/>
+			<ColumnDefinition Width="25"/>
+			<ColumnDefinition/>
+			<ColumnDefinition Width="6"/>
+		</Grid.ColumnDefinitions>
+		<Border Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,0,0" Width="1"/>
+		<Border Grid.Column="4" BorderBrush="Black" BorderThickness="1,0,0,0" Width="1" Margin="5,0"/>
+		<Border Grid.Column="6" BorderBrush="Black" BorderThickness="1,0,0,0" Width="1" Margin="5,0"/>
+	</Grid>
+</UserControl>

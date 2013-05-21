@@ -64,6 +64,12 @@
     <Compile Include="StoryControl.xaml.cs">
       <DependentUpon>StoryControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TaskboardRowControl.xaml.cs">
+      <DependentUpon>TaskboardRowControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TaskBoardRowDesignControl.xaml.cs">
+      <DependentUpon>TaskBoardRowDesignControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TaskControl.xaml.cs">
       <DependentUpon>TaskControl.xaml</DependentUpon>
     </Compile>
@@ -79,6 +85,14 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="StoryControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TaskboardRowControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TaskBoardRowDesignControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

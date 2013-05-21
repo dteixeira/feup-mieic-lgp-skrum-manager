@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-public enum TasksState { TODO, DOING, TESTING, DONE };
+public enum TasksState { Todo, Doing, Testing, Done };
 
 namespace TaskBoardControlLib
 {
@@ -89,6 +89,7 @@ namespace TaskBoardControlLib
 
                 _adorner = this.Clone();
                 _adorner.Opacity = 0.6;
+                _adorner.IsHitTestVisible = false;
 
                 _adornerLayer.Visibility = Visibility.Visible;
                 _adornerLayer.Children.Add(_adorner);

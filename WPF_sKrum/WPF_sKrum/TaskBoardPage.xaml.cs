@@ -9,6 +9,8 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using TaskboardRowLib;
 using TaskBoardControlLib;
+using ServiceLib.DataService;
+using System.Linq;
 
 namespace WPFApplication
 {
@@ -18,11 +20,10 @@ namespace WPFApplication
     public partial class TaskBoardPage : UserControl
     {
         private float scrollValue = 0.0f;
-        private DispatcherTimer CountdownTimerDelayScrollUp;
-        private DispatcherTimer CountdownTimerDelayScrollDown;
-        private DispatcherTimer CountdownTimerScrollUp;
-        private DispatcherTimer CountdownTimerScrollDown;
-
+        private DispatcherTimer countdownTimerDelayScrollUp;
+        private DispatcherTimer countdownTimerDelayScrollDown;
+        private DispatcherTimer countdownTimerScrollUp;
+        private DispatcherTimer countdownTimerScrollDown;
         private ApplicationController backdata;
 
         public TaskBoardPage()
@@ -30,160 +31,141 @@ namespace WPFApplication
             InitializeComponent();
             this.backdata = ApplicationController.Instance;
             this.backdata.CurrentPage = ApplicationPages.TaskBoardPage;
-
             this.PopulateTaskboard();
 
-            this.CountdownTimerDelayScrollUp = new DispatcherTimer();
-            this.CountdownTimerDelayScrollUp.Tick += new EventHandler(ScrollActionDelayUp);
-            this.CountdownTimerDelayScrollUp.Interval = TimeSpan.FromSeconds(1);
+            // Initialize scroll up delay timer.
+            this.countdownTimerDelayScrollUp = new DispatcherTimer();
+            this.countdownTimerDelayScrollUp.Tick += new EventHandler(ScrollActionDelayUp);
+            this.countdownTimerDelayScrollUp.Interval = TimeSpan.FromSeconds(1);
 
-            this.CountdownTimerDelayScrollDown = new DispatcherTimer();
-            this.CountdownTimerDelayScrollDown.Tick += new EventHandler(ScrollActionDelayDown);
-            this.CountdownTimerDelayScrollDown.Interval = TimeSpan.FromSeconds(1);
+            // Initialize scroll down delay timer.
+            this.countdownTimerDelayScrollDown = new DispatcherTimer();
+            this.countdownTimerDelayScrollDown.Tick += new EventHandler(ScrollActionDelayDown);
+            this.countdownTimerDelayScrollDown.Interval = TimeSpan.FromSeconds(1);
 
-            this.CountdownTimerScrollUp = new DispatcherTimer();
-            this.CountdownTimerScrollUp.Tick += new EventHandler(ScrollActionUp);
-            this.CountdownTimerScrollUp.Interval = TimeSpan.FromSeconds(0.01);
+            // Initialize scroll up timer.
+            this.countdownTimerScrollUp = new DispatcherTimer();
+            this.countdownTimerScrollUp.Tick += new EventHandler(ScrollActionUp);
+            this.countdownTimerScrollUp.Interval = TimeSpan.FromSeconds(0.01);
 
-            this.CountdownTimerScrollDown = new DispatcherTimer();
-            this.CountdownTimerScrollDown.Tick += new EventHandler(ScrollActionDown);
-            this.CountdownTimerScrollDown.Interval = TimeSpan.FromSeconds(0.01);
+            // Initialize scroll down timer.
+            this.countdownTimerScrollDown = new DispatcherTimer();
+            this.countdownTimerScrollDown.Tick += new EventHandler(ScrollActionDown);
+            this.countdownTimerScrollDown.Interval = TimeSpan.FromSeconds(0.01);
         }
 
         
 
         private void PopulateTaskboard()
         {
-            Random random = new Random();
-            bool line_change = true;
-
-            Brush BackFirstGrayColor = new SolidColorBrush(Color.FromRgb(0xF7, 0xF7, 0xF7));
-            Brush BackSecondGrayColor = new SolidColorBrush(Color.FromRgb(0xCD, 0xCD, 0xCD));
-
-
-
-
-            for (int i = 0; i < this.backdata.UserStories.Length; i++)
+            try
             {
-                //create line that holds UserStory info
-                RowDefinition rowdef = new RowDefinition();
-                rowdef.Height = GridLength.Auto;
-                Taskboard.RowDefinitions.Add(rowdef);
+                // Get current project if selected.
+                Project project = ApplicationController.Instance.CurrentProject;
 
-                Grid TaskboardLine = new Grid();
-                TaskboardLine.SetValue(Grid.RowProperty, i);
-                TaskboardLine.SetValue(Grid.ColumnProperty, 0);
-
-                ColumnDefinition coldef = new ColumnDefinition();
-                coldef.Width = new GridLength(1, GridUnitType.Star);
-                TaskboardLine.ColumnDefinitions.Add(coldef);
-                coldef = new ColumnDefinition();
-                coldef.Width = new GridLength(1, GridUnitType.Star);
-                TaskboardLine.ColumnDefinitions.Add(coldef);
-                coldef = new ColumnDefinition();
-                coldef.Width = new GridLength(1, GridUnitType.Star);
-                TaskboardLine.ColumnDefinitions.Add(coldef);
-                coldef = new ColumnDefinition();
-                coldef.Width = new GridLength(1, GridUnitType.Star);
-                TaskboardLine.ColumnDefinitions.Add(coldef);
+                // Get current sprint.
+                Sprint sprint = project.Sprints.FirstOrDefault(s => s.Closed == false);
                 
-                line_change = !line_change;
-                if (line_change)
-                    TaskboardLine.Background = BackFirstGrayColor;
-                else
-                    TaskboardLine.Background = BackSecondGrayColor;
-
-
-                StoryControl us = new StoryControl();
-                us.StoryName = "US" + backdata.UserStories[i].Number;
-                us.StoryDescription = backdata.UserStories[i].Description;
-
-                // us.StoryEstimation = backdata.UserStories[i].StorySprints[backdata.cur_sprint].Points;
-                us.StoryEstimation = 3;
-                us.StoryPriority = backdata.UserStories[i].Priority.ToString().Substring(0,1);
-                us.Width = Double.NaN;
-                us.Height = Double.NaN;
-                us.SetValue(Grid.RowProperty, 0);
-                us.SetValue(Grid.ColumnProperty, 0);
-                us.VerticalAlignment = VerticalAlignment.Top;
-
-                TaskboardLine.Children.Add(us);
-
-                TaskboardRowControl listtasks = new TaskboardRowControl();
-                listtasks.Width = Double.NaN;
-                listtasks.Height = Double.NaN;
-                listtasks.SetValue(Grid.RowProperty, 0);
-                listtasks.SetValue(Grid.ColumnProperty, 1);
-                listtasks.State = TasksState.TODO;
-
-                TaskboardRowControl listtasksstate2 = new TaskboardRowControl();
-                listtasksstate2.Width = Double.NaN;
-                listtasksstate2.Height = Double.NaN;
-                listtasksstate2.SetValue(Grid.RowProperty, 0);
-                listtasksstate2.SetValue(Grid.ColumnProperty, 2);
-                listtasksstate2.State = TasksState.DOING;
-
-                TaskboardRowControl listtasksstate3 = new TaskboardRowControl();
-                listtasksstate3.Width = Double.NaN;
-                listtasksstate3.Height = Double.NaN;
-                listtasksstate3.SetValue(Grid.RowProperty, 0);
-                listtasksstate3.SetValue(Grid.ColumnProperty, 3);
-                listtasksstate3.State = TasksState.DONE;
-
-                TaskboardRowControl.CreateLine(i);
-
-                TaskControl tasktmp = new TaskControl();
-                tasktmp.USID = 1;
-                tasktmp.TaskDescription = "Teste";
-                tasktmp.Width = Double.NaN;
-                tasktmp.Height = Double.NaN;
-                TaskboardRowControl.all_static_tasks[i][TasksState.TODO].Add(tasktmp);
-                
-
-                for (int i2 = 0; i2 < backdata.UserStories[i].Tasks.Length; i2++)
+                // Iterate all user stories in the sprint.
+                foreach (var story in sprint.Stories.Select((s, i) => new { Value = s, Index = i }))
                 {
-                    TaskControl us2 = new TaskControl();
-                    us2.USID = backdata.UserStories[i].Tasks[i2].StoryID;
-                    us2.TaskDescription = backdata.UserStories[i].Tasks[i2].Description;
-                    us2.Width = Double.NaN;
-                    us2.Height = Double.NaN;
-                    if (backdata.UserStories[i].Tasks[i2].State == ServiceLib.DataService.TaskState.Waiting)
-                        TaskboardRowControl.all_static_tasks[i][TasksState.TODO].Add(us2);
-                    else if (backdata.UserStories[i].Tasks[i2].State == ServiceLib.DataService.TaskState.InProgress)
-                        TaskboardRowControl.all_static_tasks[i][TasksState.DOING].Add(us2);
-                    else if (backdata.UserStories[i].Tasks[i2].State == ServiceLib.DataService.TaskState.Testing)
-                        TaskboardRowControl.all_static_tasks[i][TasksState.TESTING].Add(us2);
-                    else 
-                        TaskboardRowControl.all_static_tasks[i][TasksState.DONE].Add(us2);                    
+                    // Create a new grid line to old the story information.
+                    RowDefinition rowdef = new RowDefinition();
+                    rowdef.Height = GridLength.Auto;
+                    Taskboard.RowDefinitions.Add(rowdef);
+
+                    // Create the new line control.
+                    TaskBoardRowDesignControl TaskboardLine = new TaskBoardRowDesignControl();
+                    TaskboardLine.SetValue(Grid.RowProperty, story.Index);
+                    TaskboardLine.SetValue(Grid.ColumnProperty, 0);
+                    this.Taskboard.Children.Add(TaskboardLine);
+
+                    // Create the story control.
+                    StoryControl storyControl = new StoryControl
+                    {
+                        StoryDescription = story.Value.Description,
+                        StoryName = "US" + story.Value.Number.ToString("D3"),
+                        StoryPriority = story.Value.Priority.ToString()[0].ToString(),
+                        StoryEstimation = story.Value.StorySprints.FirstOrDefault(s => s.SprintID == sprint.SprintID).Points
+                    };
+                    storyControl.Width = Double.NaN;
+                    storyControl.Height = Double.NaN;
+                    storyControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                    storyControl.SetValue(Grid.ColumnProperty, 1);
+                    TaskboardLine.ControlGrid.Children.Add(storyControl);
+
+                    // Create a row control to todo tasks.
+                    TaskboardRowControl.CreateLine(story.Value.StoryID);
+                    TaskboardRowControl todo = new TaskboardRowControl { Width = Double.NaN, Height = Double.NaN, State = TasksState.Todo };
+                    todo.SetValue(Grid.ColumnProperty, 3);
+                    todo.Tasks = TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Todo];
+
+                    // Create a row control to doing tasks.
+                    TaskboardRowControl doing = new TaskboardRowControl { Width = Double.NaN, Height = Double.NaN, State = TasksState.Doing };
+                    doing.SetValue(Grid.ColumnProperty, 5);
+                    doing.Tasks = TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Doing];
+
+                    // Create a row control to done tasks.
+                    TaskboardRowControl done = new TaskboardRowControl { Width = Double.NaN, Height = Double.NaN, State = TasksState.Done };
+                    done.SetValue(Grid.ColumnProperty, 7);
+                    done.Tasks = TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Done];
+
+                    // Add task controls to grid line.
+                    TaskboardLine.ControlGrid.Children.Add(todo);
+                    TaskboardLine.ControlGrid.Children.Add(doing);
+                    TaskboardLine.ControlGrid.Children.Add(done);
+
+                    // For each task add it to the respective state lists.
+                    foreach (Task task in story.Value.Tasks)
+                    {
+                        TaskControl taskControl = new TaskControl { USID = task.StoryID, TaskDescription = task.Description };
+                        taskControl.Width = Double.NaN;
+                        taskControl.Height = Double.NaN;
+                        switch (task.State)
+                        {
+                            case TaskState.Waiting:
+                                taskControl.State = TasksState.Todo;
+                                TaskboardRowControl.AllTasks[task.StoryID][TasksState.Todo].Add(taskControl);
+                                break;
+                            case TaskState.InProgress:
+                                taskControl.State = TasksState.Doing;
+                                TaskboardRowControl.AllTasks[task.StoryID][TasksState.Doing].Add(taskControl);
+                                break;
+                            case TaskState.Completed:
+                                taskControl.State = TasksState.Done;
+                                TaskboardRowControl.AllTasks[task.StoryID][TasksState.Done].Add(taskControl);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
                 }
-
-                TaskboardLine.Children.Add(listtasks);
-                TaskboardLine.Children.Add(listtasksstate2);
-                TaskboardLine.Children.Add(listtasksstate3);
-                listtasks.Tasks = TaskboardRowControl.all_static_tasks[i][TasksState.TODO];
-                listtasksstate2.Tasks = TaskboardRowControl.all_static_tasks[i][TasksState.DOING];
-                listtasksstate3.Tasks = TaskboardRowControl.all_static_tasks[i][TasksState.DONE];
-
-                Taskboard.Children.Add(TaskboardLine);
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.Message);
             }
         }
 
         private void ScrollActionDelayUp(object sender, EventArgs e)
         {
-            this.CountdownTimerScrollUp.Start();
-            this.CountdownTimerDelayScrollUp.Stop();
+            this.countdownTimerScrollUp.Start();
+            this.countdownTimerDelayScrollUp.Stop();
         }
+
         private void ScrollActionDelayDown(object sender, EventArgs e)
         {
-            this.CountdownTimerScrollDown.Start();
-            this.CountdownTimerDelayScrollDown.Stop();
+            this.countdownTimerScrollDown.Start();
+            this.countdownTimerDelayScrollDown.Stop();
         }
+
         private void ScrollActionUp(object sender, EventArgs e)
         {
             scrollValue -= 10.0f;
             if (scrollValue < 0.0f) scrollValue = 0.0f;
             TaskboardScroll.ScrollToVerticalOffset(scrollValue);
         }
+
         private void ScrollActionDown(object sender, EventArgs e)
         {
             scrollValue += 10.0f;
@@ -193,23 +175,26 @@ namespace WPFApplication
 
         private void ScrollUp_Start(object sender, MouseEventArgs e)
         {
-            this.CountdownTimerDelayScrollUp.Start();
-            this.CountdownTimerScrollUp.Stop();
+            this.countdownTimerDelayScrollUp.Start();
+            this.countdownTimerScrollUp.Stop();
         }
+
         private void ScrollDown_Start(object sender, MouseEventArgs e)
         {
-            this.CountdownTimerDelayScrollDown.Start();
-            this.CountdownTimerScrollDown.Stop();
+            this.countdownTimerDelayScrollDown.Start();
+            this.countdownTimerScrollDown.Stop();
         }
+
         private void ScrollUp_Cancel(object sender, MouseEventArgs e)
         {
-            this.CountdownTimerDelayScrollUp.Stop();
-            this.CountdownTimerScrollUp.Stop();
+            this.countdownTimerDelayScrollUp.Stop();
+            this.countdownTimerScrollUp.Stop();
         }
+
         private void ScrollDown_Cancel(object sender, MouseEventArgs e)
         {
-            this.CountdownTimerDelayScrollDown.Stop();
-            this.CountdownTimerScrollDown.Stop();
+            this.countdownTimerDelayScrollDown.Stop();
+            this.countdownTimerScrollDown.Stop();
         }    
     }
 }

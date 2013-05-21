@@ -41,10 +41,10 @@ namespace ServiceLib.DataService {
         private string PhotoURLField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ServiceLib.DataService.Role[] RolesField;
+        private System.Collections.Generic.List<ServiceLib.DataService.Role> RolesField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ServiceLib.DataService.Task[] TasksField;
+        private System.Collections.Generic.List<ServiceLib.DataService.Task> TasksField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -135,7 +135,7 @@ namespace ServiceLib.DataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceLib.DataService.Role[] Roles {
+        public System.Collections.Generic.List<ServiceLib.DataService.Role> Roles {
             get {
                 return this.RolesField;
             }
@@ -148,7 +148,7 @@ namespace ServiceLib.DataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceLib.DataService.Task[] Tasks {
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> Tasks {
             get {
                 return this.TasksField;
             }
@@ -314,7 +314,7 @@ namespace ServiceLib.DataService {
         private int EstimationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ServiceLib.DataService.PersonTask[] PersonTasksField;
+        private System.Collections.Generic.List<ServiceLib.DataService.PersonTask> PersonTasksField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private ServiceLib.DataService.TaskState StateField;
@@ -375,7 +375,7 @@ namespace ServiceLib.DataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceLib.DataService.PersonTask[] PersonTasks {
+        public System.Collections.Generic.List<ServiceLib.DataService.PersonTask> PersonTasks {
             get {
                 return this.PersonTasksField;
             }
@@ -576,7 +576,7 @@ namespace ServiceLib.DataService {
         private int AlertLimitField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ServiceLib.DataService.Meeting[] MeetingsField;
+        private System.Collections.Generic.List<ServiceLib.DataService.Meeting> MeetingsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
@@ -594,7 +594,7 @@ namespace ServiceLib.DataService {
         private int SprintDurationField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ServiceLib.DataService.Sprint[] SprintsField;
+        private System.Collections.Generic.List<ServiceLib.DataService.Sprint> SprintsField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -620,7 +620,7 @@ namespace ServiceLib.DataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceLib.DataService.Meeting[] Meetings {
+        public System.Collections.Generic.List<ServiceLib.DataService.Meeting> Meetings {
             get {
                 return this.MeetingsField;
             }
@@ -698,7 +698,7 @@ namespace ServiceLib.DataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceLib.DataService.Sprint[] Sprints {
+        public System.Collections.Generic.List<ServiceLib.DataService.Sprint> Sprints {
             get {
                 return this.SprintsField;
             }
@@ -857,7 +857,7 @@ namespace ServiceLib.DataService {
         private int SprintIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ServiceLib.DataService.Story[] StoriesField;
+        private System.Collections.Generic.List<ServiceLib.DataService.Story> StoriesField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -948,7 +948,7 @@ namespace ServiceLib.DataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceLib.DataService.Story[] Stories {
+        public System.Collections.Generic.List<ServiceLib.DataService.Story> Stories {
             get {
                 return this.StoriesField;
             }
@@ -1004,10 +1004,10 @@ namespace ServiceLib.DataService {
         private int StoryIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ServiceLib.DataService.StorySprint[] StorySprintsField;
+        private System.Collections.Generic.List<ServiceLib.DataService.StorySprint> StorySprintsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ServiceLib.DataService.Task[] TasksField;
+        private System.Collections.Generic.List<ServiceLib.DataService.Task> TasksField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1124,7 +1124,7 @@ namespace ServiceLib.DataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceLib.DataService.StorySprint[] StorySprints {
+        public System.Collections.Generic.List<ServiceLib.DataService.StorySprint> StorySprints {
             get {
                 return this.StorySprintsField;
             }
@@ -1137,7 +1137,7 @@ namespace ServiceLib.DataService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceLib.DataService.Task[] Tasks {
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> Tasks {
             get {
                 return this.TasksField;
             }
@@ -1290,28 +1290,28 @@ namespace ServiceLib.DataService {
         ServiceLib.DataService.Role GetRoleByID(int roleID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllPeopleInProject", ReplyAction="http://tempuri.org/IDataService/GetAllPeopleInProjectResponse")]
-        ServiceLib.DataService.Person[] GetAllPeopleInProject(int projectID);
+        System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeopleInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllRolesInProject", ReplyAction="http://tempuri.org/IDataService/GetAllRolesInProjectResponse")]
-        ServiceLib.DataService.Role[] GetAllRolesInProject(int projectID);
+        System.Collections.Generic.List<ServiceLib.DataService.Role> GetAllRolesInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllPeople", ReplyAction="http://tempuri.org/IDataService/GetAllPeopleResponse")]
-        ServiceLib.DataService.Person[] GetAllPeople();
+        System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeople();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/LoginAdmin", ReplyAction="http://tempuri.org/IDataService/LoginAdminResponse")]
         bool LoginAdmin(int personID, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllTasksInPerson", ReplyAction="http://tempuri.org/IDataService/GetAllTasksInPersonResponse")]
-        ServiceLib.DataService.Task[] GetAllTasksInPerson(int personID);
+        System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInPerson(int personID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllRolesInPerson", ReplyAction="http://tempuri.org/IDataService/GetAllRolesInPersonResponse")]
-        ServiceLib.DataService.Role[] GetAllRolesInPerson(int personID);
+        System.Collections.Generic.List<ServiceLib.DataService.Role> GetAllRolesInPerson(int personID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/LoginProjectAdmin", ReplyAction="http://tempuri.org/IDataService/LoginProjectAdminResponse")]
         bool LoginProjectAdmin(int roleID, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllPeopleWorkingInTask", ReplyAction="http://tempuri.org/IDataService/GetAllPeopleWorkingInTaskResponse")]
-        ServiceLib.DataService.Person[] GetAllPeopleWorkingInTask(int taskID);
+        System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeopleWorkingInTask(int taskID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateProject", ReplyAction="http://tempuri.org/IDataService/CreateProjectResponse")]
         ServiceLib.DataService.Project CreateProject(ServiceLib.DataService.Project project);
@@ -1380,46 +1380,46 @@ namespace ServiceLib.DataService {
         ServiceLib.DataService.Meeting GetMeetingByID(int meetingID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllProjects", ReplyAction="http://tempuri.org/IDataService/GetAllProjectsResponse")]
-        ServiceLib.DataService.Project[] GetAllProjects();
+        System.Collections.Generic.List<ServiceLib.DataService.Project> GetAllProjects();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/LoginProject", ReplyAction="http://tempuri.org/IDataService/LoginProjectResponse")]
         bool LoginProject(int projectID, string password);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllSprintsInProject", ReplyAction="http://tempuri.org/IDataService/GetAllSprintsInProjectResponse")]
-        ServiceLib.DataService.Sprint[] GetAllSprintsInProject(int projectID);
+        System.Collections.Generic.List<ServiceLib.DataService.Sprint> GetAllSprintsInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllStoriesInProject", ReplyAction="http://tempuri.org/IDataService/GetAllStoriesInProjectResponse")]
-        ServiceLib.DataService.Story[] GetAllStoriesInProject(int projectID);
+        System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllTasksInProject", ReplyAction="http://tempuri.org/IDataService/GetAllTasksInProjectResponse")]
-        ServiceLib.DataService.Task[] GetAllTasksInProject(int projectID);
+        System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllStoriesWithoutSprintInProject", ReplyAction="http://tempuri.org/IDataService/GetAllStoriesWithoutSprintInProjectResponse")]
-        ServiceLib.DataService.Story[] GetAllStoriesWithoutSprintInProject(int projectID);
+        System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesWithoutSprintInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllMeetingsInProject", ReplyAction="http://tempuri.org/IDataService/GetAllMeetingsInProjectResponse")]
-        ServiceLib.DataService.Meeting[] GetAllMeetingsInProject(int projectID);
+        System.Collections.Generic.List<ServiceLib.DataService.Meeting> GetAllMeetingsInProject(int projectID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllTasksInProjectByState", ReplyAction="http://tempuri.org/IDataService/GetAllTasksInProjectByStateResponse")]
-        ServiceLib.DataService.Task[] GetAllTasksInProjectByState(int projectID, ServiceLib.DataService.TaskState state);
+        System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInProjectByState(int projectID, ServiceLib.DataService.TaskState state);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllStoriesInProjectByState", ReplyAction="http://tempuri.org/IDataService/GetAllStoriesInProjectByStateResponse")]
-        ServiceLib.DataService.Story[] GetAllStoriesInProjectByState(int projectID, ServiceLib.DataService.StoryState state);
+        System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInProjectByState(int projectID, ServiceLib.DataService.StoryState state);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllStoriesInSprint", ReplyAction="http://tempuri.org/IDataService/GetAllStoriesInSprintResponse")]
-        ServiceLib.DataService.Story[] GetAllStoriesInSprint(int sprintID);
+        System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInSprint(int sprintID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllTasksInSprint", ReplyAction="http://tempuri.org/IDataService/GetAllTasksInSprintResponse")]
-        ServiceLib.DataService.Task[] GetAllTasksInSprint(int sprintID);
+        System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInSprint(int sprintID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/AddStoryInSprint", ReplyAction="http://tempuri.org/IDataService/AddStoryInSprintResponse")]
         ServiceLib.DataService.StorySprint AddStoryInSprint(ServiceLib.DataService.StorySprint storySprint);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllTasksInStory", ReplyAction="http://tempuri.org/IDataService/GetAllTasksInStoryResponse")]
-        ServiceLib.DataService.Task[] GetAllTasksInStory(int storyID);
+        System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInStory(int storyID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateStoryOrder", ReplyAction="http://tempuri.org/IDataService/UpdateStoryOrderResponse")]
-        ServiceLib.DataService.Story[] UpdateStoryOrder(int projectID, int[] ordered);
+        System.Collections.Generic.List<ServiceLib.DataService.Story> UpdateStoryOrder(int projectID, System.Collections.Generic.List<int> ordered);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/AddWorkInTask", ReplyAction="http://tempuri.org/IDataService/AddWorkInTaskResponse")]
         ServiceLib.DataService.PersonTask AddWorkInTask(ServiceLib.DataService.PersonTask personTask);
@@ -1491,15 +1491,15 @@ namespace ServiceLib.DataService {
             return base.Channel.GetRoleByID(roleID);
         }
         
-        public ServiceLib.DataService.Person[] GetAllPeopleInProject(int projectID) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeopleInProject(int projectID) {
             return base.Channel.GetAllPeopleInProject(projectID);
         }
         
-        public ServiceLib.DataService.Role[] GetAllRolesInProject(int projectID) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Role> GetAllRolesInProject(int projectID) {
             return base.Channel.GetAllRolesInProject(projectID);
         }
         
-        public ServiceLib.DataService.Person[] GetAllPeople() {
+        public System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeople() {
             return base.Channel.GetAllPeople();
         }
         
@@ -1507,11 +1507,11 @@ namespace ServiceLib.DataService {
             return base.Channel.LoginAdmin(personID, password);
         }
         
-        public ServiceLib.DataService.Task[] GetAllTasksInPerson(int personID) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInPerson(int personID) {
             return base.Channel.GetAllTasksInPerson(personID);
         }
         
-        public ServiceLib.DataService.Role[] GetAllRolesInPerson(int personID) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Role> GetAllRolesInPerson(int personID) {
             return base.Channel.GetAllRolesInPerson(personID);
         }
         
@@ -1519,7 +1519,7 @@ namespace ServiceLib.DataService {
             return base.Channel.LoginProjectAdmin(roleID, password);
         }
         
-        public ServiceLib.DataService.Person[] GetAllPeopleWorkingInTask(int taskID) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeopleWorkingInTask(int taskID) {
             return base.Channel.GetAllPeopleWorkingInTask(taskID);
         }
         
@@ -1611,7 +1611,7 @@ namespace ServiceLib.DataService {
             return base.Channel.GetMeetingByID(meetingID);
         }
         
-        public ServiceLib.DataService.Project[] GetAllProjects() {
+        public System.Collections.Generic.List<ServiceLib.DataService.Project> GetAllProjects() {
             return base.Channel.GetAllProjects();
         }
         
@@ -1619,39 +1619,39 @@ namespace ServiceLib.DataService {
             return base.Channel.LoginProject(projectID, password);
         }
         
-        public ServiceLib.DataService.Sprint[] GetAllSprintsInProject(int projectID) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Sprint> GetAllSprintsInProject(int projectID) {
             return base.Channel.GetAllSprintsInProject(projectID);
         }
         
-        public ServiceLib.DataService.Story[] GetAllStoriesInProject(int projectID) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInProject(int projectID) {
             return base.Channel.GetAllStoriesInProject(projectID);
         }
         
-        public ServiceLib.DataService.Task[] GetAllTasksInProject(int projectID) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInProject(int projectID) {
             return base.Channel.GetAllTasksInProject(projectID);
         }
         
-        public ServiceLib.DataService.Story[] GetAllStoriesWithoutSprintInProject(int projectID) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesWithoutSprintInProject(int projectID) {
             return base.Channel.GetAllStoriesWithoutSprintInProject(projectID);
         }
         
-        public ServiceLib.DataService.Meeting[] GetAllMeetingsInProject(int projectID) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Meeting> GetAllMeetingsInProject(int projectID) {
             return base.Channel.GetAllMeetingsInProject(projectID);
         }
         
-        public ServiceLib.DataService.Task[] GetAllTasksInProjectByState(int projectID, ServiceLib.DataService.TaskState state) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInProjectByState(int projectID, ServiceLib.DataService.TaskState state) {
             return base.Channel.GetAllTasksInProjectByState(projectID, state);
         }
         
-        public ServiceLib.DataService.Story[] GetAllStoriesInProjectByState(int projectID, ServiceLib.DataService.StoryState state) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInProjectByState(int projectID, ServiceLib.DataService.StoryState state) {
             return base.Channel.GetAllStoriesInProjectByState(projectID, state);
         }
         
-        public ServiceLib.DataService.Story[] GetAllStoriesInSprint(int sprintID) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInSprint(int sprintID) {
             return base.Channel.GetAllStoriesInSprint(sprintID);
         }
         
-        public ServiceLib.DataService.Task[] GetAllTasksInSprint(int sprintID) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInSprint(int sprintID) {
             return base.Channel.GetAllTasksInSprint(sprintID);
         }
         
@@ -1659,11 +1659,11 @@ namespace ServiceLib.DataService {
             return base.Channel.AddStoryInSprint(storySprint);
         }
         
-        public ServiceLib.DataService.Task[] GetAllTasksInStory(int storyID) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInStory(int storyID) {
             return base.Channel.GetAllTasksInStory(storyID);
         }
         
-        public ServiceLib.DataService.Story[] UpdateStoryOrder(int projectID, int[] ordered) {
+        public System.Collections.Generic.List<ServiceLib.DataService.Story> UpdateStoryOrder(int projectID, System.Collections.Generic.List<int> ordered) {
             return base.Channel.UpdateStoryOrder(projectID, ordered);
         }
         

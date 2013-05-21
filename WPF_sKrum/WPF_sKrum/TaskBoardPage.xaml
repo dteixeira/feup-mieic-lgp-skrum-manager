@@ -5,47 +5,68 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
       xmlns:TaskBoardControlLib="clr-namespace:TaskBoardControlLib;assembly=TaskBoardControlLib"
-      Background="White"
+      Background="{StaticResource BackgroundBrush}"
 
       d:DesignWidth="800" d:DesignHeight="600"
       Width="auto"
       Height="auto">
+	<UserControl.Resources>
+		<Style x:Key="RectangleStyle1" TargetType="{x:Type Rectangle}">
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Fill" Value="{DynamicResource Gray5Brush}"/>
+				</Trigger>
+			</Style.Triggers>
+			<Setter Property="Fill" Value="{DynamicResource Gray4Brush}"/>
+		</Style>
+	</UserControl.Resources>
 
     <Grid x:Name="GoodArea" Margin="0">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="90*" />
-			<ColumnDefinition Width="10*" />
+			<ColumnDefinition Width="1*" />
+			<ColumnDefinition Width="80" />
 		</Grid.ColumnDefinitions>
     
 		<Grid x:Name="WholeTaskboard">
 			<Grid.RowDefinitions>
+				<RowDefinition Height="80" />
 				<RowDefinition Height="1*" />
-				<RowDefinition Height="16*" />
 			</Grid.RowDefinitions>
 
-			<Grid x:Name="TopTaskboard" Margin="0" Grid.Row="0">
+			<Grid x:Name="TopTaskboard" Margin="0,30,0,0" Grid.Row="0">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition />
 					<ColumnDefinition />
 					<ColumnDefinition />
 					<ColumnDefinition />
 				</Grid.ColumnDefinitions>
-				<TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="User Stories" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
-				<TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="To Do" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
-				<TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Doing" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
-				<TextBlock Grid.Column="3" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="Done" VerticalAlignment="Center" FontSize="18.667" FontWeight="Bold" />
+				<TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="USER STORIES" VerticalAlignment="Center" FontSize="26.667" FontFamily="Open Sans" />
+				<TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="TO DO" VerticalAlignment="Center" FontSize="26.667" FontFamily="Open Sans" />
+				<TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="DOING" VerticalAlignment="Center" FontSize="26.667" FontFamily="Open Sans" />
+				<TextBlock Grid.Column="3" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="DONE" VerticalAlignment="Center" FontSize="26.667" FontFamily="Open Sans" />
 			</Grid>
 			<ScrollViewer x:Name="TaskboardScroll" Margin="0" VerticalScrollBarVisibility="Hidden" Grid.Row="1">
 				<Grid x:Name="Taskboard"/>
 			</ScrollViewer>
 		</Grid>
-		<Grid x:Name="ScrollButtons" Grid.Column="1" Margin="0">
+		<Grid x:Name="ScrollButtons" Grid.Column="1" Margin="0" Background="{StaticResource Gray4Brush}">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="50*" />
 				<RowDefinition Height="50*" />
 			</Grid.RowDefinitions>
-			<Rectangle x:Name="ScrollUpButton" Fill="#FF969696" Margin="0" Stroke="#FF353535" StrokeThickness="2" MouseEnter="ScrollUp_Start" MouseLeave="ScrollUp_Cancel"/>
-			<Rectangle x:Name="ScrollDownButton" Fill="#FF969696" Margin="0" Grid.Row="1" Stroke="#FF353535" StrokeThickness="2" MouseEnter="ScrollDown_Start" MouseLeave="ScrollDown_Cancel"/>
+			<Rectangle x:Name="ScrollUpButton" Margin="0" StrokeThickness="2" MouseEnter="ScrollUp_Start" MouseLeave="ScrollUp_Cancel" Style="{DynamicResource RectangleStyle1}"/>
+			<Rectangle x:Name="ScrollDownButton" Style="{DynamicResource RectangleStyle1}" Margin="0" Grid.Row="1" StrokeThickness="2" MouseEnter="ScrollDown_Start" MouseLeave="ScrollDown_Cancel"/>
+			<Image Grid.Row="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="arrow.png" IsHitTestVisible="False"/>
+			<Image Grid.Row="1" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="arrow.png" IsHitTestVisible="False" Margin="0,100" RenderTransformOrigin="0.5,0.5">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-180"/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
 		</Grid>
 	</Grid>
 </UserControl>

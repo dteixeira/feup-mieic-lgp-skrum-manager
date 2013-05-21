@@ -6,11 +6,21 @@
 	mc:Ignorable="d"
 	x:Class="TaskBoardControlLib.TaskControl"
 	x:Name="UserControl"
-	d:DesignWidth="640" d:DesignHeight="480">
+	d:DesignWidth="640" d:DesignHeight="480" Margin="0">
+	<UserControl.Resources>
+		<Style x:Key="BorderStyle" TargetType="{x:Type Border}">
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Background" Value="{StaticResource Gray4Brush}"/>
+				</Trigger>
+			</Style.Triggers>
+			<Setter Property="Background" Value="{StaticResource Gray3Brush}"/>
+		</Style>
+	</UserControl.Resources>
 
-    <Grid x:Name="LayoutRoot" MinHeight="125" MinWidth="200">
-        <Border BorderThickness="1" Background="{StaticResource Gray3Brush}">
-            <TextBlock TextWrapping="Wrap" Background="{StaticResource Gray3Brush}" Foreground="Black" Margin="20,10" Text="{Binding TaskDescription}" Padding="0" FontSize="16" FontFamily="Open Sans"/>
+    <Grid x:Name="LayoutRoot" MinHeight="125" MinWidth="200" Margin="0">
+        <Border BorderThickness="0" Style="{DynamicResource BorderStyle}">
+            <TextBlock TextWrapping="Wrap" Foreground="Black" Margin="20,10" Text="{Binding TaskDescription}" Padding="0" FontSize="16" FontFamily="Open Sans"/>
         </Border>
     </Grid>
 </UserControl>

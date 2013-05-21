@@ -171,16 +171,13 @@
       <Project>{733E757F-308E-4039-947B-B6F867C07FFB}</Project>
       <Name>TaskBoardControlLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TaskboardRowLib\TaskboardRowLib.csproj">
-      <Project>{28874d51-6654-42e1-8053-4bed4aa8275f}</Project>
-      <Name>TaskboardRowLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\WpfPageTransitions\PageTransitions.csproj">
       <Project>{22a46d61-1d40-43a9-802c-b9d43dadd9ec}</Project>
       <Name>PageTransitions</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="arrow.png" />
     <Resource Include="Images\check.png" />
     <Resource Include="Images\left_closed.png" />
     <Resource Include="Images\left_open.png" />
@@ -193,6 +190,7 @@
     <Resource Include="Images\user.jpg" />
     <Resource Include="Images\configicon.png" />
     <Resource Include="Images\homeicon.png" />
+    <Resource Include="Images\arrow.png" />
     <Content Include="KinectInteraction170_32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
