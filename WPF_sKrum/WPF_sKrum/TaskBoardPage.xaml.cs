@@ -121,6 +121,15 @@ namespace WPFApplication
                         TaskControl taskControl = new TaskControl { USID = task.StoryID, TaskDescription = task.Description };
                         taskControl.Width = Double.NaN;
                         taskControl.Height = Double.NaN;
+
+                        // Calculate total work in this task.
+                        double totalWork = 0.0;
+                        foreach (PersonTask personTask in task.PersonTasks)
+                        {
+                            totalWork += personTask.SpentTime;
+                        }
+                        taskControl.TaskEstimationWork = string.Format("{0:0.#} / {1}", totalWork, task.Estimation);
+
                         switch (task.State)
                         {
                             case TaskState.Waiting:

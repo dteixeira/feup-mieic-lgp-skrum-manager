@@ -61,6 +61,8 @@ namespace TaskBoardControlLib
             set { this.taskTextTrimming = value; }
         }
 
+        public string TaskEstimationWork { get; set; }
+
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
             try

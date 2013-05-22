@@ -6,8 +6,8 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <SolidColorBrush x:Key="BackgroundBrush" Color="#E2E2E2" />
-        <SolidColorBrush x:Key="KinectOffBarBrush" Color="#242424" />
-        <SolidColorBrush x:Key="KinectOnBarBrush" Color="#555555" />
+        <SolidColorBrush x:Key="KinectOnBarBrush" Color="#242424" />
+        <SolidColorBrush x:Key="KinectOffBarBrush" Color="#555555" />
         <SolidColorBrush x:Key="MustPriorityBrush" Color="#242424" />
         <SolidColorBrush x:Key="ShouldPriorityBrush" Color="#646464" />
         <SolidColorBrush x:Key="CouldPriorityBrush" Color="#959595" />

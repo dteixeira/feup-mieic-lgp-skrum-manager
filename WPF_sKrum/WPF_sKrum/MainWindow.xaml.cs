@@ -135,8 +135,7 @@ namespace WPFApplication
                 this.backdata.KinectSensor.StartTrackingSkeleton(backdata.TrackingId);
                 this.RightOpen.Visibility = Visibility.Visible;
                 this.RightClosed.Visibility = Visibility.Collapsed;
-                //this.UpperBar.Background = new SolidColorBrush(Color.FromRgb(0x4E, 0xA6, 0xEA));
-                this.UpperBar.Background = (Brush)Resources.FindName("KinectOnBarBrush");
+                this.UpperBar.Background = (Brush)Application.Current.FindResource("KinectOnBarBrush");
             }
 
             // Disengage previous skeleton.
@@ -146,8 +145,7 @@ namespace WPFApplication
                 this.backdata.KinectSensor.StopTrackingSkeleton();
                 this.RightOpen.Visibility = Visibility.Collapsed;
                 this.RightClosed.Visibility = Visibility.Collapsed;
-                //this.UpperBar.Background = Brushes.Gray;
-                this.UpperBar.Background = (Brush)Resources.FindName("KinectOffBarBrush");
+                this.UpperBar.Background = (Brush)Application.Current.FindResource("KinectOffBarBrush");
             }
 
             else if (this.backdata.TrackingId != -1)
