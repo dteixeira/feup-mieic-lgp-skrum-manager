@@ -16,6 +16,15 @@ namespace WPFApplication
             InitializeComponent();
             this.backdata = ApplicationController.Instance;
             this.backdata.CurrentPage = ApplicationPages.MainPage;
+            this.SetupNavigation();
+        }
+
+        private void SetupNavigation()
+        {
+            MainWindow.Instance.Navigation.UpBarText = null;
+            MainWindow.Instance.Navigation.DownBarText = null;
+            MainWindow.Instance.Navigation.LeftBarText = "GESTÃO DE PROJECTOS";
+            MainWindow.Instance.Navigation.RightBarText = "TASKBOARD";
         }
 
         private void DailyScrum_PreviewMouseLeftButtonDown(object sender, RoutedEventArgs e)

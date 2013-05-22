@@ -1,0 +1,76 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="GenericControlLib.NavigationControl"
+	x:Name="UserControl"
+	d:DesignWidth="640" d:DesignHeight="480">
+
+	<Grid x:Name="LayoutRoot" IsHitTestVisible="True">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="5"/>
+			<RowDefinition Height="150"/>
+			<RowDefinition/>
+			<RowDefinition Height="150"/>
+			<RowDefinition Height="5"/>
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="5"/>
+			<ColumnDefinition Width="150"/>
+			<ColumnDefinition/>
+			<ColumnDefinition Width="150"/>
+			<ColumnDefinition Width="5"/>
+		</Grid.ColumnDefinitions>
+		<Grid x:Name="UpBar" MouseLeftButtonDown="UpBar_MouseLeftButtonDown" Grid.Column="2" Grid.RowSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden">
+			<Grid HorizontalAlignment="Center" Grid.RowSpan="2" VerticalAlignment="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<TextBlock x:Name="UpText" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Open Sans" FontSize="18.667" Margin="0" Grid.Row="1" TextAlignment="Center"/>
+				<Image Grid.Row="0" Grid.Column="0" x:Name="UpArrow" Margin="0" Source="Images/arrow_up.png" Stretch="Fill" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+			</Grid>
+		</Grid>
+		<Grid x:Name="DownBar" MouseLeftButtonDown="DownBar_MouseLeftButtonDown" Grid.Row="3" Grid.Column="2" Grid.RowSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden">
+			<Grid HorizontalAlignment="Center" Grid.RowSpan="2" VerticalAlignment="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<TextBlock x:Name="DownText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="18.667" Margin="0" TextAlignment="Center"/>
+				<Image x:Name="DownArrow" Margin="0" Source="Images/arrow_down.png" Stretch="Fill" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2"/>
+			</Grid>
+		</Grid>
+		<Grid x:Name="LeftBar" MouseLeftButtonDown="LeftBar_MouseLeftButtonDown" Grid.Row="2" Grid.ColumnSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden">
+			<Grid HorizontalAlignment="Center" VerticalAlignment="Center" ScrollViewer.CanContentScroll="True">
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<TextBlock x:Name="LeftText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="asdasd asd asd asd asdasd" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="18.667" Margin="0" Grid.Row="1" TextAlignment="Center" Padding="10,0"/>
+				<Image x:Name="LeftArrow" Margin="0" Source="Images/arrow_left.png" Stretch="Fill" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+			</Grid>
+		</Grid>
+		<Grid x:Name="RightBar" MouseLeftButtonDown="RightBar_MouseLeftButtonDown" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden">
+			<Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+				<Grid.RowDefinitions>
+					<RowDefinition/>
+					<RowDefinition/>
+				</Grid.RowDefinitions>
+				<Image x:Name="RightArrow" Margin="0" Source="Images/arrow_right.png" Stretch="Fill" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+				<TextBlock x:Name="RightText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" Grid.Row="1" FontFamily="Open Sans" FontSize="18.667" TextAlignment="Center" Padding="10,0"/>
+			</Grid>
+		</Grid>
+		<Rectangle x:Name="UpAction" MouseEnter="ActionArea_MouseEnter" MouseLeave="ActionArea_MouseLeave" Grid.ColumnSpan="5" Fill="#00000000" Panel.ZIndex="10" StrokeThickness="0" Margin="1,0,0,0"/>
+		<Rectangle x:Name="DownAction" MouseEnter="ActionArea_MouseEnter" MouseLeave="ActionArea_MouseLeave" Grid.ColumnSpan="5" Fill="#00000000" Grid.Row="4" Panel.ZIndex="10" StrokeThickness="0"/>
+		<Rectangle x:Name="LeftAction" MouseEnter="ActionArea_MouseEnter" MouseLeave="ActionArea_MouseLeave" Fill="#00000000" Grid.RowSpan="5" Panel.ZIndex="10" StrokeThickness="0" Margin="0,1,0,0"/>
+		<Rectangle x:Name="RightAction" MouseEnter="ActionArea_MouseEnter" MouseLeave="ActionArea_MouseLeave" Fill="#00000000" Grid.RowSpan="5" Grid.Column="4" Panel.ZIndex="10"/>
+		<Rectangle x:Name="UpLeftCorner" Grid.ColumnSpan="2" Fill="{DynamicResource Gray3Brush}" Grid.RowSpan="2" Opacity="0.795" StrokeThickness="0" Visibility="Hidden"/>
+		<Rectangle x:Name="DownLeftCorner" Grid.ColumnSpan="2" Fill="{DynamicResource Gray3Brush}" Grid.RowSpan="2" Grid.Row="3" Opacity="0.795" Visibility="Hidden"/>
+		<Rectangle x:Name="UpRightCorner" Grid.ColumnSpan="2" Fill="{DynamicResource Gray3Brush}" Grid.RowSpan="2" Grid.Column="3" Opacity="0.795" Visibility="Hidden"/>
+		<Rectangle x:Name="DownRightCorner" Grid.ColumnSpan="2" Fill="{DynamicResource Gray3Brush}" Grid.RowSpan="2" Grid.Row="3" Grid.Column="3" Opacity="0.795" Visibility="Hidden"/>
+		<Rectangle x:Name="CenterStopAction" MouseEnter="ActionStop_MouseEnter" Fill="#00000000" Grid.Row="1" Grid.Column="1" Grid.RowSpan="3" Grid.ColumnSpan="3" Visibility="Hidden" StrokeThickness="0" Panel.ZIndex="-1"/>
+	</Grid>
+</UserControl>

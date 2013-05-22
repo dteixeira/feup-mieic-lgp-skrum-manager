@@ -25,34 +25,16 @@
         <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
     </Window.Triggers>
 
-    <Grid x:Name="PagesStat">
-        <Grid x:Name="HoverPagesStatGrid" Panel.ZIndex="3">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="3" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="3" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="3" />
-            </Grid.RowDefinitions>
-
-            <Rectangle x:Name="HoverPagesStatLeft" Fill="Transparent" Visibility="Visible" MouseEnter="HoverPagesStat_MouseEnter" Grid.Column="0" Grid.Row="1" MouseLeave="HoverPagesStat_MouseLeave" PreviewMouseLeftButtonDown="HoverPagesStatLeft_PreviewMouseLeftButtonDown" />
-            <Rectangle x:Name="HoverPagesStatRight" Fill="Transparent" Visibility="Visible" MouseEnter="HoverPagesStat_MouseEnter" Grid.Column="2" Grid.Row="1" MouseLeave="HoverPagesStat_MouseLeave" PreviewMouseLeftButtonDown="HoverPagesStatRight_PreviewMouseLeftButtonDown" />
-            <Rectangle x:Name="HoverPagesStatUp" Fill="Transparent" Visibility="Visible" MouseEnter="HoverPagesStat_MouseEnter" Grid.Column="1" Grid.Row="0" MouseLeave="HoverPagesStat_MouseLeave" PreviewMouseLeftButtonDown="HoverPagesStatUp_PreviewMouseLeftButtonDown" />
-            <Rectangle x:Name="HoverPagesStatDown" Fill="Transparent" Visibility="Visible" MouseEnter="HoverPagesStat_MouseEnter" Grid.Column="1" Grid.Row="2" MouseLeave="HoverPagesStat_MouseLeave" PreviewMouseLeftButtonDown="HoverPagesStatDown_PreviewMouseLeftButtonDown" />
-        </Grid>
-
+    <Grid x:Name="PagesStat" Margin="0">
         <Grid x:Name="UpDownPagesStat" Panel.ZIndex="2">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*" />
-                <RowDefinition Height="80*" />
-                <RowDefinition Height="10*" />
+            	<RowDefinition Height="10*" />
+            	<RowDefinition Height="80*" />
+            	<RowDefinition Height="10*" />
             </Grid.RowDefinitions>
 
-            <Rectangle x:Name="UpPage" Fill="#FFB66B6B" Margin="5,0" Grid.Row="0" Visibility="Collapsed" Width="auto" Height="auto"  MouseLeave="HoverPagesStat_MouseLeave"  MouseEnter="HoverPagesStat_MouseEnter" />
-            <Rectangle x:Name="DownPage" Fill="#FFB66B6B" Margin="5,0" Grid.Row="2" Visibility="Collapsed" Width="auto" Height="auto"  MouseLeave="HoverPagesStat_MouseLeave"  MouseEnter="HoverPagesStat_MouseEnter" />
+        	<Rectangle x:Name="UpPage" Fill="#FFB66B6B" Margin="5,0" Grid.Row="0" Visibility="Collapsed" Width="auto" Height="auto" />
+        	<Rectangle x:Name="DownPage" Fill="#FFB66B6B" Margin="5,0" Grid.Row="2" Visibility="Collapsed" Width="auto" Height="auto" />
         </Grid>
         <Grid x:Name="LeftRightPagesStat" Panel.ZIndex="2">
             <Grid.ColumnDefinitions>
@@ -60,8 +42,8 @@
                 <ColumnDefinition Width="80*" />
                 <ColumnDefinition Width="10*" />
             </Grid.ColumnDefinitions>
-            <Rectangle x:Name="LeftPage" Fill="#FFB66B6B" Margin="0,5" Grid.Column="0" Visibility="Collapsed" Width="auto" Height="auto"  MouseLeave="HoverPagesStat_MouseLeave"  MouseEnter="HoverPagesStat_MouseEnter" />
-            <Rectangle x:Name="RightPage" Fill="#FFB66B6B" Margin="0,5" Grid.Column="2" Visibility="Collapsed" Width="auto" Height="auto"  MouseLeave="HoverPagesStat_MouseLeave"  MouseEnter="HoverPagesStat_MouseEnter" />
+            <Rectangle x:Name="LeftPage" Fill="#FFB66B6B" Margin="0,5" Grid.Column="0" Visibility="Collapsed" Width="auto" Height="auto"/>
+            <Rectangle x:Name="RightPage" Fill="#FFB66B6B" Margin="0,5" Grid.Column="2" Visibility="Collapsed" Width="auto" Height="auto"/>
         </Grid>
 
         <Grid x:Name="Window_Every" Background="#FF4EA6EA" Panel.ZIndex="1">
@@ -82,6 +64,17 @@
                 <Image x:Name="UpperBar_Config" Margin="5" Grid.Column="2" VerticalAlignment="Center" Source="Images/definicoes.png" HorizontalAlignment="Center" Style="{DynamicResource ImageStyle1}" >
                     <Image.Resources>
                         <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
+                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Setter.Value>
+                            </Setter>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="RenderTransform">
@@ -96,23 +89,23 @@
                                     </Setter>
                                 </Trigger>
                             </Style.Triggers>
-                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Setter.Value>
-                            </Setter>
                         </Style>
                     </Image.Resources>
                 </Image>
                 <Image x:Name="UpperBar_Home" Margin="5" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/casa.png" Style="{DynamicResource ImageStyle1}" >
                     <Image.Resources>
                         <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
+                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Setter.Value>
+                            </Setter>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="RenderTransform">
@@ -127,23 +120,23 @@
                                     </Setter>
                                 </Trigger>
                             </Style.Triggers>
-                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Setter.Value>
-                            </Setter>
                         </Style>
                     </Image.Resources>
                 </Image>
                 <Image x:Name="UpperBar_Close" Margin="5" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/cruz.png" Style="{DynamicResource ImageStyle1}" >
                     <Image.Resources>
                         <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
+                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+                            <Setter Property="RenderTransform">
+                                <Setter.Value>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Setter.Value>
+                            </Setter>
                             <Style.Triggers>
                                 <Trigger Property="IsMouseOver" Value="True">
                                     <Setter Property="RenderTransform">
@@ -158,17 +151,6 @@
                                     </Setter>
                                 </Trigger>
                             </Style.Triggers>
-                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Setter.Value>
-                            </Setter>
                         </Style>
                     </Image.Resources>
                 </Image>
@@ -184,5 +166,6 @@
 
             <TextBlock Grid.Row="1" x:Name="Logo" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="sKrum" VerticalAlignment="Center" FontFamily="Source Sans Pro Black" FontSize="150" Foreground="White" />
         </Grid>
+        <GenericControlLib:NavigationControl x:Name="NavigationLayer" Panel.ZIndex="1"/>
     </Grid>
 </Window>

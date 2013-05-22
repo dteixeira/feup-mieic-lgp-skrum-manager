@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 using ServiceLib.DataService;
+using GenericControlLib;
 
 namespace WPFApplication
 {
@@ -24,7 +25,6 @@ namespace WPFApplication
         public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
 
         private static MainWindow instance;
-        private static int pagesInfoSemaphore = 0;
 
         /// <summary>
         /// Returns a reference to the singleton MainWindow instance.
@@ -35,8 +35,6 @@ namespace WPFApplication
         }
 
         private ApplicationController backdata;
-        private DispatcherTimer pagesStatTimer;
-        private DispatcherTimer pagesStatDissapearTimer;
         private const int MOUSEEVENTF_LEFTDOWN = 0x00000002;
         private const int MOUSEEVENTF_LEFTUP = 0x00000004;
         private const int MOUSEEVENTF_MIDDLEDOWN = 0x00000020;
@@ -54,15 +52,23 @@ namespace WPFApplication
             set { Dispatcher.Invoke(new Action(() => { this.pageTransitionControl.TransitionType = value; })); }
         }
 
+        public NavigationControl Navigation
+        {
+            get { return this.NavigationLayer; }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
             MainWindow.instance = this;
             this.backdata = ApplicationController.Instance;
 
-            //Sets the name of the project on the top bar
-            /*Project[] currentProjects = this.backdata.Projects;
-            this.UpperBar_ProjectName.Text = currentProjects[this.backdata.CurrentProject].Name;*/
+            // Setup navigation controls.
+            this.Navigation.UpBarText = null;
+            this.Navigation.DownBarText = null;
+            this.Navigation.LeftBarText = null;
+            this.Navigation.RightBarText = "MENU INICIAL";
+            this.Navigation.NavigationEvent += new NavigationControl.NavigationHandler(NavigationEventHandler);
 
             // Register for callbacks if sensor is ready and
             // start the sensor.
@@ -73,14 +79,26 @@ namespace WPFApplication
                 this.backdata.KinectSensor.Sensor.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(this.runtime_SkeletonFrameReady);
                 this.backdata.KinectSensor.StartSensor();
             }
+        }
 
-            // Starts the needed transition timers.
-            this.pagesStatTimer = new DispatcherTimer();
-            this.pagesStatTimer.Tick += new EventHandler(PagesInfoAppearAction);
-            this.pagesStatTimer.Interval = TimeSpan.FromSeconds(1);
-            this.pagesStatDissapearTimer = new DispatcherTimer();
-            this.pagesStatDissapearTimer.Tick += new EventHandler(PagesInfoDisappearAction);
-            this.pagesStatDissapearTimer.Interval = TimeSpan.FromSeconds(0.1);
+        private void NavigationEventHandler(NavigationDirection direction)
+        {
+            KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
+            switch (direction)
+            {
+                case NavigationDirection.Up:
+                    MainWindow.Instance.GestureRegognized(this.backdata.PagesUp[backdata.CurrentPage], userGeneratedSignal);
+                    break;
+                case NavigationDirection.Right:
+                    MainWindow.Instance.GestureRegognized(this.backdata.PagesRight[backdata.CurrentPage], userGeneratedSignal);
+                    break;
+                case NavigationDirection.Left:
+                    MainWindow.Instance.GestureRegognized(this.backdata.PagesLeft[backdata.CurrentPage], userGeneratedSignal);
+                    break;
+                case NavigationDirection.Down:
+                    MainWindow.Instance.GestureRegognized(this.backdata.PagesDown[backdata.CurrentPage], userGeneratedSignal);
+                    break;
+            }
         }
 
         /// <summary>
@@ -279,106 +297,6 @@ namespace WPFApplication
             uint X = (uint)(e.RightHand.X * 65535);
             uint Y = (uint)(e.RightHand.Y * 65535);
             mouse_event(flag, X, Y, 0, 0);
-        }
-
-        private void PagesInfoAppearAction(object sender, EventArgs e)
-        {
-            this.pagesStatTimer.Stop();
-            this.pagesStatDissapearTimer.Stop();
-            if (this.backdata.PagesDown.ContainsKey(this.backdata.CurrentPage))
-            {
-                this.DownPage.Visibility = Visibility.Visible;
-            }
-            if (this.backdata.PagesUp.ContainsKey(this.backdata.CurrentPage))
-            {
-                this.UpPage.Visibility = Visibility.Visible;
-            }
-            if (this.backdata.PagesRight.ContainsKey(this.backdata.CurrentPage))
-            {
-                this.RightPage.Visibility = Visibility.Visible;
-            }
-            if (this.backdata.PagesLeft.ContainsKey(this.backdata.CurrentPage))
-            {
-                this.LeftPage.Visibility = Visibility.Visible;
-            }
-        }
-
-        private void PagesInfoDisappearAction(object sender, EventArgs e)
-        {
-            this.pagesStatTimer.Stop();
-            this.pagesStatDissapearTimer.Stop();
-
-            this.UpPage.Visibility = Visibility.Collapsed;
-            this.DownPage.Visibility = Visibility.Collapsed;
-            this.LeftPage.Visibility = Visibility.Collapsed;
-            this.RightPage.Visibility = Visibility.Collapsed;
-        }
-
-        private void HoverPagesStat_MouseLeave(object sender, MouseEventArgs e)
-        {
-            pagesInfoSemaphore--;
-            if (pagesInfoSemaphore != 0) return;
-            else
-            {
-                //Start/Continue disappearing and stop the action of apearing
-                this.pagesStatTimer.Stop();
-                this.pagesStatDissapearTimer.Start();
-            }
-        }
-
-        private void HoverPagesStat_MouseEnter(object sender, MouseEventArgs e)
-        {
-            pagesInfoSemaphore++;
-            if (pagesInfoSemaphore != 1)
-            {
-                return;
-            }
-            else
-            {
-                //Start/Continue appearing and stop the action of dissapearing
-                this.pagesStatTimer.Start();
-                this.pagesStatDissapearTimer.Stop();
-            }
-        }
-
-        private void HoverPagesStatLeft_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (this.LeftPage.Visibility == Visibility.Visible && this.backdata.PagesLeft.ContainsKey(this.backdata.CurrentPage))
-            {
-                KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-                MainWindow.Instance.GestureRegognized(this.backdata.PagesLeft[backdata.CurrentPage], userGeneratedSignal);
-                this.PagesInfoDisappearAction(null, null);
-            }
-        }
-
-        private void HoverPagesStatRight_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (this.RightPage.Visibility == Visibility.Visible && this.backdata.PagesRight.ContainsKey(this.backdata.CurrentPage))
-            {
-                KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-                MainWindow.Instance.GestureRegognized(this.backdata.PagesRight[this.backdata.CurrentPage], userGeneratedSignal);
-                this.PagesInfoDisappearAction(null, null);
-            }
-        }
-
-        private void HoverPagesStatUp_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (this.UpPage.Visibility == Visibility.Visible && backdata.PagesUp.ContainsKey(backdata.CurrentPage))
-            {
-                KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-                MainWindow.Instance.GestureRegognized(this.backdata.PagesUp[this.backdata.CurrentPage], userGeneratedSignal);
-                this.PagesInfoDisappearAction(null, null);
-            }
-        }
-
-        private void HoverPagesStatDown_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            if (this.DownPage.Visibility == Visibility.Visible && backdata.PagesDown.ContainsKey(backdata.CurrentPage))
-            {
-                KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-                MainWindow.Instance.GestureRegognized(this.backdata.PagesDown[this.backdata.CurrentPage], userGeneratedSignal);
-                this.PagesInfoDisappearAction(null, null);
-            }
         }
     }
 }
