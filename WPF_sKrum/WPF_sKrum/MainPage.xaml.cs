@@ -32,5 +32,12 @@ namespace WPFApplication
             KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
             MainWindow.Instance.GestureRegognized(ApplicationPages.TaskBoardPage, userGeneratedSignal);
         }
+
+        private void Metting_MouseLeftButtonDown(object sender, RoutedEventArgs e)
+        {
+            // Create a poput window. TODO REMOVE
+            PopupFormControlLib.FormWindow popup = new PopupFormControlLib.FormWindow();
+            popup.ShowDialog();
+        }
     }
 }

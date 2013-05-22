@@ -163,6 +163,10 @@
       <Project>{7041af5b-ad01-4e03-ad77-1202a3befe12}</Project>
       <Name>Kinect</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PopupFormControlLib\PopupFormControlLib.csproj">
+      <Project>{54D583D1-8112-4F51-ACE4-53CC42E3FA4B}</Project>
+      <Name>PopupFormControlLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceLib\ServiceLib.csproj">
       <Project>{00f9c426-8516-404c-b085-de09790effc1}</Project>
       <Name>ServiceLib</Name>

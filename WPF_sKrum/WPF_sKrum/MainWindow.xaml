@@ -9,43 +9,35 @@
         WindowState="Maximized"
         x:Name="sKrum">
     <Window.Resources>
-        <Storyboard x:Key="OnMouseEnter1">
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="UpperBar_Close">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1.5"/>
-            </DoubleAnimationUsingKeyFrames>
-            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="UpperBar_Close">
-                <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1.5"/>
-            </DoubleAnimationUsingKeyFrames>
-        </Storyboard>
-        <Storyboard x:Key="OnMouseLeave1"/>
+        <Style x:Key="HoverZoomStyle" TargetType="{x:Type Image}">
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="RenderTransform">
+                        <Setter.Value>
+                            <TransformGroup>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
+                                <SkewTransform/>
+                                <RotateTransform/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
-    <Window.Triggers>
-        <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
-    </Window.Triggers>
-
     <Grid x:Name="PagesStat" Margin="0">
-        <Grid x:Name="UpDownPagesStat" Panel.ZIndex="2">
-            <Grid.RowDefinitions>
-            	<RowDefinition Height="10*" />
-            	<RowDefinition Height="80*" />
-            	<RowDefinition Height="10*" />
-            </Grid.RowDefinitions>
-
-        	<Rectangle x:Name="UpPage" Fill="#FFB66B6B" Margin="5,0" Grid.Row="0" Visibility="Collapsed" Width="auto" Height="auto" />
-        	<Rectangle x:Name="DownPage" Fill="#FFB66B6B" Margin="5,0" Grid.Row="2" Visibility="Collapsed" Width="auto" Height="auto" />
-        </Grid>
-        <Grid x:Name="LeftRightPagesStat" Panel.ZIndex="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="10*" />
-                <ColumnDefinition Width="80*" />
-                <ColumnDefinition Width="10*" />
-            </Grid.ColumnDefinitions>
-            <Rectangle x:Name="LeftPage" Fill="#FFB66B6B" Margin="0,5" Grid.Column="0" Visibility="Collapsed" Width="auto" Height="auto"/>
-            <Rectangle x:Name="RightPage" Fill="#FFB66B6B" Margin="0,5" Grid.Column="2" Visibility="Collapsed" Width="auto" Height="auto"/>
-        </Grid>
-
         <Grid x:Name="Window_Every" Background="#FF4EA6EA" Panel.ZIndex="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*" />
@@ -61,99 +53,9 @@
                     <ColumnDefinition Width="8*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock x:Name="UpperBar_ProjectName" Margin="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontFamily="Open Sans Light" Foreground="White" />
-                <Image x:Name="UpperBar_Config" Margin="5" Grid.Column="2" VerticalAlignment="Center" Source="Images/definicoes.png" HorizontalAlignment="Center" Style="{DynamicResource ImageStyle1}" >
-                    <Image.Resources>
-                        <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
-                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="RenderTransform">
-                                        <Setter.Value>
-                                            <TransformGroup>
-                                                <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
-                                                <SkewTransform/>
-                                                <RotateTransform/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Resources>
-                </Image>
-                <Image x:Name="UpperBar_Home" Margin="5" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/casa.png" Style="{DynamicResource ImageStyle1}" >
-                    <Image.Resources>
-                        <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
-                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="RenderTransform">
-                                        <Setter.Value>
-                                            <TransformGroup>
-                                                <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
-                                                <SkewTransform/>
-                                                <RotateTransform/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Resources>
-                </Image>
-                <Image x:Name="UpperBar_Close" Margin="5" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/cruz.png" Style="{DynamicResource ImageStyle1}" >
-                    <Image.Resources>
-                        <Style x:Key="ImageStyle1" TargetType="{x:Type Image}">
-                            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-                            <Setter Property="RenderTransform">
-                                <Setter.Value>
-                                    <TransformGroup>
-                                        <ScaleTransform/>
-                                        <SkewTransform/>
-                                        <RotateTransform/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </Setter.Value>
-                            </Setter>
-                            <Style.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter Property="RenderTransform">
-                                        <Setter.Value>
-                                            <TransformGroup>
-                                                <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
-                                                <SkewTransform/>
-                                                <RotateTransform/>
-                                                <TranslateTransform/>
-                                            </TransformGroup>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Trigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Image.Resources>
-                </Image>
+                <Image x:Name="UpperBar_Config" Margin="5" Grid.Column="2" VerticalAlignment="Center" Source="Images/definicoes.png" HorizontalAlignment="Center" Style="{StaticResource HoverZoomStyle}"/>
+                <Image x:Name="UpperBar_Home" Margin="5" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/casa.png" Style="{StaticResource HoverZoomStyle}"/>
+                <Image x:Name="UpperBar_Close" Margin="5" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/cruz.png" Style="{StaticResource HoverZoomStyle}"/>
             </Grid>
 
             <Canvas x:Name="dragdropadornerLayer" Visibility="Collapsed" Panel.ZIndex="2" HorizontalAlignment="Left" VerticalAlignment="Top" />
