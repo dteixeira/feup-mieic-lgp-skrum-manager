@@ -26,8 +26,7 @@ namespace TaskBoardControlLib
         private TaskControl _adorner;
         private string AdornerLayer = "dragdropadornerLayer";
         private Canvas _adornerLayer;
-
-
+        private TextTrimming taskTextTrimming = TextTrimming.None;
         private string taskDescription;
         private TasksState state;
         private int usId;
@@ -54,6 +53,12 @@ namespace TaskBoardControlLib
         {
             get { return this.usId; }
             set { this.usId = value; }
+        }
+
+        public TextTrimming TaskTextTrimming
+        {
+            get { return this.taskTextTrimming; }
+            set { this.taskTextTrimming = value; }
         }
 
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
@@ -87,9 +92,13 @@ namespace TaskBoardControlLib
                 startpoint = mousePos;
                 DataObject data = new DataObject("TaskControl", this);
 
+                // Create a placeholder to drag.
                 _adorner = this.Clone();
                 _adorner.Opacity = 0.6;
                 _adorner.IsHitTestVisible = false;
+                _adorner.MaxWidth = 300;
+                _adorner.MaxHeight = 150;
+                _adorner.taskTextTrimming = TextTrimming.WordEllipsis;
 
                 _adornerLayer.Visibility = Visibility.Visible;
                 _adornerLayer.Children.Add(_adorner);

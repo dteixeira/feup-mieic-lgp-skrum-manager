@@ -20,7 +20,7 @@
 
     <Grid x:Name="LayoutRoot" MinHeight="125" MinWidth="200" Margin="0">
         <Border BorderThickness="0" Style="{DynamicResource BorderStyle}">
-            <TextBlock TextWrapping="Wrap" Foreground="Black" Margin="20,10" Text="{Binding TaskDescription}" Padding="0" FontSize="16" FontFamily="Open Sans" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
+            <TextBlock TextTrimming="{Binding TaskTextTrimming}" TextWrapping="Wrap" Foreground="Black" Margin="20,10" Text="{Binding TaskDescription}" Padding="0" FontSize="16" FontFamily="Open Sans" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
         </Border>
     </Grid>
 </UserControl>
