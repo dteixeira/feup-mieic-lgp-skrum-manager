@@ -37,7 +37,9 @@ namespace WPFApplication
         {
             // Create a poput window. TODO REMOVE
             PopupFormControlLib.FormWindow popup = new PopupFormControlLib.FormWindow();
+            MainWindow.Instance.WindowBlur(true);
             popup.ShowDialog();
+            MainWindow.Instance.WindowBlur(false);
         }
     }
 }

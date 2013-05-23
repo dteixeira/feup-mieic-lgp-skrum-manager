@@ -57,6 +57,18 @@ namespace WPFApplication
             get { return this.NavigationLayer; }
         }
 
+        public void WindowBlur(Boolean blur)
+        {
+            if (blur)
+            {
+                this.BlurLayer.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                this.BlurLayer.Visibility = System.Windows.Visibility.Hidden;
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();

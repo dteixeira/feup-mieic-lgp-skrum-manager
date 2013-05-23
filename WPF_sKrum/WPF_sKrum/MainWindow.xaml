@@ -69,5 +69,6 @@
             <TextBlock Grid.Row="1" x:Name="Logo" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="sKrum" VerticalAlignment="Center" FontFamily="Source Sans Pro Black" FontSize="150" Foreground="White" />
         </Grid>
         <GenericControlLib:NavigationControl x:Name="NavigationLayer" Panel.ZIndex="1"/>
+        <Grid x:Name="BlurLayer" Panel.ZIndex="1" Opacity="0.8" Background="Black" Visibility="Hidden"/>
     </Grid>
 </Window>
