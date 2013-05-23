@@ -188,7 +188,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="arrow.png" />
     <Resource Include="Images\check.png" />
     <Resource Include="Images\left_closed.png" />
     <Resource Include="Images\left_open.png" />

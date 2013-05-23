@@ -37,6 +37,17 @@ namespace WPFApplication
         {
             // Create a poput window. TODO REMOVE
             PopupFormControlLib.FormWindow popup = new PopupFormControlLib.FormWindow();
+            PopupFormControlLib.IFormPage form = new PopupFormControlLib.SpinnerPage();
+            ((PopupFormControlLib.SpinnerPage)form).Min = 1;
+            ((PopupFormControlLib.SpinnerPage)form).Max = 100;
+            ((PopupFormControlLib.SpinnerPage)form).Increment = 1;
+            form.PageTitle = "Nome da Pessoa";
+            form.PageName = "name";
+            popup.FormPages.Add(form);
+            form = new PopupFormControlLib.TestAreaPage();
+            form.PageTitle = "Email da Pessoa";
+            form.PageName = "email";
+            popup.FormPages.Add(form);
             MainWindow.Instance.WindowBlur(true);
             popup.ShowDialog();
             MainWindow.Instance.WindowBlur(false);

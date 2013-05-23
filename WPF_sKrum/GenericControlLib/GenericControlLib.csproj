@@ -54,6 +54,9 @@
     <Compile Include="NavigationControl.xaml.cs">
       <DependentUpon>NavigationControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NumericSpinnerControl.xaml.cs">
+      <DependentUpon>NumericSpinnerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -86,12 +89,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="NumericSpinnerControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\arrow_down.png" />
     <Resource Include="Images\arrow_left.png" />
     <Resource Include="Images\arrow_right.png" />
     <Resource Include="Images\arrow_up.png" />
+    <Resource Include="Images\mais.png" />
+    <Resource Include="Images\menos.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

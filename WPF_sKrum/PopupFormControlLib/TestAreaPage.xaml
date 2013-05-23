@@ -4,10 +4,9 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	mc:Ignorable="d"
-	x:Class="PopupFormControlLib.TextBoxPage"
+	x:Class="PopupFormControlLib.TestAreaPage"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
-
 	<Grid x:Name="LayoutRoot">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition/>
@@ -19,6 +18,6 @@
 			<RowDefinition Height="8*"/>
 			<RowDefinition/>
 		</Grid.RowDefinitions>
-		<TextBox x:Name="TextValue" TextWrapping="Wrap" Grid.Row="1" FontFamily="Open Sans" TextAlignment="Center" VerticalAlignment="Center" Padding="20" Margin="0,0,-3,0" Grid.Column="1" Foreground="{DynamicResource Gray7Brush}" BorderBrush="{x:Null}" Background="{DynamicResource Gray3Brush}" FontSize="32" BorderThickness="0" TextChanged="TextValue_TextChanged"/>
+		<TextBox x:Name="TextValue" TextWrapping="Wrap" Grid.Row="1" FontFamily="Open Sans" VerticalAlignment="Center" Padding="20" Margin="0,0,-3,0" Grid.Column="1" Foreground="{DynamicResource Gray7Brush}" BorderBrush="{x:Null}" Background="{DynamicResource Gray3Brush}" FontSize="32" BorderThickness="0" TextChanged="TextValue_TextChanged"/>
 	</Grid>
 </UserControl>

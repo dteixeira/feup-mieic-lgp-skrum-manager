@@ -14,11 +14,11 @@ using System.Windows.Shapes;
 namespace PopupFormControlLib
 {
 	/// <summary>
-	/// Interaction logic for TextBoxPage.xaml
+	/// Interaction logic for TestAreaPage.xaml
 	/// </summary>
-	public partial class TextBoxPage : UserControl, IFormPage
+	public partial class TestAreaPage : UserControl, IFormPage
 	{
-		public TextBoxPage()
+		public TestAreaPage()
 		{
 			this.InitializeComponent();
 		}
@@ -33,5 +33,5 @@ namespace PopupFormControlLib
         {
             this.PageValue = this.TextValue.Text;
         }
-    }
+	}
 }

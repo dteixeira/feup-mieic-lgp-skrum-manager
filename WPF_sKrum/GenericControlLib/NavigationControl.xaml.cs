@@ -29,7 +29,6 @@ namespace GenericControlLib
 	public partial class NavigationControl : UserControl
 	{
         private DispatcherTimer pagesStatTimer;
-        private bool barsVisible = false;
 
         public delegate void NavigationHandler(NavigationDirection direction);
         public event NavigationHandler NavigationEvent;
