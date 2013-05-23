@@ -76,6 +76,9 @@
     </ApplicationDefinition>
     <Compile Include="ApplicationController.cs" />
     <Compile Include="EnumTypes.cs" />
+    <Compile Include="ProjectPopUp.xaml.cs">
+      <DependentUpon>ProjectPopUp.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProjectsPage.xaml.cs">
       <DependentUpon>ProjectsPage.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
     <Compile Include="UsersPage.xaml.cs">
       <DependentUpon>UsersPage.xaml</DependentUpon>
     </Compile>
+    <Page Include="ProjectPopUp.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ProjectsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -198,6 +205,9 @@
     <Resource Include="Images\casa.png" />
     <Resource Include="Images\cruz.png" />
     <Resource Include="Images\definicoes.png" />
+    <Resource Include="Images\aloquete.png" />
+    <Resource Include="Images\darkarrow.png" />
+    <Resource Include="Images\mala.png" />
     <Content Include="KinectInteraction170_32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
