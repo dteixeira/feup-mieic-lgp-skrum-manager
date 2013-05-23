@@ -10,12 +10,19 @@ namespace SharedTypes
     /// </summary>
     public enum ApplicationPages
     {
-        sKrum,
+        RootPage,
         MainPage,
-        ProjectsPage,
-        UsersPage,
         TaskBoardPage,
-        UserStatsPage
+        ProjectConfigurationPage,
+        ProjectTeamManagementPage,
+        ProjectManagementPage,
+        PeopleManagementPage,
+        BacklogPage,
+        ProjectBacklogPage,
+        MeetingPage,
+        ProjectStatisticsPage,
+        PersonStatisticsPage,
+        PersonTaskBoardPage
     }
 
     public enum PageChangeDirection

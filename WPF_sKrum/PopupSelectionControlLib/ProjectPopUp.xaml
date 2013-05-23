@@ -2,20 +2,33 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:PageTransitions="clr-namespace:PageTransitions;assembly=WpfPageTransitions" 
-		xmlns:local="clr-namespace:PopupFormControlLib" 
+		xmlns:local="clr-namespace:PopupSelectionControlLib" 
 		xmlns:GenericControlLib="clr-namespace:GenericControlLib;assembly=GenericControlLib"
 		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-		mc:Ignorable="d" x:Name="window" x:Class="WPFApplication.ProjectPopUp"
+		mc:Ignorable="d" x:Name="window" x:Class="PopupSelectionControlLib.ProjectPopUp"
         Title="ProjectPopUp" Height="600" Width="800" WindowStyle="None" WindowState="Maximized" FontFamily="Open Sans" FontSize="18.667" Background="{x:Null}" AllowsTransparency="True">
-	
-	
-	<Grid x:Name="TotalArea" Margin="0">
+    <Window.Resources>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#E2E2E2" />
+        <SolidColorBrush x:Key="KinectOnBarBrush" Color="#242424" />
+        <SolidColorBrush x:Key="KinectOffBarBrush" Color="#555555" />
+        <SolidColorBrush x:Key="MustPriorityBrush" Color="#242424" />
+        <SolidColorBrush x:Key="ShouldPriorityBrush" Color="#646464" />
+        <SolidColorBrush x:Key="CouldPriorityBrush" Color="#959595" />
+        <SolidColorBrush x:Key="WouldPriorityBrush" Color="#DADADA" />
+        <SolidColorBrush x:Key="Gray1Brush" Color="#E2E2E2" />
+        <SolidColorBrush x:Key="Gray2Brush" Color="#DADADA" />
+        <SolidColorBrush x:Key="Gray3Brush" Color="#C3C3C3" />
+        <SolidColorBrush x:Key="Gray4Brush" Color="#959595" />
+        <SolidColorBrush x:Key="Gray5Brush" Color="#646464" />
+        <SolidColorBrush x:Key="Gray6Brush" Color="#555555" />
+        <SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
+    </Window.Resources>
+        <Grid x:Name="TotalArea" Margin="0">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="10*" />
 			<RowDefinition Height="90*" />
 		</Grid.RowDefinitions>
-
 		<Grid x:Name="UpperBar" Margin="0" Grid.Row="0" Background="{DynamicResource KinectOffBarBrush}">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="20*"/>

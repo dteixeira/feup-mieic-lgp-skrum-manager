@@ -7,7 +7,8 @@
         Title="sKrum"
         WindowStyle = "None"
         WindowState="Maximized"
-        x:Name="sKrum">
+        x:Name="sKrum"
+        Background="{DynamicResource BackgroundBrush}">
     <Window.Resources>
         <Style x:Key="HoverZoomStyle" TargetType="{x:Type Image}">
             <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
@@ -37,8 +38,8 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <Grid x:Name="PagesStat" Margin="0">
-        <Grid x:Name="Window_Every" Background="#FF4EA6EA" Panel.ZIndex="1">
+    <Grid x:Name="PagesStat" Margin="0" Background="{StaticResource BackgroundBrush}">
+        <Grid x:Name="WindowEvery" Background="#FF4EA6EA" Panel.ZIndex="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*" />
                 <RowDefinition Height="90*" />
@@ -64,7 +65,7 @@
                 <Image x:Name="RightClosed" Source="Images/right_closed.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
             </Canvas>
 
-            <pageTransitions:PageTransition Grid.Row="1" Background="Transparent" x:Name="pageTransitionControl" TransitionType="Fade" />
+            <pageTransitions:PageTransition Grid.Row="1" Background="Transparent" x:Name="PageTransitionControl" TransitionType="Fade" />
 
             <TextBlock Grid.Row="1" x:Name="Logo" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="sKrum" VerticalAlignment="Center" FontFamily="Source Sans Pro Black" FontSize="150" Foreground="White" />
         </Grid>

@@ -7,7 +7,20 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
-
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#E2E2E2" />
+        <SolidColorBrush x:Key="KinectOnBarBrush" Color="#242424" />
+        <SolidColorBrush x:Key="KinectOffBarBrush" Color="#555555" />
+        <SolidColorBrush x:Key="MustPriorityBrush" Color="#242424" />
+        <SolidColorBrush x:Key="ShouldPriorityBrush" Color="#646464" />
+        <SolidColorBrush x:Key="CouldPriorityBrush" Color="#959595" />
+        <SolidColorBrush x:Key="WouldPriorityBrush" Color="#DADADA" />
+        <SolidColorBrush x:Key="Gray1Brush" Color="#E2E2E2" />
+        <SolidColorBrush x:Key="Gray2Brush" Color="#DADADA" />
+        <SolidColorBrush x:Key="Gray3Brush" Color="#C3C3C3" />
+        <SolidColorBrush x:Key="Gray4Brush" Color="#959595" />
+        <SolidColorBrush x:Key="Gray5Brush" Color="#646464" />
+        <SolidColorBrush x:Key="Gray6Brush" Color="#555555" />
+        <SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
         <Style TargetType="{x:Type ContentPresenter}">
             <Setter Property="LayoutTransform">
                 <Setter.Value>

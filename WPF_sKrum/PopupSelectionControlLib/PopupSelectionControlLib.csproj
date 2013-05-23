@@ -4,16 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{66C3F1E6-C160-47B7-8C0C-B53A975226AD}</ProjectGuid>
+    <ProjectGuid>{5BA28F44-731C-4999-BF06-C14DB7A6E663}</ProjectGuid>
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GenericControlLib</RootNamespace>
-    <AssemblyName>GenericControlLib</AssemblyName>
+    <RootNamespace>PopupSelectionControlLib</RootNamespace>
+    <AssemblyName>PopupSelectionControlLib</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
-    <ExpressionBlendVersion>5.0.40218.0</ExpressionBlendVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -35,6 +34,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -48,17 +48,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ButtonControl.xaml.cs">
-      <DependentUpon>ButtonControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NavigationControl.xaml.cs">
-      <DependentUpon>NavigationControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="NumericSpinnerControl.xaml.cs">
-      <DependentUpon>NumericSpinnerControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ProjectButtonControl.xaml.cs">
-      <DependentUpon>ProjectButtonControl.xaml</DependentUpon>
+    <Compile Include="ProjectPopUp.xaml.cs">
+      <DependentUpon>ProjectPopUp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -84,40 +75,34 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ButtonControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="NavigationControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="NumericSpinnerControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="ProjectButtonControl.xaml">
+    <Page Include="ProjectPopUp.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\arrow_down.png" />
-    <Resource Include="Images\arrow_left.png" />
-    <Resource Include="Images\arrow_right.png" />
-    <Resource Include="Images\arrow_up.png" />
-    <Resource Include="Images\mais.png" />
-    <Resource Include="Images\menos.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\aloquete.png" />
-    <Resource Include="Images\mala.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\GenericControlLib\GenericControlLib.csproj">
+      <Project>{66c3f1e6-c160-47b7-8c0c-b53a975226ad}</Project>
+      <Name>GenericControlLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceLib\ServiceLib.csproj">
+      <Project>{00f9c426-8516-404c-b085-de09790effc1}</Project>
+      <Name>ServiceLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharedTypes\SharedTypes.csproj">
       <Project>{aefd3bbd-4261-4c4f-ba8d-fb3668bb40be}</Project>
       <Name>SharedTypes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WpfPageTransitions\PageTransitions.csproj">
+      <Project>{22a46d61-1d40-43a9-802c-b9d43dadd9ec}</Project>
+      <Name>PageTransitions</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cruz.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\darkarrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,7 +3,7 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:GenericControlLib="clr-namespace:GenericControlLib;assembly=GenericControlLib" x:Class="WPFApplication.MainPage"
+      xmlns:GenericControlLib="clr-namespace:GenericControlLib;assembly=GenericControlLib" x:Class="MainPageLib.MainPage"
       mc:Ignorable="d"
       d:DesignWidth="1024" d:DesignHeight="768" Background="{DynamicResource BackgroundBrush}">
 	<UserControl.Resources>
@@ -39,6 +39,6 @@
 		<GenericControlLib:ButtonControl ButtonFontSize="40" ButtonText="BACKLOG" />
 		<GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Column="2" ButtonText="SPRINT BACKLOG"/>
 		<GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Row="1" ButtonText="TASKBOARD"/>
-		<GenericControlLib:ButtonControl MouseLeftButtonDown="Metting_MouseLeftButtonDown"  ButtonFontSize="40" Grid.Row="1" Grid.Column="2" ButtonText="REUNIÕES" />
+		<GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Row="1" Grid.Column="2" ButtonText="REUNIÕES" />
 	</Grid>
 </UserControl>

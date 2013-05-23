@@ -2,7 +2,7 @@
 using System.Windows.Controls;
 using SharedTypes;
 
-namespace WPFApplication
+namespace MainPageLib
 {
     /// <summary>
     /// Interaction logic for MainPage.xaml
@@ -20,14 +20,9 @@ namespace WPFApplication
             System.Collections.Generic.Dictionary<PageChangeDirection, string> directions = new System.Collections.Generic.Dictionary<PageChangeDirection, string>();
             directions[PageChangeDirection.Up] = null;
             directions[PageChangeDirection.Down] = null;
-            directions[PageChangeDirection.Left] = "GESTÃO DE PROJECTOS";
+            directions[PageChangeDirection.Left] = "AJUSTES DO PROJECTO";
             directions[PageChangeDirection.Right] = "TASKBOARD";
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
-        }
-
-        private void Metting_MouseLeftButtonDown(object sender, RoutedEventArgs e)
-        {
-            // TODO IMPLEMENT.
         }
 
         public ApplicationPages PageType { get; set; }
@@ -39,7 +34,7 @@ namespace WPFApplication
                 case PageChangeDirection.Down:
                     return null;
                 case PageChangeDirection.Left:
-                    return null;
+                    return new PageChange { Context = null, Page = ApplicationPages.ProjectConfigurationPage };
                 case PageChangeDirection.Right:
                     return new PageChange { Context = null, Page = ApplicationPages.TaskBoardPage };
                 case PageChangeDirection.Up:
@@ -53,5 +48,14 @@ namespace WPFApplication
         {
             // Nothing to do.
         }
+
+
+        public void DataChangeHandler(object sender, ServiceLib.NotificationService.NotificationType notification)
+        {
+            // Nothing to do.
+        }
+
+
+        public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
     }
 }

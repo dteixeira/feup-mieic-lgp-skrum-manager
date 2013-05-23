@@ -10,35 +10,31 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ServiceLib.DataService;
 using System.Linq;
+using SharedTypes;
+using ServiceLib.DataService;
 
-namespace WPFApplication
+namespace PopupSelectionControlLib
 {
 	/// <summary>
 	/// Interaction logic for ProjectPopUp.xaml
 	/// </summary>
 	public partial class ProjectPopUp : Window
 	{
-        private ApplicationController backdata;
-        private float scrollValue = 0.0f;
-
-		public ProjectPopUp()
+		public ProjectPopUp(object context)
 		{
 			this.InitializeComponent();
-            this.backdata = ApplicationController.Instance;
-        
         }
 
-        public void fillLettters(Dictionary<string,List<Project>> dic)
+        public void FillLettters(Dictionary<string,List<Project>> dic)
         {
-
+            // TODO Finish this.
         }
 
-        public void fillProjects()
+        public void FillProjects()
         {
             Dictionary<string,List<Project>> dic = new Dictionary<string,List<Project>>();
-            List<Project> projects = backdata.Projects;
+            List<Project> projects = ApplicationController.Instance.Projects;
             var x = (from p in projects
                     orderby p.Name ascending
                     select p).ToList<Project>();
@@ -53,10 +49,10 @@ namespace WPFApplication
             {
                 foreach (Project p in dic[s])
                 {
-
+                    // TODO Finish this.
                 }
             }
         }
-	}
+    }
 
 }

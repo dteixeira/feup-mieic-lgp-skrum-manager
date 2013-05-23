@@ -9,29 +9,31 @@ using System.Windows.Shapes;
 using System.Windows.Threading;
 using TaskboardRowLib;
 using TaskBoardControlLib;
-using ServiceLib.DataService;
 using System.Linq;
+using SharedTypes;
+using ServiceLib.DataService;
+using ServiceLib.NotificationService;
 
-namespace WPFApplication
+namespace TaskBoardPageLib
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class TaskBoardPage : UserControl
+    public partial class TaskBoardPage : UserControl, ITargetPage
     {
         private float scrollValue = 0.0f;
         private DispatcherTimer countdownTimerDelayScrollUp;
         private DispatcherTimer countdownTimerDelayScrollDown;
         private DispatcherTimer countdownTimerScrollUp;
         private DispatcherTimer countdownTimerScrollDown;
-        private ApplicationController backdata;
 
-        public TaskBoardPage()
+        public ApplicationPages PageType { get; set; }
+        public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
+
+        public TaskBoardPage(object context)
         {
             InitializeComponent();
-            this.backdata = ApplicationController.Instance;
-            this.backdata.CurrentPage = ApplicationPages.TaskBoardPage;
-            this.PopulateTaskboard();
+            this.PageType = ApplicationPages.TaskBoardPage;
 
             // Initialize scroll up delay timer.
             this.countdownTimerDelayScrollUp = new DispatcherTimer();
@@ -52,8 +54,14 @@ namespace WPFApplication
             this.countdownTimerScrollDown = new DispatcherTimer();
             this.countdownTimerScrollDown.Tick += new EventHandler(ScrollActionDown);
             this.countdownTimerScrollDown.Interval = TimeSpan.FromSeconds(0.01);
-        }
 
+            // Populate taskboard.
+            this.PopulateTaskboard();
+
+            // Register for project change notifications.
+            this.DataChangeDelegate = new ApplicationController.DataModificationHandler(this.DataChangeHandler);
+            ApplicationController.Instance.DataChangedEvent += this.DataChangeDelegate;
+        }
         
 
         private void PopulateTaskboard()
@@ -204,6 +212,45 @@ namespace WPFApplication
         {
             this.countdownTimerDelayScrollDown.Stop();
             this.countdownTimerScrollDown.Stop();
-        }    
+        }
+
+        public PageChange PageChangeTarget(PageChangeDirection direction)
+        {
+            switch (direction)
+            {
+                case PageChangeDirection.Down:
+                    return null;
+                case PageChangeDirection.Left:
+                    return new PageChange { Context = null, Page = ApplicationPages.MainPage };
+                case PageChangeDirection.Right:
+                    return null;
+                case PageChangeDirection.Up:
+                    return null;
+                default:
+                    return null;
+            }
+        }
+
+        public void SetupNavigation()
+        {
+            System.Collections.Generic.Dictionary<PageChangeDirection, string> directions = new System.Collections.Generic.Dictionary<PageChangeDirection, string>();
+            directions[PageChangeDirection.Up] = "ESTATÍSTICAS";
+            directions[PageChangeDirection.Down] = null;
+            directions[PageChangeDirection.Left] = "MENU INICIAL";
+            directions[PageChangeDirection.Right] = "TASKBOARD PERSONALIZADA";
+            ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
+        }
+
+        public void UnloadPage()
+        {
+            // Unregister for notifications.
+            ApplicationController.Instance.DataChangedEvent -= this.DataChangeDelegate;
+        }
+    
+
+        public void DataChangeHandler(object sender, NotificationType notification)
+        {
+ 	        throw new NotImplementedException();
+        }
     }
 }

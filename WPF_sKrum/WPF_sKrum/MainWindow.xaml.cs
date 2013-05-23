@@ -40,24 +40,12 @@ namespace WPFApplication
 
         public PageTransitionType Transition
         {
-            set { Dispatcher.Invoke(new Action(() => { this.pageTransitionControl.TransitionType = value; })); }
+            set { Dispatcher.Invoke(new Action(() => { this.PageTransitionControl.TransitionType = value; })); }
         }
 
         public NavigationControl Navigation
         {
             get { return this.NavigationLayer; }
-        }
-
-        public void WindowBlur(Boolean blur)
-        {
-            if (blur)
-            {
-                this.BlurLayer.Visibility = System.Windows.Visibility.Visible;
-            }
-            else
-            {
-                this.BlurLayer.Visibility = System.Windows.Visibility.Hidden;
-            }
         }
 
         public MainWindow()
@@ -66,11 +54,9 @@ namespace WPFApplication
             this.backdata = ApplicationController.Instance;
             this.backdata.ApplicationWindow = this;
 
-            // Setup navigation controls. // TODO ALTER.
-            this.Navigation.UpBarText = null;
-            this.Navigation.DownBarText = null;
-            this.Navigation.LeftBarText = null;
-            this.Navigation.RightBarText = "MENU INICIAL";
+            // Setup navigation controls.
+            this.backdata.CurrentPage = new RootPage(null);
+            this.backdata.CurrentPage.SetupNavigation();
             this.Navigation.NavigationEvent += new NavigationControl.NavigationHandler(NavigationEventHandler);
 
             // Register for callbacks if sensor is ready and
@@ -84,25 +70,31 @@ namespace WPFApplication
             }
         }
 
-        // TODO REFACTOR.
-        private void NavigationEventHandler(NavigationDirection direction)
+        private void NavigationEventHandler(PageChangeDirection direction)
         {
-           /* KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
-            switch (direction)
-            {
-                case NavigationDirection.Up:
-                    this.GestureRegognized(this.backdata.PagesUp[backdata.CurrentPage], userGeneratedSignal);
-                    break;
-                case NavigationDirection.Right:
-                    this..GestureRegognized(this.backdata.PagesRight[backdata.CurrentPage], userGeneratedSignal);
-                    break;
-                case NavigationDirection.Left:
-                    this..GestureRegognized(this.backdata.PagesLeft[backdata.CurrentPage], userGeneratedSignal);
-                    break;
-                case NavigationDirection.Down:
-                    this..GestureRegognized(this.backdata.PagesDown[backdata.CurrentPage], userGeneratedSignal);
-                    break;
-            }*/
+            // Try to move only if theres a current page.
+            if(this.backdata.CurrentPage != null) {
+
+                // Try to move only if a valid transition is defined.
+                PageChange pageChange = this.backdata.CurrentPage.PageChangeTarget(direction);
+                if(pageChange != null) {
+                    
+                    // Release previous page.
+                    this.backdata.CurrentPage.UnloadPage();
+                    this.backdata.CurrentPage = null;
+
+                    // Create and setup current page.
+                    ITargetPage targetPage = this.CreatePage(pageChange);
+                    targetPage.SetupNavigation();
+                    this.backdata.CurrentPage = targetPage;
+
+                    // Animate transition.
+                    this.WindowEvery.Background = Brushes.Transparent;
+                    this.Logo.Visibility = Visibility.Collapsed;
+                    this.Transition = PageTransitionType.Fade;
+                    this.PageTransitionControl.ShowPage((UserControl)targetPage);
+                }
+            }
         }
 
         /// <summary>
@@ -110,22 +102,36 @@ namespace WPFApplication
         /// </summary>
         /// <param name="page">Type of page to be created</param>
         /// <returns>New page.</returns>
-        private UserControl CreatePage(ApplicationPages page)
+        private ITargetPage CreatePage(PageChange page)
         {
-            switch (page)
+            switch (page.Page)
             {
-                case ApplicationPages.sKrum:
+                case ApplicationPages.BacklogPage:
                     return null;
                 case ApplicationPages.MainPage:
-                    return new MainPage();
-                case ApplicationPages.ProjectsPage:
-                    return new ProjectsPage();
+                    return new MainPageLib.MainPage(page.Context);
+                case ApplicationPages.MeetingPage:
+                    return null;
+                case ApplicationPages.PeopleManagementPage:
+                    return null;
+                case ApplicationPages.PersonStatisticsPage:
+                    return null;
+                case ApplicationPages.PersonTaskBoardPage:
+                    return null;
+                case ApplicationPages.ProjectBacklogPage:
+                    return null;
+                case ApplicationPages.ProjectConfigurationPage:
+                    return null;
+                case ApplicationPages.ProjectManagementPage:
+                    return null;
+                case ApplicationPages.ProjectStatisticsPage:
+                    return null;
+                case ApplicationPages.ProjectTeamManagementPage:
+                    return null;
+                case ApplicationPages.RootPage:
+                    return null;
                 case ApplicationPages.TaskBoardPage:
-                    return new TaskBoardPage();
-                case ApplicationPages.UsersPage:
-                    return new UsersPage();
-                case ApplicationPages.UserStatsPage:
-                    return new UserStatsPage();
+                    return new TaskBoardPageLib.TaskBoardPage(page.Context);
                 default:
                     return null;
             }

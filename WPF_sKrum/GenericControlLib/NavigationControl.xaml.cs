@@ -11,18 +11,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using SharedTypes;
 
 namespace GenericControlLib
 {
-    // Represents the possible pressed directions.
-    public enum NavigationDirection
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
-
 	/// <summary>
 	/// Interaction logic for NavigationControl.xaml
 	/// </summary>
@@ -30,7 +22,7 @@ namespace GenericControlLib
 	{
         private DispatcherTimer pagesStatTimer;
 
-        public delegate void NavigationHandler(NavigationDirection direction);
+        public delegate void NavigationHandler(PageChangeDirection direction);
         public event NavigationHandler NavigationEvent;
 
         public string UpBarText
@@ -66,7 +58,7 @@ namespace GenericControlLib
             this.UpBarText = null;
 		}
 
-        private void NotifyNavigationEvent(NavigationDirection direction)
+        private void NotifyNavigationEvent(PageChangeDirection direction)
         {
             if (this.NavigationEvent != null)
             {
@@ -101,28 +93,28 @@ namespace GenericControlLib
         {
             this.pagesStatTimer.Stop();
             this.HideEverything();
-            this.NotifyNavigationEvent(NavigationDirection.Up);
+            this.NotifyNavigationEvent(PageChangeDirection.Up);
         }
 
         private void DownBar_MouseLeftButtonDown(object sender, MouseEventArgs e)
         {
             this.pagesStatTimer.Stop();
             this.HideEverything();
-            this.NotifyNavigationEvent(NavigationDirection.Down);
+            this.NotifyNavigationEvent(PageChangeDirection.Down);
         }
 
         private void RightBar_MouseLeftButtonDown(object sender, MouseEventArgs e)
         {
             this.pagesStatTimer.Stop();
             this.HideEverything();
-            this.NotifyNavigationEvent(NavigationDirection.Right);
+            this.NotifyNavigationEvent(PageChangeDirection.Right);
         }
 
         private void LeftBar_MouseLeftButtonDown(object sender, MouseEventArgs e)
         {
             this.pagesStatTimer.Stop();
             this.HideEverything();
-            this.NotifyNavigationEvent(NavigationDirection.Left);
+            this.NotifyNavigationEvent(PageChangeDirection.Left);
         }
 
         private void ActionStop_MouseEnter(object sender, MouseEventArgs e)
