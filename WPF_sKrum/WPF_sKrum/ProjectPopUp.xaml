@@ -135,10 +135,10 @@
 						<RowDefinition />
 						<RowDefinition />
 					</Grid.RowDefinitions>
-					<GenericControlLib:ProjectButton Margin="0,30,15,15" Grid.Row="0" Grid.Column="0" ButtonText="Teste" ImageSource="Images/aloquete.png"/>
-					<GenericControlLib:ProjectButton Margin="15,30,0,15" Grid.Row="0" Grid.Column="1" ButtonText="Teste" />
-					<GenericControlLib:ProjectButton Margin="0,15,15,30" Grid.Row="2" Grid.Column="0" ButtonText="Teste" />
-					<GenericControlLib:ProjectButton Margin="15,15,0,30" Grid.Row="2" Grid.Column="1" ButtonText="Teste" />
+					<GenericControlLib:ProjectButtonControl Margin="0,30,15,15" Grid.Row="0" Grid.Column="0" ButtonText="Teste" ImageSource="Images/aloquete.png"/>
+                    <GenericControlLib:ProjectButtonControl Margin="15,30,0,15" Grid.Row="0" Grid.Column="1" ButtonText="Teste" />
+                    <GenericControlLib:ProjectButtonControl Margin="0,15,15,30" Grid.Row="2" Grid.Column="0" ButtonText="Teste" />
+                    <GenericControlLib:ProjectButtonControl Margin="15,15,0,30" Grid.Row="2" Grid.Column="1" ButtonText="Teste" />
 				</Grid>
 
 				<Image x:Name="PanRight" Margin="10" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" Source="Images/darkarrow.png" RenderTransformOrigin="0.5,0.5" >

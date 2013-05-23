@@ -16,13 +16,13 @@ namespace GenericControlLib
 	/// <summary>
 	/// Interaction logic for ProjectButton.xaml
 	/// </summary>
-	public partial class ProjectButton : UserControl
+	public partial class ProjectButtonControl : UserControl
 	{
         private int buttonFontSize = 40;
         private string buttonText = "Projecto";
         private string imageSource = @"Images\mala.png";
 
-		public ProjectButton()
+		public ProjectButtonControl()
 		{
 			this.InitializeComponent();
             this.DataContext = this;

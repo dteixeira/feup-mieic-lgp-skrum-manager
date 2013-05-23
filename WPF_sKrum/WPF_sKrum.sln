@@ -17,6 +17,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabasePopulator", "Databa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PopupFormControlLib", "PopupFormControlLib\PopupFormControlLib.csproj", "{54D583D1-8112-4F51-ACE4-53CC42E3FA4B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SharedTypes", "SharedTypes\SharedTypes.csproj", "{AEFD3BBD-4261-4C4F-BA8D-FB3668BB40BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainPageLib", "MainPageLib\MainPageLib.csproj", "{0AD39A17-26E5-4DB8-99C2-3EE46EB79B0C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{00F9C426-8516-404C-B085-DE09790EFFC1} = {00F9C426-8516-404C-B085-DE09790EFFC1}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +62,14 @@ Global
 		{54D583D1-8112-4F51-ACE4-53CC42E3FA4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54D583D1-8112-4F51-ACE4-53CC42E3FA4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54D583D1-8112-4F51-ACE4-53CC42E3FA4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AEFD3BBD-4261-4C4F-BA8D-FB3668BB40BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AEFD3BBD-4261-4C4F-BA8D-FB3668BB40BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AEFD3BBD-4261-4C4F-BA8D-FB3668BB40BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AEFD3BBD-4261-4C4F-BA8D-FB3668BB40BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AD39A17-26E5-4DB8-99C2-3EE46EB79B0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AD39A17-26E5-4DB8-99C2-3EE46EB79B0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AD39A17-26E5-4DB8-99C2-3EE46EB79B0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AD39A17-26E5-4DB8-99C2-3EE46EB79B0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

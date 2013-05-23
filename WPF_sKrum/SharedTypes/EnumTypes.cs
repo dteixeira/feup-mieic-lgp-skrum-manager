@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WPFApplication
+namespace SharedTypes
 {
     /// <summary>
     /// Represents the application's pages.
@@ -16,5 +16,13 @@ namespace WPFApplication
         UsersPage,
         TaskBoardPage,
         UserStatsPage
+    }
+
+    public enum PageChangeDirection
+    {
+        Up,
+        Down,
+        Left,
+        Right
     }
 }

@@ -13,26 +13,17 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using ServiceLib.DataService;
 using GenericControlLib;
+using SharedTypes;
 
 namespace WPFApplication
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, ApplicationWindow
     {
         [DllImport("user32.dll", CharSet = CharSet.Auto, CallingConvention = CallingConvention.StdCall)]
         public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint cButtons, uint dwExtraInfo);
-
-        private static MainWindow instance;
-
-        /// <summary>
-        /// Returns a reference to the singleton MainWindow instance.
-        /// </summary>
-        public static MainWindow Instance
-        {
-            get { return MainWindow.instance; }
-        }
 
         private ApplicationController backdata;
         private const int MOUSEEVENTF_LEFTDOWN = 0x00000002;
@@ -72,10 +63,10 @@ namespace WPFApplication
         public MainWindow()
         {
             InitializeComponent();
-            MainWindow.instance = this;
             this.backdata = ApplicationController.Instance;
+            this.backdata.ApplicationWindow = this;
 
-            // Setup navigation controls.
+            // Setup navigation controls. // TODO ALTER.
             this.Navigation.UpBarText = null;
             this.Navigation.DownBarText = null;
             this.Navigation.LeftBarText = null;
@@ -93,24 +84,25 @@ namespace WPFApplication
             }
         }
 
+        // TODO REFACTOR.
         private void NavigationEventHandler(NavigationDirection direction)
         {
-            KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
+           /* KinectGestureEventArgs userGeneratedSignal = new KinectGestureEventArgs(KinectGestureType.UserGenerated, backdata.TrackingId);
             switch (direction)
             {
                 case NavigationDirection.Up:
-                    MainWindow.Instance.GestureRegognized(this.backdata.PagesUp[backdata.CurrentPage], userGeneratedSignal);
+                    this.GestureRegognized(this.backdata.PagesUp[backdata.CurrentPage], userGeneratedSignal);
                     break;
                 case NavigationDirection.Right:
-                    MainWindow.Instance.GestureRegognized(this.backdata.PagesRight[backdata.CurrentPage], userGeneratedSignal);
+                    this..GestureRegognized(this.backdata.PagesRight[backdata.CurrentPage], userGeneratedSignal);
                     break;
                 case NavigationDirection.Left:
-                    MainWindow.Instance.GestureRegognized(this.backdata.PagesLeft[backdata.CurrentPage], userGeneratedSignal);
+                    this..GestureRegognized(this.backdata.PagesLeft[backdata.CurrentPage], userGeneratedSignal);
                     break;
                 case NavigationDirection.Down:
-                    MainWindow.Instance.GestureRegognized(this.backdata.PagesDown[backdata.CurrentPage], userGeneratedSignal);
+                    this..GestureRegognized(this.backdata.PagesDown[backdata.CurrentPage], userGeneratedSignal);
                     break;
-            }
+            }*/
         }
 
         /// <summary>
@@ -139,6 +131,7 @@ namespace WPFApplication
             }
         }
 
+        // TODO REFACTOR.
         /// <summary>
         /// Callback for "gesture recognized" events.
         /// </summary>
@@ -146,7 +139,7 @@ namespace WPFApplication
         /// <param name="e">Event arguments</param>
         public void GestureRegognized(object sender, KinectGestureEventArgs e)
         {
-            // User Generated Signal.
+            /*// User Generated Signal.
             if (e.GestureType == KinectGestureType.UserGenerated)
             {
                 this.Window_Every.Background = Brushes.Transparent;
@@ -158,27 +151,27 @@ namespace WPFApplication
             }
 
             // Engage new skeleton.
-            if (e.GestureType == KinectGestureType.WaveRightHand && backdata.TrackingId == -1)
+            if (e.GestureType == KinectGestureType.WaveRightHand && backdata.TrackingID == -1)
             {
                 this.Cursor = Cursors.None;
-                this.backdata.TrackingId = e.TrackingId;
-                this.backdata.KinectSensor.StartTrackingSkeleton(backdata.TrackingId);
+                this.backdata.TrackingID = e.TrackingId;
+                this.backdata.KinectSensor.StartTrackingSkeleton(backdata.TrackingID);
                 this.RightOpen.Visibility = Visibility.Visible;
                 this.RightClosed.Visibility = Visibility.Collapsed;
                 this.UpperBar.Background = (Brush)Application.Current.FindResource("KinectOnBarBrush");
             }
 
             // Disengage previous skeleton.
-            else if (e.GestureType == KinectGestureType.WaveLeftHand && backdata.TrackingId == e.TrackingId)
+            else if (e.GestureType == KinectGestureType.WaveLeftHand && backdata.TrackingID == e.TrackingId)
             {
-                this.backdata.TrackingId = -1;
+                this.backdata.TrackingID = -1;
                 this.backdata.KinectSensor.StopTrackingSkeleton();
                 this.RightOpen.Visibility = Visibility.Collapsed;
                 this.RightClosed.Visibility = Visibility.Collapsed;
                 this.UpperBar.Background = (Brush)Application.Current.FindResource("KinectOffBarBrush");
             }
 
-            else if (this.backdata.TrackingId != -1)
+            else if (this.backdata.TrackingID != -1)
             {
                 // Process event modifications.
                 switch (e.GestureType)
@@ -230,7 +223,7 @@ namespace WPFApplication
                     default:
                         break;
                 }
-            }
+            }*/
         }
 
         /// <summary>
@@ -257,12 +250,12 @@ namespace WPFApplication
             if (receivedData)
             {
                 // No skeleton engaged, draw all.
-                if (backdata.TrackingId != -1)
+                if (backdata.TrackingID != -1)
                 {
-                    var skeleton = backdata.Skeletons.FirstOrDefault(s => s.TrackingId == backdata.TrackingId);
+                    var skeleton = backdata.Skeletons.FirstOrDefault(s => s.TrackingId == backdata.TrackingID);
                     if (skeleton == null)
                     {
-                        this.GestureRegognized(this, new KinectGestureEventArgs(KinectGestureType.WaveLeftHand, backdata.TrackingId));
+                        this.GestureRegognized(this, new KinectGestureEventArgs(KinectGestureType.WaveLeftHand, backdata.TrackingID));
                     }
                 }
             }
@@ -309,6 +302,49 @@ namespace WPFApplication
             uint X = (uint)(e.RightHand.X * 65535);
             uint Y = (uint)(e.RightHand.Y * 65535);
             mouse_event(flag, X, Y, 0, 0);
+        }
+
+        /// <summary>
+        /// Sets the current navigation bars.
+        /// </summary>
+        /// <param name="directions">Maps every possible transition direction
+        /// to the target page's name</param>
+        public void SetupNavigation(System.Collections.Generic.Dictionary<PageChangeDirection, string> directions)
+        {
+            foreach (PageChangeDirection key in directions.Keys)
+            {
+                switch (key)
+                {
+                    case PageChangeDirection.Up:
+                        this.Navigation.UpBarText = directions[key];
+                        break;
+                    case PageChangeDirection.Right:
+                        this.Navigation.RightBarText = directions[key];
+                        break;
+                    case PageChangeDirection.Left:
+                        this.Navigation.LeftBarText = directions[key];
+                        break;
+                    case PageChangeDirection.Down:
+                        this.Navigation.DownBarText = directions[key];
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Fades or clears the main window (for popups).
+        /// </summary>
+        /// <param name="fade">If true fade, otherwise clear.</param>
+        public void SetWindowFade(bool fade)
+        {
+            if (fade)
+            {
+                this.BlurLayer.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                this.BlurLayer.Visibility = System.Windows.Visibility.Hidden;
+            }
         }
     }
 }

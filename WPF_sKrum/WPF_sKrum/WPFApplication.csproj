@@ -74,8 +74,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ApplicationController.cs" />
-    <Compile Include="EnumTypes.cs" />
     <Compile Include="ProjectPopUp.xaml.cs">
       <DependentUpon>ProjectPopUp.xaml</DependentUpon>
     </Compile>
@@ -149,7 +147,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Images\Thumbs.db" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -177,6 +174,10 @@
     <ProjectReference Include="..\ServiceLib\ServiceLib.csproj">
       <Project>{00f9c426-8516-404c-b085-de09790effc1}</Project>
       <Name>ServiceLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SharedTypes\SharedTypes.csproj">
+      <Project>{aefd3bbd-4261-4c4f-ba8d-fb3668bb40be}</Project>
+      <Name>SharedTypes</Name>
     </ProjectReference>
     <ProjectReference Include="..\TaskBoardControlLib\TaskBoardControlLib.csproj">
       <Project>{733E757F-308E-4039-947B-B6F867C07FFB}</Project>
