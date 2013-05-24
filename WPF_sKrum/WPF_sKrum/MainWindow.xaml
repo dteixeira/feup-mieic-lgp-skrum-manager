@@ -56,7 +56,7 @@
                 <TextBlock x:Name="UpperBar_ProjectName" Margin="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontFamily="Open Sans Light" Foreground="White" />
                 <Image x:Name="UpperBar_Config" Margin="5" Grid.Column="2" VerticalAlignment="Center" Source="Images/definicoes.png" HorizontalAlignment="Center" Style="{StaticResource HoverZoomStyle}" MouseLeftButtonDown="UpperBar_Config_MouseLeftButtonDown"/>
                 <Image x:Name="UpperBar_Home" Margin="5" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/casa.png" Style="{StaticResource HoverZoomStyle}"/>
-                <Image x:Name="UpperBar_Close" Margin="5" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/cruz.png" Style="{StaticResource HoverZoomStyle}"/>
+                <Image x:Name="UpperBar_Close" Margin="5" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/cruz.png" Style="{StaticResource HoverZoomStyle}" MouseLeftButtonDown="UpperBar_Close_MouseLeftButtonDown"/>
             </Grid>
 
             <Canvas x:Name="dragdropadornerLayer" Visibility="Collapsed" Panel.ZIndex="2" HorizontalAlignment="Left" VerticalAlignment="Top" />

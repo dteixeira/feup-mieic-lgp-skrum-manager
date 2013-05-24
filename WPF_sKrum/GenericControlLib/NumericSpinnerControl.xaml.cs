@@ -154,5 +154,31 @@ namespace GenericControlLib
                 }
             }
         }
+
+        private void MinusButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.plusPressed = false;
+            this.IncrementHandler(sender, e);
+            this.MinusButtonHoverHandler(sender, e);
+        }
+
+        private void MinusButton_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.MinusButton_MouseLeave(sender, e);
+            this.MinusButton_MouseEnter(sender, e);
+        }
+
+        private void PlusButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.plusPressed = true;
+            this.IncrementHandler(sender, e);
+            this.PlusButtonHoverHandler(sender, e);
+        }
+
+        private void PlusButton_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.PlusButton_MouseLeave(sender, e);
+            this.PlusButton_MouseEnter(sender, e);
+        }
     }
 }

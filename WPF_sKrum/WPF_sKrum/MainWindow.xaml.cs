@@ -378,5 +378,10 @@ namespace WPFApplication
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
             MessageBox.Show(((double)form["workedTime"].PageValue).ToString());
         }
+
+        private void UpperBar_Close_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

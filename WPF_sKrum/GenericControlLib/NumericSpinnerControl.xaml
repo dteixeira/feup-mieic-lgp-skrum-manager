@@ -26,8 +26,8 @@
 			<ColumnDefinition Width="80"/>
 		</Grid.ColumnDefinitions>
 		<Label x:Name="ValueLabel" Content="Label" Grid.Column="1" FontFamily="Open Sans" FontSize="32" Foreground="{DynamicResource Gray1Brush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-		<Rectangle x:Name="MinusButton" Style="{DynamicResource SpinnerButtonStyle}" MouseEnter="MinusButton_MouseEnter" MouseLeave="MinusButton_MouseLeave"/>
-		<Rectangle x:Name="PlusButton" Style="{DynamicResource SpinnerButtonStyle}" Grid.Column="2" MouseEnter="PlusButton_MouseEnter" MouseLeave="PlusButton_MouseLeave"/>
+		<Rectangle x:Name="MinusButton" Style="{DynamicResource SpinnerButtonStyle}" MouseEnter="MinusButton_MouseEnter" MouseLeave="MinusButton_MouseLeave" MouseLeftButtonDown="MinusButton_MouseLeftButtonDown" MouseLeftButtonUp="MinusButton_MouseLeftButtonUp"/>
+		<Rectangle x:Name="PlusButton" Style="{DynamicResource SpinnerButtonStyle}" Grid.Column="2" MouseEnter="PlusButton_MouseEnter" MouseLeave="PlusButton_MouseLeave" MouseLeftButtonDown="PlusButton_MouseLeftButtonDown" MouseLeftButtonUp="PlusButton_MouseLeftButtonUp"/>
 		<Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Source="Images/menos.png" IsHitTestVisible="False"/>
 		<Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Source="Images/mais.png" Margin="0" Grid.Column="2" IsHitTestVisible="False"/>
 	</Grid>
