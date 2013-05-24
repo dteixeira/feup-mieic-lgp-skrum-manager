@@ -152,7 +152,7 @@ namespace WPFApplication
             switch (page.Page)
             {
                 case ApplicationPages.BacklogPage:
-                    return null;
+                    return new BacklogPageLib.BacklogPage(page.Context);
                 case ApplicationPages.MainPage:
                     return new MainPageLib.MainPage(page.Context);
                 case ApplicationPages.MeetingPage:

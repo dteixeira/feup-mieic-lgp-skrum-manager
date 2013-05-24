@@ -57,5 +57,11 @@ namespace MainPageLib
 
 
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
+
+        private void ButtonControl_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            PageChange page = new PageChange { Context = null, Page = ApplicationPages.BacklogPage };
+            ApplicationController.Instance.ApplicationWindow.TryTransition(page);
+        }
     }
 }

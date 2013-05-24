@@ -118,6 +118,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BacklogPageLib\BacklogPageLib.csproj">
+      <Project>{005c56c3-9fe1-484f-9108-5cd661f92163}</Project>
+      <Name>BacklogPageLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\GenericControlLib\GenericControlLib.csproj">
       <Project>{66C3F1E6-C160-47B7-8C0C-B53A975226AD}</Project>
       <Name>GenericControlLib</Name>
