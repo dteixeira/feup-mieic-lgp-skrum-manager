@@ -146,6 +146,10 @@
       <Project>{54D583D1-8112-4F51-ACE4-53CC42E3FA4B}</Project>
       <Name>PopupFormControlLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PopupSelectionControlLib\PopupSelectionControlLib.csproj">
+      <Project>{5ba28f44-731c-4999-bf06-c14db7a6e663}</Project>
+      <Name>PopupSelectionControlLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ProjectBacklogPageLib\ProjectBacklogPageLib.csproj">
       <Project>{ddf3cd0f-ba92-444b-bc60-b44d498ddafa}</Project>
       <Name>ProjectBacklogPageLib</Name>
