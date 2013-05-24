@@ -134,9 +134,37 @@
       <Project>{0ad39a17-26e5-4db8-99c2-3ee46eb79b0c}</Project>
       <Name>MainPageLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MeetingPageLib\MeetingPageLib.csproj">
+      <Project>{9c2ce687-3b6e-4310-a9c2-43c21c99de8e}</Project>
+      <Name>MeetingPageLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PeopleManagementPageLib\PeopleManagementPageLib.csproj">
+      <Project>{5ac58b46-df8f-477a-839b-d3296797cad8}</Project>
+      <Name>PeopleManagementPageLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PopupFormControlLib\PopupFormControlLib.csproj">
       <Project>{54D583D1-8112-4F51-ACE4-53CC42E3FA4B}</Project>
       <Name>PopupFormControlLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectBacklogPageLib\ProjectBacklogPageLib.csproj">
+      <Project>{ddf3cd0f-ba92-444b-bc60-b44d498ddafa}</Project>
+      <Name>ProjectBacklogPageLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectConfigurationPageLib\ProjectConfigurationPageLib.csproj">
+      <Project>{6627dd51-f600-4188-a0ce-06e8ff608d4b}</Project>
+      <Name>ProjectConfigurationPageLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectManagementPageLib\ProjectManagementPageLib.csproj">
+      <Project>{434f92a7-2c9c-4623-bd71-4c04779b0842}</Project>
+      <Name>ProjectManagementPageLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectStatisticsPageLib\ProjectStatisticsPageLib.csproj">
+      <Project>{1f627948-6fcd-4522-91b5-691ab44ecd0e}</Project>
+      <Name>ProjectStatisticsPageLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ProjectTeamManagementPageLib\ProjectTeamManagementPageLib.csproj">
+      <Project>{8e1b0f13-75fc-4dab-a923-8e1c754b3a28}</Project>
+      <Name>ProjectTeamManagementPageLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\ServiceLib\ServiceLib.csproj">
       <Project>{00f9c426-8516-404c-b085-de09790effc1}</Project>

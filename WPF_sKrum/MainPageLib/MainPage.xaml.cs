@@ -34,7 +34,7 @@ namespace MainPageLib
                 case PageChangeDirection.Down:
                     return null;
                 case PageChangeDirection.Left:
-                    return null;
+                    return new PageChange { Context = null, Page = ApplicationPages.ProjectConfigurationPage };
                 case PageChangeDirection.Right:
                     return new PageChange { Context = null, Page = ApplicationPages.TaskBoardPage };
                 case PageChangeDirection.Up:

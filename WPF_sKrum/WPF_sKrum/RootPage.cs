@@ -23,7 +23,7 @@ namespace WPFApplication
                 case PageChangeDirection.Down:
                     return null;
                 case PageChangeDirection.Left:
-                    return null;
+                    return new PageChange { Context = null, Page = ApplicationPages.ProjectManagementPage };
                 case PageChangeDirection.Right:
                     return new PageChange { Context = null, Page = ApplicationPages.MainPage };
                 case PageChangeDirection.Up:

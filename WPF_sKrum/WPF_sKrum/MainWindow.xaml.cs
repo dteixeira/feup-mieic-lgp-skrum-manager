@@ -156,23 +156,23 @@ namespace WPFApplication
                 case ApplicationPages.MainPage:
                     return new MainPageLib.MainPage(page.Context);
                 case ApplicationPages.MeetingPage:
-                    return null;
+                    return new MeetingPageLib.MeetingPage(page.Context);
                 case ApplicationPages.PeopleManagementPage:
-                    return null;
+                    return new PeopleManagementPageLib.PeopleManagementPage(page.Context);
                 case ApplicationPages.PersonStatisticsPage:
                     return null;
                 case ApplicationPages.PersonTaskBoardPage:
                     return null;
                 case ApplicationPages.ProjectBacklogPage:
-                    return null;
+                    return new ProjectBacklogPageLib.ProjectBacklogPage(page.Context);
                 case ApplicationPages.ProjectConfigurationPage:
-                    return null;
+                    return new ProjectConfigurationPageLib.ProjectConfigurationPage(page.Context);
                 case ApplicationPages.ProjectManagementPage:
-                    return null;
+                    return new ProjectManagementPageLib.ProjectManagementPage(page.Context);
                 case ApplicationPages.ProjectStatisticsPage:
-                    return null;
+                    return new ProjectStatisticsPageLib.ProjectStatisticsPage(page.Context);
                 case ApplicationPages.ProjectTeamManagementPage:
-                    return null;
+                    return new ProjectTeamManagementPageLib.ProjectTeamManagementPage(page.Context);
                 case ApplicationPages.RootPage:
                     return null;
                 case ApplicationPages.TaskBoardPage:
