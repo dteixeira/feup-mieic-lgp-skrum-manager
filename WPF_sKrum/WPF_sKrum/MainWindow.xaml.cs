@@ -91,7 +91,7 @@ namespace WPFApplication
                     // Animate transition.
                     this.WindowEvery.Background = Brushes.Transparent;
                     this.Logo.Visibility = Visibility.Collapsed;
-                    this.Transition = PageTransitionType.Fade;
+                    this.Transition = transition;
                     this.PageTransitionControl.ShowPage((UserControl)targetPage);
                 }
             }
@@ -125,7 +125,7 @@ namespace WPFApplication
                         // Animate transition.
                         this.WindowEvery.Background = Brushes.Transparent;
                         this.Logo.Visibility = Visibility.Collapsed;
-                        this.Transition = PageTransitionType.Fade;
+                        this.Transition = transition;
                         this.PageTransitionControl.ShowPage((UserControl)targetPage);
                     }
                 }
@@ -204,6 +204,7 @@ namespace WPFApplication
             // Disengage previous skeleton.
             else if (e.GestureType == KinectGestureType.WaveLeftHand && backdata.TrackingID == e.TrackingId)
             {
+                this.Cursor = Cursors.Arrow;
                 this.backdata.TrackingID = -1;
                 this.backdata.KinectSensor.StopTrackingSkeleton();
                 this.RightOpen.Visibility = Visibility.Collapsed;

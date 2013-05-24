@@ -68,6 +68,10 @@ namespace TaskBoardPageLib
         {
             try
             {
+                // Clears taskboard.
+                this.Taskboard.RowDefinitions.Clear();
+                this.Taskboard.Children.Clear();
+
                 // Get current project if selected.
                 Project project = ApplicationController.Instance.CurrentProject;
 
@@ -250,7 +254,19 @@ namespace TaskBoardPageLib
 
         public void DataChangeHandler(object sender, NotificationType notification)
         {
- 	        throw new NotImplementedException();
+            try
+            {
+                // Respond only to project modifications.
+                if (notification == NotificationType.ProjectModification)
+                {
+                    // Repopulate the taskboard with the current project.
+                    this.PopulateTaskboard();
+                }
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+            }
         }
     }
 }

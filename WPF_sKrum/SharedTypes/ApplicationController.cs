@@ -57,17 +57,24 @@ namespace SharedTypes
             get { return this.currentProject; }
             set
             {
-                // Unsubscribe notifications for the current project.
-                if (this.currentProject != null)
+                if (this.currentProject == null || this.CurrentProject.ProjectID != value.ProjectID)
                 {
-                    this.Notifications.Unsubscribe(this.currentProject.ProjectID);
-                }
+                    // Unsubscribe notifications for the current project.
+                    if (this.currentProject != null)
+                    {
+                        this.Notifications.Unsubscribe(this.currentProject.ProjectID);
+                    }
 
-                // Subscribe to a new project.
-                this.currentProject = value;
-                if (this.currentProject != null)
+                    // Subscribe to a new project.
+                    this.currentProject = value;
+                    if (this.currentProject != null)
+                    {
+                        this.Notifications.Subscribe(this.currentProject.ProjectID);
+                    }
+                }
+                else
                 {
-                    this.Notifications.Subscribe(this.currentProject.ProjectID);
+                    this.currentProject = value;
                 }
             }
         }
@@ -126,6 +133,7 @@ namespace SharedTypes
                         Project updated = this.Data.GetProjectByID(this.currentProject.ProjectID);
                         int index = this.Projects.FindIndex(p => p.ProjectID == updated.ProjectID);
                         this.Projects[index] = updated;
+                        this.CurrentProject = updated;
                     }
                     break;
             }
