@@ -1,0 +1,22 @@
+﻿<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:GenericControlLib="clr-namespace:GenericControlLib;assembly=GenericControlLib" x:Class="PopupFormControlLib.CollectionSpinnerPage" 
+             mc:Ignorable="d" 
+             d:DesignHeight="454" d:DesignWidth="550">
+	<Grid x:Name="LayoutRoot" Margin="0">
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition/>
+			<ColumnDefinition Width="8*"/>
+			<ColumnDefinition/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition/>
+			<RowDefinition Height="8*"/>
+			<RowDefinition/>
+		</Grid.RowDefinitions>
+		<GenericControlLib:NumericCollectionSpinnerControl x:Name="NumericCollectionSpinner" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
+	</Grid>
+</UserControl>

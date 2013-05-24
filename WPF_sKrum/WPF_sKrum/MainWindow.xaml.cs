@@ -366,17 +366,22 @@ namespace WPFApplication
         private void UpperBar_Config_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
-            PopupFormControlLib.SpinnerPage page = new PopupFormControlLib.SpinnerPage();
-            page.Min = 5;
-            page.Max = 30;
-            page.Increment = 0.5;
-            page.PageTitle = "Horas Contribuidas";
-            page.PageName = "workedTime";
+            PopupFormControlLib.CollectionSpinnerPage page = new PopupFormControlLib.CollectionSpinnerPage();
+            System.Collections.Generic.List<double> list = new System.Collections.Generic.List<double>();
+            list.Add(1);
+            list.Add(2);
+            list.Add(3);
+            list.Add(5);
+            list.Add(8);
+            list.Add(13);
+            page.ValueCollection = list;
+            page.PageTitle = "Estimatiava de Esforço";
+            page.PageName = "estimation";
             form.FormPages.Add(page);
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
             form.ShowDialog();
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
-            MessageBox.Show(((double)form["workedTime"].PageValue).ToString());
+            MessageBox.Show(((double)form["estimation"].PageValue).ToString());
         }
 
         private void UpperBar_Close_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

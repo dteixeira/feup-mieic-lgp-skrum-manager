@@ -62,6 +62,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CollectionSpinnerPage.xaml.cs">
+      <DependentUpon>CollectionSpinnerPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FormWindow.xaml.cs">
       <DependentUpon>FormWindow.xaml</DependentUpon>
     </Compile>
@@ -99,6 +102,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="CollectionSpinnerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FormWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

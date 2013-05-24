@@ -98,7 +98,7 @@ namespace TaskBoardPageLib
                         StoryDescription = story.Value.Description,
                         StoryName = "US" + story.Value.Number.ToString("D3"),
                         StoryPriority = story.Value.Priority.ToString()[0].ToString(),
-                        StoryEstimation = story.Value.StorySprints.FirstOrDefault(s => s.SprintID == sprint.SprintID).Points,
+                        StoryEstimation = story.Value.StorySprints.FirstOrDefault(s => s.SprintID == sprint.SprintID).Points.ToString(),
                         Story = story.Value
                     };
                     storyControl.Width = Double.NaN;

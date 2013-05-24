@@ -51,6 +51,9 @@
     <Compile Include="ButtonControl.xaml.cs">
       <DependentUpon>ButtonControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NumericCollectionSpinnerControl.xaml.cs">
+      <DependentUpon>NumericCollectionSpinnerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NavigationControl.xaml.cs">
       <DependentUpon>NavigationControl.xaml</DependentUpon>
     </Compile>
@@ -85,6 +88,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="ButtonControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NumericCollectionSpinnerControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

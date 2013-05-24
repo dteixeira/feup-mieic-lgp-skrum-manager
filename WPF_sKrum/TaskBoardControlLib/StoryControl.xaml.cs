@@ -21,7 +21,7 @@ namespace TaskBoardControlLib
         private string storyDescription;
         private string storyName;
         private string storyPriority;
-        private int storyEstimation;
+        private string storyEstimation;
 
 		public StoryControl()
 		{
@@ -47,7 +47,7 @@ namespace TaskBoardControlLib
             set { this.storyPriority = value; }
         }
 
-        public int StoryEstimation
+        public string StoryEstimation
         {
             get { return this.storyEstimation; }
             set { this.storyEstimation = value; }
