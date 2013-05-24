@@ -129,7 +129,7 @@ namespace GenericControlLib
                 this.SpinnerValue += this.Increment;
                 this.Notify(this.spinnerValue);
             }
-            else if (this.spinnerValue - this.increment >= this.min)
+            else if (!this.plusPressed && this.spinnerValue - this.increment >= this.min)
             {
                 this.SpinnerValue -= this.Increment;
                 this.Notify(this.spinnerValue);

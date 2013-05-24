@@ -80,5 +80,9 @@
 			</Grid>
 			<PageTransitions:PageTransition Background="Transparent" x:Name="PageTransitionLayer" Grid.ColumnSpan="2" Margin="0" />
 		</Grid>
+		<Canvas x:Name="kinectLayer" Visibility="Visible" Panel.ZIndex="100" Margin="0" Grid.RowSpan="2">
+			<Image x:Name="RightOpen" Source="Images/right_open.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
+			<Image x:Name="RightClosed" Source="Images/right_closed.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
+		</Canvas>
 	</Grid>
 </Window>

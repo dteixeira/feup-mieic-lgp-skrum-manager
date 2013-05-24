@@ -33,6 +33,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Kinect, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Kinect.Toolkit">
+      <HintPath>..\Kinect\Assemblies\Microsoft.Kinect.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kinect.Toolkit.Controls">
+      <HintPath>..\Kinect\Assemblies\Microsoft.Kinect.Toolkit.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kinect.Toolkit.Fusion">
+      <HintPath>..\Kinect\Assemblies\Microsoft.Kinect.Toolkit.Fusion.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Kinect.Toolkit.Interaction, Version=1.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Kinect\Assemblies\Microsoft.Kinect.Toolkit.Interaction.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -104,11 +118,21 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\cruz.png" />
+    <Resource Include="Images\right_closed.png" />
+    <Resource Include="Images\right_open.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GenericControlLib\GenericControlLib.csproj">
       <Project>{66C3F1E6-C160-47B7-8C0C-B53A975226AD}</Project>
       <Name>GenericControlLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Kinect\Kinect.csproj">
+      <Project>{7041af5b-ad01-4e03-ad77-1202a3befe12}</Project>
+      <Name>Kinect</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceLib\ServiceLib.csproj">
+      <Project>{00f9c426-8516-404c-b085-de09790effc1}</Project>
+      <Name>ServiceLib</Name>
     </ProjectReference>
     <ProjectReference Include="..\SharedTypes\SharedTypes.csproj">
       <Project>{aefd3bbd-4261-4c4f-ba8d-fb3668bb40be}</Project>
@@ -118,6 +142,14 @@
       <Project>{22A46D61-1D40-43A9-802C-B9D43DADD9EC}</Project>
       <Name>PageTransitions</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="KinectInteraction170_32.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="KinectInteraction170_64.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -193,7 +193,7 @@ namespace WPFApplication
             // Engage new skeleton.
             if (e.GestureType == KinectGestureType.WaveRightHand && backdata.TrackingID == -1)
             {
-                this.Cursor = Cursors.None;
+                Mouse.OverrideCursor = Cursors.None;
                 this.backdata.TrackingID = e.TrackingId;
                 this.backdata.KinectSensor.StartTrackingSkeleton(backdata.TrackingID);
                 this.RightOpen.Visibility = Visibility.Visible;
@@ -204,7 +204,7 @@ namespace WPFApplication
             // Disengage previous skeleton.
             else if (e.GestureType == KinectGestureType.WaveLeftHand && backdata.TrackingID == e.TrackingId)
             {
-                this.Cursor = Cursors.Arrow;
+                Mouse.OverrideCursor = Cursors.Arrow;
                 this.backdata.TrackingID = -1;
                 this.backdata.KinectSensor.StopTrackingSkeleton();
                 this.RightOpen.Visibility = Visibility.Collapsed;
@@ -354,11 +354,29 @@ namespace WPFApplication
             if (fade)
             {
                 this.BlurLayer.Visibility = System.Windows.Visibility.Visible;
+                this.kinectLayer.Visibility = System.Windows.Visibility.Hidden;
             }
             else
             {
                 this.BlurLayer.Visibility = System.Windows.Visibility.Hidden;
+                this.kinectLayer.Visibility = System.Windows.Visibility.Visible;
             }
+        }
+
+        private void UpperBar_Config_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+            PopupFormControlLib.SpinnerPage page = new PopupFormControlLib.SpinnerPage();
+            page.Min = 5;
+            page.Max = 30;
+            page.Increment = 0.5;
+            page.PageTitle = "Horas Contribuidas";
+            page.PageName = "workedTime";
+            form.FormPages.Add(page);
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            form.ShowDialog();
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+            MessageBox.Show(((double)form["workedTime"].PageValue).ToString());
         }
     }
 }

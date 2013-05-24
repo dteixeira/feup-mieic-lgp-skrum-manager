@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:GenericControlLib="clr-namespace:GenericControlLib;assembly=GenericControlLib"
 	mc:Ignorable="d"
 	x:Class="PopupFormControlLib.SpinnerPage"
 	x:Name="UserControl"
@@ -18,6 +19,6 @@
 			<RowDefinition Height="8*"/>
 			<RowDefinition/>
 		</Grid.RowDefinitions>
-		<TextBox x:Name="TextValue" TextWrapping="Wrap" Grid.Row="1" FontFamily="Open Sans" TextAlignment="Center" VerticalAlignment="Center" Padding="20" Margin="0,0,-3,0" Grid.Column="1" Foreground="{DynamicResource Gray7Brush}" BorderBrush="{x:Null}" Background="{DynamicResource Gray3Brush}" FontSize="32" BorderThickness="0" TextChanged="TextValue_TextChanged"/>
+		<GenericControlLib:NumericSpinnerControl x:Name="NumericSpinner" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
 	</Grid>
 </UserControl>
