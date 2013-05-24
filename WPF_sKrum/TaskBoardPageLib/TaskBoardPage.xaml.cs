@@ -98,7 +98,8 @@ namespace TaskBoardPageLib
                         StoryDescription = story.Value.Description,
                         StoryName = "US" + story.Value.Number.ToString("D3"),
                         StoryPriority = story.Value.Priority.ToString()[0].ToString(),
-                        StoryEstimation = story.Value.StorySprints.FirstOrDefault(s => s.SprintID == sprint.SprintID).Points
+                        StoryEstimation = story.Value.StorySprints.FirstOrDefault(s => s.SprintID == sprint.SprintID).Points,
+                        Story = story.Value
                     };
                     storyControl.Width = Double.NaN;
                     storyControl.Height = Double.NaN;
@@ -130,7 +131,7 @@ namespace TaskBoardPageLib
                     // For each task add it to the respective state lists.
                     foreach (Task task in story.Value.Tasks)
                     {
-                        TaskControl taskControl = new TaskControl { USID = task.StoryID, TaskDescription = task.Description };
+                        TaskControl taskControl = new TaskControl { USID = task.StoryID, TaskDescription = task.Description, Task = task };
                         taskControl.Width = Double.NaN;
                         taskControl.Height = Double.NaN;
 

@@ -53,6 +53,8 @@ namespace TaskBoardControlLib
             set { this.storyEstimation = value; }
         }
 
+        public ServiceLib.DataService.Story Story { get; set; }
+
         public Brush StoryPriorityColor
         {
             get

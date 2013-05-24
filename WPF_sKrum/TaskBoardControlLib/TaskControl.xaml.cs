@@ -63,6 +63,8 @@ namespace TaskBoardControlLib
 
         public string TaskEstimationWork { get; set; }
 
+        public ServiceLib.DataService.Task Task { get; set; }
+
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
             try

@@ -43,8 +43,8 @@ namespace SharedTypes
 
         private Project currentProject = null;
         public KinectSensorController KinectSensor { get; private set; }
-        public NotificationServiceClient Notifications { get; private set; }
-        public DataServiceClient Data { get; private set; }
+        private NotificationServiceClient Notifications { get; set; }
+        private DataServiceClient Data { get; set; }
         public int TrackingID { get; set; }
         public bool Gripping { get; set; }
         public ITargetPage CurrentPage { get; set; }
@@ -52,6 +52,7 @@ namespace SharedTypes
         public List<Project> Projects { get; private set; }
         public List<Person> People { get; private set; }
         public ApplicationWindow ApplicationWindow { get; set; }
+        public bool IgnoreNextProjectUpdate { get; set; }
         public Project CurrentProject
         {
             get { return this.currentProject; }
@@ -128,6 +129,11 @@ namespace SharedTypes
                     this.Projects = this.Data.GetAllProjects();
                     break;
                 case NotificationType.ProjectModification:
+                    if (this.IgnoreNextProjectUpdate)
+                    {
+                        this.IgnoreNextProjectUpdate = false;
+                        return;
+                    }
                     if (currentProject != null)
                     {
                         Project updated = this.Data.GetProjectByID(this.currentProject.ProjectID);
