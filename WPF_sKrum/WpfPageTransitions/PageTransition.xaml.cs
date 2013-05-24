@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using SharedTypes;
 
 namespace PageTransitions
 {
@@ -22,7 +23,7 @@ namespace PageTransitions
             typeof(PageTransitionType),
             typeof(PageTransition), new PropertyMetadata(PageTransitionType.SlideAndFade));
 
-        public PageTransitionType TransitionType
+        public SharedTypes.PageTransitionType TransitionType
         {
             get { return (PageTransitionType)GetValue(TransitionTypeProperty); }
             set { SetValue(TransitionTypeProperty, value); }

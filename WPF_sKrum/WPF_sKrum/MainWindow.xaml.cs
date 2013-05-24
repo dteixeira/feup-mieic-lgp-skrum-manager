@@ -38,6 +38,9 @@ namespace WPFApplication
         private const int MOUSEEVENTF_XDOWN = 0x00000080;
         private const int MOUSEEVENTF_XUP = 0x00000100;
 
+        private delegate void TryTransitionPageChangeDirectionHandler(PageChangeDirection direction, PageTransitionType transition);
+        private delegate void TryTransitionPageChangeHandler(PageChange direction, PageTransitionType transition);
+
         public PageTransitionType Transition
         {
             set { Dispatcher.Invoke(new Action(() => { this.PageTransitionControl.TransitionType = value; })); }
@@ -70,21 +73,18 @@ namespace WPFApplication
             }
         }
 
-        private void NavigationEventHandler(PageChangeDirection direction)
+        public void TryTransition(PageChange change, PageTransitionType transition = PageTransitionType.Fade)
         {
-            // Try to move only if theres a current page.
-            if(this.backdata.CurrentPage != null) {
-
-                // Try to move only if a valid transition is defined.
-                PageChange pageChange = this.backdata.CurrentPage.PageChangeTarget(direction);
-                if(pageChange != null) {
-                    
+            if (this.Dispatcher.Thread == System.Threading.Thread.CurrentThread)
+            {
+                if (change != null)
+                {
                     // Release previous page.
                     this.backdata.CurrentPage.UnloadPage();
                     this.backdata.CurrentPage = null;
 
                     // Create and setup current page.
-                    ITargetPage targetPage = this.CreatePage(pageChange);
+                    ITargetPage targetPage = this.CreatePage(change);
                     targetPage.SetupNavigation();
                     this.backdata.CurrentPage = targetPage;
 
@@ -95,6 +95,51 @@ namespace WPFApplication
                     this.PageTransitionControl.ShowPage((UserControl)targetPage);
                 }
             }
+            else
+            {
+                this.Dispatcher.BeginInvoke(new TryTransitionPageChangeHandler(TryTransition), new PageChange[] { change });
+            }
+        }
+
+        public void TryTransition(PageChangeDirection direction, PageTransitionType transition = PageTransitionType.Fade)
+        {
+            if (this.Dispatcher.Thread == System.Threading.Thread.CurrentThread)
+            {
+                // Try to move only if theres a current page.
+                if (this.backdata.CurrentPage != null)
+                {
+                    // Try to move only if a valid transition is defined.
+                    PageChange pageChange = this.backdata.CurrentPage.PageChangeTarget(direction);
+                    if (pageChange != null)
+                    {
+
+                        // Release previous page.
+                        this.backdata.CurrentPage.UnloadPage();
+                        this.backdata.CurrentPage = null;
+
+                        // Create and setup current page.
+                        ITargetPage targetPage = this.CreatePage(pageChange);
+                        targetPage.SetupNavigation();
+                        this.backdata.CurrentPage = targetPage;
+
+                        // Animate transition.
+                        this.WindowEvery.Background = Brushes.Transparent;
+                        this.Logo.Visibility = Visibility.Collapsed;
+                        this.Transition = PageTransitionType.Fade;
+                        this.PageTransitionControl.ShowPage((UserControl)targetPage);
+                    }
+                }
+            }
+            else
+            {
+                this.Dispatcher.BeginInvoke(new TryTransitionPageChangeDirectionHandler(TryTransition), new PageChangeDirection[] { direction });
+            }
+        }
+
+        private void NavigationEventHandler(PageChangeDirection direction)
+        {
+            // Try to make a transition.
+            this.TryTransition(direction);
         }
 
         /// <summary>
@@ -145,17 +190,6 @@ namespace WPFApplication
         /// <param name="e">Event arguments</param>
         public void GestureRegognized(object sender, KinectGestureEventArgs e)
         {
-            /*// User Generated Signal.
-            if (e.GestureType == KinectGestureType.UserGenerated)
-            {
-                this.Window_Every.Background = Brushes.Transparent;
-                this.Logo.Visibility = Visibility.Collapsed;
-                this.Transition = PageTransitionType.Fade;
-                var page = this.CreatePage((ApplicationPages)sender);
-                this.pageTransitionControl.ShowPage(page);
-                return;
-            }
-
             // Engage new skeleton.
             if (e.GestureType == KinectGestureType.WaveRightHand && backdata.TrackingID == -1)
             {
@@ -177,59 +211,32 @@ namespace WPFApplication
                 this.UpperBar.Background = (Brush)Application.Current.FindResource("KinectOffBarBrush");
             }
 
+            // Recognize transition gestures.
             else if (this.backdata.TrackingID != -1)
             {
                 // Process event modifications.
                 switch (e.GestureType)
                 {
                     case KinectGestureType.SwipeRightToLeft:
-                        if (this.backdata.PagesRight.ContainsKey(this.backdata.CurrentPage))
-                        {
-                            this.Window_Every.Background = Brushes.Transparent;
-                            this.Logo.Visibility = Visibility.Collapsed;
-                            this.Transition = PageTransitionType.SlideRight;
-                            UserControl page = this.CreatePage(this.backdata.PagesRight[this.backdata.CurrentPage]);
-                            this.pageTransitionControl.ShowPage(page);
-                        }
+                        this.TryTransition(PageChangeDirection.Right, PageTransitionType.SlideRight);
                         break;
 
                     case KinectGestureType.SwipeLeftToRight:
-                        if (this.backdata.PagesLeft.ContainsKey(this.backdata.CurrentPage))
-                        {
-                            this.Window_Every.Background = Brushes.Transparent;
-                            this.Logo.Visibility = Visibility.Collapsed;
-                            this.Transition = PageTransitionType.SlideLeft;
-                            UserControl page = this.CreatePage(this.backdata.PagesLeft[this.backdata.CurrentPage]);
-                            this.pageTransitionControl.ShowPage(page);
-                        }
+                        this.TryTransition(PageChangeDirection.Left, PageTransitionType.SlideLeft);
                         break;
 
                     case KinectGestureType.CircleLeftHand:
-                        if (this.backdata.PagesDown.ContainsKey(this.backdata.CurrentPage))
-                        {
-                            this.Window_Every.Background = Brushes.Transparent;
-                            this.Logo.Visibility = Visibility.Collapsed;
-                            this.Transition = PageTransitionType.SlideUp;
-                            UserControl page = this.CreatePage(this.backdata.PagesDown[this.backdata.CurrentPage]);
-                            this.pageTransitionControl.ShowPage(page);
-                        }
+                        this.TryTransition(PageChangeDirection.Down, PageTransitionType.SlideDown);
                         break;
 
                     case KinectGestureType.CircleRightHand:
-                        if (this.backdata.PagesUp.ContainsKey(this.backdata.CurrentPage))
-                        {
-                            this.Window_Every.Background = Brushes.Transparent;
-                            this.Logo.Visibility = Visibility.Collapsed;
-                            this.Transition = PageTransitionType.SlideDown;
-                            UserControl page = this.CreatePage(this.backdata.PagesUp[this.backdata.CurrentPage]);
-                            this.pageTransitionControl.ShowPage(page);
-                        }
+                        this.TryTransition(PageChangeDirection.Up, PageTransitionType.SlideUp);
                         break;
 
                     default:
                         break;
                 }
-            }*/
+            }
         }
 
         /// <summary>

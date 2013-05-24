@@ -110,6 +110,10 @@
       <Project>{66C3F1E6-C160-47B7-8C0C-B53A975226AD}</Project>
       <Name>GenericControlLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharedTypes\SharedTypes.csproj">
+      <Project>{aefd3bbd-4261-4c4f-ba8d-fb3668bb40be}</Project>
+      <Name>SharedTypes</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WpfPageTransitions\PageTransitions.csproj">
       <Project>{22A46D61-1D40-43A9-802C-B9D43DADD9EC}</Project>
       <Name>PageTransitions</Name>

@@ -78,7 +78,7 @@
 				<GenericControlLib:ButtonControl x:Name="NextButton" ButtonText="SEGUINTE" Visibility="Hidden" MouseLeftButtonDown="NextButton_MouseLeftButtonDown"/>
 				<GenericControlLib:ButtonControl x:Name="OkButton" ButtonText="CONFIRMAR" Visibility="Hidden" Panel.ZIndex="10" MouseLeftButtonDown="OkButton_MouseLeftButtonDown"/>
 			</Grid>
-			<PageTransitions:PageTransition Background="Transparent" x:Name="PageTransitionLayer" TransitionType="Fade" Grid.ColumnSpan="2" Margin="0" />
+			<PageTransitions:PageTransition Background="Transparent" x:Name="PageTransitionLayer" Grid.ColumnSpan="2" Margin="0" />
 		</Grid>
 	</Grid>
 </Window>

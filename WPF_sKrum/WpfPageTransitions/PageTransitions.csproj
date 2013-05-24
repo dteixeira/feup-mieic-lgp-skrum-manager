@@ -71,7 +71,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PageTransitionType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -94,6 +93,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharedTypes\SharedTypes.csproj">
+      <Project>{aefd3bbd-4261-4c4f-ba8d-fb3668bb40be}</Project>
+      <Name>SharedTypes</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
