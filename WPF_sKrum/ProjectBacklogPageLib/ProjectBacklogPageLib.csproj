@@ -69,6 +69,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Images\Thumbs.db" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -90,6 +91,13 @@
       <Project>{aefd3bbd-4261-4c4f-ba8d-fb3668bb40be}</Project>
       <Name>SharedTypes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\TaskBoardControlLib\TaskBoardControlLib.csproj">
+      <Project>{733e757f-308e-4039-947b-b6f867c07ffb}</Project>
+      <Name>TaskBoardControlLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

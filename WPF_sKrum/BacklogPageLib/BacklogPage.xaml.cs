@@ -72,7 +72,7 @@ namespace BacklogPageLib
         {
             try
             {
-                // Clears taskboard.
+                // Clears backlog.
                 this.Backlog.Items.Clear();
 
                 // Get current project if selected.
@@ -194,7 +194,7 @@ namespace BacklogPageLib
                 case PageChangeDirection.Left:
                     return new PageChange { Context = null, Page = ApplicationPages.MainPage };
                 case PageChangeDirection.Right:
-                    return null;
+                    return new PageChange { Context = null, Page = ApplicationPages.ProjectBacklogPage };
                 case PageChangeDirection.Up:
                     return null;
                 default:

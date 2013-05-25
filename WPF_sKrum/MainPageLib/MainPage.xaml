@@ -37,8 +37,8 @@
 			<RowDefinition Height="1*" />
 		</Grid.RowDefinitions>
 		<GenericControlLib:ButtonControl ButtonFontSize="40" ButtonText="BACKLOG" MouseLeftButtonDown="ButtonControl_MouseLeftButtonDown" />
-		<GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Column="2" ButtonText="SPRINT BACKLOG"/>
-		<GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Row="1" ButtonText="TASKBOARD"/>
-		<GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Row="1" Grid.Column="2" ButtonText="REUNIÕES" />
+		<GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Column="2" ButtonText="SPRINT BACKLOG" MouseLeftButtonDown="ButtonControl_MouseLeftButtonDown_1"/>
+		<GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Row="1" ButtonText="TASKBOARD" MouseLeftButtonDown="ButtonControl_MouseLeftButtonDown_2"/>
+		<GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Row="1" Grid.Column="2" ButtonText="REUNIÕES" MouseLeftButtonDown="ButtonControl_MouseLeftButtonDown_3" />
 	</Grid>
 </UserControl>

@@ -63,5 +63,23 @@ namespace MainPageLib
             PageChange page = new PageChange { Context = null, Page = ApplicationPages.BacklogPage };
             ApplicationController.Instance.ApplicationWindow.TryTransition(page);
         }
+
+        private void ButtonControl_MouseLeftButtonDown_1(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            PageChange page = new PageChange { Context = null, Page = ApplicationPages.ProjectBacklogPage };
+            ApplicationController.Instance.ApplicationWindow.TryTransition(page);
+        }
+
+        private void ButtonControl_MouseLeftButtonDown_2(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            PageChange page = new PageChange { Context = null, Page = ApplicationPages.TaskBoardPage };
+            ApplicationController.Instance.ApplicationWindow.TryTransition(page);
+        }
+
+        private void ButtonControl_MouseLeftButtonDown_3(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            PageChange page = new PageChange { Context = null, Page = ApplicationPages.MeetingPage };
+            ApplicationController.Instance.ApplicationWindow.TryTransition(page);
+        }
     }
 }
