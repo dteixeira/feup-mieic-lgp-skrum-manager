@@ -68,7 +68,7 @@
 					</Image>
 				</Grid>
 				<ScrollViewer x:Name="BacklogScroll" Margin="0" VerticalScrollBarVisibility="Hidden">
-					<ListView x:Name="Backlog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="False" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+					<ListView x:Name="Backlog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="True" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Drop="Backlog_Drop" >
 						<ListView.ItemContainerStyle>
 							<Style TargetType="{x:Type ListViewItem}">
 								<Setter Property="BorderThickness" Value="0"/>
@@ -105,7 +105,7 @@
 					</Image>
 				</Grid>
 				<ScrollViewer x:Name="SprintBacklogScroll" Margin="0" VerticalScrollBarVisibility="Hidden">
-					<ListView x:Name="SprintBacklog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="False" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+					<ListView x:Name="SprintBacklog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="True" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Drop="SprintBacklog_Drop" >
 						<ListView.ItemContainerStyle>
 							<Style TargetType="{x:Type ListViewItem}">
 								<Setter Property="BorderThickness" Value="0"/>

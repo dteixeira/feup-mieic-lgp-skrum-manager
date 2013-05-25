@@ -135,7 +135,7 @@ namespace TaskBoardControlLib
                     Math.Abs(diff.Y) > SystemParameters.MinimumVerticalDragDistance))
             {
                 startpoint = mousePos;
-                DataObject data = new DataObject("TaskControl", this);
+                DataObject data = new DataObject("StoryControl", this);
 
                 // Create a placeholder to drag.
                 _adorner = this.Clone();

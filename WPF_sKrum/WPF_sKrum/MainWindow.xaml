@@ -39,7 +39,7 @@
         </Style>
     </Window.Resources>
     <Grid x:Name="PagesStat" Margin="0" Background="{StaticResource BackgroundBrush}">
-        <Grid x:Name="WindowEvery" Background="#FF4EA6EA" Panel.ZIndex="1">
+        <Grid x:Name="WindowEvery" Background="{DynamicResource Gray4Brush}" Panel.ZIndex="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="10*" />
                 <RowDefinition Height="90*" />

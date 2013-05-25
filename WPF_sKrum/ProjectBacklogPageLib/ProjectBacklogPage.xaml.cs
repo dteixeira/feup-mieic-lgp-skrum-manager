@@ -2,6 +2,7 @@
 using ServiceLib.NotificationService;
 using SharedTypes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -34,6 +35,11 @@ namespace ProjectBacklogPageLib
         private DispatcherTimer countdownTimerScrollDown;
         private enum BacklogSelected {Backlog, SprintBacklog};
         private BacklogSelected currentBacklog;
+
+        private ObservableCollection<StoryControl> collection = new ObservableCollection<StoryControl>();
+        private ObservableCollection<StoryControl> collectionSprint = new ObservableCollection<StoryControl>();
+                
+                
 
         public ApplicationPages PageType { get; set; }
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
@@ -85,8 +91,7 @@ namespace ProjectBacklogPageLib
                 List<Story> storiesSprintBacklog = connection.GetAllStoriesInSprint(ApplicationController.Instance.CurrentProject.Sprints[0].SprintID);
                 connection.Close();
 
-                ObservableCollection<StoryControl> collection = new ObservableCollection<StoryControl>();
-                // Iterate all user stories in the sprint.
+                // Iterate all user stories in the backlog.
                 foreach (var story in storiesBacklog.Select((s, i) => new { Value = s, Index = i }))
                 {
                     // Create the story control.
@@ -108,8 +113,9 @@ namespace ProjectBacklogPageLib
 
                     collection.Add(storyControl);
                 }
-                
-                ObservableCollection<StoryControl> collectionSprint = new ObservableCollection<StoryControl>();
+                this.Backlog.ItemsSource = collection;
+
+                // Iterate all user stories in the sprint.
                 foreach (var story in storiesSprintBacklog.Select((s, i) => new { Value = s, Index = i }))
                 {
                     // Create the story control.
@@ -136,6 +142,31 @@ namespace ProjectBacklogPageLib
             catch (Exception e)
             {
                 System.Console.WriteLine(e.Message);
+            }
+            this.Sort();
+        }
+
+        private void Sort()
+        {
+            ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(this.Backlog.ItemsSource);
+            StorySorter sorter = new StorySorter();
+            view.CustomSort = sorter;
+            ListCollectionView sprintview = (ListCollectionView)CollectionViewSource.GetDefaultView(this.SprintBacklog.ItemsSource);
+            sprintview.CustomSort = sorter;
+            this.Backlog.Items.Refresh();
+            this.SprintBacklog.Items.Refresh();
+        }
+
+        public class StorySorter : IComparer
+        {
+            public int Compare(object x, object y)
+            {
+                if (((StoryControl)x).StoryNumber > ((StoryControl)y).StoryNumber)
+                    return 1;
+                if (((StoryControl)x).StoryNumber < ((StoryControl)y).StoryNumber)
+                    return -1;
+                else
+                    return 0;
             }
         }
 
@@ -273,6 +304,58 @@ namespace ProjectBacklogPageLib
             catch (Exception e)
             {
                 System.Console.WriteLine(e.Message);
+            }
+        }
+
+        private void Backlog_Drop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                var dataObj = e.Data as DataObject;
+                StoryControl dragged = dataObj.GetData("StoryControl") as StoryControl;
+                
+                //check if it comes from sprint, if not ignore
+                if (collectionSprint.Contains(dragged))
+                {
+                    // Launch thread to update the project.
+                    //System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.UpdateTaskInService));
+                    //thread.Start(new object[] { this.State, dragged.Task });
+
+                    // Update visualization.
+                    collectionSprint.Remove(dragged);
+                    collection.Add(dragged);
+                }
+                e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
+            }
+        }
+
+        private void SprintBacklog_Drop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                var dataObj = e.Data as DataObject;
+                StoryControl dragged = dataObj.GetData("StoryControl") as StoryControl;
+
+                //check if it comes from sprint, if not ignore
+                if (collection.Contains(dragged))
+                {
+                    // Launch thread to update the project.
+                    //System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.UpdateTaskInService));
+                    //thread.Start(new object[] { this.State, dragged.Task });
+
+                    // Update visualization.
+                    collection.Remove(dragged);
+                    collectionSprint.Add(dragged);
+                }
+                e.Handled = true;
+            }
+            catch (Exception ex)
+            {
+                System.Console.WriteLine(ex.Message);
             }
         }
     }
