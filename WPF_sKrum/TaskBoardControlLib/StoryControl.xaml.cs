@@ -31,6 +31,7 @@ namespace TaskBoardControlLib
         private string storyName;
         private string storyPriority;
         private string storyEstimation;
+        private int storyNumber;
 
 		public StoryControl()
 		{
@@ -60,6 +61,12 @@ namespace TaskBoardControlLib
         {
             get { return this.storyEstimation; }
             set { this.storyEstimation = value; }
+        }
+
+        public int StoryNumber
+        {
+            get { return this.storyNumber; }
+            set { this.storyNumber = value; }
         }
 
         public bool IsDraggable

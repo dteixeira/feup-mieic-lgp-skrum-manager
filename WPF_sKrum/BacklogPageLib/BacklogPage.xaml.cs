@@ -2,7 +2,10 @@
 using ServiceLib.NotificationService;
 using SharedTypes;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -70,8 +73,7 @@ namespace BacklogPageLib
             try
             {
                 // Clears taskboard.
-                this.Backlog.RowDefinitions.Clear();
-                this.Backlog.Children.Clear();
+                this.Backlog.Items.Clear();
 
                 // Get current project if selected.
                 Project project = ApplicationController.Instance.CurrentProject;
@@ -80,14 +82,10 @@ namespace BacklogPageLib
                 List<Story> stories = connection.GetAllStoriesInProject(project.ProjectID);
                 connection.Close();
 
+                ObservableCollection<StoryControl> collection = new ObservableCollection<StoryControl>();
                 // Iterate all user stories in the sprint.
                 foreach (var story in  stories.Select((s, i) => new { Value = s, Index = i }))
                 {
-                    // Create a new grid line to old the story information.
-                    RowDefinition rowdef = new RowDefinition();
-                    rowdef.Height = GridLength.Auto;
-                    Backlog.RowDefinitions.Add(rowdef);
-
                     // Create the story control.
                     StoryControl storyControl = new StoryControl
                     {
@@ -95,6 +93,7 @@ namespace BacklogPageLib
                         StoryName = "US" + story.Value.Number.ToString("D3"),
                         StoryPriority = story.Value.Priority.ToString()[0].ToString(),
                         StoryEstimation = "",
+                        StoryNumber = story.Value.Number,
                         Story = story.Value,
                         IsDraggable = true
                     };
@@ -104,12 +103,35 @@ namespace BacklogPageLib
                     storyControl.SetValue(Grid.ColumnProperty, 0);
                     storyControl.SetValue(Grid.RowProperty, story.Index);
 
-                    this.Backlog.Children.Add(storyControl);
+                    collection.Add(storyControl);
                 }
+                this.Backlog.ItemsSource = collection;
             }
             catch (Exception e)
             {
                 System.Console.WriteLine(e.Message);
+            }
+            this.Sort();
+        }
+
+        private void Sort()
+        {
+            ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(this.Backlog.ItemsSource);
+            StorySorter sorter = new StorySorter();
+            view.CustomSort = sorter;
+            this.Backlog.Items.Refresh();
+        }
+
+        public class StorySorter : IComparer
+        {
+            public int Compare(object x, object y)
+            {
+                if (((StoryControl)x).StoryNumber > ((StoryControl)y).StoryNumber)
+                    return 1;
+                if (((StoryControl)x).StoryNumber < ((StoryControl)y).StoryNumber)
+                    return -1;
+                else
+                    return 0;
             }
         }
 
