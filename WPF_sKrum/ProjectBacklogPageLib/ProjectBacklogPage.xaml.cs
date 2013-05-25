@@ -38,8 +38,6 @@ namespace ProjectBacklogPageLib
 
         private ObservableCollection<StoryControl> collection = new ObservableCollection<StoryControl>();
         private ObservableCollection<StoryControl> collectionSprint = new ObservableCollection<StoryControl>();
-                
-                
 
         public ApplicationPages PageType { get; set; }
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
@@ -88,6 +86,7 @@ namespace ProjectBacklogPageLib
 
                 ServiceLib.DataService.DataServiceClient connection = new ServiceLib.DataService.DataServiceClient();
                 List<Story> storiesBacklog = connection.GetAllStoriesWithoutSprintInProject(project.ProjectID);
+                //TODO change to get current sprint
                 List<Story> storiesSprintBacklog = connection.GetAllStoriesInSprint(ApplicationController.Instance.CurrentProject.Sprints[0].SprintID);
                 connection.Close();
 
@@ -318,8 +317,8 @@ namespace ProjectBacklogPageLib
                 if (collectionSprint.Contains(dragged))
                 {
                     // Launch thread to update the project.
-                    //System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.UpdateTaskInService));
-                    //thread.Start(new object[] { this.State, dragged.Task });
+                    //System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.UpdateStoryInService));
+                    //thread.Start(new object[] { dragged.Story });
 
                     // Update visualization.
                     collectionSprint.Remove(dragged);
@@ -344,8 +343,8 @@ namespace ProjectBacklogPageLib
                 if (collection.Contains(dragged))
                 {
                     // Launch thread to update the project.
-                    //System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.UpdateTaskInService));
-                    //thread.Start(new object[] { this.State, dragged.Task });
+                    //System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.AddStoryToSprintInService));
+                    //thread.Start(new object[] { dragged.Story });
 
                     // Update visualization.
                     collection.Remove(dragged);
@@ -357,6 +356,16 @@ namespace ProjectBacklogPageLib
             {
                 System.Console.WriteLine(ex.Message);
             }
+        }
+
+        public void AddStoryToSprintInService(object info)
+        {
+            //TODO
+        }
+        
+        public void UpdateStoryInService(object info)
+        {
+            //TODO
         }
     }
 }
