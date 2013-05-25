@@ -20,7 +20,7 @@ namespace MainPageLib
             System.Collections.Generic.Dictionary<PageChangeDirection, string> directions = new System.Collections.Generic.Dictionary<PageChangeDirection, string>();
             directions[PageChangeDirection.Up] = null;
             directions[PageChangeDirection.Down] = null;
-            directions[PageChangeDirection.Left] = "AJUSTES DO PROJECTO";
+            directions[PageChangeDirection.Left] = "AJUSTES DE PROJECTO";
             directions[PageChangeDirection.Right] = "TASKBOARD";
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
         }

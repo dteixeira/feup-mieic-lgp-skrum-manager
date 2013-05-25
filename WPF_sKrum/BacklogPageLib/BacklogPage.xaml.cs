@@ -95,7 +95,8 @@ namespace BacklogPageLib
                         StoryName = "US" + story.Value.Number.ToString("D3"),
                         StoryPriority = story.Value.Priority.ToString()[0].ToString(),
                         StoryEstimation = "",
-                        Story = story.Value
+                        Story = story.Value,
+                        IsDraggable = true
                     };
                     storyControl.Width = Double.NaN;
                     storyControl.Height = Double.NaN;

@@ -27,6 +27,7 @@ namespace TaskBoardControlLib
         private string AdornerLayer = "dragdropadornerLayer";
         private Canvas _adornerLayer;
         private TextTrimming taskTextTrimming = TextTrimming.None;
+        
         private string taskDescription;
         private TasksState state;
         private int usId;
@@ -73,7 +74,7 @@ namespace TaskBoardControlLib
                 started_drag = true;
 
                 Visual visual = e.OriginalSource as Visual;
-                Window _topWindow = (Window)FindAncestor(typeof(Window), visual);
+                Window _topWindow = (Window) SharedTypes.Utilities.FindAncestor(typeof(Window), visual);
                 _adornerLayer = (Canvas)LogicalTreeHelper.FindLogicalNode(_topWindow, AdornerLayer);
             }
             catch (Exception exc)
@@ -129,7 +130,7 @@ namespace TaskBoardControlLib
         {
             base.OnGiveFeedback(e);
 
-            Point mousePos = GetMousePositionWin32();
+            Point mousePos = SharedTypes.Utilities.GetMousePositionWin32();
 
             Canvas.SetLeft(_adorner, mousePos.X);
             Canvas.SetTop(_adorner, mousePos.Y);
@@ -145,42 +146,5 @@ namespace TaskBoardControlLib
             p.Height = this.Height;
             return p;
         }
-
-        #region Utilities
-
-        public static FrameworkElement FindAncestor(Type ancestorType, Visual visual)
-        {
-            while (visual != null && !ancestorType.IsInstanceOfType(visual))
-            {
-                visual = (Visual)VisualTreeHelper.GetParent(visual);
-            }
-            return visual as FrameworkElement;
-        }
-
-        public static bool IsMovementBigEnough(Point initialMousePosition, Point currentPosition)
-        {
-            return (Math.Abs(currentPosition.X - initialMousePosition.X) >= SystemParameters.MinimumHorizontalDragDistance ||
-                 Math.Abs(currentPosition.Y - initialMousePosition.Y) >= SystemParameters.MinimumVerticalDragDistance);
-        }
-
-        [DllImport("user32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        internal static extern bool GetCursorPos(ref Win32Point pt);
-
-        [StructLayout(LayoutKind.Sequential)]
-        internal struct Win32Point
-        {
-            public Int32 X;
-            public Int32 Y;
-        };
-
-        public static Point GetMousePositionWin32()
-        {
-            Win32Point w32Mouse = new Win32Point();
-            GetCursorPos(ref w32Mouse);
-            return new Point(w32Mouse.X, w32Mouse.Y);
-        }
-
-        #endregion Utilities
 	}
 }

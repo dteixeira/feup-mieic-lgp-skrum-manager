@@ -62,8 +62,8 @@ namespace ProjectTeamManagementPageLib
         {
             System.Collections.Generic.Dictionary<PageChangeDirection, string> directions = new System.Collections.Generic.Dictionary<PageChangeDirection, string>();
             directions[PageChangeDirection.Up] = null;
-            directions[PageChangeDirection.Down] = "CONFIGURAÇÃO PROJECTO";
-            directions[PageChangeDirection.Left] = "ADMINISTRAÇÃO PROJECTOS";
+            directions[PageChangeDirection.Down] = "AJUSTES DE PROJECTO";
+            directions[PageChangeDirection.Left] = "GESTÃO DE PROJECTOS";
             directions[PageChangeDirection.Right] = "MENU INICIAL";
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
         }

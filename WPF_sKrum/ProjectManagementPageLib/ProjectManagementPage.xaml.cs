@@ -61,10 +61,10 @@ namespace ProjectManagementPageLib
         public void SetupNavigation()
         {
             System.Collections.Generic.Dictionary<PageChangeDirection, string> directions = new System.Collections.Generic.Dictionary<PageChangeDirection, string>();
-            directions[PageChangeDirection.Up] = "ADMINISTRAÇÃO UTILIZADORES";
+            directions[PageChangeDirection.Up] = "GESTÃO DE UTILIZADORES";
             directions[PageChangeDirection.Down] = null;
             directions[PageChangeDirection.Left] = null;
-            directions[PageChangeDirection.Right] = "CONFIGURAÇÃO PROJECTO";
+            directions[PageChangeDirection.Right] = "AJUSTES DE PROJECTO";
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
         }
 

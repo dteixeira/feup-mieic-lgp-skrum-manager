@@ -62,9 +62,9 @@ namespace PeopleManagementPageLib
         {
             System.Collections.Generic.Dictionary<PageChangeDirection, string> directions = new System.Collections.Generic.Dictionary<PageChangeDirection, string>();
             directions[PageChangeDirection.Up] = null;
-            directions[PageChangeDirection.Down] = "ADMINISTRAÇÃO UTILIZADORES";
+            directions[PageChangeDirection.Down] = "GESTÃO DE PROJECTOS";
             directions[PageChangeDirection.Left] = null;
-            directions[PageChangeDirection.Right] = "CONFIGURAÇÃO PROJECTO";
+            directions[PageChangeDirection.Right] = "AJUSTES DE PROJECTO";
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
         }
 

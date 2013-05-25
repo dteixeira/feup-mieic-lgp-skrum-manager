@@ -53,6 +53,7 @@
     <Compile Include="ITargetPage.cs" />
     <Compile Include="PageChange.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Kinect\Kinect.csproj">
