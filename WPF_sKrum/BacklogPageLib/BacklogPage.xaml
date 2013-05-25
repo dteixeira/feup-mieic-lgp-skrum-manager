@@ -61,7 +61,7 @@
         		<ColumnDefinition Width="10*"/>
         		<ColumnDefinition Width="90*"/>
         	</Grid.ColumnDefinitions>
-        	<ScrollViewer x:Name="BacklogScroll" Margin="20,0" VerticalScrollBarVisibility="Hidden" Grid.Column="1">
+        	<ScrollViewer x:Name="BacklogScroll" Margin="20,0" VerticalScrollBarVisibility="Hidden" Grid.Column="1" Background="Transparent">
                 <ListView x:Name="Backlog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="False" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">

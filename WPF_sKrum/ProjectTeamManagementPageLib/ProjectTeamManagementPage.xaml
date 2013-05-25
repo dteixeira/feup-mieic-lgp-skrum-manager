@@ -4,8 +4,51 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
+             d:DesignHeight="600" d:DesignWidth="800"
+             Width="auto"
+             Height="auto">
+
+    <UserControl.Resources>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#E2E2E2" />
+        <SolidColorBrush x:Key="KinectOnBarBrush" Color="#242424" />
+        <SolidColorBrush x:Key="KinectOffBarBrush" Color="#555555" />
+        <SolidColorBrush x:Key="MustPriorityBrush" Color="#242424" />
+        <SolidColorBrush x:Key="ShouldPriorityBrush" Color="#646464" />
+        <SolidColorBrush x:Key="CouldPriorityBrush" Color="#959595" />
+        <SolidColorBrush x:Key="WouldPriorityBrush" Color="#DADADA" />
+        <SolidColorBrush x:Key="Gray1Brush" Color="#E2E2E2" />
+        <SolidColorBrush x:Key="Gray2Brush" Color="#DADADA" />
+        <SolidColorBrush x:Key="Gray3Brush" Color="#C3C3C3" />
+        <SolidColorBrush x:Key="Gray4Brush" Color="#959595" />
+        <SolidColorBrush x:Key="Gray5Brush" Color="#646464" />
+        <SolidColorBrush x:Key="Gray6Brush" Color="#555555" />
+        <SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
+    </UserControl.Resources>
+    <Grid x:Name="GoodArea" Margin="0" Background="{StaticResource BackgroundBrush}">
+    	<Grid.ColumnDefinitions>
+    		<ColumnDefinition Width="90*"/>
+    		<ColumnDefinition Width="10*"/>
+    	</Grid.ColumnDefinitions>
+    	<Grid x:Name="AllArea" Margin="0">
+    		<Grid.RowDefinitions>
+    			<RowDefinition Height="80"/>
+    			<RowDefinition/>
+    		</Grid.RowDefinitions>
+            <Label Content="Team" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" FontFamily="Source Sans Pro" FontSize="21.333"/>
+    	</Grid>
+    	<Grid x:Name="RightArea" Grid.Column="1" Margin="0">
+    		<Grid.RowDefinitions>
+    			<RowDefinition/>
+    			<RowDefinition Height="Auto"/>
+    		</Grid.RowDefinitions>
+    		<Grid x:Name="ScrumMasterArea" Margin="0" Grid.Row="1">
+    			<Grid.RowDefinitions>
+    				<RowDefinition Height="Auto"/>
+    				<RowDefinition Height="Auto"/>
+    			</Grid.RowDefinitions>
+    			<TextBlock Text="Scrum Master" Margin="0" FontFamily="Source Sans Pro" FontSize="18.667" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" Width="103" TextWrapping="Wrap"/>
+    		</Grid>
+    	</Grid>
+        
     </Grid>
 </UserControl>

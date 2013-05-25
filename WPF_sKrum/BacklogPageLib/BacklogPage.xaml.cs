@@ -33,6 +33,8 @@ namespace BacklogPageLib
         private DispatcherTimer countdownTimerScrollUp;
         private DispatcherTimer countdownTimerScrollDown;
 
+        private ObservableCollection<StoryControl> collection = new ObservableCollection<StoryControl>();
+        
         public ApplicationPages PageType { get; set; }
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
 
@@ -74,6 +76,7 @@ namespace BacklogPageLib
             {
                 // Clears backlog.
                 this.Backlog.Items.Clear();
+                collection.Clear();
 
                 // Get current project if selected.
                 Project project = ApplicationController.Instance.CurrentProject;
@@ -82,7 +85,6 @@ namespace BacklogPageLib
                 List<Story> stories = connection.GetAllStoriesInProject(project.ProjectID);
                 connection.Close();
 
-                ObservableCollection<StoryControl> collection = new ObservableCollection<StoryControl>();
                 // Iterate all user stories in the sprint.
                 foreach (var story in  stories.Select((s, i) => new { Value = s, Index = i }))
                 {

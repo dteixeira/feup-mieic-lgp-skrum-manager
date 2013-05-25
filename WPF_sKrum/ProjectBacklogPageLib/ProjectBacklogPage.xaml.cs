@@ -78,8 +78,11 @@ namespace ProjectBacklogPageLib
         {
             try
             {
-                // Clears taskboard.
+                // Clears backlog.
                 this.Backlog.Items.Clear();
+                this.SprintBacklog.Items.Clear();
+                collection.Clear();
+                collectionSprint.Clear();
 
                 // Get current project if selected.
                 Project project = ApplicationController.Instance.CurrentProject;
