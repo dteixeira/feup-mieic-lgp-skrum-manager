@@ -10,6 +10,14 @@
              Height="auto">
 
     <UserControl.Resources>
+        <Style x:Key="RectangleStyle1" TargetType="{x:Type Rectangle}">
+            <Setter Property="Fill" Value="{DynamicResource Gray4Brush}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Fill" Value="{DynamicResource Gray5Brush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <SolidColorBrush x:Key="BackgroundBrush" Color="#E2E2E2" />
         <SolidColorBrush x:Key="KinectOnBarBrush" Color="#242424" />
         <SolidColorBrush x:Key="KinectOffBarBrush" Color="#555555" />
@@ -25,43 +33,74 @@
         <SolidColorBrush x:Key="Gray6Brush" Color="#555555" />
         <SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
     </UserControl.Resources>
-	<Grid x:Name="GoodArea" Margin="0" Background="{StaticResource BackgroundBrush}">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="85*"/>
-			<ColumnDefinition Width="15*"/>
-		</Grid.ColumnDefinitions>
-		<Grid x:Name="AllArea" Margin="0">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="80"/>
-				<RowDefinition/>
-			</Grid.RowDefinitions>
-			<Label Content="Team" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" FontFamily="Source Sans Pro" FontSize="21.333"/>
-            <ScrollViewer x:Name="TeamScroll" Margin="0,0" VerticalScrollBarVisibility="Hidden" Grid.Row="1" Background="Transparent">
-                <ListView x:Name="Team" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Center" Height="Auto" AllowDrop="False" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="BorderThickness" Value="0"/>
-                            <Setter Property="Margin" Value="0,3,0,3"/>
-                            <Setter Property="Padding" Value="0"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                </ListView>
-            </ScrollViewer>
-		</Grid>
-		<Grid x:Name="RightArea" Grid.Column="1" Margin="0">
-			<Grid.RowDefinitions>
-				<RowDefinition/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
-			<Grid x:Name="ScrumMasterArea" Margin="0" Grid.Row="1">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-				</Grid.RowDefinitions>
-				<TextBlock Margin="0" FontFamily="Source Sans Pro" FontSize="18.667" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="Scrum Master"/></TextBlock>
-				<GenericControlLib:UserButtonControl Height="Auto" Width="Auto" Margin="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
-			</Grid>
-		</Grid>
-        
-	</Grid>
+    <Grid x:Name="GoodArea" Margin="0" Background="{StaticResource BackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="85*"/>
+            <ColumnDefinition Width="15*"/>
+        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="80"/>
+            </Grid.ColumnDefinitions>
+            
+            <Grid x:Name="AllArea" Margin="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Content="Team" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" FontFamily="Source Sans Pro" FontSize="21.333"/>
+                <ScrollViewer x:Name="TeamScroll" Margin="0,0" VerticalScrollBarVisibility="Hidden" Grid.Row="1" Background="Transparent">
+                    <ListView x:Name="Team" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Height="Auto" AllowDrop="False" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="6" />
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="BorderThickness" Value="0"/>
+                                <Setter Property="Margin" Value="0,3,0,3"/>
+                                <Setter Property="Padding" Value="0"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </ScrollViewer>
+            </Grid>
+            <Grid x:Name="ScrollButtons" Grid.Column="1" Margin="0" Background="{StaticResource Gray4Brush}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50*" />
+                    <RowDefinition Height="50*" />
+                </Grid.RowDefinitions>
+                <Rectangle x:Name="ScrollUpButton" Margin="0" StrokeThickness="2" MouseEnter="ScrollUp_Start" MouseLeave="ScrollUp_Cancel" Style="{DynamicResource RectangleStyle1}"/>
+                <Rectangle x:Name="ScrollDownButton" Style="{DynamicResource RectangleStyle1}" Margin="0" Grid.Row="1" StrokeThickness="2" MouseEnter="ScrollDown_Start" MouseLeave="ScrollDown_Cancel"/>
+                <Image Grid.Row="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False"/>
+                <Image Grid.Row="1" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False" Margin="0,100" RenderTransformOrigin="0.5,0.5">
+                    <Image.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-180"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Image.RenderTransform>
+                </Image>
+            </Grid>
+        </Grid>
+        <Grid x:Name="RightArea" Grid.Column="1" Margin="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="ScrumMasterArea" Margin="0" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <TextBlock Margin="0" FontFamily="Source Sans Pro" FontSize="18.667" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="Scrum Master"/></TextBlock>
+                <GenericControlLib:UserButtonControl Height="Auto" Width="Auto" Margin="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsDraggable="True"/>
+            </Grid>
+        </Grid>
+    </Grid>
 </UserControl>
