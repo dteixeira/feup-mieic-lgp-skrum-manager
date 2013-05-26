@@ -1,11 +1,59 @@
-﻿<UserControl x:Class="ProjectConfigurationPageLib.ProjectConfigurationPage"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:GenericControlLib="clr-namespace:GenericControlLib;assembly=GenericControlLib" x:Class="ProjectConfigurationPageLib.ProjectConfigurationPage" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
+             d:DesignHeight="600" d:DesignWidth="800" Background="{DynamicResource BackgroundBrush}">
+    <Grid x:Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="60*"/>
+            <ColumnDefinition Width="40*"/>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="StatsGrid" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <GenericControlLib:ToogleButtonControl x:Name="BurnDownButton" Grid.Row="1" Margin="0,40,40,40" ButtonText="Visualizar Burndown Chart" ButtonFontSize="30"/>
+            <GenericControlLib:ToogleButtonControl x:Name="BurnUpButton" Grid.Row="2" Margin="0,40,40,40" ButtonText="Visualizar Burnup Chart" ButtonFontSize="30"/>
+            <GenericControlLib:ToogleButtonControl x:Name="TaskButton" Grid.Row="3" Margin="0,40,40,40" ButtonText="Visualizar Percentagem Tarefas Feitas" ButtonFontSize="30"/>
+            <TextBlock x:Name="SectionTextBlock" Text="GRÁFICOS/DADOS" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{DynamicResource Gray7Brush}" FontFamily="Source Sans Pro" FontSize="26.667"/>
+        </Grid>
+        <Grid x:Name="ConfGrid">
+            <Grid.RowDefinitions>
+            	<RowDefinition/>
+            	<RowDefinition/>
+            	<RowDefinition/>
+            </Grid.RowDefinitions>
+        	<Grid x:Name="ThirdOptionArea" Grid.Row="2">
+        		<Grid.RowDefinitions>
+        			<RowDefinition Height="Auto"/>
+        			<RowDefinition/>
+        		</Grid.RowDefinitions>
+        		<GenericControlLib:NumericSpinnerControl x:Name="NumIntSpinner" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0"/>
+        		<TextBlock x:Name="NumTextBlock" Text="NÚMERO DE INTERACÇÕES PARA ESTIMAR VELOCIDADE" FontSize="26.667" FontFamily="Source Sans Pro" TextWrapping="Wrap" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{DynamicResource Gray7Brush}"/>
+        	</Grid>
+        	<Grid x:Name="SecondOptionArea" Grid.Row="1">
+        		<Grid.RowDefinitions>
+        			<RowDefinition Height="Auto"/>
+        			<RowDefinition/>
+        		</Grid.RowDefinitions>
+        		<GenericControlLib:NumericSpinnerControl x:Name="LimAlertSpinner" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0"/>
+        		<TextBlock x:Name="LimTextBlock" Text="LIMITE DE RECEPÇÃO DE ALERTAS" FontSize="26.667" FontFamily="Source Sans Pro" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{DynamicResource Gray7Brush}"/>
+        	</Grid>
+        	<Grid x:Name="FirstOptionArea">
+        		<Grid.RowDefinitions>
+        			<RowDefinition Height="Auto"/>
+        			<RowDefinition/>
+        		</Grid.RowDefinitions>
+        		<GenericControlLib:NumericSpinnerControl x:Name="DurSpinner" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0"/>
+        		<TextBlock x:Name="DurTextBlock" Text="DURAÇÃO DO SPRINT (SEMANAS)" FontFamily="Source Sans Pro" FontSize="26.667" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{DynamicResource Gray7Brush}"/>
+        	</Grid>
+        </Grid>
+
     </Grid>
 </UserControl>

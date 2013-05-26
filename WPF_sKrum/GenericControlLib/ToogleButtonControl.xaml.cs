@@ -20,12 +20,13 @@ namespace GenericControlLib
 	{
         private bool selected = false;
         private int buttonFontSize = 50;
-        private string buttonText = "BUTTON";
+        private string buttonText = "TOOGLEBUTTON";
 
         public ToogleButtonControl()
 		{
 			this.InitializeComponent();
             this.DataContext = this;
+            this.UpdateText();
 		}
 
         public int ButtonFontSize
@@ -56,16 +57,18 @@ namespace GenericControlLib
                     this.OuterBorder.Background = new SolidColorBrush(Color.FromRgb(0x24, 0x24, 0x24));
                     this.TextValue.Foreground = new SolidColorBrush(Color.FromRgb(0xE2, 0xE2, 0xE2));
                 }
+                //Force change on text
+                this.UpdateText();
             }
         }
 
-        private void OuterBorder_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        private void ToogleButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             this.OuterBorder.Background = new SolidColorBrush(Color.FromRgb(0x64, 0x64, 0x64));
             this.TextValue.Foreground = new SolidColorBrush(Color.FromRgb(0xE2, 0xE2, 0xE2));
         }
 
-        private void OuterBorder_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        private void ToogleButton_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
             if (this.selected)
             {
@@ -77,6 +80,21 @@ namespace GenericControlLib
                 this.OuterBorder.Background = new SolidColorBrush(Color.FromRgb(0x24, 0x24, 0x24));
                 this.TextValue.Foreground = new SolidColorBrush(Color.FromRgb(0xE2, 0xE2, 0xE2));
             }
+        }
+
+        private void ToogleButton_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            selected = !selected;
+            //Force change on text
+            this.UpdateText();
+        }
+
+        private void UpdateText()
+        {
+            if (selected)
+                this.StateValue.Text = "Activado";
+            else
+                this.StateValue.Text = "Desactivado";
         }
 	}
 }

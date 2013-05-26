@@ -1,4 +1,5 @@
-﻿using ServiceLib.NotificationService;
+﻿using ServiceLib.DataService;
+using ServiceLib.NotificationService;
 using SharedTypes;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,7 @@ namespace ProjectConfigurationPageLib
     /// <summary>
     /// Interaction logic for ProjectConfigurationPage.xaml
     /// </summary>
-    public partial class ProjectConfigurationPage : UserControl,ITargetPage
+    public partial class ProjectConfigurationPage : UserControl, ITargetPage
     {
         public ApplicationPages PageType { get; set; }
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
@@ -39,6 +40,12 @@ namespace ProjectConfigurationPageLib
         private void PopulateProjectConfiguration()
         {
             //TODO
+            // Get current project if selected.
+            Project project = ApplicationController.Instance.CurrentProject;
+            this.DurSpinner.SpinnerValue = project.SprintDuration;
+            this.LimAlertSpinner.SpinnerValue = project.AlertLimit;
+            this.NumIntSpinner.SpinnerValue = project.Speed;
+
         }
 
         public PageChange PageChangeTarget(PageChangeDirection direction)
@@ -71,7 +78,35 @@ namespace ProjectConfigurationPageLib
         public void UnloadPage()
         {
             // Unregister for notifications.
+
+            // Update project data using web service
+            // Launch thread to update the project.
+            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.UpdateProjConfInService));
+            thread.Start(new object[] { this.DurSpinner.SpinnerValue, this.LimAlertSpinner.SpinnerValue, this.NumIntSpinner.SpinnerValue });
+
             ApplicationController.Instance.DataChangedEvent -= this.DataChangeDelegate;
+        }
+
+        private void UpdateProjConfInService(object obj)
+        {
+            try
+            {
+                //Set Project with the new data
+                Project project = ApplicationController.Instance.CurrentProject;
+                object[] param = obj as object[];
+                project.SprintDuration = Convert.ToInt32(param[0]);
+                project.AlertLimit = Convert.ToInt32(param[1]);
+                project.Speed = Convert.ToInt32(param[2]);
+                //Update data using web service
+                ServiceLib.DataService.DataServiceClient client = new ServiceLib.DataService.DataServiceClient();
+                SharedTypes.ApplicationController.Instance.IgnoreNextProjectUpdate = true;
+                client.UpdateProject(project);
+                client.Close();
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+            }
         }
 
 

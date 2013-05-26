@@ -34,8 +34,16 @@
 			</Style.Triggers>
 		</Style>
 	</UserControl.Resources>
-	<Grid x:Name="LayoutRoot">
-		<Border x:Name="OuterBorder" ClipToBounds="True" BorderThickness="1" Style="{DynamicResource BorderStyle}" MouseEnter="OuterBorder_MouseEnter" MouseLeave="OuterBorder_MouseLeave"/>
-		<TextBlock x:Name="TextValue" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="0" IsHitTestVisible="False"/>
+    <Grid x:Name="LayoutRoot">
+        <Rectangle Width="auto" Height="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Transparent"  MouseEnter="ToogleButton_MouseEnter" MouseLeave="ToogleButton_MouseLeave" MouseLeftButtonDown="ToogleButton_MouseLeftButtonDown" />
+        <Border x:Name="OuterBorder" ClipToBounds="True" BorderThickness="1" Style="{DynamicResource BorderStyle}" IsHitTestVisible="False"/>
+        <Grid x:Name="InnerArea">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="StateValue" Grid.Row="0" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding StateText}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="5" IsHitTestVisible="False"/>
+            <TextBlock x:Name="TextValue" Grid.Row="1" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="5" IsHitTestVisible="False"/>
+        </Grid>
 	</Grid>
 </UserControl>
