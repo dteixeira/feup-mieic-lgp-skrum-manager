@@ -37,7 +37,7 @@
 			</Grid.RowDefinitions>
 			<Label Content="Team" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" FontFamily="Source Sans Pro" FontSize="21.333"/>
             <ScrollViewer x:Name="TeamScroll" Margin="0,0" VerticalScrollBarVisibility="Hidden" Grid.Row="1" Background="Transparent">
-                <ListView x:Name="Team" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="False" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
+                <ListView x:Name="Team" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Center" Height="Auto" AllowDrop="False" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
                             <Setter Property="BorderThickness" Value="0"/>

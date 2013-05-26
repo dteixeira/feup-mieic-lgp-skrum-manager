@@ -44,14 +44,13 @@ namespace ProjectTeamManagementPageLib
 
         private void PopulateProjectTeamManagementPage()
         {
-            //TODO
             try
             {
-                // Clears backlog.
+                // Clears team.
                 this.Team.Items.Clear();
                 teamCollection.Clear();
 
-                // Get current project if selected.
+                // Get team.
                 Project project = ApplicationController.Instance.CurrentProject;
 
                 ServiceLib.DataService.DataServiceClient connection = new ServiceLib.DataService.DataServiceClient();

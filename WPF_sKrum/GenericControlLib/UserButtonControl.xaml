@@ -10,12 +10,12 @@
             <Setter Property="Background" Value="{DynamicResource Gray7Brush}"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource Gray1Brush}"/>
+                    <Setter Property="Background" Value="{DynamicResource Gray4Brush}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
         <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{DynamicResource Gray1Brush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Gray4Brush}"/>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
                     <Setter Property="Foreground" Value="{DynamicResource Gray7Brush}" />
@@ -36,8 +36,8 @@
                 </Border.Effect>
             </Border>
         </Border>
-        <TextBlock TextAlignment="Left" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="5" IsHitTestVisible="False" Grid.Row="1"/>
-        <Image Panel.ZIndex="9999" Margin="5" HorizontalAlignment="Center" Source="{Binding ImageSource}" VerticalAlignment="Center" IsHitTestVisible="False" />
+        <TextBlock TextAlignment="Left" TextWrapping="Wrap" Text="{Binding UserName}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="5" IsHitTestVisible="False" Grid.Row="1"/>
+        <Image Panel.ZIndex="9999" Width="auto" Height="auto" Margin="5" HorizontalAlignment="Center" Source="{Binding UserPhoto}" VerticalAlignment="Center" IsHitTestVisible="False" />
     </Grid>
 
 </UserControl>

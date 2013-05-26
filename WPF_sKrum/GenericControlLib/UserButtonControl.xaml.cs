@@ -19,8 +19,8 @@ namespace GenericControlLib
     public partial class UserButtonControl : UserControl
     {
         private int buttonFontSize = 20;
-        private string buttonText = "Projecto";
-        private string imageSource = @"Images\utilizador.png";
+        private string userName = "Utilizador";
+        private string userPhoto = @"http://178.175.139.37/images/members/21.jpg";
 
         public UserButtonControl()
         {
@@ -34,16 +34,18 @@ namespace GenericControlLib
             set { this.buttonFontSize = value; }
         }
 
-        public string ButtonText
+        public string UserName
         {
-            get { return this.buttonText; }
-            set { this.buttonText = value; }
+            get { return this.userName; }
+            set { this.userName = value; }
         }
 
-        public string ImageSource
+        public string UserPhoto
         {
-            get { return this.imageSource; }
-            set { this.imageSource = value; }
+            get { return this.userPhoto; }
+            set { this.userPhoto = value; }
         }
+
+        public ServiceLib.DataService.Story Story { get; set; }
     }
 }
