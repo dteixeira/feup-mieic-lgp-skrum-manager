@@ -237,5 +237,10 @@ namespace BacklogPageLib
                 System.Console.WriteLine(e.Message);
             }
         }
+
+        private void SideMenuControl_FirstDrop(object sender, DragEventArgs e)
+        {
+            System.Console.WriteLine("Teste");
+        }
     }
 }

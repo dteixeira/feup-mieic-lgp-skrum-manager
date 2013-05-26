@@ -23,10 +23,10 @@
     		<RowDefinition Height="Auto"/>
     		<RowDefinition Height="Auto"/>
     	</Grid.RowDefinitions>
-        <Rectangle x:Name="FirstIconBack" AllowDrop="True" Style="{DynamicResource RectangleStyle}"/>
-        <Rectangle x:Name="SecondIconBack" Grid.Row="1" AllowDrop="True" Style="{DynamicResource RectangleStyle}"/>
-        <Rectangle x:Name="ThirdIconBack" Grid.Row="2" AllowDrop="True" Style="{DynamicResource RectangleStyle}"/>
-        <Rectangle x:Name="FourthIconBack" Grid.Row="3" AllowDrop="True" Style="{DynamicResource RectangleStyle}"/>
+        <Rectangle x:Name="FirstIconBack" Style="{DynamicResource RectangleStyle}" Drop="FirstIconBack_Drop"/>
+        <Rectangle x:Name="SecondIconBack" Grid.Row="1" Style="{DynamicResource RectangleStyle}" Drop="SecondIconBack_Drop"/>
+        <Rectangle x:Name="ThirdIconBack" Grid.Row="2" Style="{DynamicResource RectangleStyle}" Drop="ThirdIconBack_Drop"/>
+        <Rectangle x:Name="FourthIconBack" Grid.Row="3" Style="{DynamicResource RectangleStyle}" Drop="FourthIconBack_Drop"/>
         
         <Image x:Name="FirstIconImage" Visibility="{Binding FirstVisibility}" Source="{Binding FirstIcon}" IsHitTestVisible="False"/>
         <Image x:Name="SecondIconImage" Grid.Row="1" Visibility="{Binding SecondVisibility}"  Source="{Binding SecondIcon}" IsHitTestVisible="False"/>

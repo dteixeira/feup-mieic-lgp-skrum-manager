@@ -29,7 +29,11 @@ namespace GenericControlLib
         private Options secondType;
         private Options thirdType;
         private Options fourthType;
-
+        private delegate void myDropDelegate(object obj, DragEventArgs e);
+        myDropDelegate firstDrop;
+        myDropDelegate secondDrop;
+        myDropDelegate thirdDrop;
+        myDropDelegate fourthDrop;
 
         public SideMenuControl()
 		{
@@ -85,6 +89,27 @@ namespace GenericControlLib
             set { this.fourthType = value; }
         }
 
+        public Action<object, DragEventArgs> FirstDrop
+        {
+            set { this.FirstIconBack.AllowDrop = true; this.firstDrop = new myDropDelegate(value); }
+        }
+
+        public Action<object, DragEventArgs> SecondDrop
+        {
+            set { this.SecondIconBack.AllowDrop = true; this.secondDrop = new myDropDelegate(value); }
+        }
+
+        public Action<object, DragEventArgs> ThirdDrop
+        {
+            set { this.ThirdIconBack.AllowDrop = true; this.thirdDrop = new myDropDelegate(value); }
+        }
+
+        public Action<object, DragEventArgs> FourthDrop
+        {
+            set { this.FourthIconBack.AllowDrop = true; this.fourthDrop = new myDropDelegate(value); }
+        }
+
+
         public string FirstIcon
         {
             get{ return this.convertTypetoIcon(firstType); }
@@ -118,6 +143,26 @@ namespace GenericControlLib
                 default:
                     return "Images/none.png";
             }
+        }
+
+        private void FirstIconBack_Drop(object sender, DragEventArgs e)
+        {
+            this.firstDrop.Invoke(sender, e);
+        }
+
+        private void SecondIconBack_Drop(object sender, DragEventArgs e)
+        {
+            this.secondDrop.Invoke(sender, e);
+        }
+
+        private void ThirdIconBack_Drop(object sender, DragEventArgs e)
+        {
+            this.thirdDrop.Invoke(sender, e);
+        }
+
+        private void FourthIconBack_Drop(object sender, DragEventArgs e)
+        {
+            this.fourthDrop.Invoke(sender, e);
         }
 
     }
