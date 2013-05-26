@@ -97,6 +97,7 @@ namespace ProjectTeamManagementPageLib
                     personControl.Width = Double.NaN;
                     personControl.Height = Double.NaN;
                     personControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                    personControl.IsDraggable = true;
 
                     teamCollection.Add(personControl);
                 }
@@ -209,6 +210,12 @@ namespace ProjectTeamManagementPageLib
             {
                 System.Console.WriteLine(e.Message);
             }
+        }
+
+        private void Rectangle_Drop(object sender, DragEventArgs e)
+        {
+            //TODO make new ScrumMaster
+            System.Console.WriteLine("asd");
         }
 
     }

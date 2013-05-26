@@ -54,7 +54,7 @@
                     <ListView x:Name="Team" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Height="Auto" AllowDrop="False" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
                         <ListView.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="6" />
+                                <UniformGrid Columns="4" />
                             </ItemsPanelTemplate>
                         </ListView.ItemsPanel>
 
@@ -99,7 +99,8 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
                 <TextBlock Margin="0" FontFamily="Source Sans Pro" FontSize="18.667" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="Scrum Master"/></TextBlock>
-                <GenericControlLib:UserButtonControl Height="Auto" Width="Auto" Margin="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" IsDraggable="True"/>
+                <Rectangle Panel.ZIndex="1" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0" Grid.Row="1" AllowDrop="True" Fill="Transparent" Drop="Rectangle_Drop"/>
+                <GenericControlLib:UserButtonControl Height="Auto" Width="Auto" Margin="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
             </Grid>
         </Grid>
     </Grid>
