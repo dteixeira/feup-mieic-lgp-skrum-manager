@@ -1,7 +1,10 @@
-﻿using ServiceLib.NotificationService;
+﻿using GenericControlLib;
+using ServiceLib.DataService;
+using ServiceLib.NotificationService;
 using SharedTypes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -24,6 +27,9 @@ namespace ProjectTeamManagementPageLib
         public ApplicationPages PageType { get; set; }
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
 
+        private ObservableCollection<UserButtonControl> teamCollection = new ObservableCollection<UserButtonControl>();
+        
+
         public ProjectTeamManagementPage(object context)
         {
             InitializeComponent();
@@ -39,6 +45,40 @@ namespace ProjectTeamManagementPageLib
         private void PopulateProjectTeamManagementPage()
         {
             //TODO
+            try
+            {
+                // Clears backlog.
+                this.Team.Items.Clear();
+                teamCollection.Clear();
+
+                // Get current project if selected.
+                Project project = ApplicationController.Instance.CurrentProject;
+
+                ServiceLib.DataService.DataServiceClient connection = new ServiceLib.DataService.DataServiceClient();
+                List<Person> team = connection.GetAllPeopleInProject(project.ProjectID);
+                connection.Close();
+
+                // Iterate all person on team
+                foreach (var person in team.Select((s, i) => new { Value = s, Index = i }))
+                {
+                    // Create the person.
+                    UserButtonControl personControl = new UserButtonControl
+                    {
+                        
+                    };
+                    personControl.Width = Double.NaN;
+                    personControl.Height = Double.NaN;
+                    personControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+
+                    teamCollection.Add(personControl);
+                }
+                this.Team.ItemsSource = teamCollection;
+            }
+            catch (Exception e)
+            {
+                System.Console.WriteLine(e.Message);
+            }
+
         }
 
         public PageChange PageChangeTarget(PageChangeDirection direction)

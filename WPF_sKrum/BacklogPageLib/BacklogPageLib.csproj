@@ -85,6 +85,10 @@
     <Resource Include="Images\arrow.png" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GenericControlLib\GenericControlLib.csproj">
+      <Project>{66c3f1e6-c160-47b7-8c0c-b53a975226ad}</Project>
+      <Name>GenericControlLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceLib\ServiceLib.csproj">
       <Project>{00f9c426-8516-404c-b085-de09790effc1}</Project>
       <Name>ServiceLib</Name>

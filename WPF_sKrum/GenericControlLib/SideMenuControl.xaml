@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="GenericControlLib.SideMenuControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <Style x:Key="RectangleStyle" TargetType="{x:Type Rectangle}">
+            <Setter Property="Fill" Value="Transparent"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Fill" Value="{DynamicResource Gray4Brush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+    <Grid Background="{DynamicResource Gray7Brush}">
+    	<Grid.RowDefinitions>
+    		<RowDefinition Height="Auto"/>
+    		<RowDefinition Height="Auto"/>
+    		<RowDefinition Height="Auto"/>
+    		<RowDefinition Height="Auto"/>
+    	</Grid.RowDefinitions>
+        <Rectangle x:Name="FirstIconBack" AllowDrop="True" Style="{DynamicResource RectangleStyle}"/>
+        <Rectangle x:Name="SecondIconBack" Grid.Row="1" AllowDrop="True" Style="{DynamicResource RectangleStyle}"/>
+        <Rectangle x:Name="ThirdIconBack" Grid.Row="2" AllowDrop="True" Style="{DynamicResource RectangleStyle}"/>
+        <Rectangle x:Name="FourthIconBack" Grid.Row="3" AllowDrop="True" Style="{DynamicResource RectangleStyle}"/>
+        
+        <Image x:Name="FirstIconImage" Visibility="{Binding FirstVisibility}" Source="{Binding FirstIcon}" IsHitTestVisible="False"/>
+        <Image x:Name="SecondIconImage" Grid.Row="1" Visibility="{Binding SecondVisibility}"  Source="{Binding SecondIcon}" IsHitTestVisible="False"/>
+        <Image x:Name="ThirdIconImage" Grid.Row="2" Visibility="{Binding ThirdVisibility}"  Source="{Binding ThirdIcon}" IsHitTestVisible="False"/>
+        <Image x:Name="FourthIconImage" Grid.Row="3" Visibility="{Binding FourthVisibility}"  Source="{Binding FourthIcon}" IsHitTestVisible="False"/>
+    </Grid>
+</UserControl>
