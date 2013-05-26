@@ -366,14 +366,15 @@ namespace WPFApplication
         private void UpperBar_Config_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
-            PopupFormControlLib.PasswordBoxPage page = new PopupFormControlLib.PasswordBoxPage();
+            PopupFormControlLib.StoryPriorityPage page = new PopupFormControlLib.StoryPriorityPage();
             page.PageTitle = "Password do Projecto";
             page.PageName = "password";
             form.FormPages.Add(page);
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
             form.ShowDialog();
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
-            MessageBox.Show((string)form["password"].PageValue);
+            var result = ((ServiceLib.DataService.StoryPriority)form["password"].PageValue).ToString();
+            MessageBox.Show(result);
         }
 
         private void UpperBar_Close_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)

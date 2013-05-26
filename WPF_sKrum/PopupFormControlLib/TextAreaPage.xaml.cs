@@ -16,9 +16,9 @@ namespace PopupFormControlLib
 	/// <summary>
 	/// Interaction logic for TestAreaPage.xaml
 	/// </summary>
-	public partial class TestAreaPage : UserControl, IFormPage
+	public partial class TextAreaPage : UserControl, IFormPage
 	{
-		public TestAreaPage()
+		public TextAreaPage()
 		{
 			this.InitializeComponent();
 		}

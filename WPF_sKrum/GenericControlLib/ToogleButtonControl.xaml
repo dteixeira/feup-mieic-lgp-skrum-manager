@@ -1,0 +1,41 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="GenericControlLib.ToogleButtonControl"
+	x:Name="UserControl"
+	d:DesignWidth="640" d:DesignHeight="480">
+	<UserControl.Resources>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#E2E2E2" />
+        <SolidColorBrush x:Key="KinectOnBarBrush" Color="#242424" />
+        <SolidColorBrush x:Key="KinectOffBarBrush" Color="#555555" />
+        <SolidColorBrush x:Key="MustPriorityBrush" Color="#242424" />
+        <SolidColorBrush x:Key="ShouldPriorityBrush" Color="#646464" />
+        <SolidColorBrush x:Key="CouldPriorityBrush" Color="#959595" />
+        <SolidColorBrush x:Key="WouldPriorityBrush" Color="#DADADA" />
+        <SolidColorBrush x:Key="Gray1Brush" Color="#E2E2E2" />
+        <SolidColorBrush x:Key="Gray2Brush" Color="#DADADA" />
+        <SolidColorBrush x:Key="Gray3Brush" Color="#C3C3C3" />
+        <SolidColorBrush x:Key="Gray4Brush" Color="#959595" />
+        <SolidColorBrush x:Key="Gray5Brush" Color="#646464" />
+        <SolidColorBrush x:Key="Gray6Brush" Color="#555555" />
+        <SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
+		<Style x:Key="BorderStyle" TargetType="{x:Type Border}">
+			<Setter Property="Background" Value="{DynamicResource Gray7Brush}"/>
+		</Style>
+		<Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+			<Setter Property="Foreground" Value="{DynamicResource Gray1Brush}"/>
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
+					<Setter Property="Foreground" Value="{DynamicResource Gray1Brush}" />
+				</DataTrigger >
+			</Style.Triggers>
+		</Style>
+	</UserControl.Resources>
+	<Grid x:Name="LayoutRoot">
+		<Border x:Name="OuterBorder" ClipToBounds="True" BorderThickness="1" Style="{DynamicResource BorderStyle}" MouseEnter="OuterBorder_MouseEnter" MouseLeave="OuterBorder_MouseLeave"/>
+		<TextBlock x:Name="TextValue" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="0" IsHitTestVisible="False"/>
+	</Grid>
+</UserControl>

@@ -88,8 +88,11 @@
     <Compile Include="SpinnerPage.xaml.cs">
       <DependentUpon>SpinnerPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestAreaPage.xaml.cs">
-      <DependentUpon>TestAreaPage.xaml</DependentUpon>
+    <Compile Include="StoryPriorityPage.xaml.cs">
+      <DependentUpon>StoryPriorityPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TextAreaPage.xaml.cs">
+      <DependentUpon>TextAreaPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="TextBoxPage.xaml.cs">
       <DependentUpon>TextBoxPage.xaml</DependentUpon>
@@ -121,7 +124,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="TestAreaPage.xaml">
+    <Page Include="StoryPriorityPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="TextAreaPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
