@@ -365,7 +365,24 @@ namespace WPFApplication
 
         private void UpperBar_Config_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // TODO.
+            /*PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+            PopupFormControlLib.PasswordBoxPage page = new PopupFormControlLib.PasswordBoxPage();
+            page.PageTitle = "Password do Projecto";
+            page.PageName = "password";
+            form.FormPages.Add(page);
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            form.ShowDialog();
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+            MessageBox.Show((string)form["password"].PageValue);*/
+
+            //Tester for the project/people selector
+
+            PopupSelectionControlLib.SelectionWindow form1 = new PopupSelectionControlLib.SelectionWindow();
+            PopupSelectionControlLib.ProjectSelectionPage page1 = new PopupSelectionControlLib.ProjectSelectionPage();
+            form1.FormPage = page1;
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            form1.ShowDialog();
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
         }
 
         private void UpperBar_Close_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
