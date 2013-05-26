@@ -44,8 +44,6 @@ namespace PopupSelectionControlLib
         {
             this.InitializeComponent();
 
-            //Content
-
             // Initialize scroll up delay timer.
             this.countdownTimerDelayScrollLeft = new DispatcherTimer();
             this.countdownTimerDelayScrollLeft.Tick += new EventHandler(ScrollActionDelayLeft);
@@ -69,7 +67,7 @@ namespace PopupSelectionControlLib
             FillLetters();
         }
 
-        public void FillLetters()
+        private void FillLetters()
         {
             try
             {
@@ -106,7 +104,7 @@ namespace PopupSelectionControlLib
             }
         }
 
-        public void letterSelected(object sender, EventArgs e)
+        private void letterSelected(object sender, EventArgs e)
         {
             //TODO
             //Limpar formatação das outras letras
@@ -120,7 +118,7 @@ namespace PopupSelectionControlLib
         ///     Fills the content placeholder with the project usercontrols
         /// </summary>
         /// <param name="projects">List of projects with name started by the desired letter</param>
-        public void FillProjects(List<Project> projects)
+        private void FillProjects(List<Project> projects)
         {
             try
             {
@@ -128,16 +126,17 @@ namespace PopupSelectionControlLib
                 foreach (Project p in projects)
                 {
                     GenericControlLib.ProjectButtonControl button = new GenericControlLib.ProjectButtonControl();
-                    button.ButtonText = p.Name;
+                    button.ProjectName = p.Name;
                     if (p.Password != "")
-                    {button.ImageSource = "Images/aloquete.png";}
+                    {button.ProjectImageSource = "Images/aloquete.png";}
                     else
-                    {button.ImageSource = "Images/mala.png";}
+                    {button.ProjectImageSource = "Images/mala.png";}
 
                     //TODO check
                     button.Width = 275;
                     button.Height = 100;
-
+                    button.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    button.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
                     button.MouseLeftButtonDown += new MouseButtonEventHandler(projectSelected);
                     this.Contents.Children.Add(button);
                 }
@@ -148,10 +147,10 @@ namespace PopupSelectionControlLib
             }
         }
 
-        public void projectSelected(object sender, EventArgs e)
+        private void projectSelected(object sender, EventArgs e)
         {
             GenericControlLib.ProjectButtonControl project = (GenericControlLib.ProjectButtonControl)sender;
-            MessageBox.Show(project.ButtonText);
+            MessageBox.Show(project.ProjectName);
         }
 
 

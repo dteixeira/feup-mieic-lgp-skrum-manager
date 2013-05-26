@@ -84,7 +84,7 @@
 
         	<ScrollViewer x:Name="ContentScroll" Margin="0" Grid.Column="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
         		<StackPanel x:Name="ContentPlaceholder" Orientation="Horizontal" Margin="0">
-        			<UniformGrid Height="auto" Width="auto" x:Name="Contents" Margin="0" Rows="2" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        			<UniformGrid Height="auto" Width="auto" x:Name="Contents" Margin="0" Rows="2" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
         		</StackPanel>		
         	</ScrollViewer>
         	<Image x:Name="PanRight" Focusable="True" IsHitTestVisible="False" Margin="10" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" Source="Images/darkarrow.png" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="10" >

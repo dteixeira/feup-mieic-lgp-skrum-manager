@@ -37,7 +37,7 @@
             </Border>
         </Border>
         <TextBlock TextAlignment="Left" TextWrapping="Wrap" Text="{Binding UserName}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="5" IsHitTestVisible="False" Grid.Row="1"/>
-        <Image Panel.ZIndex="9999" Width="auto" Height="auto" Margin="5" HorizontalAlignment="Center" Source="{Binding UserPhoto}" VerticalAlignment="Center" IsHitTestVisible="False" />
+        <Image Width="auto" Height="auto" Margin="5" HorizontalAlignment="Center" Source="{Binding UserPhoto}" VerticalAlignment="Center" IsHitTestVisible="False" />
     </Grid>
 
 </UserControl>

@@ -7,26 +7,26 @@
 	x:Class="GenericControlLib.ProjectButtonControl"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
-	<UserControl.Resources>
-		<Style x:Key="BorderStyle" TargetType="{x:Type Border}">
-			<Setter Property="Background" Value="{DynamicResource Gray7Brush}"/>
-			<Style.Triggers>
-				<Trigger Property="IsMouseOver" Value="True">
-					<Setter Property="Background" Value="{DynamicResource Gray1Brush}"/>
-				</Trigger>
-			</Style.Triggers>
-		</Style>
-		<Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
-			<Setter Property="Foreground" Value="{DynamicResource Gray1Brush}"/>
-			<Style.Triggers>
-				<DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
-					<Setter Property="Foreground" Value="{DynamicResource Gray7Brush}" />
-				</DataTrigger >
-			</Style.Triggers>
-		</Style>
-	</UserControl.Resources>
-	
-	<Grid x:Name="LayoutRoot">
+    <UserControl.Resources>
+        <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="{DynamicResource Gray7Brush}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource Gray4Brush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource Gray4Brush}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource Gray7Brush}" />
+                </DataTrigger >
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="30*"/>
 			<ColumnDefinition Width="70*"/>
@@ -38,7 +38,7 @@
 				</Border.Effect>
 			</Border>
 		</Border>
-		<TextBlock TextAlignment="Left" Grid.Column="1" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="5" IsHitTestVisible="False"/>
-		<Image Margin="5" HorizontalAlignment="Center" Grid.Column="0" Source="{Binding ImageSource}" VerticalAlignment="Center" IsHitTestVisible="False"/>
+		<TextBlock TextAlignment="Left" Grid.Column="1" TextWrapping="Wrap" Text="{Binding ProjectName}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="5" IsHitTestVisible="False"/>
+		<Image Margin="5" HorizontalAlignment="Center" Grid.Column="0" Source="{Binding ProjectImageSource}" VerticalAlignment="Center" IsHitTestVisible="False"/>
 	</Grid>
 </UserControl>

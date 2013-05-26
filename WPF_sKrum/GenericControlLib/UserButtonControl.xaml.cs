@@ -59,7 +59,7 @@ namespace GenericControlLib
             set { this.allow_drag = value; }
         }
 
-        public ServiceLib.DataService.Story Story { get; set; }
+        public ServiceLib.DataService.Person Person { get; set; }
 
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
