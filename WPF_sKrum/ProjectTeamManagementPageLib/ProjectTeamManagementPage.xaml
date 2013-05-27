@@ -11,10 +11,10 @@
 
     <UserControl.Resources>
         <Style x:Key="RectangleStyle1" TargetType="{x:Type Rectangle}">
-            <Setter Property="Fill" Value="{DynamicResource Gray4Brush}"/>
+            <Setter Property="Fill" Value="{DynamicResource BackgroundBrush}"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Fill" Value="{DynamicResource Gray5Brush}"/>
+                    <Setter Property="Fill" Value="{DynamicResource Gray4Brush}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -39,53 +39,59 @@
             <ColumnDefinition Width="15*"/>
         </Grid.ColumnDefinitions>
         <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="80"/>
-            </Grid.ColumnDefinitions>
-            
+
             <Grid x:Name="AllArea" Margin="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="80"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Label Content="Team" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" FontFamily="Source Sans Pro" FontSize="21.333"/>
-                <ScrollViewer x:Name="TeamScroll" Margin="0,0" VerticalScrollBarVisibility="Hidden" Grid.Row="1" Background="Transparent">
-                    <ListView x:Name="Team" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Height="Auto" AllowDrop="False" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
-                        <ListView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="4" />
-                            </ItemsPanelTemplate>
-                        </ListView.ItemsPanel>
+                <Grid x:Name="CenterRowArea" Margin="0,30,0,50" Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="100px"/>
+                        <ColumnDefinition Width="60*"/>
+                        <ColumnDefinition Width="100px"/>
+                        <ColumnDefinition Width="5*"/>
+                    </Grid.ColumnDefinitions>
 
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="BorderThickness" Value="0"/>
-                                <Setter Property="Margin" Value="0,3,0,3"/>
-                                <Setter Property="Padding" Value="0"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                    </ListView>
-                </ScrollViewer>
-            </Grid>
-            <Grid x:Name="ScrollButtons" Grid.Column="1" Margin="0" Background="{StaticResource Gray4Brush}">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50*" />
-                    <RowDefinition Height="50*" />
-                </Grid.RowDefinitions>
-                <Rectangle x:Name="ScrollUpButton" Margin="0" StrokeThickness="2" MouseEnter="ScrollUp_Start" MouseLeave="ScrollUp_Cancel" Style="{DynamicResource RectangleStyle1}"/>
-                <Rectangle x:Name="ScrollDownButton" Style="{DynamicResource RectangleStyle1}" Margin="0" Grid.Row="1" StrokeThickness="2" MouseEnter="ScrollDown_Start" MouseLeave="ScrollDown_Cancel"/>
-                <Image Grid.Row="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False"/>
-                <Image Grid.Row="1" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False" Margin="0,100" RenderTransformOrigin="0.5,0.5">
-                    <Image.RenderTransform>
-                        <TransformGroup>
-                            <ScaleTransform/>
-                            <SkewTransform/>
-                            <RotateTransform Angle="-180"/>
-                            <TranslateTransform/>
-                        </TransformGroup>
-                    </Image.RenderTransform>
-                </Image>
+                    <Image x:Name="PanLeft" Focusable="True" IsHitTestVisible="False" Margin="10" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Source="Images/darkarrow.png" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="10" >
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="-90        "/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+
+                    <Rectangle x:Name="PanLeftScroller" Style="{DynamicResource RectangleStyle1}" Grid.Column="1" Height="auto" Margin="0" Width="auto" MouseEnter="ScrollLeft_Start" MouseLeave="ScrollLeft_Cancel"/>
+
+                    <ScrollViewer x:Name="TeamScroll" Margin="0" Grid.Column="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
+                        <StackPanel x:Name="Team" Orientation="Horizontal" Margin="0">
+                            <Grid x:Name="Contents" Margin="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                            </Grid>
+                        </StackPanel>
+                    </ScrollViewer>
+                    <Image x:Name="PanRight" Focusable="True" IsHitTestVisible="False" Margin="10" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" Source="Images/darkarrow.png" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="10" >
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform/>
+                                <RotateTransform Angle="90        "/>
+                                <TranslateTransform/>
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+
+                    <Rectangle x:Name="PanRightScroller" Style="{DynamicResource RectangleStyle1}" Grid.Column="3" Height="auto" Margin="0" Width="auto" MouseEnter="ScrollRight_Start" MouseLeave="ScrollRight_Cancel"/>
+                </Grid>
             </Grid>
         </Grid>
         <Grid x:Name="RightArea" Grid.Column="1" Margin="0">

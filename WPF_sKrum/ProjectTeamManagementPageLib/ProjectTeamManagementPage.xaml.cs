@@ -26,15 +26,15 @@ namespace ProjectTeamManagementPageLib
     public partial class ProjectTeamManagementPage : UserControl, ITargetPage
     {
         private float scrollValue = 0.0f;
-        private DispatcherTimer countdownTimerDelayScrollUp;
-        private DispatcherTimer countdownTimerDelayScrollDown;
-        private DispatcherTimer countdownTimerScrollUp;
-        private DispatcherTimer countdownTimerScrollDown;
+        private DispatcherTimer countdownTimerDelayScrollLeft;
+        private DispatcherTimer countdownTimerDelayScrollRight;
+        private DispatcherTimer countdownTimerScrollLeft;
+        private DispatcherTimer countdownTimerScrollRight;
 
         public ApplicationPages PageType { get; set; }
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
 
-        private ObservableCollection<UserButtonVerticalControl> teamCollection = new ObservableCollection<UserButtonVerticalControl>();
+        private ObservableCollection<UserButtonControl> teamCollection = new ObservableCollection<UserButtonControl>();
         
 
         public ProjectTeamManagementPage(object context)
@@ -43,24 +43,24 @@ namespace ProjectTeamManagementPageLib
             this.PageType = ApplicationPages.ProjectTeamManagementPage;
 
             // Initialize scroll up delay timer.
-            this.countdownTimerDelayScrollUp = new DispatcherTimer();
-            this.countdownTimerDelayScrollUp.Tick += new EventHandler(ScrollActionDelayUp);
-            this.countdownTimerDelayScrollUp.Interval = TimeSpan.FromSeconds(1);
+            this.countdownTimerDelayScrollLeft = new DispatcherTimer();
+            this.countdownTimerDelayScrollLeft.Tick += new EventHandler(ScrollActionDelayLeft);
+            this.countdownTimerDelayScrollLeft.Interval = TimeSpan.FromSeconds(1);
 
             // Initialize scroll down delay timer.
-            this.countdownTimerDelayScrollDown = new DispatcherTimer();
-            this.countdownTimerDelayScrollDown.Tick += new EventHandler(ScrollActionDelayDown);
-            this.countdownTimerDelayScrollDown.Interval = TimeSpan.FromSeconds(1);
+            this.countdownTimerDelayScrollRight = new DispatcherTimer();
+            this.countdownTimerDelayScrollRight.Tick += new EventHandler(ScrollActionDelayRight);
+            this.countdownTimerDelayScrollRight.Interval = TimeSpan.FromSeconds(1);
 
             // Initialize scroll up timer.
-            this.countdownTimerScrollUp = new DispatcherTimer();
-            this.countdownTimerScrollUp.Tick += new EventHandler(ScrollActionUp);
-            this.countdownTimerScrollUp.Interval = TimeSpan.FromSeconds(0.01);
+            this.countdownTimerScrollLeft = new DispatcherTimer();
+            this.countdownTimerScrollLeft.Tick += new EventHandler(ScrollActionLeft);
+            this.countdownTimerScrollLeft.Interval = TimeSpan.FromSeconds(0.01);
 
             // Initialize scroll down timer.
-            this.countdownTimerScrollDown = new DispatcherTimer();
-            this.countdownTimerScrollDown.Tick += new EventHandler(ScrollActionDown);
-            this.countdownTimerScrollDown.Interval = TimeSpan.FromSeconds(0.01);
+            this.countdownTimerScrollRight = new DispatcherTimer();
+            this.countdownTimerScrollRight.Tick += new EventHandler(ScrollActionRight);
+            this.countdownTimerScrollRight.Interval = TimeSpan.FromSeconds(0.01);
 
             // Register for project change notifications.
             this.DataChangeDelegate = new ApplicationController.DataModificationHandler(this.DataChangeHandler);
@@ -73,10 +73,6 @@ namespace ProjectTeamManagementPageLib
         {
             try
             {
-                // Clears team.
-                this.Team.Items.Clear();
-                teamCollection.Clear();
-
                 // Get team.
                 Project project = ApplicationController.Instance.CurrentProject;
 
@@ -84,82 +80,101 @@ namespace ProjectTeamManagementPageLib
                 List<Person> team = connection.GetAllPeople();
                 connection.Close();
 
-                for(int qweqwe=0;qweqwe<20;qweqwe++)
+                this.Contents.Children.Clear();
+                int row = 3;
+                int column = -1;
+                for (int qwe = 0; qwe < 10; qwe++)
                 {
-                // Iterate all person on team
-                foreach (var person in team.Select((s, i) => new { Value = s, Index = i }))
-                {
-                    // Create the person.
-                    UserButtonVerticalControl personControl = new UserButtonVerticalControl
+                    foreach (Person p in team)
                     {
-                        UserName = person.Value.Name,
-                        UserPhoto = person.Value.PhotoURL
-                    };
-                    personControl.Width = Double.NaN;
-                    personControl.Height = Double.NaN;
-                    personControl.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-                    personControl.IsDraggable = true;
+                        // Create person control.
+                        GenericControlLib.UserButtonControl button = new GenericControlLib.UserButtonControl();
+                        button.UserName = p.Name;
 
-                    teamCollection.Add(personControl);
+                        // Create proper grids.
+                        ++row;
+                        if (row > 2)
+                        {
+                            row = 0;
+                            column++;
+                        }
+                        if (row == 0)
+                        {
+                            ColumnDefinition columnDef = new ColumnDefinition();
+                            columnDef.Width = new GridLength(1, GridUnitType.Star);
+                            this.Contents.ColumnDefinitions.Add(columnDef);
+                        }
+
+                        button.UserPhoto = p.PhotoURL;
+
+                        // Create persons control.
+                        button.Width = Double.NaN;
+                        button.Height = Double.NaN;
+                        button.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                        button.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                        button.IsDraggable = true;
+                        button.Person = p;
+                        button.SetValue(Grid.ColumnProperty, column);
+                        button.SetValue(Grid.RowProperty, row);
+                        button.Margin = new Thickness(10, 10, 10, 10);
+                        this.Contents.Children.Add(button);
+                    }
                 }
-                }
-                this.Team.ItemsSource = teamCollection;
             }
             catch (Exception e)
             {
                 System.Console.WriteLine(e.Message);
             }
-
         }
 
-        private void ScrollActionDelayUp(object sender, EventArgs e)
+        private void ScrollActionDelayLeft(object sender, EventArgs e)
         {
-            this.countdownTimerScrollUp.Start();
-            this.countdownTimerDelayScrollUp.Stop();
+            this.countdownTimerScrollLeft.Start();
+            this.countdownTimerDelayScrollLeft.Stop();
         }
 
-        private void ScrollActionDelayDown(object sender, EventArgs e)
+        private void ScrollActionDelayRight(object sender, EventArgs e)
         {
-            this.countdownTimerScrollDown.Start();
-            this.countdownTimerDelayScrollDown.Stop();
+            this.countdownTimerScrollRight.Start();
+            this.countdownTimerDelayScrollRight.Stop();
         }
 
-        private void ScrollActionUp(object sender, EventArgs e)
+        private void ScrollActionLeft(object sender, EventArgs e)
         {
             scrollValue -= 10.0f;
             if (scrollValue < 0.0f) scrollValue = 0.0f;
-            TeamScroll.ScrollToVerticalOffset(scrollValue);
+            TeamScroll.ScrollToHorizontalOffset(scrollValue);
         }
 
-        private void ScrollActionDown(object sender, EventArgs e)
+        private void ScrollActionRight(object sender, EventArgs e)
         {
             scrollValue += 10.0f;
-            if (scrollValue > TeamScroll.ScrollableHeight) scrollValue = (float)TeamScroll.ScrollableHeight;
-            TeamScroll.ScrollToVerticalOffset(scrollValue);
+            if (scrollValue > TeamScroll.ScrollableWidth) scrollValue = (float)TeamScroll.ScrollableWidth;
+            TeamScroll.ScrollToHorizontalOffset(scrollValue);
         }
 
-        private void ScrollUp_Start(object sender, MouseEventArgs e)
+        private void ScrollLeft_Start(object sender, MouseEventArgs e)
         {
-            this.countdownTimerDelayScrollUp.Start();
-            this.countdownTimerScrollUp.Stop();
+            this.countdownTimerDelayScrollLeft.Start();
+            this.countdownTimerScrollLeft.Stop();
         }
 
-        private void ScrollDown_Start(object sender, MouseEventArgs e)
+        private void ScrollRight_Start(object sender, MouseEventArgs e)
         {
-            this.countdownTimerDelayScrollDown.Start();
-            this.countdownTimerScrollDown.Stop();
+            this.countdownTimerDelayScrollRight.Start();
+            this.countdownTimerScrollRight.Stop();
         }
 
-        private void ScrollUp_Cancel(object sender, MouseEventArgs e)
+        private void ScrollLeft_Cancel(object sender, MouseEventArgs e)
         {
-            this.countdownTimerDelayScrollUp.Stop();
-            this.countdownTimerScrollUp.Stop();
+            this.countdownTimerDelayScrollLeft.Stop();
+            this.countdownTimerScrollLeft.Stop();
         }
 
-        private void ScrollDown_Cancel(object sender, MouseEventArgs e)
+        private void ScrollRight_Cancel(object sender, MouseEventArgs e)
         {
-            this.countdownTimerDelayScrollDown.Stop();
-            this.countdownTimerScrollDown.Stop();
+            this.countdownTimerDelayScrollRight.Stop();
+            this.countdownTimerScrollRight.Stop();
         }
 
         public PageChange PageChangeTarget(PageChangeDirection direction)
