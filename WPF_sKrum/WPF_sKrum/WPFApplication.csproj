@@ -154,10 +154,6 @@
       <Project>{ddf3cd0f-ba92-444b-bc60-b44d498ddafa}</Project>
       <Name>ProjectBacklogPageLib</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ProjectConfigurationPageLib\ProjectConfigurationPageLib.csproj">
-      <Project>{6627dd51-f600-4188-a0ce-06e8ff608d4b}</Project>
-      <Name>ProjectConfigurationPageLib</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ProjectManagementPageLib\ProjectManagementPageLib.csproj">
       <Project>{434f92a7-2c9c-4623-bd71-4c04779b0842}</Project>
       <Name>ProjectManagementPageLib</Name>

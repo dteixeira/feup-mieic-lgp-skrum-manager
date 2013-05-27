@@ -295,7 +295,7 @@ namespace PeopleManagementPageLib
                 case PageChangeDirection.Left:
                     return null;
                 case PageChangeDirection.Right:
-                    return new PageChange { Context = null, Page = ApplicationPages.ProjectConfigurationPage };
+                    return new PageChange { Context = null, Page = ApplicationPages.ProjectTeamManagementPage };
                 case PageChangeDirection.Up:
                     return null;
                 default:
@@ -309,7 +309,7 @@ namespace PeopleManagementPageLib
             directions[PageChangeDirection.Up] = null;
             directions[PageChangeDirection.Down] = "GESTÃO DE PROJECTOS";
             directions[PageChangeDirection.Left] = null;
-            directions[PageChangeDirection.Right] = "AJUSTES DE PROJECTO";
+            directions[PageChangeDirection.Right] = "GESTÃO DE EQUIPA";
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
         }
 

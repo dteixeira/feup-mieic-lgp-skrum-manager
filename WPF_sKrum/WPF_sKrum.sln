@@ -32,8 +32,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeetingPageLib", "MeetingPa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectTeamManagementPageLib", "ProjectTeamManagementPageLib\ProjectTeamManagementPageLib.csproj", "{8E1B0F13-75FC-4DAB-A923-8E1C754B3A28}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectConfigurationPageLib", "ProjectConfigurationPageLib\ProjectConfigurationPageLib.csproj", "{6627DD51-F600-4188-A0CE-06E8FF608D4B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectManagementPageLib", "ProjectManagementPageLib\ProjectManagementPageLib.csproj", "{434F92A7-2C9C-4623-BD71-4C04779B0842}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleManagementPageLib", "PeopleManagementPageLib\PeopleManagementPageLib.csproj", "{5AC58B46-DF8F-477A-839B-D3296797CAD8}"
@@ -106,10 +104,6 @@ Global
 		{8E1B0F13-75FC-4DAB-A923-8E1C754B3A28}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E1B0F13-75FC-4DAB-A923-8E1C754B3A28}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E1B0F13-75FC-4DAB-A923-8E1C754B3A28}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6627DD51-F600-4188-A0CE-06E8FF608D4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6627DD51-F600-4188-A0CE-06E8FF608D4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6627DD51-F600-4188-A0CE-06E8FF608D4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6627DD51-F600-4188-A0CE-06E8FF608D4B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{434F92A7-2C9C-4623-BD71-4C04779B0842}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{434F92A7-2C9C-4623-BD71-4C04779B0842}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{434F92A7-2C9C-4623-BD71-4C04779B0842}.Release|Any CPU.ActiveCfg = Release|Any CPU

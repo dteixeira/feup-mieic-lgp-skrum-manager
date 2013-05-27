@@ -37,8 +37,6 @@ namespace PopupFormControlLib
             this.Success = false;
             this.FormPages = new List<IFormPage>();
             this.CurrentPageIndex = -1;
-            RightOpen.Visibility = Visibility.Visible;
-            RightClosed.Visibility = Visibility.Collapsed;
             if (ApplicationController.Instance.KinectSensor.FoundSensor())
             {
                 ApplicationController.Instance.KinectSensor.Pointers.KinectPointerMoved += new EventHandler<KinectPointerEventArgs>(this.KinectPointerMovedHandler);
@@ -49,6 +47,8 @@ namespace PopupFormControlLib
             if (ApplicationController.Instance.TrackingID != -1)
             {
                 Mouse.OverrideCursor = Cursors.None;
+                RightOpen.Visibility = Visibility.Visible;
+                RightClosed.Visibility = Visibility.Collapsed;
             }
         }
 

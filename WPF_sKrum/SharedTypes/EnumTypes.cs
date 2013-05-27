@@ -13,7 +13,6 @@ namespace SharedTypes
         RootPage,
         MainPage,
         TaskBoardPage,
-        ProjectConfigurationPage,
         ProjectTeamManagementPage,
         ProjectManagementPage,
         PeopleManagementPage,

@@ -301,7 +301,7 @@ namespace ProjectManagementPageLib
                 case PageChangeDirection.Left:
                     return null;
                 case PageChangeDirection.Right:
-                    return new PageChange { Context = null, Page = ApplicationPages.ProjectConfigurationPage };
+                    return new PageChange { Context = null, Page = ApplicationPages.ProjectTeamManagementPage };
                 case PageChangeDirection.Up:
                     return new PageChange { Context = null, Page = ApplicationPages.PeopleManagementPage };
                 default:
@@ -315,7 +315,7 @@ namespace ProjectManagementPageLib
             directions[PageChangeDirection.Up] = "GESTÃO DE UTILIZADORES";
             directions[PageChangeDirection.Down] = null;
             directions[PageChangeDirection.Left] = null;
-            directions[PageChangeDirection.Right] = "AJUSTES DE PROJECTO";
+            directions[PageChangeDirection.Right] = "GESTÃO DE EQUIPA";
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
         }
 
@@ -403,21 +403,21 @@ namespace ProjectManagementPageLib
             PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
             PopupFormControlLib.TextBoxPage namePage = new PopupFormControlLib.TextBoxPage { PageName = "name", PageTitle = "Nome do Projecto", DefaultValue = project.Name };
             PopupFormControlLib.PasswordBoxPage passwordPage = new PopupFormControlLib.PasswordBoxPage { PageName = "password", PageTitle = "Password do Project", DefaultValue = project.Password == null ? null : "aaaaaaaaaaaaaaaa" };
-            PopupFormControlLib.SpinnerPage durationPage = new PopupFormControlLib.SpinnerPage { PageName = "duration", PageTitle = "Duração do Sprint", Min = 1, Max = 9999, Increment = 1, DefaultValue = project.SprintDuration };
+            //PopupFormControlLib.SpinnerPage durationPage = new PopupFormControlLib.SpinnerPage { PageName = "duration", PageTitle = "Duração do Sprint", Min = 1, Max = 9999, Increment = 1, DefaultValue = project.SprintDuration };
             form.FormPages.Add(namePage);
             form.FormPages.Add(passwordPage);
-            form.FormPages.Add(durationPage);
+            //form.FormPages.Add(durationPage);
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
             form.ShowDialog();
             if (form.Success)
             {
                 string name = (string)form["name"].PageValue;
                 string password = (string)form["password"].PageValue;
-                int duration = (int)((double)form["duration"].PageValue);
+                //int duration = (int)((double)form["duration"].PageValue);
                 if (name != "")
                 {
                     project.Name = name;
-                    project.SprintDuration = duration;
+                    //project.SprintDuration = duration;
                     project.Password = ((PopupFormControlLib.PasswordBoxPage)form["password"]).Changed ? password : null;
 
                     // Launch thread to update the project.

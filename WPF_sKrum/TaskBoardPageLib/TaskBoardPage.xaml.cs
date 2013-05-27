@@ -244,7 +244,7 @@ namespace TaskBoardPageLib
             directions[PageChangeDirection.Up] = "ESTATÍSTICAS";
             directions[PageChangeDirection.Down] = null;
             directions[PageChangeDirection.Left] = "MENU INICIAL";
-            directions[PageChangeDirection.Right] = "TASKBOARD PERSONALIZADA";
+            directions[PageChangeDirection.Right] = "TASKBOARD PESSOAL";
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
         }
 

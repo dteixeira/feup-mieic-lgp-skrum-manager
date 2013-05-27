@@ -165,8 +165,6 @@ namespace WPFApplication
                     return null;
                 case ApplicationPages.ProjectBacklogPage:
                     return new ProjectBacklogPageLib.ProjectBacklogPage(page.Context);
-                case ApplicationPages.ProjectConfigurationPage:
-                    return new ProjectConfigurationPageLib.ProjectConfigurationPage(page.Context);
                 case ApplicationPages.ProjectManagementPage:
                     return new ProjectManagementPageLib.ProjectManagementPage(page.Context);
                 case ApplicationPages.ProjectStatisticsPage:

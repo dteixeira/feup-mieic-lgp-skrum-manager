@@ -44,6 +44,8 @@ namespace PopupFormControlLib
             if (ApplicationController.Instance.TrackingID != -1)
             {
                 Mouse.OverrideCursor = Cursors.None;
+                RightOpen.Visibility = Visibility.Visible;
+                RightClosed.Visibility = Visibility.Collapsed;
             }
         }
 

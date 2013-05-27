@@ -166,7 +166,7 @@ namespace ProjectTeamManagementPageLib
             switch (direction)
             {
                 case PageChangeDirection.Down:
-                    return new PageChange { Context = null, Page = ApplicationPages.ProjectConfigurationPage };
+                    return null;
                 case PageChangeDirection.Left:
                     return new PageChange { Context = null, Page = ApplicationPages.ProjectManagementPage };
                 case PageChangeDirection.Right:
@@ -182,7 +182,7 @@ namespace ProjectTeamManagementPageLib
         {
             System.Collections.Generic.Dictionary<PageChangeDirection, string> directions = new System.Collections.Generic.Dictionary<PageChangeDirection, string>();
             directions[PageChangeDirection.Up] = null;
-            directions[PageChangeDirection.Down] = "AJUSTES DE PROJECTO";
+            directions[PageChangeDirection.Down] = null;
             directions[PageChangeDirection.Left] = "GESTÃO DE PROJECTOS";
             directions[PageChangeDirection.Right] = "MENU INICIAL";
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);

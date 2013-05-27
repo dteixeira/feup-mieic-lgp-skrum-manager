@@ -20,7 +20,7 @@ namespace MainPageLib
             System.Collections.Generic.Dictionary<PageChangeDirection, string> directions = new System.Collections.Generic.Dictionary<PageChangeDirection, string>();
             directions[PageChangeDirection.Up] = null;
             directions[PageChangeDirection.Down] = null;
-            directions[PageChangeDirection.Left] = "AJUSTES DE PROJECTO";
+            directions[PageChangeDirection.Left] = "GESTÃO DE EQUIPA";
             directions[PageChangeDirection.Right] = "TASKBOARD";
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
         }
@@ -34,7 +34,7 @@ namespace MainPageLib
                 case PageChangeDirection.Down:
                     return null;
                 case PageChangeDirection.Left:
-                    return new PageChange { Context = null, Page = ApplicationPages.ProjectConfigurationPage };
+                    return new PageChange { Context = null, Page = ApplicationPages.ProjectTeamManagementPage };
                 case PageChangeDirection.Right:
                     return new PageChange { Context = null, Page = ApplicationPages.TaskBoardPage };
                 case PageChangeDirection.Up:
