@@ -27,7 +27,7 @@
     <Grid x:Name="LayoutRoot">
     	<Grid.ColumnDefinitions>
     		<ColumnDefinition Width="Auto"/>
-    		<ColumnDefinition Width="Auto"/>
+    		<ColumnDefinition/>
     	</Grid.ColumnDefinitions>
         <Border x:Name="OuterBorder" ClipToBounds="True" BorderThickness="0" Style="{DynamicResource BorderStyle}" Grid.ColumnSpan="2">
             <Border x:Name="ShadowBorder" Background="Transparent" BorderBrush="Black" BorderThickness="10" Margin="-15,-12,-15,-20">

@@ -59,7 +59,7 @@
 				<ColumnDefinition Width="8*" />
 				<ColumnDefinition Width="8*" />
 			</Grid.ColumnDefinitions>
-			<Image HorizontalAlignment="Center" MouseLeftButtonDown="Close_MouseLeftButtonDown" VerticalAlignment="Center" Grid.Column="4" Source="Images/cruz.png" Margin="5" Style="{StaticResource HoverZoomStyle}" Panel.ZIndex="1"/>
+			<Image HorizontalAlignment="Center" MouseLeftButtonUp="Close_MouseLeftButtonUp" VerticalAlignment="Center" Grid.Column="4" Source="Images/cruz.png" Margin="5" Style="{StaticResource HoverZoomStyle}" Panel.ZIndex="1"/>
 			<Label x:Name="FieldNameLabel" Content="Nome do Projecto" VerticalContentAlignment="Center" Foreground="White" FontSize="32" Padding="40,5,5,5"/>
 		</Grid>
 		<Grid x:Name="FormContent" Grid.RowSpan="2" Grid.Row="1" VerticalAlignment="Center">
@@ -71,10 +71,10 @@
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<Grid x:Name="LeftButtonPlaceholder" Margin="70,30,20,40">
-				<GenericControlLib:ButtonControl x:Name="NoButton" ButtonText="NÃO" Height="150" MouseLeftButtonDown="NoButton_MouseLeftButtonDown"/>
+				<GenericControlLib:ButtonControl x:Name="NoButton" ButtonText="NÃO" Height="150" MouseLeftButtonUp="NoButton_MouseLeftButtonUp"/>
 			</Grid>
 			<Grid x:Name="RightButtonPlaceholder" Grid.Column="1" Margin="20,30,70,40">
-				<GenericControlLib:ButtonControl x:Name="YesButton" ButtonText="SIM" Panel.ZIndex="10" Height="150" MouseLeftButtonDown="YesButton_MouseLeftButtonDown"/>
+				<GenericControlLib:ButtonControl x:Name="YesButton" ButtonText="SIM" Panel.ZIndex="10" Height="150" MouseLeftButtonUp="YesButton_MouseLeftButtonUp"/>
 			</Grid>
 		</Grid>
 		<Canvas x:Name="kinectLayer" Visibility="Visible" Panel.ZIndex="100" Margin="0" Grid.RowSpan="2">

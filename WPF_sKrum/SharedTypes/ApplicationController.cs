@@ -54,6 +54,7 @@ namespace SharedTypes
         public ApplicationWindow ApplicationWindow { get; set; }
         public bool IgnoreNextProjectUpdate { get; set; }
         public bool IgnoreNextGlobalProjectUpdate { get; set; }
+        public bool IgnoreNextGlobalPeopleUpdate { get; set; }
         public Project CurrentProject
         {
             get { return this.currentProject; }
@@ -125,6 +126,11 @@ namespace SharedTypes
             {
                 case NotificationType.GlobalPersonModification:
                     this.People = this.Data.GetAllPeople();
+                    if (this.IgnoreNextGlobalPeopleUpdate)
+                    {
+                        this.IgnoreNextGlobalPeopleUpdate = false;
+                        return;
+                    }
                     break;
                 case NotificationType.GlobalProjectModification:
                     this.Projects = this.Data.GetAllProjects();

@@ -355,7 +355,7 @@ namespace ProjectManagementPageLib
         {
             PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
             PopupFormControlLib.TextBoxPage namePage = new PopupFormControlLib.TextBoxPage { PageName = "name", PageTitle = "Nome do Projecto" };
-            PopupFormControlLib.PasswordBoxPage passwordPage = new PopupFormControlLib.PasswordBoxPage { PageName = "password", PageTitle = "Password do Project" };
+            PopupFormControlLib.PasswordBoxPage passwordPage = new PopupFormControlLib.PasswordBoxPage { PageName = "password", PageTitle = "Password do Projecto" };
             PopupFormControlLib.SpinnerPage durationPage = new PopupFormControlLib.SpinnerPage { PageName = "duration", PageTitle = "Duração do Sprint", Min = 1, Max = 9999, Increment = 1 };
             form.FormPages.Add(namePage);
             form.FormPages.Add(passwordPage);
@@ -402,7 +402,7 @@ namespace ProjectManagementPageLib
             Project project = projectControl.Project;
             PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
             PopupFormControlLib.TextBoxPage namePage = new PopupFormControlLib.TextBoxPage { PageName = "name", PageTitle = "Nome do Projecto", DefaultValue = project.Name };
-            PopupFormControlLib.PasswordBoxPage passwordPage = new PopupFormControlLib.PasswordBoxPage { PageName = "password", PageTitle = "Password do Project", DefaultValue = project.Password == null ? null : "aaaaaaaaaaaaaaaa" };
+            PopupFormControlLib.PasswordBoxPage passwordPage = new PopupFormControlLib.PasswordBoxPage { PageName = "password", PageTitle = "Password do Projecto", DefaultValue = project.Password == null ? null : "aaaaaaaaaaaaaaaa" };
             //PopupFormControlLib.SpinnerPage durationPage = new PopupFormControlLib.SpinnerPage { PageName = "duration", PageTitle = "Duração do Sprint", Min = 1, Max = 9999, Increment = 1, DefaultValue = project.SprintDuration };
             form.FormPages.Add(namePage);
             form.FormPages.Add(passwordPage);
@@ -449,9 +449,17 @@ namespace ProjectManagementPageLib
             GenericControlLib.ProjectButtonControl projectControl = dataObj.GetData("ProjectButtonControl") as GenericControlLib.ProjectButtonControl;
             if (projectControl != null)
             {
-                // Launch thread to update the project.
-                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.DeleteProject));
-                thread.Start(projectControl);
+                PopupFormControlLib.YesNoFormWindow form = new PopupFormControlLib.YesNoFormWindow();
+                form.FormTitle = "Apagar o Projecto?";
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+                form.ShowDialog();
+                if (form.Success)
+                {
+                    // Launch thread to update the project.
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.DeleteProject));
+                    thread.Start(projectControl);
+                }
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
             }
         }
 

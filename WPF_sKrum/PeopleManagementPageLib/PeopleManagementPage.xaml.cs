@@ -319,7 +319,6 @@ namespace PeopleManagementPageLib
             ApplicationController.Instance.DataChangedEvent -= this.DataChangeDelegate;
         }
 
-
         public void DataChangeHandler(object sender, NotificationType notification)
         {
             try
@@ -327,14 +326,163 @@ namespace PeopleManagementPageLib
                 // Respond only to user modifications.
                 if (notification == NotificationType.GlobalPersonModification)
                 {
+                    var keys = this.dic.Keys.ToList<string>();
+                    var people = ApplicationController.Instance.People;
+                    foreach (string letter in keys)
+                    {
+                        dic[letter] = (from p in people
+                                       where p.Name[0].ToString().ToUpper() == letter
+                                       select p).ToList<Person>();
+                    }
+
                     // Repopulate with the changes.
-                    this.PopulatePeopleManagement();
+                    this.FillPersons(dic[this.currentLetter]);
                 }
             }
             catch (Exception e)
             {
                 System.Console.WriteLine(e.Message);
             }
+        }
+
+        public void AddPerson_Click(object sender, MouseEventArgs e)
+        {
+            PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+            PopupFormControlLib.TextBoxPage namePage = new PopupFormControlLib.TextBoxPage { PageName = "name", PageTitle = "Nome" };
+            PopupFormControlLib.TextBoxPage emailPage = new PopupFormControlLib.TextBoxPage { PageName = "email", PageTitle = "Email" };
+            PopupFormControlLib.PasswordBoxPage passwordPage = new PopupFormControlLib.PasswordBoxPage { PageName = "password", PageTitle = "Password" };
+            PopupFormControlLib.TextAreaPage jobDescriptionPage = new PopupFormControlLib.TextAreaPage { PageName = "jobDescription", PageTitle = "Funções" };
+            PopupFormControlLib.TextBoxPage photoURLPage = new PopupFormControlLib.TextBoxPage { PageName = "photoURL", PageTitle = "Foto" };
+            form.FormPages.Add(namePage);
+            form.FormPages.Add(emailPage);
+            form.FormPages.Add(passwordPage);
+            form.FormPages.Add(jobDescriptionPage);
+            form.FormPages.Add(photoURLPage);
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            form.ShowDialog();
+            if (form.Success)
+            {
+                string name = (string)form["name"].PageValue;
+                string email = (string)form["email"].PageValue;
+                string password = (string)form["password"].PageValue;
+                string jobDescription = (string)form["jobDescription"].PageValue;
+                string photoURL = (string)form["photoURL"].PageValue;
+                name = name == "" ? null : name;
+                email = email == "" ? null : email;
+                password = password == "" ? null : password;
+                jobDescription = jobDescription == "" ? null : jobDescription;
+                photoURL = photoURL == "" ? null : photoURL;
+                if (name != null && email != null)
+                {
+                    Person person = new Person
+                    {
+                        Email = email,
+                        JobDescription = jobDescription,
+                        Name = name,
+                        Password = password,
+                        PhotoURL = photoURL
+                    };
+
+                    // Launch thread to update the project.
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.AddPerson));
+                    thread.Start(person);
+                }
+            }
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+        }
+
+        public void AddPerson(object obj)
+        {
+            Person person = obj as Person;
+            DataServiceClient client = new DataServiceClient();
+            client.CreatePerson(person);
+            client.Close();
+        }
+
+        public void EditPerson_Drop(object sender, DragEventArgs e)
+        {
+            var dataObj = e.Data as DataObject;
+            GenericControlLib.UserButtonControl userControl = dataObj.GetData("UserButtonControl") as GenericControlLib.UserButtonControl;
+            Person person = userControl.Person;
+            PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+            PopupFormControlLib.TextBoxPage namePage = new PopupFormControlLib.TextBoxPage { PageName = "name", PageTitle = "Nome", DefaultValue = person.Name };
+            PopupFormControlLib.TextBoxPage emailPage = new PopupFormControlLib.TextBoxPage { PageName = "email", PageTitle = "Email", DefaultValue = person.Email };
+            PopupFormControlLib.PasswordBoxPage passwordPage = new PopupFormControlLib.PasswordBoxPage { PageName = "password", PageTitle = "Password", DefaultValue = person.Password == null ? null : "aaaaaaaaaaaaaaaa" };
+            PopupFormControlLib.TextAreaPage jobDescriptionPage = new PopupFormControlLib.TextAreaPage { PageName = "jobDescription", PageTitle = "Funções", DefaultValue = person.JobDescription };
+            PopupFormControlLib.TextBoxPage photoURLPage = new PopupFormControlLib.TextBoxPage { PageName = "photoURL", PageTitle = "Foto", DefaultValue = person.PhotoURL };
+            form.FormPages.Add(namePage);
+            form.FormPages.Add(emailPage);
+            form.FormPages.Add(passwordPage);
+            form.FormPages.Add(jobDescriptionPage);
+            form.FormPages.Add(photoURLPage);
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            form.ShowDialog();
+            if (form.Success)
+            {
+                string name = (string)form["name"].PageValue;
+                string email = (string)form["email"].PageValue;
+                string password = (string)form["password"].PageValue;
+                string jobDescription = (string)form["jobDescription"].PageValue;
+                string photoURL = (string)form["photoURL"].PageValue;
+                name = name == "" ? null : name;
+                email = email == "" ? null : email;
+                jobDescription = jobDescription == "" ? null : jobDescription;
+                photoURL = photoURL == "" ? null : photoURL;
+                if (name != null && email != null)
+                {
+                    person.Name = name;
+                    person.Email = email;
+                    person.JobDescription = jobDescription;
+                    person.PhotoURL = photoURL;
+                    person.Password = ((PopupFormControlLib.PasswordBoxPage)form["password"]).Changed ? password : null;
+
+                    // Launch thread to update the project.
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.EditPerson));
+                    thread.Start(person);
+                }
+            }
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+        }
+
+        public void EditPerson(object obj)
+        {
+            Person person = obj as Person;
+            DataServiceClient client = new DataServiceClient();
+            if (person.Password != null)
+            {
+                ApplicationController.Instance.IgnoreNextGlobalPeopleUpdate = true;
+                client.UpdatePersonPassword(person.PersonID, person.Password == "" ? null : person.Password);
+            }
+            client.UpdatePerson(person);
+            client.Close();
+        }
+
+        public void DeletePerson_Drop(object sender, DragEventArgs e)
+        {
+            var dataObj = e.Data as DataObject;
+            GenericControlLib.UserButtonControl userControl = dataObj.GetData("UserButtonControl") as GenericControlLib.UserButtonControl;
+            if (userControl != null)
+            {
+                PopupFormControlLib.YesNoFormWindow form = new PopupFormControlLib.YesNoFormWindow();
+                form.FormTitle = "Apagar a Pessoa?";
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+                form.ShowDialog();
+                if (form.Success)
+                {
+                    // Launch thread to update the project.
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.DeletePerson));
+                    thread.Start(userControl);
+                }
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+            }
+        }
+
+        private void DeletePerson(object obj)
+        {
+            GenericControlLib.UserButtonControl userControl = obj as GenericControlLib.UserButtonControl;
+            DataServiceClient client = new DataServiceClient();
+            client.DeletePerson(userControl.Person.PersonID);
+            client.Close();
         }
     }
 }

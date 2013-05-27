@@ -39,6 +39,6 @@
 			</Border>
 		</Border>
 		<TextBlock TextAlignment="Left" Grid.Column="1" TextWrapping="Wrap" Text="{Binding ProjectName}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Left" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="5,5,20,5" IsHitTestVisible="False" TextTrimming="WordEllipsis"/>
-		<Image Margin="5" HorizontalAlignment="Center" Grid.Column="0" Source="{Binding ProjectImageSource}" VerticalAlignment="Center" IsHitTestVisible="False"/>
+		<Image Margin="5,25" HorizontalAlignment="Center" Grid.Column="0" Source="{Binding ProjectImageSource}" VerticalAlignment="Center" IsHitTestVisible="False"/>
 	</Grid>
 </UserControl>

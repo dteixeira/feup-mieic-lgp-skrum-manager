@@ -25,7 +25,7 @@ namespace GenericControlLib
         private string AdornerLayer = "dragdropadornerLayer";
         private Canvas _adornerLayer;
 
-        private int buttonFontSize = 40;
+        private int buttonFontSize = 30;
         private string projectName = "Projecto";
         private string projectimageSource = @"Images\mala.png";
 

@@ -113,6 +113,6 @@
                 <Rectangle x:Name="PanRightScroller" Style="{DynamicResource RectangleStyle1}" Grid.Column="3" Height="auto" Margin="0" Width="auto" MouseEnter="ContentScrollRight_Start" MouseLeave="ScrollRight_Cancel"/>
             </Grid>
         </Grid>
-        <GenericControlLib:SideMenuControl Grid.Column="1" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Center" FirstVisibility="Visible" FirstType="Add" SecondVisibility="Visible" SecondType="Edit" ThirdVisibility="Visible" ThirdType="Remove"/>
+        <GenericControlLib:SideMenuControl Grid.Column="1" HorizontalAlignment="Right" Margin="0" VerticalAlignment="Center" FirstVisibility="Visible" FirstType="Add" SecondVisibility="Visible" SecondType="Edit" ThirdVisibility="Visible" ThirdType="Remove" FirstMenuClickEvent="AddPerson_Click" SecondMenuDropEvent="EditPerson_Drop" ThirdMenuDropEvent="DeletePerson_Drop" />
     </Grid>
 </UserControl>

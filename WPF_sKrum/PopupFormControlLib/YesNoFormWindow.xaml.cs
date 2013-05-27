@@ -49,7 +49,7 @@ namespace PopupFormControlLib
             }
         }
 
-        private void Close_MouseLeftButtonDown(object sender, RoutedEventArgs e)
+        private void Close_MouseLeftButtonUp(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -106,13 +106,13 @@ namespace PopupFormControlLib
         {
         }
 
-        private void NoButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void NoButton_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.Success = false;
             this.Close();
         }
 
-        private void YesButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void YesButton_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.Success = true;
             this.Close();
