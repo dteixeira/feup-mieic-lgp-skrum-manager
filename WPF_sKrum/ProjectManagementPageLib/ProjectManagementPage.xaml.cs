@@ -27,6 +27,7 @@ namespace ProjectManagementPageLib
         private ScrollSelected currentScroll;
         private float scrollValueContent = 0.0f;
         private float scrollValueLetters = 0.0f;
+        private string currentLetter;
 
         private Dictionary<string, List<Project>> dic;
 
@@ -67,7 +68,6 @@ namespace ProjectManagementPageLib
             // Register for project change notifications.
             this.DataChangeDelegate = new ApplicationController.DataModificationHandler(this.DataChangeHandler);
             ApplicationController.Instance.DataChangedEvent += this.DataChangeDelegate;
-
             PopulateProjectManagementPage();
         }
 
@@ -107,6 +107,7 @@ namespace ProjectManagementPageLib
                     if (s == "A")
                     {
                         letterA = letra;
+                        this.currentLetter = "A";
                     }
                 }
 
@@ -132,6 +133,7 @@ namespace ProjectManagementPageLib
             letter.LetterStyle = "TextBlockSelectedStyle";
 
             // Fill with projects.
+            this.currentLetter = letter.LetterText;
             FillProjects(dic[letter.LetterText]);
         }
 
@@ -176,7 +178,7 @@ namespace ProjectManagementPageLib
                         button.ProjectImageSource = "Images/mala.png"; 
                     }
 
-                    //TODO check
+                    // Create project control.
                     button.Width = Double.NaN;
                     button.Height = Double.NaN;
                     button.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
@@ -328,10 +330,10 @@ namespace ProjectManagementPageLib
             try
             {
                 // Respond only to project modifications.
-                if (notification == NotificationType.ProjectModification)
+                if (notification == NotificationType.GlobalProjectModification || notification == NotificationType.ProjectModification)
                 {
                     // Repopulate the taskboard with the current project.
-                    this.PopulateProjectManagementPage();
+                    this.FillProjects(dic[this.currentLetter]);
                 }
             }
             catch (Exception e)
