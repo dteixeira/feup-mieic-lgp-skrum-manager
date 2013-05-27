@@ -34,7 +34,7 @@ namespace ProjectTeamManagementPageLib
         public ApplicationPages PageType { get; set; }
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
 
-        private ObservableCollection<UserButtonControl> teamCollection = new ObservableCollection<UserButtonControl>();
+        private ObservableCollection<UserButtonVerticalControl> teamCollection = new ObservableCollection<UserButtonVerticalControl>();
         
 
         public ProjectTeamManagementPage(object context)
@@ -90,13 +90,14 @@ namespace ProjectTeamManagementPageLib
                 foreach (var person in team.Select((s, i) => new { Value = s, Index = i }))
                 {
                     // Create the person.
-                    UserButtonControl personControl = new UserButtonControl
+                    UserButtonVerticalControl personControl = new UserButtonVerticalControl
                     {
-                        
+                        UserName = person.Value.Name,
+                        UserPhoto = person.Value.PhotoURL
                     };
                     personControl.Width = Double.NaN;
                     personControl.Height = Double.NaN;
-                    personControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                    personControl.VerticalAlignment = System.Windows.VerticalAlignment.Center;
                     personControl.IsDraggable = true;
 
                     teamCollection.Add(personControl);

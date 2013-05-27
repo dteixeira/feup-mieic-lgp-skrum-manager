@@ -100,7 +100,7 @@
                 </Grid.RowDefinitions>
                 <TextBlock Margin="0" FontFamily="Source Sans Pro" FontSize="18.667" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="Scrum Master"/></TextBlock>
                 <Rectangle Panel.ZIndex="1" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0" Grid.Row="1" AllowDrop="True" Fill="Transparent" Drop="Rectangle_Drop"/>
-                <GenericControlLib:UserButtonControl Height="Auto" Width="Auto" Margin="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Bottom" />
+                <GenericControlLib:UserButtonVerticalControl Height="Auto" Width="Auto" Margin="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
             </Grid>
         </Grid>
     </Grid>
