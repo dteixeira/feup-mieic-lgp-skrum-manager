@@ -71,8 +71,6 @@ namespace ProjectManagementPageLib
             PopulateProjectManagementPage();
         }
 
-
-
         private void PopulateProjectManagementPage()
         {
             try
@@ -94,15 +92,26 @@ namespace ProjectManagementPageLib
                 }
 
                 //Fill the scroller with  the letters
+                GenericControlLib.LetterControl letterA = null;
                 foreach (string s in dic.Keys)
                 {
                     GenericControlLib.LetterControl letra = new GenericControlLib.LetterControl();
                     letra.LetterText = s;
-                    letra.Width = Double.NaN;
+                    letra.Width = 120;
                     letra.Height = Double.NaN;
+                    letra.LetterSize = 80;
                     letra.MouseLeftButtonDown += new MouseButtonEventHandler(letterSelected);
                     Letters.Children.Add(letra);
+
+                    // Save letter 'A'.
+                    if (s == "A")
+                    {
+                        letterA = letra;
+                    }
                 }
+
+                // Select first letter.
+                this.letterSelected(letterA, null);
             }
             catch (Exception e)
             {
@@ -112,16 +121,22 @@ namespace ProjectManagementPageLib
 
         private void letterSelected(object sender, EventArgs e)
         {
-            //TODO
-            //Limpar formatação das outras letras
-            //Mudar formatação da letra seleccionada
-            GenericControlLib.LetterControl letra = (GenericControlLib.LetterControl)sender;
-            FillProjects(dic[letra.LetterText]);
+            // Handle visual selection
+            GenericControlLib.LetterControl letter = (GenericControlLib.LetterControl)sender;
+            foreach (var child in this.Letters.Children)
+            {
+                ((GenericControlLib.LetterControl)child).BackgroundRectangleStyle = "RectangleStyle1";
+                ((GenericControlLib.LetterControl)child).LetterStyle = "TextBlockStyle";
+            }
+            letter.BackgroundRectangleStyle = "RectangleSelectedStyle";
+            letter.LetterStyle = "TextBlockSelectedStyle";
 
+            // Fill with projects.
+            FillProjects(dic[letter.LetterText]);
         }
 
         /// <summary>
-        ///     Fills the content placeholder with the project usercontrols
+        /// Fills the content placeholder with the project usercontrols
         /// </summary>
         /// <param name="projects">List of projects with name started by the desired letter</param>
         private void FillProjects(List<Project> projects)
@@ -129,22 +144,48 @@ namespace ProjectManagementPageLib
             try
             {
                 this.Contents.Children.Clear();
+                int row = 3;
+                int column = -1;
                 foreach (Project p in projects)
                 {
+                    // Create project control.
                     GenericControlLib.ProjectButtonControl button = new GenericControlLib.ProjectButtonControl();
                     button.ProjectName = p.Name;
-                    if (p.Password != "")
-                    { button.ProjectImageSource = "Images/aloquete.png"; }
+
+                    // Create proper grids.
+                    ++row;
+                    if (row > 2)
+                    {
+                        row = 0;
+                        column++;
+                    }
+                    if (row == 0)
+                    {
+                        ColumnDefinition columnDef = new ColumnDefinition();
+                        columnDef.Width = new GridLength(1, GridUnitType.Star);
+                        this.Contents.ColumnDefinitions.Add(columnDef);
+                    }
+
+                    // Set correct image.
+                    if (p.Password != null)
+                    { 
+                        button.ProjectImageSource = "Images/aloquete.png"; 
+                    }
                     else
-                    { button.ProjectImageSource = "Images/mala.png"; }
+                    { 
+                        button.ProjectImageSource = "Images/mala.png"; 
+                    }
 
                     //TODO check
-                    button.Width = 300;
-                    button.Height = 100;
-                    button.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-                    button.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                    button.Width = Double.NaN;
+                    button.Height = Double.NaN;
+                    button.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                    button.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
                     button.IsDraggable = true;
                     button.Project = p;
+                    button.SetValue(Grid.ColumnProperty, column);
+                    button.SetValue(Grid.RowProperty, row);
+                    button.Margin = new Thickness(10, 10, 10, 10);
                     this.Contents.Children.Add(button);
                 }
             }
@@ -281,7 +322,6 @@ namespace ProjectManagementPageLib
             // Unregister for notifications.
             ApplicationController.Instance.DataChangedEvent -= this.DataChangeDelegate;
         }
-
 
         public void DataChangeHandler(object sender, NotificationType notification)
         {

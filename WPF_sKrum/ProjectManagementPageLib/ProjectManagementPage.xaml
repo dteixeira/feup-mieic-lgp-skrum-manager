@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:GenericControlLib="clr-namespace:GenericControlLib;assembly=GenericControlLib" x:Class="ProjectManagementPageLib.ProjectManagementPage" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300" Background="{DynamicResource BackgroundBrush}">
+             d:DesignHeight="1074" d:DesignWidth="1661" Background="{DynamicResource BackgroundBrush}">
     <UserControl.Resources>
         <Style x:Key="RectangleStyle1" TargetType="{x:Type Rectangle}">
         	<Setter Property="Fill" Value="{DynamicResource BackgroundBrush}"/>
@@ -19,18 +19,17 @@
 
 	<Grid>
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="90*"/>
-			<ColumnDefinition Width="10*"/>
+			<ColumnDefinition/>
+			<ColumnDefinition Width="100"/>
 		</Grid.ColumnDefinitions>
 
 		<Grid x:Name="UsableArea" Margin="0">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="30*"/>
-				<RowDefinition Height="55*"/>
-				<RowDefinition Height="15*"/>
+				<RowDefinition Height="110"/>
+				<RowDefinition/>
 			</Grid.RowDefinitions>
 
-			<Grid x:Name="UpperRowArea" Margin="0" Grid.Row="0">
+			<Grid x:Name="UpperRowArea" Margin="0,15,0,0" Grid.Row="0">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="8*"/>
 					<ColumnDefinition Width="80px"/>
@@ -52,7 +51,7 @@
 					</Image.RenderTransform>
 				</Image>
 				<ScrollViewer x:Name="LetterScroll" Margin="0" Grid.Column="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
-					<StackPanel x:Name="Letters" Orientation="Horizontal" Height="Auto" Width="Auto" Margin="0,15"/>
+					<StackPanel x:Name="Letters" Orientation="Horizontal" Height="Auto" Width="Auto" Margin="0"/>
 				</ScrollViewer>
 				<Rectangle x:Name="UpperPanRightScroller" Style="{DynamicResource RectangleStyle1}" Grid.Column="3" Height="auto" Margin="0" Width="auto" MouseEnter="ScrollRight_Start" MouseLeave="ScrollRight_Cancel"/>
 				<Image x:Name="UpperPanRight" Focusable="True" IsHitTestVisible="False" Margin="10" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" Source="Images/darkarrow.png" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="10" >
@@ -67,7 +66,7 @@
 				</Image>
 			</Grid>
 
-			<Grid x:Name="CenterRowArea" Margin="0" Grid.Row="1">
+			<Grid x:Name="CenterRowArea" Margin="0,30,0,50" Grid.Row="1">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="5*"/>
 					<ColumnDefinition Width="100px"/>
@@ -91,7 +90,13 @@
 
 				<ScrollViewer x:Name="ContentScroll" Margin="0" Grid.Column="2" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Disabled">
 					<StackPanel x:Name="ContentPlaceholder" Orientation="Horizontal" Margin="0">
-						<UniformGrid Height="auto" Width="auto" x:Name="Contents" Margin="0" Rows="2" HorizontalAlignment="Center" VerticalAlignment="Stretch"/>
+						<Grid x:Name="Contents" Margin="0">
+							<Grid.RowDefinitions>
+								<RowDefinition/>
+								<RowDefinition/>
+								<RowDefinition/>
+							</Grid.RowDefinitions>
+						</Grid>
 					</StackPanel>
 				</ScrollViewer>
 				<Image x:Name="PanRight" Focusable="True" IsHitTestVisible="False" Margin="10" Grid.Column="3" HorizontalAlignment="Left" VerticalAlignment="Center" Source="Images/darkarrow.png" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="10" >

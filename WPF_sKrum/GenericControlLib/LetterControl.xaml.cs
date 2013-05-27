@@ -38,5 +38,21 @@ namespace GenericControlLib
 			get{return letterSize;}
 			set{letterSize=value;}
 		}
+
+        public string BackgroundRectangleStyle
+        {
+            set
+            {
+                this.RectBackground.SetResourceReference(Rectangle.StyleProperty, value);
+            }
+        }
+
+        public string LetterStyle
+        {
+            set
+            {
+                this.Letter.SetResourceReference(TextBlock.StyleProperty, value);
+            }
+        }
     }
 }

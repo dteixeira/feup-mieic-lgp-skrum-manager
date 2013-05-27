@@ -9,22 +9,28 @@
 		<Style x:Key="RectangleStyle1" TargetType="{x:Type Rectangle}">
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Fill" Value="{DynamicResource KinectOnBarBrush}"/>
+                    <Setter Property="Fill" Value="{DynamicResource Gray7Brush}"/>
                 </Trigger>
             </Style.Triggers>
-            <Setter Property="Fill" Value="{DynamicResource BackgroundBrush}"/>
+            <Setter Property="Fill" Value="{DynamicResource Gray1Brush}"/>
 		</Style>
-			<Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
-				<Style.Triggers>
-					<DataTrigger Binding="{Binding ElementName=RectBackground, Path=IsMouseOver}" Value="True">
-						<Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}" />
-					</DataTrigger >
-				</Style.Triggers>
-				<Setter Property="Foreground" Value="{DynamicResource KinectOnBarBrush}"/>
-			</Style>
+		<Style x:Key="RectangleSelectedStyle" TargetType="{x:Type Rectangle}">
+            <Setter Property="Fill" Value="{DynamicResource Gray4Brush}"/>
+		</Style>
+		<Style x:Key="TextBlockSelectedStyle" TargetType="{x:Type TextBlock}">
+			<Setter Property="Foreground" Value="{DynamicResource Gray1Brush}"/>
+		</Style>
+		<Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+			<Style.Triggers>
+				<DataTrigger Binding="{Binding ElementName=RectBackground, Path=IsMouseOver}" Value="True">
+					<Setter Property="Foreground" Value="{DynamicResource BackgroundBrush}" />
+				</DataTrigger >
+			</Style.Triggers>
+			<Setter Property="Foreground" Value="{DynamicResource KinectOnBarBrush}"/>
+		</Style>
 	</UserControl.Resources>
 	<Grid x:Name="LayoutRoot" Margin="0">
-    	<TextBlock x:Name="Letter" HorizontalAlignment="Center" Margin="25" TextWrapping="Wrap" Text="{Binding LetterText}" VerticalAlignment="Center" FontSize="{Binding LetterSize}" FontFamily="Source Sans Pro" Style="{DynamicResource TextBlockStyle}" Panel.ZIndex="999" IsHitTestVisible="False" />
+    	<TextBlock x:Name="Letter" HorizontalAlignment="Center" Margin="25,5,25,10" TextWrapping="Wrap" Text="{Binding LetterText}" VerticalAlignment="Center" FontSize="{Binding LetterSize}" FontFamily="Open Sans" Style="{DynamicResource TextBlockStyle}" Panel.ZIndex="999" IsHitTestVisible="False" TextAlignment="Center" />
     	<Rectangle x:Name="RectBackground" Height="auto" Margin="0" Width="auto" Style="{DynamicResource RectangleStyle1}"/>
     </Grid>
 </UserControl>
