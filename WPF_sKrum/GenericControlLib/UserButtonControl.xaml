@@ -29,15 +29,15 @@
     		<RowDefinition Height="Auto"/>
     		<RowDefinition Height="Auto"/>
     	</Grid.RowDefinitions>
-        <Border x:Name="OuterBorder" ClipToBounds="True" BorderThickness="1" Style="{DynamicResource BorderStyle}" Grid.RowSpan="2">
+        <Border x:Name="OuterBorder" ClipToBounds="True" BorderThickness="0,0,0,1" Style="{DynamicResource BorderStyle}" Grid.RowSpan="2">
             <Border x:Name="ShadowBorder" Background="Transparent" BorderBrush="Black" BorderThickness="10" Margin="-15,-12,-15,-20">
                 <Border.Effect>
                     <DropShadowEffect BlurRadius="15" Direction="300" ShadowDepth="0"/>
                 </Border.Effect>
             </Border>
         </Border>
-        <TextBlock TextAlignment="Left" TextWrapping="Wrap" Text="{Binding UserName}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="5" IsHitTestVisible="False" Grid.Row="1"/>
-        <Image Width="auto" Height="auto" Margin="5" HorizontalAlignment="Center" Source="{Binding UserPhoto}" VerticalAlignment="Center" IsHitTestVisible="False" />
+        <TextBlock TextAlignment="Left" TextWrapping="Wrap" Text="{Binding UserName}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="0,5" IsHitTestVisible="False" Grid.Row="1" MaxWidth="250"/>
+        <Image Width="auto" Height="auto" Source="{Binding UserPhoto}" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="250" MaxHeight="250" />
     </Grid>
 
 </UserControl>

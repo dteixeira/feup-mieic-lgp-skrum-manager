@@ -27,6 +27,7 @@ namespace PeopleManagementPageLib
         private ScrollSelected currentScroll;
         private float scrollValueContent = 0.0f;
         private float scrollValueLetters = 0.0f;
+        private string currentLetter;
 
         private Dictionary<string, List<Person>> dic;
 
@@ -75,32 +76,44 @@ namespace PeopleManagementPageLib
         {
             try
             {
-                //Build the dictionary with all the projects in the database
+                //Build the dictionary with all the persons in the database
                 dic = new Dictionary<string, List<Person>>();
-                List<Person> projects = ApplicationController.Instance.People;
+                List<Person> persons = ApplicationController.Instance.People;
 
-                var x = (from p in projects
+                var x = (from p in persons
                          orderby p.Name ascending
                          select p).ToList<Person>();
-                projects = x;
+                persons = x;
 
                 foreach (int letter in Enumerable.Range('A', 'Z' - 'A' + 1))
                 {
-                    dic[Convert.ToChar(letter).ToString()] = (from p in projects
+                    dic[Convert.ToChar(letter).ToString()] = (from p in persons
                                                               where p.Name[0].ToString().ToUpper().Equals(Convert.ToChar(letter).ToString())
                                                               select p).ToList<Person>();
                 }
 
                 //Fill the scroller with  the letters
+                GenericControlLib.LetterControl letterA = null;
                 foreach (string s in dic.Keys)
                 {
                     GenericControlLib.LetterControl letra = new GenericControlLib.LetterControl();
                     letra.LetterText = s;
-                    letra.Width = Double.NaN;
+                    letra.Width = 120;
                     letra.Height = Double.NaN;
+                    letra.LetterSize = 80;
                     letra.MouseLeftButtonDown += new MouseButtonEventHandler(letterSelected);
                     Letters.Children.Add(letra);
+
+                    // Save letter 'A'.
+                    if (s == "A")
+                    {
+                        letterA = letra;
+                        this.currentLetter = "A";
+                    }
                 }
+
+                // Select first letter.
+                this.letterSelected(letterA, null);
             }
             catch (Exception e)
             {
@@ -110,36 +123,65 @@ namespace PeopleManagementPageLib
 
         private void letterSelected(object sender, EventArgs e)
         {
-            //TODO
-            //Limpar formatação das outras letras
-            //Mudar formatação da letra seleccionada
-            GenericControlLib.LetterControl letra = (GenericControlLib.LetterControl)sender;
-            FillProjects(dic[letra.LetterText]);
+            // Handle visual selection
+            GenericControlLib.LetterControl letter = (GenericControlLib.LetterControl)sender;
+            foreach (var child in this.Letters.Children)
+            {
+                ((GenericControlLib.LetterControl)child).BackgroundRectangleStyle = "RectangleStyle1";
+                ((GenericControlLib.LetterControl)child).LetterStyle = "TextBlockStyle";
+            }
+            letter.BackgroundRectangleStyle = "RectangleSelectedStyle";
+            letter.LetterStyle = "TextBlockSelectedStyle";
+
+            // Fill with people.
+            this.currentLetter = letter.LetterText;
+            FillPersons(dic[letter.LetterText]);
 
         }
 
         /// <summary>
-        ///     Fills the content placeholder with the project usercontrols
+        ///     Fills the content placeholder with the user usercontrols
         /// </summary>
-        /// <param name="projects">List of projects with name started by the desired letter</param>
-        private void FillProjects(List<Person> projects)
+        /// <param name="persons">List of persons with name started by the desired letter</param>
+        private void FillPersons(List<Person> persons)
         {
             try
             {
                 this.Contents.Children.Clear();
-                foreach (Person p in projects)
+                int row = 2;
+                int column = -1;
+                foreach (Person p in persons)
                 {
+                    // Create person control.
                     GenericControlLib.UserButtonControl button = new GenericControlLib.UserButtonControl();
                     button.UserName = p.Name;
+
+                    // Create proper grids.
+                    ++row;
+                    if (row > 1)
+                    {
+                        row = 0;
+                        column++;
+                    }
+                    if (row == 0)
+                    {
+                        ColumnDefinition columnDef = new ColumnDefinition();
+                        columnDef.Width = new GridLength(1, GridUnitType.Star);
+                        this.Contents.ColumnDefinitions.Add(columnDef);
+                    }
+
                     button.UserPhoto = p.PhotoURL;
 
-                    //TODO check
-                    button.Width = 300;
-                    button.Height = 100;
-                    button.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-                    button.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                    // Create persons control.
+                    button.Width = Double.NaN;
+                    button.Height = Double.NaN;
+                    button.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                    button.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
                     button.IsDraggable = true;
                     button.Person = p;
+                    button.SetValue(Grid.ColumnProperty, column);
+                    button.SetValue(Grid.RowProperty, row);
+                    //button.Margin = new Thickness(10, 10, 10, 10);
                     this.Contents.Children.Add(button);
                 }
             }
@@ -149,10 +191,10 @@ namespace PeopleManagementPageLib
             }
         }
 
-        private void projectSelected(object sender, EventArgs e)
+        private void userSelected(object sender, EventArgs e)
         {
-            GenericControlLib.ProjectButtonControl project = (GenericControlLib.ProjectButtonControl)sender;
-            MessageBox.Show(project.ProjectName);
+            GenericControlLib.UserButtonControl person = (GenericControlLib.UserButtonControl)sender;
+            MessageBox.Show(person.UserName);
         }
 
 
@@ -282,10 +324,10 @@ namespace PeopleManagementPageLib
         {
             try
             {
-                // Respond only to project modifications.
-                if (notification == NotificationType.ProjectModification)
+                // Respond only to user modifications.
+                if (notification == NotificationType.GlobalPersonModification)
                 {
-                    // Repopulate the taskboard with the current project.
+                    // Repopulate with the changes.
                     this.PopulatePeopleManagement();
                 }
             }
