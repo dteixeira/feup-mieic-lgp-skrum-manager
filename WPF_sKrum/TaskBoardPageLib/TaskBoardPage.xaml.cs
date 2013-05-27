@@ -102,6 +102,7 @@ namespace TaskBoardPageLib
                         Story = story.Value,
                         IsDraggable = false
                     };
+                    storyControl.Margin = new Thickness(0, 10, 0, 10);
                     storyControl.Width = Double.NaN;
                     storyControl.Height = Double.NaN;
                     storyControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
