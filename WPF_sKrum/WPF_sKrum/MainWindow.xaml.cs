@@ -379,6 +379,7 @@ namespace WPFApplication
 
             PopupSelectionControlLib.SelectionWindow form1 = new PopupSelectionControlLib.SelectionWindow();
             PopupSelectionControlLib.ProjectSelectionPage page1 = new PopupSelectionControlLib.ProjectSelectionPage();
+            page1.PageTitle = "Escolha do Projecto";
             form1.FormPage = page1;
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
             form1.ShowDialog();

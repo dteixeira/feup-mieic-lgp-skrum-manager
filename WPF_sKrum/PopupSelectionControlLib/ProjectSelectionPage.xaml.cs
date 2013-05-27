@@ -31,6 +31,7 @@ namespace PopupSelectionControlLib
         private ScrollSelected currentScroll;
         private float scrollValueContent = 0.0f;
         private float scrollValueLetters = 0.0f;
+        private string currentLetter;
 
         private Dictionary<string, List<Project>> dic;
 
@@ -84,19 +85,31 @@ namespace PopupSelectionControlLib
                 {
                     dic[Convert.ToChar(letter).ToString()] = (from p in projects
                                                               where p.Name[0].ToString().ToUpper().Equals(Convert.ToChar(letter).ToString())
-                                              select p).ToList<Project>();
+                                                              select p).ToList<Project>();
                 }
-                            
+
                 //Fill the scroller with  the letters
+                GenericControlLib.LetterControl letterA = null;
                 foreach (string s in dic.Keys)
                 {
-                        GenericControlLib.LetterControl letra = new GenericControlLib.LetterControl();
-                        letra.LetterText = s;
-                        letra.Width = Double.NaN;
-                        letra.Height = Double.NaN;
-                        letra.MouseLeftButtonDown += new MouseButtonEventHandler(letterSelected);
-                        Letters.Children.Add(letra);
+                    GenericControlLib.LetterControl letra = new GenericControlLib.LetterControl();
+                    letra.LetterText = s;
+                    letra.Width = 120;
+                    letra.Height = Double.NaN;
+                    letra.LetterSize = 80;
+                    letra.MouseLeftButtonDown += new MouseButtonEventHandler(letterSelected);
+                    Letters.Children.Add(letra);
+
+                    // Save letter 'A'.
+                    if (s == "A")
+                    {
+                        letterA = letra;
+                        this.currentLetter = "A";
+                    }
                 }
+
+                // Select first letter.
+                this.letterSelected(letterA, null);
             }
             catch (Exception e)
             {
@@ -106,12 +119,19 @@ namespace PopupSelectionControlLib
 
         private void letterSelected(object sender, EventArgs e)
         {
-            //TODO
-            //Limpar formatação das outras letras
-            //Mudar formatação da letra seleccionada
-            GenericControlLib.LetterControl letra = (GenericControlLib.LetterControl)sender;
-            FillProjects(dic[letra.LetterText]);
+            // Handle visual selection
+            GenericControlLib.LetterControl letter = (GenericControlLib.LetterControl)sender;
+            foreach (var child in this.Letters.Children)
+            {
+                ((GenericControlLib.LetterControl)child).BackgroundRectangleStyle = "RectangleStyle1";
+                ((GenericControlLib.LetterControl)child).LetterStyle = "TextBlockStyle";
+            }
+            letter.BackgroundRectangleStyle = "RectangleSelectedStyle";
+            letter.LetterStyle = "TextBlockSelectedStyle";
 
+            // Fill with projects.
+            this.currentLetter = letter.LetterText;
+            FillProjects(dic[letter.LetterText]);
         }
 
         /// <summary>
@@ -123,21 +143,49 @@ namespace PopupSelectionControlLib
             try
             {
                 this.Contents.Children.Clear();
+                int row = 3;
+                int column = -1;
                 foreach (Project p in projects)
                 {
+                    // Create project control.
                     GenericControlLib.ProjectButtonControl button = new GenericControlLib.ProjectButtonControl();
                     button.ProjectName = p.Name;
-                    if (p.Password != "")
-                    {button.ProjectImageSource = "Images/aloquete.png";}
-                    else
-                    {button.ProjectImageSource = "Images/mala.png";}
 
-                    //TODO check
-                    button.Width = 275;
-                    button.Height = 100;
-                    button.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-                    button.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+                    // Create proper grids.
+                    ++row;
+                    if (row > 2)
+                    {
+                        row = 0;
+                        column++;
+                    }
+                    if (row == 0)
+                    {
+                        ColumnDefinition columnDef = new ColumnDefinition();
+                        columnDef.Width = new GridLength(1, GridUnitType.Star);
+                        this.Contents.ColumnDefinitions.Add(columnDef);
+                    }
+
+                    // Set correct image.
+                    if (p.Password != null)
+                    { 
+                        button.ProjectImageSource = "Images/aloquete.png"; 
+                    }
+                    else
+                    { 
+                        button.ProjectImageSource = "Images/mala.png"; 
+                    }
+
+                    // Create project control.
+                    button.Width = Double.NaN;
+                    button.Height = Double.NaN;
+                    button.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                    button.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                    button.Project = p;
+                    button.SetValue(Grid.ColumnProperty, column);
+                    button.SetValue(Grid.RowProperty, row);
+                    button.Margin = new Thickness(10, 10, 10, 10);
                     button.MouseLeftButtonDown += new MouseButtonEventHandler(projectSelected);
+
                     this.Contents.Children.Add(button);
                 }
             }
@@ -173,12 +221,12 @@ namespace PopupSelectionControlLib
                 case ScrollSelected.Letters:
                     scrollValueLetters -= 10.0f;
                     if (scrollValueLetters < 0.0f) scrollValueLetters = 0.0f;
-                        LetterScroll.ScrollToHorizontalOffset(scrollValueLetters);
+                    LetterScroll.ScrollToHorizontalOffset(scrollValueLetters);
                     break;
                 default:
                     scrollValueContent -= 10.0f;
                     if (scrollValueContent < 0.0f) scrollValueContent = 0.0f;
-                        ContentScroll.ScrollToHorizontalOffset(scrollValueContent);            
+                    ContentScroll.ScrollToHorizontalOffset(scrollValueContent);
                     break;
             }
         }
@@ -191,17 +239,17 @@ namespace PopupSelectionControlLib
                 case ScrollSelected.Letters:
                     scrollValueLetters += 10.0f;
                     if (scrollValueLetters > LetterScroll.ScrollableWidth) scrollValueLetters = (float)LetterScroll.ScrollableWidth;
-                        LetterScroll.ScrollToHorizontalOffset(scrollValueLetters);
+                    LetterScroll.ScrollToHorizontalOffset(scrollValueLetters);
                     break;
                 default:
                     scrollValueContent += 10.0f;
                     if (scrollValueContent > ContentScroll.ScrollableWidth) scrollValueContent = (float)ContentScroll.ScrollableWidth;
-                        ContentScroll.ScrollToHorizontalOffset(scrollValueContent);                
+                    ContentScroll.ScrollToHorizontalOffset(scrollValueContent);
                     break;
             }
 
         }
-        
+
         private void ScrollLeft_Start(object sender, MouseEventArgs e)
         {
             currentScroll = ScrollSelected.Letters;

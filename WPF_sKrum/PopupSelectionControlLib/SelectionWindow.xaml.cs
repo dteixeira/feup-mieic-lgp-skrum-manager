@@ -100,6 +100,7 @@ namespace PopupSelectionControlLib
         private void window_Loaded(object sender, RoutedEventArgs e)
         {
             this.FormContent.Children.Add((UserControl) FormPage);
+            this.FieldNameLabel.Content = FormPage.PageTitle;
         }
     }
 }
