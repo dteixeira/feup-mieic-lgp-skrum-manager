@@ -50,6 +50,15 @@ namespace PopupFormControlLib
 
         public object PageValue { get; set; }
 
+        public double DefaultValue
+        {
+            set
+            {
+                this.PageValue = value;
+                this.NumericSpinner.SpinnerValue = value;
+            }
+        }
+
         public void SpinnerChangeHandler(double value)
         {
             this.PageValue = value;

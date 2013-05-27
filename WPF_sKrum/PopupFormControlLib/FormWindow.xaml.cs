@@ -37,6 +37,8 @@ namespace PopupFormControlLib
             this.Success = false;
             this.FormPages = new List<IFormPage>();
             this.CurrentPageIndex = -1;
+            RightOpen.Visibility = Visibility.Visible;
+            RightClosed.Visibility = Visibility.Collapsed;
             if (ApplicationController.Instance.KinectSensor.FoundSensor())
             {
                 ApplicationController.Instance.KinectSensor.Pointers.KinectPointerMoved += new EventHandler<KinectPointerEventArgs>(this.KinectPointerMovedHandler);
@@ -50,7 +52,7 @@ namespace PopupFormControlLib
             }
         }
 
-        private void Close_MouseLeftButtonDown(object sender, RoutedEventArgs e)
+        private void Close_MouseLeftButtonUp(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
@@ -162,18 +164,18 @@ namespace PopupFormControlLib
             }
         }
 
-        private void NextButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void NextButton_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.NextPage();
         }
 
-        private void OkButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void OkButton_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.Success = true;
             this.Close();
         }
 
-        private void PreviousButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void PreviousButton_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.PreviousPage();
         }

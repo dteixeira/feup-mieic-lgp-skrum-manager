@@ -99,8 +99,8 @@ namespace GenericControlLib
                 _adorner = this.Clone();
                 _adorner.Opacity = 0.6;
                 _adorner.IsHitTestVisible = false;
-                _adorner.MaxWidth = 150;
-                _adorner.MaxHeight = 250;
+                _adorner.MaxWidth = 300;
+                _adorner.MaxHeight = 150;
 
                 _adornerLayer.Visibility = Visibility.Visible;
                 _adornerLayer.Children.Add(_adorner);

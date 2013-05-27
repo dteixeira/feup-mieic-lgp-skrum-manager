@@ -29,6 +29,14 @@ namespace PopupFormControlLib
 
         public object PageValue { get; set; }
 
+        public string DefaultValue
+        {
+            set { 
+                this.PageValue = value;
+                this.TextValue.Text = value;
+            }
+        }
+
         private void TextValue_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             this.PageValue = this.TextValue.Text;

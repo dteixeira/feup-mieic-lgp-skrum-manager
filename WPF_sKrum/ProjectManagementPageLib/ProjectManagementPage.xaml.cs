@@ -332,6 +332,15 @@ namespace ProjectManagementPageLib
                 // Respond only to project modifications.
                 if (notification == NotificationType.GlobalProjectModification || notification == NotificationType.ProjectModification)
                 {
+                    var keys = this.dic.Keys.ToList<string>();
+                    var projects = ApplicationController.Instance.Projects;
+                    foreach (string letter in keys)
+                    {
+                        dic[letter] = (from p in projects
+                                where p.Name[0].ToString().ToUpper() == letter
+                                select p).ToList<Project>();
+                    }
+
                     // Repopulate the taskboard with the current project.
                     this.FillProjects(dic[this.currentLetter]);
                 }
@@ -340,6 +349,119 @@ namespace ProjectManagementPageLib
             {
                 System.Console.WriteLine(e.Message);
             }
+        }
+
+        public void AddProject_Click(object sender, MouseEventArgs e)
+        {
+            PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+            PopupFormControlLib.TextBoxPage namePage = new PopupFormControlLib.TextBoxPage { PageName = "name", PageTitle = "Nome do Projecto" };
+            PopupFormControlLib.PasswordBoxPage passwordPage = new PopupFormControlLib.PasswordBoxPage { PageName = "password", PageTitle = "Password do Project" };
+            PopupFormControlLib.SpinnerPage durationPage = new PopupFormControlLib.SpinnerPage { PageName = "duration", PageTitle = "Duração do Sprint", Min = 1, Max = 9999, Increment = 1 };
+            form.FormPages.Add(namePage);
+            form.FormPages.Add(passwordPage);
+            form.FormPages.Add(durationPage);
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            form.ShowDialog();
+            if (form.Success)
+            {
+                string name = (string)form["name"].PageValue;
+                string password = (string)form["password"].PageValue;
+                int duration = (int)((double)form["duration"].PageValue);
+                password = password == "" ? null : password;
+                if (name != "")
+                {
+                    Project project = new Project
+                    {
+                        AlertLimit = 1,
+                        Name = name,
+                        Password = password,
+                        Speed = 1,
+                        SprintDuration = duration
+                    };
+                    // Launch thread to update the project.
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.AddProject));
+                    thread.Start(project);
+                }
+            }
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+        }
+
+        public void AddProject(object obj)
+        {
+            Project project = obj as Project;
+            DataServiceClient client = new DataServiceClient();
+            ApplicationController.Instance.IgnoreNextProjectUpdate = true;
+            client.CreateProject(project);
+            client.Close();
+        }
+
+        public void EditProject_Drop(object sender, DragEventArgs e)
+        {
+            var dataObj = e.Data as DataObject;
+            GenericControlLib.ProjectButtonControl projectControl = dataObj.GetData("ProjectButtonControl") as GenericControlLib.ProjectButtonControl;
+            Project project = projectControl.Project;
+            PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+            PopupFormControlLib.TextBoxPage namePage = new PopupFormControlLib.TextBoxPage { PageName = "name", PageTitle = "Nome do Projecto", DefaultValue = project.Name };
+            PopupFormControlLib.PasswordBoxPage passwordPage = new PopupFormControlLib.PasswordBoxPage { PageName = "password", PageTitle = "Password do Project", DefaultValue = project.Password == null ? null : "aaaaaaaaaaaaaaaa" };
+            PopupFormControlLib.SpinnerPage durationPage = new PopupFormControlLib.SpinnerPage { PageName = "duration", PageTitle = "Duração do Sprint", Min = 1, Max = 9999, Increment = 1, DefaultValue = project.SprintDuration };
+            form.FormPages.Add(namePage);
+            form.FormPages.Add(passwordPage);
+            form.FormPages.Add(durationPage);
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            form.ShowDialog();
+            if (form.Success)
+            {
+                string name = (string)form["name"].PageValue;
+                string password = (string)form["password"].PageValue;
+                int duration = (int)((double)form["duration"].PageValue);
+                if (name != "")
+                {
+                    project.Name = name;
+                    project.SprintDuration = duration;
+                    project.Password = ((PopupFormControlLib.PasswordBoxPage)form["password"]).Changed ? password : null;
+
+                    // Launch thread to update the project.
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.EditProject));
+                    thread.Start(project);
+                }
+            }
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+        }
+
+        public void EditProject(object obj)
+        {
+            Project project = obj as Project;
+            DataServiceClient client = new DataServiceClient();
+            if (project.Password != null)
+            {
+                ApplicationController.Instance.IgnoreNextGlobalProjectUpdate = true;
+                ApplicationController.Instance.IgnoreNextProjectUpdate = true;
+                client.UpdateProjectPassword(project.ProjectID, project.Password == "" ? null : project.Password);
+            }
+            ApplicationController.Instance.IgnoreNextProjectUpdate = true;
+            client.UpdateProject(project);
+            client.Close();
+        }
+
+        public void DeleteProject_Drop(object sender, DragEventArgs e)
+        {
+            var dataObj = e.Data as DataObject;
+            GenericControlLib.ProjectButtonControl projectControl = dataObj.GetData("ProjectButtonControl") as GenericControlLib.ProjectButtonControl;
+            if (projectControl != null)
+            {
+                // Launch thread to update the project.
+                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.DeleteProject));
+                thread.Start(projectControl);
+            }
+        }
+
+        private void DeleteProject(object obj)
+        {
+            GenericControlLib.ProjectButtonControl projectControl = obj as GenericControlLib.ProjectButtonControl;
+            DataServiceClient client = new DataServiceClient();
+            ApplicationController.Instance.IgnoreNextProjectUpdate = true;
+            client.DeleteProject(projectControl.Project.ProjectID);
+            client.Close();
         }
     }
 }

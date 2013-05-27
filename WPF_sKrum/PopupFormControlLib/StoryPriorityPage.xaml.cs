@@ -18,6 +18,8 @@ namespace PopupFormControlLib
 	/// </summary>
 	public partial class StoryPriorityPage : UserControl, IFormPage
 	{
+        ServiceLib.DataService.StoryPriority pageValue;
+
 		public StoryPriorityPage()
 		{
 			this.InitializeComponent();
@@ -29,7 +31,30 @@ namespace PopupFormControlLib
 
         public string PageTitle { get; set; }
 
-        public object PageValue { get; set; }
+        public object PageValue
+        {
+            get { return this.pageValue; }
+            set
+            {
+                this.pageValue = (ServiceLib.DataService.StoryPriority)value;
+                switch (this.pageValue)
+                {
+                    case ServiceLib.DataService.StoryPriority.Could:
+                        this.CouldButton_MouseLeftButtonDown(null, null);
+                        break;
+                    case ServiceLib.DataService.StoryPriority.Must:
+                        this.MustButton_MouseLeftButtonDown(null, null);
+                        break;
+                    case ServiceLib.DataService.StoryPriority.Should:
+                        this.ShouldButton_MouseLeftButtonDown(null, null);
+                        break;
+                    case ServiceLib.DataService.StoryPriority.Wont:
+                        this.WouldButton_MouseLeftButtonDown(null, null);
+                        break;
+
+                }
+            }
+        }
 
         private void MustButton_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {

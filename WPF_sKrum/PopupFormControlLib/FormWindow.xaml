@@ -59,7 +59,7 @@
 				<ColumnDefinition Width="8*" />
 				<ColumnDefinition Width="8*" />
 			</Grid.ColumnDefinitions>
-			<Image HorizontalAlignment="Center" MouseLeftButtonDown="Close_MouseLeftButtonDown" VerticalAlignment="Center" Grid.Column="4" Source="Images/cruz.png" Margin="5" Style="{StaticResource HoverZoomStyle}" Panel.ZIndex="1"/>
+			<Image HorizontalAlignment="Center" MouseLeftButtonUp="Close_MouseLeftButtonUp" VerticalAlignment="Center" Grid.Column="4" Source="Images/cruz.png" Margin="5" Style="{StaticResource HoverZoomStyle}" Panel.ZIndex="1"/>
 			<Label x:Name="FieldNameLabel" Content="Nome do Projecto" VerticalContentAlignment="Center" Foreground="White" FontSize="32" Padding="40,5,5,5"/>
 		</Grid>
 		<Grid x:Name="FormContent" Grid.RowSpan="2" Grid.Row="1">
@@ -72,11 +72,11 @@
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
 			<Grid x:Name="LeftButtonPlaceholder" Grid.Row="1" Margin="70,30,20,40">
-				<GenericControlLib:ButtonControl x:Name="PreviousButton" ButtonText="ANTERIOR" Visibility="Hidden" MouseLeftButtonDown="PreviousButton_MouseLeftButtonDown"/>
+				<GenericControlLib:ButtonControl x:Name="PreviousButton" ButtonText="ANTERIOR" Visibility="Hidden" MouseLeftButtonUp="PreviousButton_MouseLeftButtonUp"/>
 			</Grid>
 			<Grid x:Name="RightButtonPlaceholder" Grid.Row="1" Grid.Column="1" Margin="20,30,70,40">
-				<GenericControlLib:ButtonControl x:Name="NextButton" ButtonText="SEGUINTE" Visibility="Hidden" MouseLeftButtonDown="NextButton_MouseLeftButtonDown"/>
-				<GenericControlLib:ButtonControl x:Name="OkButton" ButtonText="CONFIRMAR" Visibility="Hidden" Panel.ZIndex="10" MouseLeftButtonDown="OkButton_MouseLeftButtonDown"/>
+				<GenericControlLib:ButtonControl x:Name="NextButton" ButtonText="SEGUINTE" Visibility="Hidden" MouseLeftButtonUp="NextButton_MouseLeftButtonUp"/>
+				<GenericControlLib:ButtonControl x:Name="OkButton" ButtonText="CONFIRMAR" Visibility="Hidden" Panel.ZIndex="10" MouseLeftButtonUp="OkButton_MouseLeftButtonUp"/>
 			</Grid>
 			<PageTransitions:PageTransition Background="Transparent" x:Name="PageTransitionLayer" Grid.ColumnSpan="2" Margin="0" />
 		</Grid>
