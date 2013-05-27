@@ -148,7 +148,7 @@ namespace PeopleManagementPageLib
             try
             {
                 this.Contents.Children.Clear();
-                int row = 2;
+                int row = 3;
                 int column = -1;
                 foreach (Person p in persons)
                 {
@@ -158,7 +158,7 @@ namespace PeopleManagementPageLib
 
                     // Create proper grids.
                     ++row;
-                    if (row > 1)
+                    if (row > 2)
                     {
                         row = 0;
                         column++;
@@ -175,7 +175,7 @@ namespace PeopleManagementPageLib
                     // Create persons control.
                     button.Width = Double.NaN;
                     button.Height = Double.NaN;
-                    button.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                    button.VerticalAlignment = System.Windows.VerticalAlignment.Center;
                     button.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
                     button.IsDraggable = true;
                     button.Person = p;

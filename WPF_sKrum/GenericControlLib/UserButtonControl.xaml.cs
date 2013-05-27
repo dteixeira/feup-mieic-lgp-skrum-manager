@@ -27,7 +27,7 @@ namespace GenericControlLib
 
         private int buttonFontSize = 20;
         private string userName = "Utilizador";
-        private string userPhoto = @"http://178.175.139.37/images/members/21.jpg";
+        private string userPhoto = @"Images/noperson.png";
 
         public UserButtonControl()
         {
@@ -50,7 +50,7 @@ namespace GenericControlLib
         public string UserPhoto
         {
             get { return this.userPhoto; }
-            set { this.userPhoto = value; }
+            set { if (value != null && value.Length>0) this.userPhoto = value; }
         }
 
         public bool IsDraggable
@@ -99,8 +99,8 @@ namespace GenericControlLib
                 _adorner = this.Clone();
                 _adorner.Opacity = 0.6;
                 _adorner.IsHitTestVisible = false;
-                _adorner.MaxWidth = 150;
-                _adorner.MaxHeight = 250;
+                //_adorner.MaxWidth = 300;
+                _adorner.MaxHeight = 125;
 
                 _adornerLayer.Visibility = Visibility.Visible;
                 _adornerLayer.Children.Add(_adorner);
