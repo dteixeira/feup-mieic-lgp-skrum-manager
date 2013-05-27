@@ -73,7 +73,7 @@
 					</ListView.ItemContainerStyle>
 				</ListView>
 			</ScrollViewer>
-			<GenericControlLib:SideMenuControl FirstType="Add" SecondType="Edit" ThirdType="Remove" FirstVisibility="Visible" SecondVisibility="Visible" ThirdVisibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" FirstDrop="SideMenuControl_FirstDrop"/>
-		</Grid>
+            <GenericControlLib:SideMenuControl FirstType="Add" SecondType="Edit" ThirdType="Remove" FirstVisibility="Visible" SecondVisibility="Visible" ThirdVisibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </Grid>
 	</Grid>
 </UserControl>

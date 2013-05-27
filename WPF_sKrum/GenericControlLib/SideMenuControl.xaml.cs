@@ -29,16 +29,25 @@ namespace GenericControlLib
         private Options secondType;
         private Options thirdType;
         private Options fourthType;
-        private delegate void myDropDelegate(object obj, DragEventArgs e);
-        myDropDelegate firstDrop;
-        myDropDelegate secondDrop;
-        myDropDelegate thirdDrop;
-        myDropDelegate fourthDrop;
+        public delegate void myDropDelegate(object obj, DragEventArgs e);
+        public event myDropDelegate FirstMenuDropEvent;
+        public event myDropDelegate SecondMenuDropEvent;
+        public event myDropDelegate ThirdMenuDropEvent;
+        public event myDropDelegate FourthMenuDropEvent;
+        public delegate void myClickDelegate(object obj, MouseEventArgs e);
+        public event myClickDelegate FirstMenuClickEvent;
+        public event myClickDelegate SecondMenuClickEvent;
+        public event myClickDelegate ThirdMenuClickEvent;
+        public event myClickDelegate FourthMenuClickEvent;
 
         public SideMenuControl()
 		{
 			this.InitializeComponent();
             this.DataContext = this;
+            this.FirstIconBack.AllowDrop = true;
+            this.SecondIconBack.AllowDrop = true;
+            this.ThirdIconBack.AllowDrop = true;
+            this.FourthIconBack.AllowDrop = true;
 		}
 
         public Visibility FirstVisibility
@@ -89,27 +98,6 @@ namespace GenericControlLib
             set { this.fourthType = value; }
         }
 
-        public Action<object, DragEventArgs> FirstDrop
-        {
-            set { this.FirstIconBack.AllowDrop = true; this.firstDrop = new myDropDelegate(value); }
-        }
-
-        public Action<object, DragEventArgs> SecondDrop
-        {
-            set { this.SecondIconBack.AllowDrop = true; this.secondDrop = new myDropDelegate(value); }
-        }
-
-        public Action<object, DragEventArgs> ThirdDrop
-        {
-            set { this.ThirdIconBack.AllowDrop = true; this.thirdDrop = new myDropDelegate(value); }
-        }
-
-        public Action<object, DragEventArgs> FourthDrop
-        {
-            set { this.FourthIconBack.AllowDrop = true; this.fourthDrop = new myDropDelegate(value); }
-        }
-
-
         public string FirstIcon
         {
             get{ return this.convertTypetoIcon(firstType); }
@@ -147,23 +135,50 @@ namespace GenericControlLib
 
         private void FirstIconBack_Drop(object sender, DragEventArgs e)
         {
-            this.firstDrop.Invoke(sender, e);
+            if (this.FirstMenuDropEvent != null)
+                this.FirstMenuDropEvent(sender, e);
         }
 
         private void SecondIconBack_Drop(object sender, DragEventArgs e)
         {
-            this.secondDrop.Invoke(sender, e);
+            if (this.SecondMenuDropEvent != null)
+                this.SecondMenuDropEvent(sender, e);
         }
 
         private void ThirdIconBack_Drop(object sender, DragEventArgs e)
         {
-            this.thirdDrop.Invoke(sender, e);
+            if (this.ThirdMenuDropEvent != null)
+                this.ThirdMenuDropEvent(sender, e);
         }
 
         private void FourthIconBack_Drop(object sender, DragEventArgs e)
         {
-            this.fourthDrop.Invoke(sender, e);
+            if (this.FourthMenuDropEvent != null)
+                this.FourthMenuDropEvent(sender, e);
         }
 
+        private void FirstIconBack_Click(object sender, MouseEventArgs e)
+        {
+            if (this.FirstMenuClickEvent != null)
+                this.FirstMenuClickEvent(sender, e);
+        }
+
+        private void SecondIconBack_Click(object sender, MouseEventArgs e)
+        {
+            if (this.SecondMenuClickEvent != null)
+                this.SecondMenuClickEvent(sender, e);
+        }
+
+        private void ThirdIconBack_Click(object sender, MouseEventArgs e)
+        {
+            if (this.ThirdMenuClickEvent != null)
+                this.ThirdMenuClickEvent(sender, e);
+        }
+
+        private void FourthIconBack_Click(object sender, MouseEventArgs e)
+        {
+            if (this.FourthMenuClickEvent != null)
+                this.FourthMenuClickEvent(sender, e);
+        }
     }
 }
