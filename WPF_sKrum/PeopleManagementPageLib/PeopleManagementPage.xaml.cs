@@ -181,7 +181,7 @@ namespace PeopleManagementPageLib
                     button.Person = p;
                     button.SetValue(Grid.ColumnProperty, column);
                     button.SetValue(Grid.RowProperty, row);
-                    //button.Margin = new Thickness(10, 10, 10, 10);
+                    button.Margin = new Thickness(10, 10, 10, 10);
                     this.Contents.Children.Add(button);
                 }
             }
