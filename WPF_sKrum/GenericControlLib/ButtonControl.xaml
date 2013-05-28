@@ -33,6 +33,6 @@
 				</Border.Effect>
 			</Border>
 		</Border>
-		<TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="0" IsHitTestVisible="False"/>
+		<TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="20,5,20,5" IsHitTestVisible="False"/>
 	</Grid>
 </UserControl>
