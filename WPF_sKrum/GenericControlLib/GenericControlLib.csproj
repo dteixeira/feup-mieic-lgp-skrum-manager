@@ -55,6 +55,9 @@
     <Compile Include="LetterControl.xaml.cs">
       <DependentUpon>LetterControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PercentageDualShowerControl.xaml.cs">
+      <DependentUpon>PercentageDualShowerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PercentageShowerControl.xaml.cs">
       <DependentUpon>PercentageShowerControl.xaml</DependentUpon>
     </Compile>
@@ -113,6 +116,10 @@
     <Page Include="LetterControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="PercentageDualShowerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PercentageShowerControl.xaml">
       <SubType>Designer</SubType>

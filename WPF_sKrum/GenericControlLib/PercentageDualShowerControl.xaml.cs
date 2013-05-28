@@ -17,10 +17,11 @@ namespace GenericControlLib
     /// <summary>
     /// Interaction logic for PercentageShowerControl.xaml
     /// </summary>
-    public partial class PercentageShowerControl : UserControl
+    public partial class PercentageDualShowerControl : UserControl
     {
         private int done;
-        private int todo;
+        private int expected;
+        
 
         public int Done
         {
@@ -28,28 +29,31 @@ namespace GenericControlLib
             set { this.done = value; }
         }
 
-        public int Todo
+        public int Expected
         {
-            get { return this.todo; }
-            set { this.todo = value; }
+            get { return this.expected; }
+            set { this.expected = value; }
         }
 
         public double Percentage
         {
-            get
+            get 
             {
-                if (todo + done > 0)
-                    return (((double)done) / (todo + done));
+                if (done > expected)
+                    return 1;
                 else
-                    return 0;
+                    return (((double)done) / expected);
             }
         }
 
-        public string PercentageText
+        public double Percentage2
         {
             get
             {
-                return ((int)(Percentage * 100)).ToString() + "%";
+                if (done < expected)
+                    return 1;
+                else
+                    return (((double)expected) / done);
             }
         }
 
@@ -57,19 +61,30 @@ namespace GenericControlLib
         {
             get
             {
-                return (done.ToString() + "/" + ((todo + done).ToString()));
+                return (done.ToString());
             }
         }
 
-        public PercentageShowerControl()
+        public string StatsText2
+        {
+            get
+            {
+                return (expected.ToString());
+            }
+        }
+
+
+        public PercentageDualShowerControl()
         {
             InitializeComponent();
         }
 
         private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
-            this.Bar.Width = this.WholeArea.RenderSize.Width * Percentage;
+            this.Bar.Width = this.WholeArea.RenderSize.Width * Percentage2;
+            this.Bar2.Width = this.WholeArea.RenderSize.Width * Percentage;
             this.StatShower.Text = this.StatsText;
+            this.StatShower2.Text = this.StatsText2;
         }
     }
 }
