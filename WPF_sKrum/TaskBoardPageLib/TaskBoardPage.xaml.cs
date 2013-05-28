@@ -305,6 +305,57 @@ namespace TaskBoardPageLib
 
         public void AddWork_Drop(object sender, DragEventArgs e)
         {
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+
+            var dataObj = e.Data as DataObject;
+            TaskControl taskControl = dataObj.GetData("TaskControl") as TaskControl;
+            if (taskControl != null)
+            {
+                // Select a user.
+                PopupSelectionControlLib.SelectionWindow userForm = new PopupSelectionControlLib.SelectionWindow();
+                PopupSelectionControlLib.UserSelectionPage userPage = new PopupSelectionControlLib.UserSelectionPage(true);
+                userPage.PageTitle = "Escolha uma Pessoa";
+                userForm.FormPage = userPage;
+                userForm.ShowDialog();
+                if (userForm.Success)
+                {
+                    ServiceLib.DataService.Person person = (ServiceLib.DataService.Person)userForm.Result;
+                    PopupFormControlLib.FormWindow workForm = new PopupFormControlLib.FormWindow();
+                    PopupFormControlLib.SpinnerPage workPage = new PopupFormControlLib.SpinnerPage { PageName = "work", PageTitle = "Horas Trabalhadas", Min = 0.5, Max = 99999, Increment = 0.5 };
+                    workForm.FormPages.Add(workPage);
+                    workForm.ShowDialog();
+                    if (workForm.Success)
+                    {
+                        System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(AddWork));
+                        thread.Start(new object[] { person, taskControl.Task, (double)workForm["work"].PageValue });
+                    }
+                }
+            }
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+        }
+
+        public void AddWork(object obj)
+        {
+            try
+            {
+                object[] vars = obj as object[];
+                ServiceLib.DataService.Person person = (ServiceLib.DataService.Person)vars[0];
+                ServiceLib.DataService.Task task = (ServiceLib.DataService.Task)vars[1];
+                double work = (double)vars[2];
+                ServiceLib.DataService.PersonTask personTask = new PersonTask
+                {
+                    CreationDate = System.DateTime.Now,
+                    PersonID = person.PersonID,
+                    TaskID = task.TaskID,
+                    SpentTime = work
+                };
+                ServiceLib.DataService.DataServiceClient client = new DataServiceClient();
+                client.AddWorkInTask(personTask);
+                client.Close();
+            }
+            catch (Exception)
+            {
+            }
         }
 
         public void DeleteTask_Drop(object sender, DragEventArgs e)

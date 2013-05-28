@@ -64,9 +64,32 @@ namespace TaskboardRowLib
                 {
                     if (this.State != taskControl.State)
                     {
+                        // If no user is attributed to the task
+                        ServiceLib.DataService.Person person = null;
+                        if (this.State != TasksState.Todo && taskControl.Task.PersonTasks.Count == 0)
+                        {
+                            // Select a user.
+                            SharedTypes.ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+                            PopupSelectionControlLib.SelectionWindow userForm = new PopupSelectionControlLib.SelectionWindow();
+                            PopupSelectionControlLib.UserSelectionPage userPage = new PopupSelectionControlLib.UserSelectionPage(true);
+                            userPage.PageTitle = "Escolha o Responsável";
+                            userForm.FormPage = userPage;
+                            userForm.ShowDialog();
+                            if (userForm.Success)
+                            {
+                                person = (ServiceLib.DataService.Person)userForm.Result;
+                                SharedTypes.ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+                            }
+                            else
+                            {
+                                SharedTypes.ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+                                return;
+                            }
+                        }
+
                         // Launch thread to update the project.
                         System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.UpdateTaskInService));
-                        thread.Start(new object[] { this.State, taskControl.Task });
+                        thread.Start(new object[] { this.State, taskControl.Task, person });
 
                         // Update visualization.
                         TaskboardRowControl.AllTasks[taskControl.USID][taskControl.State].Remove(taskControl);
@@ -155,6 +178,7 @@ namespace TaskboardRowLib
                 object[] param = info as object[];
                 TasksState state = (TasksState)param[0];
                 ServiceLib.DataService.Task task = (ServiceLib.DataService.Task)param[1];
+                ServiceLib.DataService.Person person = (ServiceLib.DataService.Person)param[2];
 
                 // Change the task state.
                 switch (state)
@@ -182,6 +206,17 @@ namespace TaskboardRowLib
                 {
                     SharedTypes.ApplicationController.Instance.IgnoreNextProjectUpdate = false;
                     SharedTypes.ApplicationController.Instance.DataChanged(ServiceLib.NotificationService.NotificationType.ProjectModification);
+                }
+                if (person != null)
+                {
+                    ServiceLib.DataService.PersonTask personTask = new ServiceLib.DataService.PersonTask
+                    {
+                        CreationDate = System.DateTime.Now,
+                        PersonID = person.PersonID,
+                        SpentTime = 0,
+                        TaskID = task.TaskID
+                    };
+                    client.AddWorkInTask(personTask);
                 }
                 client.Close();
             }
