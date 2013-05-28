@@ -9,14 +9,14 @@
       Width="auto"
       Height="auto">
 	<UserControl.Resources>
-		<Style x:Key="RectangleStyle1" TargetType="{x:Type Rectangle}">
-			<Style.Triggers>
-				<Trigger Property="IsMouseOver" Value="True">
-					<Setter Property="Fill" Value="{DynamicResource Gray5Brush}"/>
-				</Trigger>
-			</Style.Triggers>
-			<Setter Property="Fill" Value="{DynamicResource Gray4Brush}"/>
-		</Style>
+        <Style x:Key="RectangleStyle1" TargetType="{x:Type Rectangle}">
+            <Setter Property="Fill" Value="{DynamicResource BackgroundBrush}"/>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Fill" Value="{DynamicResource Gray4Brush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
         <SolidColorBrush x:Key="BackgroundBrush" Color="#E2E2E2" />
         <SolidColorBrush x:Key="KinectOnBarBrush" Color="#242424" />
         <SolidColorBrush x:Key="KinectOffBarBrush" Color="#555555" />

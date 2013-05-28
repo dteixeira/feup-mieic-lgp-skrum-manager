@@ -134,7 +134,7 @@
     <Resource Include="Images\cruz.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\darkarrow.png" />
+    <Resource Include="Images\arrow.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\right_closed.png" />
