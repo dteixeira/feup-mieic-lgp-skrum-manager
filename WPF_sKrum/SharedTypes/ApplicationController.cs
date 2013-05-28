@@ -141,17 +141,17 @@ namespace SharedTypes
                     }
                     break;
                 case NotificationType.ProjectModification:
-                    if (this.IgnoreNextProjectUpdate)
-                    {
-                        this.IgnoreNextProjectUpdate = false;
-                        return;
-                    }
                     if (currentProject != null)
                     {
                         Project updated = this.Data.GetProjectByID(this.currentProject.ProjectID);
                         int index = this.Projects.FindIndex(p => p.ProjectID == updated.ProjectID);
                         this.Projects[index] = updated;
                         this.CurrentProject = updated;
+                    }
+                    if (this.IgnoreNextProjectUpdate)
+                    {
+                        this.IgnoreNextProjectUpdate = false;
+                        return;
                     }
                     break;
             }

@@ -48,8 +48,8 @@
     </Window.Resources>
 	<Grid x:Name="LayoutRoot" RenderTransformOrigin="0.5,0.5" Background="{DynamicResource BackgroundBrush}" Margin="50,150">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="10*"/>
-			<RowDefinition Height="90*"/>
+			<RowDefinition Height="80"/>
+			<RowDefinition/>
 		</Grid.RowDefinitions>
 		<Grid x:Name="UpperBar" Margin="0" Grid.Row="0" Background="{DynamicResource KinectOffBarBrush}">
 			<Grid.ColumnDefinitions>

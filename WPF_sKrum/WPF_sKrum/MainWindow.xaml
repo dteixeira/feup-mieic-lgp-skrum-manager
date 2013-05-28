@@ -41,8 +41,8 @@
     <Grid x:Name="PagesStat" Margin="0" Background="{StaticResource BackgroundBrush}">
         <Grid x:Name="WindowEvery" Background="{DynamicResource Gray4Brush}" Panel.ZIndex="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="10*" />
-                <RowDefinition Height="90*" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
             <Grid x:Name="UpperBar" Margin="0" Grid.Row="0" Background="{DynamicResource KinectOffBarBrush}">

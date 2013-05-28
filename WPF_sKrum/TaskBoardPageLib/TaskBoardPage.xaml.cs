@@ -13,6 +13,7 @@ using System.Linq;
 using SharedTypes;
 using ServiceLib.DataService;
 using ServiceLib.NotificationService;
+using System.Collections.Specialized;
 
 namespace TaskBoardPageLib
 {
@@ -26,14 +27,15 @@ namespace TaskBoardPageLib
         private DispatcherTimer countdownTimerDelayScrollDown;
         private DispatcherTimer countdownTimerScrollUp;
         private DispatcherTimer countdownTimerScrollDown;
-
         public ApplicationPages PageType { get; set; }
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
+        private delegate void TaskBoardUpdate(TaskControl taskControl);
 
         public TaskBoardPage(object context)
         {
             InitializeComponent();
             this.PageType = ApplicationPages.TaskBoardPage;
+            TaskboardRowControl.CurrentTaskBoard = this;
 
             // Initialize scroll up delay timer.
             this.countdownTimerDelayScrollUp = new DispatcherTimer();
@@ -62,7 +64,32 @@ namespace TaskBoardPageLib
             this.DataChangeDelegate = new ApplicationController.DataModificationHandler(this.DataChangeHandler);
             ApplicationController.Instance.DataChangedEvent += this.DataChangeDelegate;
         }
-        
+
+        public void TaskDragStarted(TaskControl taskControl)
+        {
+            this.MenuLayer.Visibility = System.Windows.Visibility.Visible;
+        }
+
+        public void TaskDragStopped(TaskControl taskControl)
+        {
+            this.MenuLayer.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        public void CollectionChangedMethod(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            //different kind of changes that may have occurred in collection
+            if (e.Action == NotifyCollectionChangedAction.Add)
+            {
+                if (e.NewItems != null)
+                {
+                    foreach (TaskControl taskControl in e.NewItems)
+                    {
+                        taskControl.StartDragEvent += new TaskControl.StartDragHandler(this.TaskDragStarted);
+                        taskControl.StopDragEvent += new TaskControl.StopDragHandler(this.TaskDragStopped);
+                    }
+                }
+            }
+        }
 
         private void PopulateTaskboard()
         {
@@ -115,6 +142,7 @@ namespace TaskBoardPageLib
                     TaskboardRowControl todo = new TaskboardRowControl { Width = Double.NaN, Height = Double.NaN };
                     todo.SetValue(Grid.ColumnProperty, 3);
                     todo.Tasks = TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Todo];
+                    TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Todo].CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChangedMethod);
 
                     // Create a row control to doing tasks.
                     TaskboardRowControl doing = new TaskboardRowControl { Width = Double.NaN, Height = Double.NaN, State = TasksState.Doing };
@@ -137,6 +165,8 @@ namespace TaskBoardPageLib
                         TaskControl taskControl = new TaskControl { USID = task.StoryID, TaskDescription = task.Description, Task = task };
                         taskControl.Width = Double.NaN;
                         taskControl.Height = Double.NaN;
+                        taskControl.StartDragEvent += new TaskControl.StartDragHandler(TaskDragStarted);
+                        taskControl.StopDragEvent += new TaskControl.StopDragHandler(TaskDragStopped);
 
                         // Calculate total work in this task.
                         double totalWork = 0.0;
@@ -271,6 +301,49 @@ namespace TaskBoardPageLib
             {
                 System.Console.WriteLine(e.Message);
             }
+        }
+
+        public void AddWork_Drop(object sender, DragEventArgs e)
+        {
+            MessageBox.Show("YAY");
+        }
+
+        public void DeleteTask_Drop(object sender, DragEventArgs e)
+        {
+            var dataObj = e.Data as DataObject;
+            TaskControl taskControl = dataObj.GetData("TaskControl") as TaskControl;
+            if (taskControl != null)
+            {
+                PopupFormControlLib.YesNoFormWindow form = new PopupFormControlLib.YesNoFormWindow();
+                form.FormTitle = "Apagar a Task?";
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+                form.ShowDialog();
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+                if (form.Success)
+                {
+                    TaskboardRowControl.AllTasks[taskControl.USID][taskControl.State].Remove(taskControl);
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(DeleteTask));
+                    thread.Start(taskControl);
+                }
+            }
+        }
+
+        public void DeleteTask(object obj)
+        {
+            TaskControl taskControl = (TaskControl)obj;
+            ServiceLib.DataService.DataServiceClient client = new ServiceLib.DataService.DataServiceClient();
+            SharedTypes.ApplicationController.Instance.IgnoreNextProjectUpdate = true;
+            bool result = client.DeleteTask(taskControl.Task.TaskID);
+            client.Close();
+            if (!result)
+            {
+                SharedTypes.ApplicationController.Instance.IgnoreNextProjectUpdate = false;
+                ApplicationController.Instance.DataChanged(NotificationType.ProjectModification);
+            }
+        }
+
+        public void EditTask_Drop(object sender, DragEventArgs e)
+        {
         }
     }
 }
