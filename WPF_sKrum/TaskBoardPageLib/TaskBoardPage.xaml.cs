@@ -305,7 +305,6 @@ namespace TaskBoardPageLib
 
         public void AddWork_Drop(object sender, DragEventArgs e)
         {
-            MessageBox.Show("YAY");
         }
 
         public void DeleteTask_Drop(object sender, DragEventArgs e)

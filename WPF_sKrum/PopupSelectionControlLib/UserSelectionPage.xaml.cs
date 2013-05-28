@@ -41,9 +41,10 @@ namespace PopupSelectionControlLib
         private DispatcherTimer countdownTimerScrollLeft;
         private DispatcherTimer countdownTimerScrollRight;
 
-        public UserSelectionPage()
+        public UserSelectionPage(bool projectSelect = false)
         {
             this.InitializeComponent();
+            this.projectSelect = projectSelect;
 
             // Initialize scroll up delay timer.
             this.countdownTimerDelayScrollLeft = new DispatcherTimer();
@@ -74,7 +75,17 @@ namespace PopupSelectionControlLib
             {
                 //Build the dictionary with all the users in the database
                 dic = new Dictionary<string, List<Person>>();
-                List<Person> persons = ApplicationController.Instance.People;
+                List<Person> persons = null;
+                if (this.projectSelect)
+                {
+                    ServiceLib.DataService.DataServiceClient client = new DataServiceClient();
+                    persons = client.GetAllPeopleInProject(ApplicationController.Instance.CurrentProject.ProjectID);
+                    client.Close();
+                }
+                else
+                {
+                    persons = ApplicationController.Instance.People;
+                }
 
                 var x = (from p in persons
                          orderby p.Name ascending
@@ -188,8 +199,10 @@ namespace PopupSelectionControlLib
 
         private void personSelected(object sender, EventArgs e)
         {
-            GenericControlLib.UserButtonControl project = (GenericControlLib.UserButtonControl)sender;
-            MessageBox.Show(project.UserName);
+            GenericControlLib.UserButtonControl userControl = (GenericControlLib.UserButtonControl)sender;
+            this.PageValue = userControl.Person;
+            this.FormWindow.Success = true;
+            this.FormWindow.Close();
         }
 
 
@@ -281,15 +294,9 @@ namespace PopupSelectionControlLib
             this.countdownTimerScrollRight.Stop();
         }
 
-
-        public string PageName
-        { get; set; }
-
-        public string PageTitle
-        { get; set; }
-
-        public object PageValue
-        { get; set; }
-
+        public string PageTitle { get; set; }
+        public SelectionWindow FormWindow { get; set; }
+        public object PageValue { get; set; }
+        private bool projectSelect;
     }
 }

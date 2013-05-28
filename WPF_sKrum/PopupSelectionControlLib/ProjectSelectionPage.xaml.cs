@@ -32,6 +32,7 @@ namespace PopupSelectionControlLib
         private float scrollValueContent = 0.0f;
         private float scrollValueLetters = 0.0f;
         private string currentLetter;
+        public SelectionWindow FormWindow { get; set; }
 
         private Dictionary<string, List<Project>> dic;
 
@@ -197,8 +198,13 @@ namespace PopupSelectionControlLib
 
         private void projectSelected(object sender, EventArgs e)
         {
-            GenericControlLib.ProjectButtonControl project = (GenericControlLib.ProjectButtonControl)sender;
-            MessageBox.Show(project.ProjectName);
+            GenericControlLib.ProjectButtonControl projectControl = (GenericControlLib.ProjectButtonControl)sender;
+            if (this.FormWindow != null)
+            {
+                this.PageValue = projectControl.Project;
+                this.FormWindow.Success = true;
+                this.FormWindow.Close();
+            }
         }
 
 
@@ -290,15 +296,8 @@ namespace PopupSelectionControlLib
             this.countdownTimerScrollRight.Stop();
         }
 
-
-        public string PageName
-        { get; set; }
-
-        public string PageTitle
-        { get; set; }
-
-        public object PageValue
-        { get; set; }
+        public string PageTitle { get; set; }
+        public object PageValue { get; set; }
          
     }
 }

@@ -90,6 +90,10 @@
       <Project>{54d583d1-8112-4f51-ace4-53cc42e3fa4b}</Project>
       <Name>PopupFormControlLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\PopupSelectionControlLib\PopupSelectionControlLib.csproj">
+      <Project>{5ba28f44-731c-4999-bf06-c14db7a6e663}</Project>
+      <Name>PopupSelectionControlLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceLib\ServiceLib.csproj">
       <Project>{00f9c426-8516-404c-b085-de09790effc1}</Project>
       <Name>ServiceLib</Name>

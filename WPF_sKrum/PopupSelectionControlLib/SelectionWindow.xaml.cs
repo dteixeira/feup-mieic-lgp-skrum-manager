@@ -23,14 +23,28 @@ namespace PopupSelectionControlLib
     /// </summary>
     public partial class SelectionWindow : Window
     {
-        public bool Success { get; private set; }
+        public bool Success { get; set; }
         public IFormPage FormPage { get; set; }
+        public object Result
+        {
+            get
+            {
+                if (this.FormPage != null)
+                {
+                    return this.FormPage.PageValue;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+        }
         
         public SelectionWindow()
         {
             InitializeComponent();
             this.Success = false;
-                        
+
             if (ApplicationController.Instance.KinectSensor.FoundSensor())
             {
                 ApplicationController.Instance.KinectSensor.Pointers.KinectPointerMoved += new EventHandler<KinectPointerEventArgs>(this.KinectPointerMovedHandler);
@@ -41,6 +55,8 @@ namespace PopupSelectionControlLib
             if (ApplicationController.Instance.TrackingID != -1)
             {
                 Mouse.OverrideCursor = Cursors.None;
+                RightOpen.Visibility = Visibility.Visible;
+                RightClosed.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -101,6 +117,10 @@ namespace PopupSelectionControlLib
         {
             this.FormContent.Children.Add((UserControl) FormPage);
             this.FieldNameLabel.Content = FormPage.PageTitle;
+            if (this.FormPage != null)
+            {
+                this.FormPage.FormWindow = this;
+            }
         }
     }
 }
