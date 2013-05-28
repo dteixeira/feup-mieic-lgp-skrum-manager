@@ -394,6 +394,47 @@ namespace TaskBoardPageLib
 
         public void EditTask_Drop(object sender, DragEventArgs e)
         {
+            var dataObj = e.Data as DataObject;
+            TaskControl taskControl = dataObj.GetData("TaskControl") as TaskControl;
+            PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+            PopupFormControlLib.TextAreaPage descriptionPage = new PopupFormControlLib.TextAreaPage { PageName = "description", PageTitle = "Descrição", DefaultValue = taskControl.Task.Description };
+            PopupFormControlLib.SpinnerPage estimationPage = new PopupFormControlLib.SpinnerPage { PageName = "estimation", PageTitle = "Estimativa de Esforço", Min = 1, Max = 999, Increment = 1, DefaultValue = taskControl.Task.Estimation };
+            form.FormPages.Add(descriptionPage);
+            form.FormPages.Add(estimationPage);
+            SharedTypes.ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            form.ShowDialog();
+
+            // Create a new task.
+            if (form.Success)
+            {
+                string description = (string)form["description"].PageValue;
+                int estimation = (int)((double)form["estimation"].PageValue);
+                if (description != null && description != "")
+                {
+                    ServiceLib.DataService.Task task = new ServiceLib.DataService.Task
+                    {
+                        CreationDate = taskControl.Task.CreationDate,
+                        Description = description,
+                        Estimation = estimation,
+                        State = taskControl.Task.State,
+                        StoryID = taskControl.Task.StoryID,
+                        TaskID = taskControl.Task.TaskID
+                    };
+
+                    // Start a new thread to interact with the service.
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(EditTask));
+                    thread.Start(task);
+                }
+            }
+            SharedTypes.ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+        }
+
+        public void EditTask(object obj)
+        {
+            ServiceLib.DataService.Task task = (ServiceLib.DataService.Task)obj;
+            ServiceLib.DataService.DataServiceClient client = new ServiceLib.DataService.DataServiceClient();
+            client.UpdateTask(task);
+            client.Close();
         }
     }
 }
