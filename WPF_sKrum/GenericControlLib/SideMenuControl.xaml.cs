@@ -19,7 +19,7 @@ namespace GenericControlLib
     /// </summary>
     public partial class SideMenuControl : UserControl
     {
-        public enum Options {Add, Edit, Remove,  };
+        public enum Options {Add, Edit, Remove, SpecialAdd };
 
         private Visibility firstVisibility = Visibility.Collapsed;
         private Visibility secondVisibility = Visibility.Collapsed;
@@ -128,6 +128,8 @@ namespace GenericControlLib
                     return "Images/edit.png";
                 case Options.Remove:
                     return "Images/remove.png";
+                case Options.SpecialAdd:
+                    return "Images/add2.png";
                 default:
                     return "Images/none.png";
             }

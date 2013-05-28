@@ -85,7 +85,7 @@
 				<ColumnDefinition Width="100"/>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
-			<GenericControlLib:SideMenuControl Grid.Column="0" Margin="0" VerticalAlignment="Center" FirstVisibility="Visible" FirstType="Add" SecondVisibility="Visible" SecondType="Edit" ThirdVisibility="Visible" ThirdType="Remove" FirstMenuDropEvent="AddWork_Drop" SecondMenuDropEvent="EditTask_Drop" ThirdMenuDropEvent="DeleteTask_Drop" />
+			<GenericControlLib:SideMenuControl Grid.Column="0" Margin="0" VerticalAlignment="Center" FirstVisibility="Visible" FirstType="SpecialAdd" SecondVisibility="Visible" SecondType="Edit" ThirdVisibility="Visible" ThirdType="Remove" FirstMenuDropEvent="AddWork_Drop" SecondMenuDropEvent="EditTask_Drop" ThirdMenuDropEvent="DeleteTask_Drop" />
 		</Grid>
 	</Grid>
 </UserControl>
