@@ -376,8 +376,8 @@ namespace WPFApplication
             //Tester for the project/people selector
 
             PopupSelectionControlLib.SelectionWindow form1 = new PopupSelectionControlLib.SelectionWindow();
-            PopupSelectionControlLib.ProjectSelectionPage page1 = new PopupSelectionControlLib.ProjectSelectionPage();
-            page1.PageTitle = "Escolha do Projecto";
+            PopupSelectionControlLib.UserSelectionPage page1 = new PopupSelectionControlLib.UserSelectionPage();
+            page1.PageTitle = "Escolha do Utilizador";
             form1.FormPage = page1;
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
             form1.ShowDialog();
