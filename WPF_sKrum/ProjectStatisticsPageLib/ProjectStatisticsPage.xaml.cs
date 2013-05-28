@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace ProjectStatisticsPageLib
 {
     /// <summary>
-    /// Interaction logic for MeetingPage.xaml
+    /// Interaction logic for ProjectStatisticsPage.xaml
     /// </summary>
     public partial class ProjectStatisticsPage : UserControl, ITargetPage
     {

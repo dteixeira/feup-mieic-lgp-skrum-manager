@@ -233,7 +233,7 @@ namespace TaskBoardPageLib
                 case PageChangeDirection.Right:
                     return null;
                 case PageChangeDirection.Up:
-                    return null;
+                    return new PageChange { Context = null, Page = ApplicationPages.ProjectStatisticsPage };
                 default:
                     return null;
             }
