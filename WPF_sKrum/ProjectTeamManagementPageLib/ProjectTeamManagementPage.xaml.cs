@@ -81,7 +81,7 @@ namespace ProjectTeamManagementPageLib
                 connection.Close();
 
                 this.Contents.Children.Clear();
-                int row = 3;
+                int row = 4;
                 int column = -1;
                 for (int qwe = 0; qwe < 10; qwe++)
                 {
@@ -93,7 +93,7 @@ namespace ProjectTeamManagementPageLib
 
                         // Create proper grids.
                         ++row;
-                        if (row > 2)
+                        if (row > 3)
                         {
                             row = 0;
                             column++;

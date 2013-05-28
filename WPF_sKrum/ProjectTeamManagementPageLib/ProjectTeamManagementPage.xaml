@@ -45,7 +45,6 @@
                     <RowDefinition Height="80"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <Label Content="Team" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" FontFamily="Source Sans Pro" FontSize="21.333"/>
                 <Grid x:Name="CenterRowArea" Margin="0,30,0,50" Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*"/>
@@ -72,6 +71,7 @@
                         <StackPanel x:Name="Team" Orientation="Horizontal" Margin="0">
                             <Grid x:Name="Contents" Margin="0">
                                 <Grid.RowDefinitions>
+                                    <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>
                                     <RowDefinition/>

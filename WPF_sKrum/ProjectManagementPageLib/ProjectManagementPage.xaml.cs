@@ -146,7 +146,7 @@ namespace ProjectManagementPageLib
             try
             {
                 this.Contents.Children.Clear();
-                int row = 3;
+                int row = 4;
                 int column = -1;
                 foreach (Project p in projects)
                 {
@@ -156,7 +156,7 @@ namespace ProjectManagementPageLib
 
                     // Create proper grids.
                     ++row;
-                    if (row > 2)
+                    if (row > 3)
                     {
                         row = 0;
                         column++;

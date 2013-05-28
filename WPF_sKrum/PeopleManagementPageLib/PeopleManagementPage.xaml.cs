@@ -148,7 +148,7 @@ namespace PeopleManagementPageLib
             try
             {
                 this.Contents.Children.Clear();
-                int row = 3;
+                int row = 4;
                 int column = -1;
                 foreach (Person p in persons)
                 {
@@ -158,7 +158,7 @@ namespace PeopleManagementPageLib
 
                     // Create proper grids.
                     ++row;
-                    if (row > 2)
+                    if (row > 3)
                     {
                         row = 0;
                         column++;
