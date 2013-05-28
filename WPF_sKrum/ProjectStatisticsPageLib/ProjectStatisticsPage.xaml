@@ -36,6 +36,7 @@
 				<RowDefinition Height="8*"/>
 			</Grid.RowDefinitions>
 			<GenericControlLib:ButtonControl VerticalAlignment="Bottom" ButtonText="On Time" IsHitTestVisible="False" Margin="100,0,100,20"/>
+			<GenericControlLib:GraphicControl Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="50,50,50,50"/>
 		</Grid>
             
 	</Grid>
