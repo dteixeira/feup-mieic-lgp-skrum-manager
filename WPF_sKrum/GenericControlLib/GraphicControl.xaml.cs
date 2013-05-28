@@ -50,11 +50,10 @@ namespace GenericControlLib
             //Adicionar valores a introduzir no gráfico
             List<KeyValuePair<string, int>> valueList = new List<KeyValuePair<string, int>>();
             valueList.Add(new KeyValuePair<string, int>("1", 60));
-            valueList.Add(new KeyValuePair<string, int>("2", 20));
-            valueList.Add(new KeyValuePair<string, int>("3", 50));
-            valueList.Add(new KeyValuePair<string, int>("4", 30));
-            valueList.Add(new KeyValuePair<string, int>("5", 40));
-            valueList.Add(new KeyValuePair<string, int>("6", 22));
+            valueList.Add(new KeyValuePair<string, int>("2", 55));
+            valueList.Add(new KeyValuePair<string, int>("3", 20));
+            valueList.Add(new KeyValuePair<string, int>("4", 20));
+            valueList.Add(new KeyValuePair<string, int>("5", 10));
 
             //Novos valores para a linha adicional
             List<KeyValuePair<string, int>> valueList2 = new List<KeyValuePair<string, int>>();
