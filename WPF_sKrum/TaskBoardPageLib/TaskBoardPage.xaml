@@ -1,16 +1,17 @@
-﻿<UserControl x:Class="TaskBoardPageLib.TaskBoardPage"
+﻿<UserControl
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      mc:Ignorable="d"
       xmlns:TaskBoardControlLib="clr-namespace:TaskBoardControlLib;assembly=TaskBoardControlLib"
+      xmlns:GenericControlLib="clr-namespace:GenericControlLib;assembly=GenericControlLib" x:Class="TaskBoardPageLib.TaskBoardPage"
+      mc:Ignorable="d"
       d:DesignWidth="800" d:DesignHeight="600"
       Width="auto"
       Height="auto">
 	<UserControl.Resources>
         <Style x:Key="RectangleStyle1" TargetType="{x:Type Rectangle}">
-            <Setter Property="Fill" Value="{DynamicResource BackgroundBrush}"/>
+        	<Setter Property="Fill" Value="{DynamicResource BackgroundBrush}"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="Fill" Value="{DynamicResource Gray4Brush}"/>
@@ -33,7 +34,7 @@
         <SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
 	</UserControl.Resources>
 
-    <Grid x:Name="GoodArea" Margin="0" Background="{StaticResource BackgroundBrush}">
+	<Grid x:Name="GoodArea" Margin="0" Background="{StaticResource BackgroundBrush}">
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition Width="1*" />
 			<ColumnDefinition Width="80" />
@@ -65,8 +66,8 @@
 				<RowDefinition Height="50*" />
 				<RowDefinition Height="50*" />
 			</Grid.RowDefinitions>
-			<Rectangle x:Name="ScrollUpButton" Margin="0" StrokeThickness="2" MouseEnter="ScrollUp_Start" MouseLeave="ScrollUp_Cancel" Style="{DynamicResource RectangleStyle1}"/>
-			<Rectangle x:Name="ScrollDownButton" Style="{DynamicResource RectangleStyle1}" Margin="0" Grid.Row="1" StrokeThickness="2" MouseEnter="ScrollDown_Start" MouseLeave="ScrollDown_Cancel"/>
+			<Rectangle x:Name="ScrollUpButton" Margin="0" StrokeThickness="0" MouseEnter="ScrollUp_Start" MouseLeave="ScrollUp_Cancel" Style="{DynamicResource RectangleStyle1}"/>
+			<Rectangle x:Name="ScrollDownButton" Style="{DynamicResource RectangleStyle1}" Margin="0" Grid.Row="1" StrokeThickness="0" MouseEnter="ScrollDown_Start" MouseLeave="ScrollDown_Cancel"/>
 			<Image Grid.Row="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False"/>
 			<Image Grid.Row="1" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False" Margin="0,100" RenderTransformOrigin="0.5,0.5">
 				<Image.RenderTransform>
@@ -78,6 +79,13 @@
 					</TransformGroup>
 				</Image.RenderTransform>
 			</Image>
+		</Grid>
+		<Grid x:Name="MenuLayer" Grid.ColumnSpan="2" Visibility="Hidden">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="100"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<GenericControlLib:SideMenuControl Grid.Column="0" Margin="0" VerticalAlignment="Center" FirstVisibility="Visible" FirstType="Add" SecondVisibility="Visible" SecondType="Edit" ThirdVisibility="Visible" ThirdType="Remove" FirstMenuDropEvent="AddWork_Drop" SecondMenuDropEvent="EditTask_Drop" ThirdMenuDropEvent="DeleteTask_Drop" />
 		</Grid>
 	</Grid>
 </UserControl>

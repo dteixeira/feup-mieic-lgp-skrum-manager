@@ -27,10 +27,13 @@ namespace TaskBoardControlLib
         private string AdornerLayer = "dragdropadornerLayer";
         private Canvas _adornerLayer;
         private TextTrimming taskTextTrimming = TextTrimming.None;
-        
         private string taskDescription;
         private TasksState state;
         private int usId;
+        public delegate void StartDragHandler(TaskControl taskControl);
+        public delegate void StopDragHandler(TaskControl taskControl);
+        public event StartDragHandler StartDragEvent;
+        public event StopDragHandler StopDragEvent;
 
 		public TaskControl()
 		{
@@ -108,7 +111,19 @@ namespace TaskBoardControlLib
                 _adornerLayer.Visibility = Visibility.Visible;
                 _adornerLayer.Children.Add(_adorner);
 
+                // Drag started callbacks.
+                if (this.StartDragEvent != null)
+                {
+                    this.StartDragEvent(this);
+                }
                 DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
+
+                // Drag stopped event.
+                if (this.StopDragEvent != null)
+                {
+                    this.StopDragEvent(this);
+                }
+
                 _adornerLayer.Children.Remove(_adorner);
                 _adornerLayer.Visibility = Visibility.Collapsed;
                 started_drag = false;

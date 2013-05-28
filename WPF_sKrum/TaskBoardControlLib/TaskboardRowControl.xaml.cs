@@ -24,6 +24,7 @@ namespace TaskboardRowLib
         /* Static members and static constructor */
 
         public static Dictionary<int, Dictionary<TasksState, ObservableCollection<TaskControl>>> AllTasks { get; set; }
+        public static UserControl CurrentTaskBoard { get; set; }
         private delegate void TaskBoardUpdate(ServiceLib.DataService.Task task); 
 
         static TaskboardRowControl()
