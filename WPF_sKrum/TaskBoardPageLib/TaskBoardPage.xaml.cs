@@ -102,6 +102,7 @@ namespace TaskBoardPageLib
                         Story = story.Value,
                         IsDraggable = false
                     };
+                    storyControl.IsDraggable = true;
                     storyControl.Margin = new Thickness(0, 10, 0, 10);
                     storyControl.Width = Double.NaN;
                     storyControl.Height = Double.NaN;

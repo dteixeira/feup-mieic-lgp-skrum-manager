@@ -104,6 +104,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\PopupFormControlLib\PopupFormControlLib.csproj">
+      <Project>{54d583d1-8112-4f51-ace4-53cc42e3fa4b}</Project>
+      <Name>PopupFormControlLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceLib\ServiceLib.csproj">
       <Project>{00f9c426-8516-404c-b085-de09790effc1}</Project>
       <Name>ServiceLib</Name>

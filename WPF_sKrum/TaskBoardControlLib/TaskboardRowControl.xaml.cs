@@ -24,6 +24,7 @@ namespace TaskboardRowLib
         /* Static members and static constructor */
 
         public static Dictionary<int, Dictionary<TasksState, ObservableCollection<TaskControl>>> AllTasks { get; set; }
+        private delegate void TaskBoardUpdate(ServiceLib.DataService.Task task); 
 
         static TaskboardRowControl()
         {
@@ -54,18 +55,57 @@ namespace TaskboardRowLib
             try
             {
                 var dataObj = e.Data as DataObject;
-                TaskControl dragged = dataObj.GetData("TaskControl") as TaskControl;
+                TaskControl taskControl = dataObj.GetData("TaskControl") as TaskControl;
+                StoryControl storyControl = dataObj.GetData("StoryControl") as StoryControl;
 
-                if (this.State != dragged.State)
+                // Handle task drop.
+                if (taskControl != null)
                 {
-                    // Launch thread to update the project.
-                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.UpdateTaskInService));
-                    thread.Start(new object[]{ this.State, dragged.Task });
+                    if (this.State != taskControl.State)
+                    {
+                        // Launch thread to update the project.
+                        System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.UpdateTaskInService));
+                        thread.Start(new object[] { this.State, taskControl.Task });
 
-                    // Update visualization.
-                    TaskboardRowControl.AllTasks[dragged.USID][dragged.State].Remove(dragged);
-                    dragged.State = this.State;
-                    TaskboardRowControl.AllTasks[dragged.USID][this.State].Add(dragged);
+                        // Update visualization.
+                        TaskboardRowControl.AllTasks[taskControl.USID][taskControl.State].Remove(taskControl);
+                        taskControl.State = this.State;
+                        TaskboardRowControl.AllTasks[taskControl.USID][this.State].Add(taskControl);
+                    }
+                }
+                // Handle story drop.
+                else if (storyControl != null)
+                {
+                    PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+                    PopupFormControlLib.TextAreaPage descriptionPage = new PopupFormControlLib.TextAreaPage { PageName = "description", PageTitle = "Descrição" };
+                    PopupFormControlLib.SpinnerPage estimationPage = new PopupFormControlLib.SpinnerPage { PageName = "estimation", PageTitle = "Estimativa de Esforço", Min = 1, Max = 999, Increment = 1 };
+                    form.FormPages.Add(descriptionPage);
+                    form.FormPages.Add(estimationPage);
+                    SharedTypes.ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+                    form.ShowDialog();
+
+                    // Create a new task.
+                    if (form.Success)
+                    {
+                        string description = (string)form["description"].PageValue;
+                        int estimation = (int)((double)form["estimation"].PageValue);
+                        if (description != null && description != "")
+                        {
+                            ServiceLib.DataService.Task task = new ServiceLib.DataService.Task
+                            {
+                                CreationDate = System.DateTime.Now,
+                                Description = description,
+                                Estimation = estimation,
+                                State = ServiceLib.DataService.TaskState.Waiting,
+                                StoryID = storyControl.Story.StoryID
+                            };
+
+                            // Start a new thread to interact with the service.
+                            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.CreateTask));
+                            thread.Start(task);
+                        }
+                    }
+                    SharedTypes.ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
                 }
                 e.Handled = true;
             }
@@ -73,6 +113,38 @@ namespace TaskboardRowLib
             {
                 System.Console.WriteLine(ex.Message);
             }
+        }
+
+        public void CreateTask(object obj)
+        {
+            ServiceLib.DataService.Task task = (ServiceLib.DataService.Task)obj;
+            ServiceLib.DataService.DataServiceClient client = new ServiceLib.DataService.DataServiceClient();
+            SharedTypes.ApplicationController.Instance.IgnoreNextProjectUpdate = true;
+            task = client.CreateTask(task);
+            client.Close();
+            if (Dispatcher.Thread.Equals(System.Threading.Thread.CurrentThread))
+            {
+                CreateTaskInTaskboard(task);
+            }
+            else
+            {
+                Dispatcher.BeginInvoke(new TaskBoardUpdate(CreateTaskInTaskboard), new object[] { task });
+            }
+        }
+
+        public void CreateTaskInTaskboard(ServiceLib.DataService.Task task)
+        {
+            TaskControl taskControl = new TaskControl
+            {
+                Task = task,
+                TaskDescription = task.Description,
+                TaskEstimationWork = string.Format("{0:0.#} / {1}", 0, task.Estimation),
+                USID = task.StoryID,
+                State = TasksState.Todo
+            };
+            taskControl.Width = Double.NaN;
+            taskControl.Height = Double.NaN;
+            AllTasks[taskControl.Task.StoryID][TasksState.Todo].Add(taskControl);
         }
 
         public void UpdateTaskInService(object info)

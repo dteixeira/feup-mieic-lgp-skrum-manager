@@ -7,9 +7,19 @@
 	x:Class="TaskBoardControlLib.StoryControl"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480" Margin="0">
+	<UserControl.Resources>
+		<Style x:Key="OuterGridStyle" TargetType="{x:Type Grid}">
+			<Style.Triggers>
+				<Trigger Property="IsMouseOver" Value="True">
+					<Setter Property="Background" Value="{DynamicResource Gray3Brush}"/>
+				</Trigger>
+			</Style.Triggers>
+			<Setter Property="Background" Value="White"/>
+		</Style>
+	</UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" MinHeight="146" MinWidth="200">
-        <Grid Margin="1" Background="White">
+        <Grid Margin="1" Style="{DynamicResource OuterGridStyle}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition Width="25"/>
@@ -19,7 +29,7 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid Grid.Column="0" Grid.Row="1" Margin="0">
-                <TextBlock Grid.Column="0" x:Name="StoryDescriptionTextBlock" TextWrapping="Wrap" Background="White" Text="{Binding StoryDescription}" FontSize="16" Padding="20,10" Foreground="Black" FontFamily="Open Sans" />
+                <TextBlock Grid.Column="0" x:Name="StoryDescriptionTextBlock" TextWrapping="Wrap" Text="{Binding StoryDescription}" FontSize="16" Padding="20,10" Foreground="Black" FontFamily="Open Sans" TextTrimming="WordEllipsis" />
             </Grid>
             <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Background="{Binding StoryPriorityColor}">
                 <Grid.RowDefinitions>
