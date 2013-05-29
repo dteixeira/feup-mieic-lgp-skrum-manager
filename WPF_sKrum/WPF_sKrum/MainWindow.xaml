@@ -8,7 +8,7 @@
         WindowStyle = "None"
         WindowState="Maximized"
         x:Name="sKrum"
-        Background="{DynamicResource BackgroundBrush}">
+        Background="{DynamicResource BackgroundBrush}" Loaded="sKrum_Loaded">
     <Window.Resources>
         <Style x:Key="HoverZoomStyle" TargetType="{x:Type Image}">
             <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
@@ -62,8 +62,6 @@
             <Canvas x:Name="dragdropadornerLayer" Visibility="Collapsed" Panel.ZIndex="2" HorizontalAlignment="Left" VerticalAlignment="Top" />
 
             <pageTransitions:PageTransition Grid.Row="1" Background="Transparent" x:Name="PageTransitionControl" TransitionType="Fade" />
-
-            <TextBlock Grid.Row="1" x:Name="Logo" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="sKrum" VerticalAlignment="Center" FontFamily="Source Sans Pro Black" FontSize="150" Foreground="White" />
         </Grid>
         <GenericControlLib:NavigationControl x:Name="NavigationLayer" Panel.ZIndex="1"/>
         <Grid x:Name="BlurLayer" Panel.ZIndex="1" Opacity="0.8" Background="Black" Visibility="Hidden"/>

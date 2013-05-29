@@ -2,17 +2,30 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 using SharedTypes;
 
 namespace WPFApplication
 {
-    public class RootPage : ITargetPage
+    /// <summary>
+    /// Interaction logic for RootPage.xaml
+    /// </summary>
+    public partial class RootPage : UserControl, ITargetPage
     {
         public ApplicationPages PageType { get; set; }
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
 
         public RootPage(object context)
         {
+            InitializeComponent();
             this.PageType = ApplicationPages.RootPage;
         }
 

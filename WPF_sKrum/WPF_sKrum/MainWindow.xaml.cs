@@ -95,7 +95,6 @@ namespace WPFApplication
 
                     // Animate transition.
                     this.WindowEvery.Background = Brushes.Transparent;
-                    this.Logo.Visibility = Visibility.Collapsed;
                     this.Transition = transition;
                     this.PageTransitionControl.ShowPage((UserControl)targetPage);
                 }
@@ -129,7 +128,6 @@ namespace WPFApplication
 
                         // Animate transition.
                         this.WindowEvery.Background = Brushes.Transparent;
-                        this.Logo.Visibility = Visibility.Collapsed;
                         this.Transition = transition;
                         this.PageTransitionControl.ShowPage((UserControl)targetPage);
                     }
@@ -177,7 +175,7 @@ namespace WPFApplication
                 case ApplicationPages.ProjectTeamManagementPage:
                     return new ProjectTeamManagementPageLib.ProjectTeamManagementPage(page.Context);
                 case ApplicationPages.RootPage:
-                    return null;
+                    return new RootPage(page.Context);
                 case ApplicationPages.TaskBoardPage:
                     return new TaskBoardPageLib.TaskBoardPage(page.Context);
                 default:
@@ -368,30 +366,16 @@ namespace WPFApplication
 
         private void UpperBar_Config_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            /*PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
-            PopupFormControlLib.PasswordBoxPage page = new PopupFormControlLib.PasswordBoxPage();
-            page.PageTitle = "Password do Projecto";
-            page.PageName = "password";
-            form.FormPages.Add(page);
-            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
-            form.ShowDialog();
-            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
-            MessageBox.Show((string)form["password"].PageValue);*/
-
-            //Tester for the project/people selector
-
-            PopupSelectionControlLib.SelectionWindow form1 = new PopupSelectionControlLib.SelectionWindow();
-            PopupSelectionControlLib.UserSelectionPage page1 = new PopupSelectionControlLib.UserSelectionPage();
-            page1.PageTitle = "Escolha do Utilizador";
-            form1.FormPage = page1;
-            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
-            form1.ShowDialog();
-            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
         }
 
         private void UpperBar_Close_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             this.Close();
+        }
+
+        private void sKrum_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            this.TryTransition(new PageChange { Context = null, Page = ApplicationPages.RootPage });
         }
     }
 }
