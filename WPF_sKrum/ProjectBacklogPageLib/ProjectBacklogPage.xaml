@@ -40,13 +40,13 @@
     		<ColumnDefinition/>
     		<ColumnDefinition Width="80"/>
     	</Grid.ColumnDefinitions>
-		<Grid x:Name="BacklogRight" Margin="0,0,20,0" Grid.Column="3">
+		<Grid x:Name="BacklogRight" Margin="10,0,10,28" Grid.Column="3">
 			<Grid x:Name="SprintBacklogArea" Margin="0">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="80"/>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
-				<Label Content="SPRINT BACKLOG" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" FontFamily="Source Sans Pro" FontSize="21.333"/>
+				<Label Content="SPRINT BACKLOG" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" FontFamily="Open Sans" FontSize="21.333"/>
 				<ScrollViewer x:Name="SprintBacklogScroll" Margin="0" VerticalScrollBarVisibility="Hidden" Grid.Row="1">
 					<ListView x:Name="SprintBacklog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="True" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Drop="SprintBacklog_Drop" Margin="0" >
 						<ListView.ItemContainerStyle>
@@ -60,13 +60,13 @@
 				</ScrollViewer>
 			</Grid>
 		</Grid>
-		<Grid x:Name="BacklogLeft" Margin="20,0,0,0" Grid.Column="1">
+		<Grid x:Name="BacklogLeft" Margin="10,0,10,30" Grid.Column="1">
 			<Grid x:Name="BacklogArea" Margin="0">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="80"/>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
-				<Label Content="BACKLOG" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" FontFamily="Source Sans Pro" FontSize="21.333"/>
+				<Label Content="BACKLOG" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" FontFamily="Open Sans" FontSize="21.333"/>
 				<ScrollViewer x:Name="BacklogScroll" Margin="0" VerticalScrollBarVisibility="Hidden" Grid.RowSpan="2" Grid.Row="1">
 					<ListView x:Name="Backlog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="True" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Drop="Backlog_Drop" Margin="0" >
 						<ListView.ItemContainerStyle>
@@ -118,6 +118,6 @@
 				</Image.RenderTransform>
 			</Image>
 		</Grid>
-		<Border BorderBrush="{DynamicResource Gray7Brush}" BorderThickness="0,0,1,0" Grid.Column="2" Background="{DynamicResource Gray7Brush}" Width="1" HorizontalAlignment="Center"/>
+		<Border BorderBrush="{DynamicResource Gray7Brush}" BorderThickness="0,0,1,0" Grid.Column="2" Background="{DynamicResource Gray7Brush}" Width="1" HorizontalAlignment="Center" Margin="0,20"/>
 	</Grid>
 </UserControl>
