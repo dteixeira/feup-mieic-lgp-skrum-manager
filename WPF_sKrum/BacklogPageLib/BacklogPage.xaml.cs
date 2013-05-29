@@ -6,18 +6,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 using TaskBoardControlLib;
 
@@ -30,19 +23,21 @@ namespace BacklogPageLib
     {
         private float scrollValue = 0.0f;
         private float scrollValueSprints = 0.0f;
-        
+
         private DispatcherTimer countdownTimerDelayScrollUp;
         private DispatcherTimer countdownTimerDelayScrollDown;
         private DispatcherTimer countdownTimerScrollUp;
         private DispatcherTimer countdownTimerScrollDown;
+
         private enum BacklogSelected { Backlog, Sprint };
+
         private BacklogSelected currentBacklog;
 
         private ObservableCollection<StoryControl> collection = new ObservableCollection<StoryControl>();
         private ObservableCollection<SprintControl> collectionSprint = new ObservableCollection<SprintControl>();
 
-        
         public ApplicationPages PageType { get; set; }
+
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
 
         public BacklogPage(object context)
@@ -86,15 +81,14 @@ namespace BacklogPageLib
                 collection.Clear();
 
                 // Get current project if selected.
+                ServiceLib.DataService.DataServiceClient client = new ServiceLib.DataService.DataServiceClient();
                 Project project = ApplicationController.Instance.CurrentProject;
-
-                ServiceLib.DataService.DataServiceClient connection = new ServiceLib.DataService.DataServiceClient();
-                List<Story> stories = connection.GetAllStoriesInProject(project.ProjectID);
-                List<Sprint> sprints = connection.GetAllSprintsInProject(project.ProjectID);
-                connection.Close();
+                List<Sprint> sprints = project.Sprints;
+                List<Story> stories = client.GetAllStoriesInProjectByState(project.ProjectID, StoryState.InProgress);
+                client.Close();
 
                 // Iterate all user stories in the project.
-                foreach (var story in  stories.Select((s, i) => new { Value = s, Index = i }))
+                foreach (var story in stories.Select((s, i) => new { Value = s, Index = i }))
                 {
                     // Create the story control.
                     StoryControl storyControl = new StoryControl
@@ -111,30 +105,30 @@ namespace BacklogPageLib
                     storyControl.Height = Double.NaN;
                     storyControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
                     storyControl.SetValue(Grid.ColumnProperty, 0);
-                    
+
                     collection.Add(storyControl);
                 }
                 this.Backlog.ItemsSource = collection;
 
-                for(int qwe=0;qwe<10;qwe++)
-                {
                 // Iterate all sprints in the project.
                 foreach (var sprint in sprints.Select((s, i) => new { Value = s, Index = i }))
                 {
                     // Create the sprint control.
+                    int total = sprint.Value.Stories.Count;
+                    int done = sprint.Value.Stories.Count(st => st.State == StoryState.Completed);
+                    string ratio = string.Format("{0} / {1}", done, total);
                     SprintControl sprintControl = new SprintControl()
                     {
                         SprintBeginDate = sprint.Value.BeginDate,
                         SprintEndDate = sprint.Value.EndDate,
-                        SprintNumber = sprint.Value.Number
+                        SprintNumber = sprint.Value.Number,
+                        StoryRatio = ratio
                     };
 
                     sprintControl.Width = Double.NaN;
                     sprintControl.Height = Double.NaN;
                     sprintControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
-                    
                     collectionSprint.Add(sprintControl);
-                }
                 }
                 this.Sprints.ItemsSource = collectionSprint;
             }
@@ -187,6 +181,7 @@ namespace BacklogPageLib
                     if (scrollValueSprints < 0.0f) scrollValueSprints = 0.0f;
                     SprintsScroll.ScrollToVerticalOffset(scrollValueSprints);
                     break;
+
                 default:
                     scrollValue -= 10.0f;
                     if (scrollValue < 0.0f) scrollValue = 0.0f;
@@ -204,13 +199,13 @@ namespace BacklogPageLib
                     if (scrollValueSprints > SprintsScroll.ScrollableHeight) scrollValueSprints = (float)SprintsScroll.ScrollableHeight;
                     SprintsScroll.ScrollToVerticalOffset(scrollValueSprints);
                     break;
+
                 default:
                     scrollValue += 10.0f;
                     if (scrollValue > BacklogScroll.ScrollableHeight) scrollValue = (float)BacklogScroll.ScrollableHeight;
                     BacklogScroll.ScrollToVerticalOffset(scrollValue);
                     break;
             }
-
         }
 
         private void ScrollUp_Start(object sender, MouseEventArgs e)
@@ -285,7 +280,6 @@ namespace BacklogPageLib
             // Unregister for notifications.
             ApplicationController.Instance.DataChangedEvent -= this.DataChangeDelegate;
         }
-
 
         public void DataChangeHandler(object sender, NotificationType notification)
         {

@@ -215,6 +215,7 @@
     <Resource Include="Images\add2.png" />
     <Resource Include="Images\edit.png" />
     <Resource Include="Images\remove.png" />
+    <Resource Include="Images\arrow.png" />
     <Content Include="System.Windows.Controls.DataVisualization.Toolkit.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

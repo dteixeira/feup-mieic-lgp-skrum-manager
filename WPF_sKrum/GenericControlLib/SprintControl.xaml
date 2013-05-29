@@ -18,10 +18,10 @@
 
     <Grid Style="{DynamicResource OuterGridStyle}">
     	<Grid.RowDefinitions>
-    		<RowDefinition Height="50"/>
+    		<RowDefinition Height="40"/>
     		<RowDefinition Height="Auto"/>
     	</Grid.RowDefinitions>
-		<Grid x:Name="WholeArea" Grid.Row="1">
+		<Grid x:Name="WholeArea" Grid.Row="1" Margin="0,10">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="Auto"/>
 				<ColumnDefinition/>
@@ -30,15 +30,20 @@
 				<RowDefinition Height="Auto"/>
 				<RowDefinition Height="Auto"/>
 			</Grid.RowDefinitions>
-			<Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="Source Sans Pro" Grid.Column="1" Content="{Binding BeginDateText}"/>
-			<Label HorizontalAlignment="Left" Grid.Row="1" Content="{Binding EndDateText}" VerticalAlignment="Center" FontSize="16" FontFamily="Source Sans Pro" Grid.Column="1" />
+			<Label HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" FontFamily="Open Sans" Grid.Column="1" Content="{Binding BeginDateText}" Padding="0,0,20,0"/>
+			<Label HorizontalAlignment="Right" Grid.Row="1" Content="{Binding EndDateText}" VerticalAlignment="Center" FontSize="16" FontFamily="Open Sans" Grid.Column="1" Padding="0,5,20,0" />
 
-			<Label HorizontalAlignment="Left" Content="Data Início" VerticalAlignment="Center" FontSize="21.333" FontFamily="Source Sans Pro" Grid.Column="0" Panel.ZIndex="100" />
-			<Label HorizontalAlignment="Left" Grid.Row="1" Content="Data Fim" VerticalAlignment="Center" FontSize="21.333" FontFamily="Source Sans Pro" Grid.Column="0" Panel.ZIndex="100" />
+			<Label HorizontalAlignment="Left" Content="INÍCIO" VerticalAlignment="Center" FontSize="16" FontFamily="Open Sans" Grid.Column="0" Panel.ZIndex="100" Padding="20,0,0,0" />
+			<Label HorizontalAlignment="Left" Grid.Row="1" Content="FIM" VerticalAlignment="Center" FontSize="16" FontFamily="Open Sans" Grid.Column="0" Panel.ZIndex="100" Padding="20,5,0,0" />
 
 		</Grid>
 		<Grid Background="{DynamicResource Gray7Brush}">
-			<Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding SprintName}" Padding="5" FontSize="21.333" FontFamily="Source Sans Pro" Panel.ZIndex="100" Foreground="{DynamicResource Gray1Brush}" />
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding SprintName}" Padding="20,0,0,0" FontSize="18.667" FontFamily="Open Sans" Panel.ZIndex="100" Foreground="{DynamicResource Gray1Brush}" VerticalContentAlignment="Center" />
+			<Label HorizontalAlignment="Right" Content="{Binding StoryRatio}" VerticalAlignment="Center" Grid.Column="1" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Padding="0,0,20,0" FontSize="18.667" FontFamily="Open Sans" Foreground="{DynamicResource Gray1Brush}"/>
 		</Grid>
 	</Grid>
 </UserControl>

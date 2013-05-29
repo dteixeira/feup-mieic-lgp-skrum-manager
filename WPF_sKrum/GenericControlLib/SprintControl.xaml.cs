@@ -1,16 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GenericControlLib
 {
@@ -29,12 +18,13 @@ namespace GenericControlLib
             this.DataContext = this;
         }
 
-
         public DateTime SprintBeginDate
         {
             get { return this.sprintBeginDate; }
             set { this.sprintBeginDate = value; }
         }
+
+        public string StoryRatio { get; set; }
 
         public DateTime? SprintEndDate
         {
@@ -55,7 +45,7 @@ namespace GenericControlLib
 
         public string SprintName
         {
-            get { return "SPRINT" + this.sprintNumber.ToString(); }
+            get { return "SPRINT " + this.sprintNumber.ToString(); }
         }
 
         public string EndDateText

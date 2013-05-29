@@ -35,13 +35,14 @@
 
     <Grid x:Name="GoodArea" Margin="0" Background="{StaticResource BackgroundBrush}">
         <Grid.ColumnDefinitions>
-        	<ColumnDefinition Width="80"/>
+        	<ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="100" />
             <ColumnDefinition Width="6*" />
-            <ColumnDefinition Width="80" />
-        	<ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="20"/>
+        	<ColumnDefinition Width="300"/>
         	<ColumnDefinition Width="80"/>
         </Grid.ColumnDefinitions>
-        <Grid x:Name="ScrollButtons_Sprints" Grid.Column="4" Margin="0">
+        <Grid x:Name="ScrollButtons_Sprints" Grid.Column="5" Margin="0">
         	<Grid.RowDefinitions>
         		<RowDefinition Height="50*" />
         		<RowDefinition Height="50*" />
@@ -60,18 +61,18 @@
         		</Image.RenderTransform>
         	</Image>
         </Grid>
-        <ScrollViewer x:Name="SprintsScroll" VerticalScrollBarVisibility="Hidden" Grid.Column="3" Background="Transparent">
+        <ScrollViewer x:Name="SprintsScroll" VerticalScrollBarVisibility="Hidden" Grid.Column="4" Background="Transparent" Margin="10,30">
         	<ListView x:Name="Sprints" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="False" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
         		<ListView.ItemContainerStyle>
         			<Style TargetType="{x:Type ListViewItem}">
         				<Setter Property="BorderThickness" Value="0"/>
-        				<Setter Property="Margin" Value="0,3,0,3"/>
+        				<Setter Property="Margin" Value="0,10,0,10"/>
         				<Setter Property="Padding" Value="0"/>
         			</Style>
         		</ListView.ItemContainerStyle>
         	</ListView>
         </ScrollViewer>
-        <Grid x:Name="ScrollButtons" Grid.Column="2" Margin="0">
+        <Grid x:Name="ScrollButtons" Grid.Column="1" Margin="20,0,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50*" />
                 <RowDefinition Height="50*" />
@@ -90,17 +91,18 @@
                 </Image.RenderTransform>
             </Image>
         </Grid>
-        <ScrollViewer x:Name="BacklogScroll" VerticalScrollBarVisibility="Hidden" Grid.Column="1" Background="Transparent">
+        <ScrollViewer x:Name="BacklogScroll" VerticalScrollBarVisibility="Hidden" Grid.Column="2" Background="Transparent" Margin="10,30">
         	<ListView x:Name="Backlog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="False" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" >
         		<ListView.ItemContainerStyle>
         			<Style TargetType="{x:Type ListViewItem}">
         				<Setter Property="BorderThickness" Value="0"/>
-        				<Setter Property="Margin" Value="0,3,0,3"/>
+        				<Setter Property="Margin" Value="0,10,0,10"/>
         				<Setter Property="Padding" Value="0"/>
         			</Style>
         		</ListView.ItemContainerStyle>
         	</ListView>
         </ScrollViewer>
         <GenericControlLib:SideMenuControl FirstType="Add" SecondType="Edit" ThirdType="Remove" FirstVisibility="Visible" SecondVisibility="Visible" ThirdVisibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Border BorderBrush="{DynamicResource Gray7Brush}" BorderThickness="0,0,1,0" Grid.Column="3" Background="{DynamicResource Gray7Brush}" Width="1" Margin="0,20"/>
     </Grid>
 </UserControl>

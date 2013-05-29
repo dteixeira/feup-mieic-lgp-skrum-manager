@@ -29,8 +29,8 @@
 					<RowDefinition/>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
-				<TextBlock x:Name="UpText" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Open Sans" FontSize="18.667" Margin="0" Grid.Row="1" TextAlignment="Center"/>
-				<Image Grid.Row="0" Grid.Column="0" x:Name="UpArrow" Margin="0" Source="Images/arrow_up.png" Stretch="Fill" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+				<TextBlock x:Name="UpText" TextWrapping="Wrap" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Open Sans" FontSize="18.667" Margin="0" Grid.Row="1" TextAlignment="Center"/>
+				<Image Grid.Row="0" Grid.Column="0" x:Name="UpArrow" Margin="0" Source="Images/arrow.png" Stretch="Fill" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 			</Grid>
 		</Grid>
 		<Grid x:Name="DownBar" MouseLeftButtonDown="DownBar_MouseLeftButtonDown" Grid.Row="3" Grid.Column="2" Grid.RowSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden">
@@ -39,8 +39,17 @@
 					<RowDefinition/>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
-				<TextBlock x:Name="DownText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="18.667" Margin="0" TextAlignment="Center"/>
-				<Image x:Name="DownArrow" Margin="0" Source="Images/arrow_down.png" Stretch="Fill" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2"/>
+				<TextBlock x:Name="DownText" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="18.667" Margin="0" TextAlignment="Center"/>
+				<Image x:Name="DownArrow" Margin="0" Source="Images/arrow.png" Stretch="Fill" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="2" RenderTransformOrigin="0.5,0.5">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform Angle="180"/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</Image.RenderTransform>
+				</Image>
 			</Grid>
 		</Grid>
 		<Grid x:Name="LeftBar" MouseLeftButtonDown="LeftBar_MouseLeftButtonDown" Grid.Row="2" Grid.ColumnSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden">
@@ -49,8 +58,17 @@
 					<RowDefinition/>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
-				<TextBlock x:Name="LeftText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="asdasd asd asd asd asdasd" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="18.667" Margin="0" Grid.Row="1" TextAlignment="Center" Padding="10,0"/>
-				<Image x:Name="LeftArrow" Margin="0" Source="Images/arrow_left.png" Stretch="Fill" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+				<TextBlock x:Name="LeftText" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="18.667" Margin="0" Grid.Row="1" TextAlignment="Center" Padding="10,0"/>
+				<Image x:Name="LeftArrow" Margin="0" Source="Images/arrow.png" Stretch="Fill" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform Angle="-90"/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</Image.RenderTransform>
+				</Image>
 			</Grid>
 		</Grid>
 		<Grid x:Name="RightBar" MouseLeftButtonDown="RightBar_MouseLeftButtonDown" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden">
@@ -59,8 +77,17 @@
 					<RowDefinition/>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
-				<Image x:Name="RightArrow" Margin="0" Source="Images/arrow_right.png" Stretch="Fill" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-				<TextBlock x:Name="RightText" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Center" Grid.Row="1" FontFamily="Open Sans" FontSize="18.667" TextAlignment="Center" Padding="10,0"/>
+				<Image x:Name="RightArrow" Margin="0" Source="Images/arrow.png" Stretch="Fill" Width="80" Height="80" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+					<Image.RenderTransform>
+						<TransformGroup>
+							<ScaleTransform/>
+							<SkewTransform/>
+							<RotateTransform Angle="90"/>
+							<TranslateTransform/>
+						</TransformGroup>
+					</Image.RenderTransform>
+				</Image>
+				<TextBlock x:Name="RightText" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="1" FontFamily="Open Sans" FontSize="18.667" TextAlignment="Center" Padding="10,0"/>
 			</Grid>
 		</Grid>
 		<Rectangle x:Name="UpAction" MouseEnter="ActionArea_MouseEnter" MouseLeave="ActionArea_MouseLeave" Grid.ColumnSpan="5" Fill="#00000000" Panel.ZIndex="10" StrokeThickness="0" Margin="1,0,0,0"/>
