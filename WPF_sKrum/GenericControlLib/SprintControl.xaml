@@ -5,7 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid Background="White">
+    <UserControl.Resources>
+        <Style x:Key="OuterGridStyle" TargetType="{x:Type Grid}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource Gray3Brush}"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Style="{DynamicResource OuterGridStyle}">
     	<Grid.RowDefinitions>
     		<RowDefinition Height="50"/>
     		<RowDefinition Height="Auto"/>
@@ -26,8 +37,8 @@
 			<Label HorizontalAlignment="Left" Grid.Row="1" Content="Data Fim" VerticalAlignment="Center" FontSize="21.333" FontFamily="Source Sans Pro" Grid.Column="0" Panel.ZIndex="100" />
 
 		</Grid>
-		<Grid Background="{DynamicResource Gray4Brush}">
-			<Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding SprintName}" Padding="5" FontSize="21.333" FontFamily="Source Sans Pro" Panel.ZIndex="100" />
+		<Grid Background="{DynamicResource Gray7Brush}">
+			<Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding SprintName}" Padding="5" FontSize="21.333" FontFamily="Source Sans Pro" Panel.ZIndex="100" Foreground="{DynamicResource Gray1Brush}" />
 		</Grid>
 	</Grid>
 </UserControl>
