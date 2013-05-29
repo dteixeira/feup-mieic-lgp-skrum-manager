@@ -36,6 +36,8 @@ namespace SharedTypes
         /// <param name="type">Type of the data modification event that occured.</param>
         public delegate void DataModificationHandler(object sender, NotificationType type);
 
+        public delegate void NotifyClientsHandler(NotificationType notification);
+
         /// <summary>
         /// Used to register for service data change notification.
         /// </summary>
@@ -121,6 +123,14 @@ namespace SharedTypes
         /// <param name="notification">The type of modification to be notified</param>
         public void DataChanged(NotificationType notification)
         {
+            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(AsyncDataChanged));
+            thread.Start(notification);
+        }
+
+        private void AsyncDataChanged(object obj)
+        {
+            NotificationType notification = (NotificationType)obj;
+
             // Update info.
             switch (notification)
             {
@@ -157,21 +167,34 @@ namespace SharedTypes
             }
 
             // Notify all needed clients.
-            if (DataChangedEvent != null)
+            this.NotifyClients(notification);
+        }
+
+        private void NotifyClients(NotificationType notification)
+        {
+            if (this.ApplicationWindow.WindowDispatcher.Thread == System.Threading.Thread.CurrentThread)
             {
-                System.Delegate[] delegateList = DataChangedEvent.GetInvocationList();
-                foreach (DataModificationHandler handler in delegateList)
+                // Notify all needed clients.
+                if (DataChangedEvent != null)
                 {
-                    try
+                    System.Delegate[] delegateList = DataChangedEvent.GetInvocationList();
+                    foreach (DataModificationHandler handler in delegateList)
                     {
-                        handler(this, notification);
-                    }
-                    catch (System.Exception e)
-                    {
-                        System.Console.WriteLine(e.Message);
-                        DataChangedEvent -= handler;
+                        try
+                        {
+                            handler(this, notification);
+                        }
+                        catch (System.Exception e)
+                        {
+                            System.Console.WriteLine(e.Message);
+                            DataChangedEvent -= handler;
+                        }
                     }
                 }
+            }
+            else
+            {
+                this.ApplicationWindow.WindowDispatcher.BeginInvoke(new NotifyClientsHandler(NotifyClients), notification);
             }
         }
     }

@@ -51,6 +51,11 @@ namespace WPFApplication
             get { return this.NavigationLayer; }
         }
 
+        public System.Windows.Threading.Dispatcher WindowDispatcher
+        {
+            get { return this.Dispatcher; }
+        }
+
         public MainWindow()
         {
             InitializeComponent();

@@ -7,6 +7,7 @@ namespace SharedTypes
 {
     public interface ApplicationWindow
     {
+        System.Windows.Threading.Dispatcher WindowDispatcher { get; }
         void SetupNavigation(Dictionary<PageChangeDirection, string> navigation);
         void SetWindowFade(bool fade);
         void TryTransition(PageChange change, PageTransitionType transition = PageTransitionType.Fade);
