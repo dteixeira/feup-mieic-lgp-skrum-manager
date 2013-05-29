@@ -102,7 +102,7 @@
         		</ListView.ItemContainerStyle>
         	</ListView>
         </ScrollViewer>
-        <GenericControlLib:SideMenuControl FirstType="Add" SecondType="Edit" ThirdType="Remove" FirstVisibility="Visible" SecondVisibility="Visible" ThirdVisibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <GenericControlLib:SideMenuControl FirstType="Add" SecondType="Edit" ThirdType="Remove" FirstVisibility="Visible" SecondVisibility="Visible" ThirdVisibility="Visible" HorizontalAlignment="Center" VerticalAlignment="Center" FirstMenuClickEvent="AddStory_Click" SecondMenuDropEvent="EditStory_Drop" ThirdMenuDropEvent="DeleteStory_Drop" />
         <Border BorderBrush="{DynamicResource Gray7Brush}" BorderThickness="0,0,1,0" Grid.Column="3" Background="{DynamicResource Gray7Brush}" Width="1" Margin="0,20"/>
     </Grid>
 </UserControl>

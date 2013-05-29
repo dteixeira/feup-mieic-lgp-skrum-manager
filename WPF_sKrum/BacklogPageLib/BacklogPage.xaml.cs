@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -296,6 +297,18 @@ namespace BacklogPageLib
             {
                 System.Console.WriteLine(e.Message);
             }
+        }
+
+        public void AddStory_Click(object sender, MouseEventArgs e)
+        {
+        }
+
+        public void EditStory_Drop(object sender, DragEventArgs e)
+        {
+        }
+
+        public void DeleteStory_Drop(object sender, DragEventArgs e)
+        {
         }
     }
 }
