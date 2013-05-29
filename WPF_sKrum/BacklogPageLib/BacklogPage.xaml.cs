@@ -116,27 +116,25 @@ namespace BacklogPageLib
                 }
                 this.Backlog.ItemsSource = collection;
 
+                for(int qwe=0;qwe<10;qwe++)
+                {
                 // Iterate all sprints in the project.
                 foreach (var sprint in sprints.Select((s, i) => new { Value = s, Index = i }))
                 {
                     // Create the sprint control.
-                    SprintControl sprintControl = new SprintControl();
+                    SprintControl sprintControl = new SprintControl()
+                    {
+                        SprintBeginDate = sprint.Value.BeginDate,
+                        SprintEndDate = sprint.Value.EndDate,
+                        SprintNumber = sprint.Value.Number
+                    };
 
-                    sprintControl.SprintBeginDate = sprint.Value.BeginDate;
-                    if (sprint.Value.EndDate.HasValue)
-                    {
-                        sprintControl.SprintEndDate = (DateTime)sprint.Value.EndDate;
-                    }
-                    else 
-                    {
-                        sprintControl.SprintEndDate = sprint.Value.BeginDate;
-                    }
                     sprintControl.Width = Double.NaN;
                     sprintControl.Height = Double.NaN;
-                    sprintControl.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-                    sprintControl.SetValue(Grid.ColumnProperty, 0);
-
+                    sprintControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                    
                     collectionSprint.Add(sprintControl);
+                }
                 }
                 this.Sprints.ItemsSource = collectionSprint;
             }

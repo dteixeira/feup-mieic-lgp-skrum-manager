@@ -5,20 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid x:Name="WholeArea" Background="{DynamicResource Gray4Brush}">
-    	<Grid.ColumnDefinitions>
-    		<ColumnDefinition Width="Auto"/>
-    		<ColumnDefinition/>
-    	</Grid.ColumnDefinitions>
+    <Grid Background="White">
     	<Grid.RowDefinitions>
-    		<RowDefinition/>
-    		<RowDefinition/>
+    		<RowDefinition Height="50"/>
+    		<RowDefinition Height="Auto"/>
     	</Grid.RowDefinitions>
-    	<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontSize="24" FontFamily="Source Sans Pro" Grid.Column="1" Margin="10,0,0,0" Text="{Binding BeginDateText}"/>
-    	<TextBlock HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="{Binding EndDateText}" VerticalAlignment="Center" FontSize="24" FontFamily="Source Sans Pro" Grid.Column="1" Margin="10,0,0,0"/>
+		<Grid x:Name="WholeArea" Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+			<Label HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="16" FontFamily="Source Sans Pro" Grid.Column="1" Content="{Binding BeginDateText}"/>
+			<Label HorizontalAlignment="Left" Grid.Row="1" Content="{Binding EndDateText}" VerticalAlignment="Center" FontSize="16" FontFamily="Source Sans Pro" Grid.Column="1" />
 
-        <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Data Início" VerticalAlignment="Center" FontSize="32" FontFamily="Source Sans Pro" Grid.Column="0" Panel.ZIndex="1"/>
-        <TextBlock HorizontalAlignment="Left" Grid.Row="1" TextWrapping="Wrap" Text="Data Fim" VerticalAlignment="Center" FontSize="32" FontFamily="Source Sans Pro" Grid.Column="0" Margin="0,53.888,0,55.888" Panel.ZIndex="1"/>
+			<Label HorizontalAlignment="Left" Content="Data Início" VerticalAlignment="Center" FontSize="21.333" FontFamily="Source Sans Pro" Grid.Column="0" Panel.ZIndex="100" />
+			<Label HorizontalAlignment="Left" Grid.Row="1" Content="Data Fim" VerticalAlignment="Center" FontSize="21.333" FontFamily="Source Sans Pro" Grid.Column="0" Panel.ZIndex="100" />
 
-    </Grid>
+		</Grid>
+		<Grid Background="{DynamicResource Gray4Brush}">
+			<Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding SprintName}" Padding="5" FontSize="21.333" FontFamily="Source Sans Pro" Panel.ZIndex="100" />
+		</Grid>
+	</Grid>
 </UserControl>
