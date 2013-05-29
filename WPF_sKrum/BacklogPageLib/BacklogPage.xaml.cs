@@ -81,11 +81,30 @@ namespace BacklogPageLib
                 collectionSprint.Clear();
 
                 // Get current project if selected.
-                ServiceLib.DataService.DataServiceClient client = new ServiceLib.DataService.DataServiceClient();
                 Project project = ApplicationController.Instance.CurrentProject;
                 List<Sprint> sprints = project.Sprints;
-                List<Story> stories = client.GetAllStoriesInProjectByState(project.ProjectID, StoryState.InProgress);
+
+                // Order stories.
+                ServiceLib.DataService.DataServiceClient client = new ServiceLib.DataService.DataServiceClient();
+                List<Story> stories = new List<Story>();
+                List<Story> tempStories = client.GetAllStoriesInProject(project.ProjectID);
                 client.Close();
+                Story firstStory = tempStories.FirstOrDefault(s => s.PreviousStory == null);
+                if (firstStory != null)
+                {
+                    stories.Add(firstStory);
+                    tempStories.Remove(firstStory);
+                    while (tempStories.Count > 0)
+                    {
+                        Story tempStory = tempStories.FirstOrDefault(s => s.PreviousStory == stories.Last().StoryID);
+                        if (tempStory != null)
+                        {
+                            stories.Add(tempStory);
+                            tempStories.Remove(tempStory);
+                        }
+                    }
+                }
+                stories = stories.Where(s => s.State == StoryState.InProgress).ToList<Story>();
 
                 // Iterate all user stories in the project.
                 foreach (var story in stories.Select((s, i) => new { Value = s, Index = i }))
@@ -136,15 +155,6 @@ namespace BacklogPageLib
             {
                 System.Console.WriteLine(e.Message);
             }
-            this.Sort();
-        }
-
-        private void Sort()
-        {
-            ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(this.Backlog.ItemsSource);
-            StorySorter sorter = new StorySorter();
-            view.CustomSort = sorter;
-            this.Backlog.Items.Refresh();
         }
 
         public class StorySorter : IComparer
