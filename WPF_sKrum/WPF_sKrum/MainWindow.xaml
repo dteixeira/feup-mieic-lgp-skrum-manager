@@ -37,7 +37,18 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        <Style x:Key="HoverStyle" TargetType="{x:Type Grid}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource Gray5Brush}"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+
     </Window.Resources>
+    
     <Grid x:Name="PagesStat" Margin="0" Background="{StaticResource BackgroundBrush}">
         <Grid x:Name="WindowEvery" Background="{DynamicResource Gray4Brush}" Panel.ZIndex="1">
             <Grid.RowDefinitions>
@@ -53,10 +64,18 @@
                     <ColumnDefinition Width="8*" />
                     <ColumnDefinition Width="8*" />
                 </Grid.ColumnDefinitions>
-                <TextBlock x:Name="UpperBar_ProjectName" Margin="5" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="16" FontFamily="Open Sans Light" Foreground="White" />
-                <Image x:Name="UpperBar_Config" Margin="5" Grid.Column="2" VerticalAlignment="Center" Source="Images/definicoes.png" HorizontalAlignment="Center" Style="{StaticResource HoverZoomStyle}" MouseLeftButtonDown="UpperBar_Config_MouseLeftButtonDown"/>
-                <Image x:Name="UpperBar_Home" Margin="5" Grid.Column="3" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/casa.png" Style="{StaticResource HoverZoomStyle}"/>
-                <Image x:Name="UpperBar_Close" Margin="5" Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/cruz.png" Style="{StaticResource HoverZoomStyle}" MouseLeftButtonDown="UpperBar_Close_MouseLeftButtonDown"/>
+                <Grid x:Name="GridProjName" Margin="5" MouseLeftButtonDown="UpperBar_SelectProj_MouseLeftButtonDown" Style="{StaticResource HoverStyle}">
+                	<TextBlock x:Name="UpperBar_ProjectName" Grid.Column="0" FontSize="16" FontFamily="Open Sans Light" Foreground="White" TextAlignment="Center" TextWrapping="Wrap" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Selecção Projecto" />
+                </Grid>
+                <Grid x:Name="GridClose" Grid.Column="4" MouseLeftButtonDown="UpperBar_Close_MouseLeftButtonDown" Style="{StaticResource HoverStyle}">
+                	<Image x:Name="UpperBar_Close" Source="Images/cruz.png" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid x:Name="GridHome" Grid.Column="3" Style="{StaticResource HoverStyle}">
+                	<Image x:Name="UpperBar_Home" Source="Images/casa.png" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
+                <Grid x:Name="GridConfig" Grid.Column="2" MouseLeftButtonDown="UpperBar_Config_MouseLeftButtonDown" Style="{StaticResource HoverStyle}">
+                	<Image x:Name="UpperBar_Config" Source="Images/definicoes.png" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Grid>
             </Grid>
 
             <Canvas x:Name="dragdropadornerLayer" Visibility="Collapsed" Panel.ZIndex="2" HorizontalAlignment="Left" VerticalAlignment="Top" />

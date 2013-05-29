@@ -373,6 +373,48 @@ namespace WPFApplication
             this.Close();
         }
 
+        private void UpperBar_SelectProj_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // Select a user.
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            PopupSelectionControlLib.SelectionWindow userForm = new PopupSelectionControlLib.SelectionWindow();
+            PopupSelectionControlLib.ProjectSelectionPage projectPage = new PopupSelectionControlLib.ProjectSelectionPage();
+            projectPage.PageTitle = "Escolha um Projecto";
+            userForm.FormPage = projectPage;
+            userForm.ShowDialog();
+            if (userForm.Success)
+            {
+                ServiceLib.DataService.Project project = (ServiceLib.DataService.Project)userForm.Result;
+                /*foreach (Role r in person.Roles)
+                {
+                    // Return if the role already exists.
+                    if (r.RoleDescription == RoleDescription.TeamMember && r.ProjectID == ApplicationController.Instance.CurrentProject.ProjectID)
+                    {
+                        return;
+                    }
+                }
+
+                // Define assigned time.
+                PopupFormControlLib.FormWindow workForm = new PopupFormControlLib.FormWindow();
+                PopupFormControlLib.SpinnerPage workPage = new PopupFormControlLib.SpinnerPage { PageName = "work", PageTitle = "Tempo Disponível", Min = 0.1, Max = 1, Increment = 0.1 };
+                workForm.FormPages.Add(workPage);
+                workForm.ShowDialog();
+                if (workForm.Success)
+                {
+                    Role role = new Role
+                    {
+                        AssignedTime = (double)workForm["work"].PageValue,
+                        PersonID = person.PersonID,
+                        ProjectID = ApplicationController.Instance.CurrentProject.ProjectID,
+                        RoleDescription = RoleDescription.TeamMember
+                    };
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(AddPerson));
+                    thread.Start(role);
+                }*/
+            }
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+        }
+
         private void sKrum_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             this.TryTransition(new PageChange { Context = null, Page = ApplicationPages.RootPage });
