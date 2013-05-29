@@ -72,6 +72,9 @@
     <Compile Include="PercentageShowerControl.xaml.cs">
       <DependentUpon>PercentageShowerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SprintControl.xaml.cs">
+      <DependentUpon>SprintControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ToogleButtonControl.xaml.cs">
       <DependentUpon>ToogleButtonControl.xaml</DependentUpon>
     </Compile>
@@ -137,6 +140,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="PercentageShowerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SprintControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

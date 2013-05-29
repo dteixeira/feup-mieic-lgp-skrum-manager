@@ -1,4 +1,5 @@
-﻿using ServiceLib.DataService;
+﻿using GenericControlLib;
+using ServiceLib.DataService;
 using ServiceLib.NotificationService;
 using SharedTypes;
 using System;
@@ -28,12 +29,18 @@ namespace BacklogPageLib
     public partial class BacklogPage : UserControl, ITargetPage
     {
         private float scrollValue = 0.0f;
+        private float scrollValueSprints = 0.0f;
+        
         private DispatcherTimer countdownTimerDelayScrollUp;
         private DispatcherTimer countdownTimerDelayScrollDown;
         private DispatcherTimer countdownTimerScrollUp;
         private DispatcherTimer countdownTimerScrollDown;
+        private enum BacklogSelected { Backlog, Sprint };
+        private BacklogSelected currentBacklog;
 
         private ObservableCollection<StoryControl> collection = new ObservableCollection<StoryControl>();
+        private ObservableCollection<SprintControl> collectionSprint = new ObservableCollection<SprintControl>();
+
         
         public ApplicationPages PageType { get; set; }
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
@@ -83,9 +90,10 @@ namespace BacklogPageLib
 
                 ServiceLib.DataService.DataServiceClient connection = new ServiceLib.DataService.DataServiceClient();
                 List<Story> stories = connection.GetAllStoriesInProject(project.ProjectID);
+                List<Sprint> sprints = connection.GetAllSprintsInProject(project.ProjectID);
                 connection.Close();
 
-                // Iterate all user stories in the sprint.
+                // Iterate all user stories in the project.
                 foreach (var story in  stories.Select((s, i) => new { Value = s, Index = i }))
                 {
                     // Create the story control.
@@ -103,11 +111,34 @@ namespace BacklogPageLib
                     storyControl.Height = Double.NaN;
                     storyControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
                     storyControl.SetValue(Grid.ColumnProperty, 0);
-                    storyControl.SetValue(Grid.RowProperty, story.Index);
-
+                    
                     collection.Add(storyControl);
                 }
                 this.Backlog.ItemsSource = collection;
+
+                // Iterate all sprints in the project.
+                foreach (var sprint in sprints.Select((s, i) => new { Value = s, Index = i }))
+                {
+                    // Create the sprint control.
+                    SprintControl sprintControl = new SprintControl();
+
+                    sprintControl.SprintBeginDate = sprint.Value.BeginDate;
+                    if (sprint.Value.EndDate.HasValue)
+                    {
+                        sprintControl.SprintEndDate = (DateTime)sprint.Value.EndDate;
+                    }
+                    else 
+                    {
+                        sprintControl.SprintEndDate = sprint.Value.BeginDate;
+                    }
+                    sprintControl.Width = Double.NaN;
+                    sprintControl.Height = Double.NaN;
+                    sprintControl.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                    sprintControl.SetValue(Grid.ColumnProperty, 0);
+
+                    collectionSprint.Add(sprintControl);
+                }
+                this.Sprints.ItemsSource = collectionSprint;
             }
             catch (Exception e)
             {
@@ -151,26 +182,49 @@ namespace BacklogPageLib
 
         private void ScrollActionUp(object sender, EventArgs e)
         {
-            scrollValue -= 10.0f;
-            if (scrollValue < 0.0f) scrollValue = 0.0f;
-            BacklogScroll.ScrollToVerticalOffset(scrollValue);
+            switch (currentBacklog)
+            {
+                case BacklogSelected.Sprint:
+                    scrollValueSprints -= 10.0f;
+                    if (scrollValueSprints < 0.0f) scrollValueSprints = 0.0f;
+                    SprintsScroll.ScrollToVerticalOffset(scrollValueSprints);
+                    break;
+                default:
+                    scrollValue -= 10.0f;
+                    if (scrollValue < 0.0f) scrollValue = 0.0f;
+                    BacklogScroll.ScrollToVerticalOffset(scrollValue);
+                    break;
+            }
         }
 
         private void ScrollActionDown(object sender, EventArgs e)
         {
-            scrollValue += 10.0f;
-            if (scrollValue > BacklogScroll.ScrollableHeight) scrollValue = (float)BacklogScroll.ScrollableHeight;
-            BacklogScroll.ScrollToVerticalOffset(scrollValue);
+            switch (currentBacklog)
+            {
+                case BacklogSelected.Sprint:
+                    scrollValueSprints += 10.0f;
+                    if (scrollValueSprints > SprintsScroll.ScrollableHeight) scrollValueSprints = (float)SprintsScroll.ScrollableHeight;
+                    SprintsScroll.ScrollToVerticalOffset(scrollValueSprints);
+                    break;
+                default:
+                    scrollValue += 10.0f;
+                    if (scrollValue > BacklogScroll.ScrollableHeight) scrollValue = (float)BacklogScroll.ScrollableHeight;
+                    BacklogScroll.ScrollToVerticalOffset(scrollValue);
+                    break;
+            }
+
         }
 
         private void ScrollUp_Start(object sender, MouseEventArgs e)
         {
+            currentBacklog = BacklogSelected.Backlog;
             this.countdownTimerDelayScrollUp.Start();
             this.countdownTimerScrollUp.Stop();
         }
 
         private void ScrollDown_Start(object sender, MouseEventArgs e)
         {
+            currentBacklog = BacklogSelected.Backlog;
             this.countdownTimerDelayScrollDown.Start();
             this.countdownTimerScrollDown.Stop();
         }
@@ -184,6 +238,20 @@ namespace BacklogPageLib
         private void ScrollDown_Cancel(object sender, MouseEventArgs e)
         {
             this.countdownTimerDelayScrollDown.Stop();
+            this.countdownTimerScrollDown.Stop();
+        }
+
+        private void SprintScrollUp_Start(object sender, MouseEventArgs e)
+        {
+            currentBacklog = BacklogSelected.Sprint;
+            this.countdownTimerDelayScrollUp.Start();
+            this.countdownTimerScrollUp.Stop();
+        }
+
+        private void SprintScrollDown_Start(object sender, MouseEventArgs e)
+        {
+            currentBacklog = BacklogSelected.Sprint;
+            this.countdownTimerDelayScrollDown.Start();
             this.countdownTimerScrollDown.Stop();
         }
 
