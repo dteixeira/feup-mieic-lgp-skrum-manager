@@ -69,7 +69,6 @@ namespace BacklogPageLib
             // Register for project change notifications.
             this.DataChangeDelegate = new ApplicationController.DataModificationHandler(this.DataChangeHandler);
             ApplicationController.Instance.DataChangedEvent += this.DataChangeDelegate;
-
             PopulateBacklog();
         }
 
@@ -78,8 +77,8 @@ namespace BacklogPageLib
             try
             {
                 // Clears backlog.
-                this.Backlog.Items.Clear();
                 collection.Clear();
+                collectionSprint.Clear();
 
                 // Get current project if selected.
                 ServiceLib.DataService.DataServiceClient client = new ServiceLib.DataService.DataServiceClient();
@@ -301,14 +300,132 @@ namespace BacklogPageLib
 
         public void AddStory_Click(object sender, MouseEventArgs e)
         {
+            PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+            PopupFormControlLib.TextAreaPage descriptionPage = new PopupFormControlLib.TextAreaPage { PageName = "description", PageTitle = "Descrição" };
+            PopupFormControlLib.StoryPriorityPage priorityPage = new PopupFormControlLib.StoryPriorityPage { PageName = "priority", PageTitle = "Prioridade" };
+            form.FormPages.Add(descriptionPage);
+            form.FormPages.Add(priorityPage);
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            form.ShowDialog();
+            if (form.Success)
+            {
+                string description = (string)form["description"].PageValue;
+                StoryPriority priority = (StoryPriority)form["priority"].PageValue;
+                if (description != null && description != "")
+                {
+                    Story story = new Story
+                    {
+                        CreationDate = System.DateTime.Now,
+                        Description = description,
+                        Priority = priority,
+                        State = StoryState.InProgress,
+                        ProjectID = ApplicationController.Instance.CurrentProject.ProjectID
+                    };
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(AddStory));
+                    thread.Start(story);
+                }
+            }
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+        }
+
+        public void AddStory(object obj)
+        {
+            DataServiceClient client = new DataServiceClient();
+            client.CreateStory((Story)obj);
+            client.Close();
         }
 
         public void EditStory_Drop(object sender, DragEventArgs e)
         {
+            var dataObj = e.Data as DataObject;
+            TaskBoardControlLib.StoryControl storyControl = dataObj.GetData("StoryControl") as TaskBoardControlLib.StoryControl;
+            if (storyControl != null)
+            {
+                PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+                PopupFormControlLib.TextAreaPage descriptionPage = new PopupFormControlLib.TextAreaPage { PageName = "description", PageTitle = "Descrição", DefaultValue = storyControl.Story.Description };
+                PopupFormControlLib.StoryPriorityPage priorityPage = new PopupFormControlLib.StoryPriorityPage { PageName = "priority", PageTitle = "Prioridade", DefaultValue = storyControl.Story.Priority };
+                form.FormPages.Add(descriptionPage);
+                form.FormPages.Add(priorityPage);
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+                form.ShowDialog();
+                if (form.Success)
+                {
+                    string description = (string)form["description"].PageValue;
+                    StoryPriority priority = (StoryPriority)form["priority"].PageValue;
+                    if (description != null && description != "")
+                    {
+                        Story story = storyControl.Story;
+                        story.Description = description;
+                        story.Priority = priority;
+                        System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(EditStory));
+                        thread.Start(story);
+                    }
+                }
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+            }
+        }
+
+        public void EditStory(object obj)
+        {
+            DataServiceClient client = new DataServiceClient();
+            client.UpdateStory((Story)obj);
+            client.Close();
         }
 
         public void DeleteStory_Drop(object sender, DragEventArgs e)
         {
+            var dataObj = e.Data as DataObject;
+            TaskBoardControlLib.StoryControl storyControl = dataObj.GetData("StoryControl") as TaskBoardControlLib.StoryControl;
+            if (storyControl != null)
+            {
+                PopupFormControlLib.YesNoFormWindow form = new PopupFormControlLib.YesNoFormWindow();
+                form.FormTitle = "Apagar a Story?";
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+                form.ShowDialog();
+                if (form.Success)
+                {
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(DeleteStory));
+                    thread.Start(storyControl.Story);
+                }
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+            }
+        }
+
+        public void DeleteStory(object obj)
+        {
+            Story story = (Story)obj;
+            DataServiceClient client = new DataServiceClient();
+            client.DeleteStory(story.StoryID);
+            client.Close();
+        }
+
+        public void CloseStory_Drop(object sender, DragEventArgs e)
+        {
+            var dataObj = e.Data as DataObject;
+            TaskBoardControlLib.StoryControl storyControl = dataObj.GetData("StoryControl") as TaskBoardControlLib.StoryControl;
+            if (storyControl != null)
+            {
+                PopupFormControlLib.YesNoFormWindow form = new PopupFormControlLib.YesNoFormWindow();
+                form.FormTitle = "Fechar a Story?";
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+                form.ShowDialog();
+                if (form.Success)
+                {
+                    Story story = storyControl.Story;
+                    story.State = StoryState.Completed;
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(CloseStory));
+                    thread.Start(storyControl.Story);
+                }
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+            }
+        }
+
+        public void CloseStory(object obj)
+        {
+            Story story = (Story)obj;
+            DataServiceClient client = new DataServiceClient();
+            client.DeleteStory(story.StoryID);
+            client.Close();
         }
     }
 }

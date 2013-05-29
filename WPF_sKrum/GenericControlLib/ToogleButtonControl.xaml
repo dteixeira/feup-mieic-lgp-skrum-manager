@@ -7,7 +7,7 @@
 	x:Class="GenericControlLib.ToogleButtonControl"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
-	<UserControl.Resources>
+    <UserControl.Resources>
         <SolidColorBrush x:Key="BackgroundBrush" Color="#E2E2E2" />
         <SolidColorBrush x:Key="KinectOnBarBrush" Color="#242424" />
         <SolidColorBrush x:Key="KinectOffBarBrush" Color="#555555" />
@@ -22,28 +22,20 @@
         <SolidColorBrush x:Key="Gray5Brush" Color="#646464" />
         <SolidColorBrush x:Key="Gray6Brush" Color="#555555" />
         <SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
-		<Style x:Key="BorderStyle" TargetType="{x:Type Border}">
-			<Setter Property="Background" Value="{DynamicResource Gray7Brush}"/>
-		</Style>
-		<Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
-			<Setter Property="Foreground" Value="{DynamicResource Gray1Brush}"/>
-			<Style.Triggers>
-				<DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
-					<Setter Property="Foreground" Value="{DynamicResource Gray1Brush}" />
-				</DataTrigger >
-			</Style.Triggers>
-		</Style>
-	</UserControl.Resources>
+        <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="{DynamicResource Gray7Brush}"/>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource Gray1Brush}"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource Gray1Brush}" />
+                </DataTrigger >
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
     <Grid x:Name="LayoutRoot">
-        <Rectangle Width="auto" Height="auto" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Transparent"  MouseEnter="ToogleButton_MouseEnter" MouseLeave="ToogleButton_MouseLeave" MouseLeftButtonDown="ToogleButton_MouseLeftButtonDown" />
-        <Border x:Name="OuterBorder" ClipToBounds="True" BorderThickness="1" Style="{DynamicResource BorderStyle}" IsHitTestVisible="False"/>
-        <Grid x:Name="InnerArea">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <TextBlock x:Name="StateValue" Grid.Row="0" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding StateText}" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="5" IsHitTestVisible="False"/>
-            <TextBlock x:Name="TextValue" Grid.Row="1" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="5" IsHitTestVisible="False"/>
-        </Grid>
-	</Grid>
+        <Border x:Name="OuterBorder" ClipToBounds="True" BorderThickness="1" Style="{DynamicResource BorderStyle}" MouseEnter="OuterBorder_MouseEnter" MouseLeave="OuterBorder_MouseLeave"/>
+        <TextBlock x:Name="TextValue" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="0" IsHitTestVisible="False"/>
+    </Grid>
 </UserControl>

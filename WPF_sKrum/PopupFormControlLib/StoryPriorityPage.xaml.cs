@@ -18,8 +18,6 @@ namespace PopupFormControlLib
 	/// </summary>
 	public partial class StoryPriorityPage : UserControl, IFormPage
 	{
-        ServiceLib.DataService.StoryPriority pageValue;
-
 		public StoryPriorityPage()
 		{
 			this.InitializeComponent();
@@ -31,13 +29,13 @@ namespace PopupFormControlLib
 
         public string PageTitle { get; set; }
 
-        public object PageValue
+        public object PageValue { get; set; }
+
+        public ServiceLib.DataService.StoryPriority DefaultValue
         {
-            get { return this.pageValue; }
             set
             {
-                this.pageValue = (ServiceLib.DataService.StoryPriority)value;
-                switch (this.pageValue)
+                switch (value)
                 {
                     case ServiceLib.DataService.StoryPriority.Could:
                         this.CouldButton_MouseLeftButtonDown(null, null);
@@ -51,7 +49,6 @@ namespace PopupFormControlLib
                     case ServiceLib.DataService.StoryPriority.Wont:
                         this.WouldButton_MouseLeftButtonDown(null, null);
                         break;
-
                 }
             }
         }
