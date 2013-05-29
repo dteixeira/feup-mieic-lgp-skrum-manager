@@ -34,47 +34,13 @@
 
     <Grid x:Name="AllArea" Background="{DynamicResource BackgroundBrush}">
     	<Grid.ColumnDefinitions>
+    		<ColumnDefinition Width="80"/>
     		<ColumnDefinition/>
+    		<ColumnDefinition Width="20"/>
     		<ColumnDefinition/>
+    		<ColumnDefinition Width="80"/>
     	</Grid.ColumnDefinitions>
-
-		<Grid x:Name="GoodArea" Margin="0" Grid.Row="1">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="1*" />
-				<ColumnDefinition />
-			</Grid.ColumnDefinitions>
-
-		</Grid>
-		<Grid Margin="0" d:IsHidden="True">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-			</Grid.ColumnDefinitions>
-		</Grid>
-		<Grid x:Name="BacklogRight" Margin="0,0,20,0" Grid.Column="1">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition Width="80"/>
-			</Grid.ColumnDefinitions>
-			<Grid x:Name="ScrollButtonsRight" Margin="0" Grid.Column="1" Background="Transparent">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="50*" />
-					<RowDefinition Height="50*" />
-				</Grid.RowDefinitions>
-				<Rectangle x:Name="ScrollUpButtonRight" Margin="0" StrokeThickness="2" MouseEnter="SprintBacklogScrollUp_Start" MouseLeave="ScrollUp_Cancel" Style="{DynamicResource RectangleStyle1}" />
-				<Rectangle x:Name="ScrollDownButtonRight" Style="{DynamicResource RectangleStyle1}" Margin="0" Grid.Row="1" StrokeThickness="2" MouseEnter="SprintBacklogScrollDown_Start" MouseLeave="ScrollDown_Cancel" />
-				<Image Grid.Row="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False"/>
-				<Image Grid.Row="1" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False" Margin="0,100" RenderTransformOrigin="0.5,0.5">
-					<Image.RenderTransform>
-						<TransformGroup>
-							<ScaleTransform/>
-							<SkewTransform/>
-							<RotateTransform Angle="-180"/>
-							<TranslateTransform/>
-						</TransformGroup>
-					</Image.RenderTransform>
-				</Image>
-			</Grid>
+		<Grid x:Name="BacklogRight" Margin="0,0,20,0" Grid.Column="3">
 			<Grid x:Name="SprintBacklogArea" Margin="0">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="80"/>
@@ -82,7 +48,7 @@
 				</Grid.RowDefinitions>
 				<Label Content="SPRINT BACKLOG" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" FontFamily="Source Sans Pro" FontSize="21.333"/>
 				<ScrollViewer x:Name="SprintBacklogScroll" Margin="0" VerticalScrollBarVisibility="Hidden" Grid.Row="1">
-					<ListView x:Name="SprintBacklog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="True" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Drop="SprintBacklog_Drop" Margin="0,0,20,0" >
+					<ListView x:Name="SprintBacklog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="True" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Drop="SprintBacklog_Drop" Margin="0" >
 						<ListView.ItemContainerStyle>
 							<Style TargetType="{x:Type ListViewItem}">
 								<Setter Property="BorderThickness" Value="0"/>
@@ -94,30 +60,7 @@
 				</ScrollViewer>
 			</Grid>
 		</Grid>
-		<Grid x:Name="BacklogLeft" Margin="0,0,20,0">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition Width="80"/>
-			</Grid.ColumnDefinitions>
-			<Grid x:Name="ScrollButtonsLeft" Margin="0" Grid.Column="1" Background="Transparent">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="50*" />
-					<RowDefinition Height="50*" />
-				</Grid.RowDefinitions>
-				<Rectangle x:Name="ScrollUpButtonLeft" Margin="0" StrokeThickness="2" MouseEnter="ScrollUp_Start" MouseLeave="ScrollUp_Cancel" Style="{DynamicResource RectangleStyle1}" />
-				<Rectangle x:Name="ScrollDownButtonLeft" Style="{DynamicResource RectangleStyle1}" Margin="0" Grid.Row="1" StrokeThickness="2" MouseEnter="ScrollDown_Start" MouseLeave="ScrollDown_Cancel" />
-				<Image Grid.Row="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False"/>
-				<Image Grid.Row="1" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False" Margin="0,100" RenderTransformOrigin="0.5,0.5">
-					<Image.RenderTransform>
-						<TransformGroup>
-							<ScaleTransform/>
-							<SkewTransform/>
-							<RotateTransform Angle="-180"/>
-							<TranslateTransform/>
-						</TransformGroup>
-					</Image.RenderTransform>
-				</Image>
-			</Grid>
+		<Grid x:Name="BacklogLeft" Margin="20,0,0,0" Grid.Column="1">
 			<Grid x:Name="BacklogArea" Margin="0">
 				<Grid.RowDefinitions>
 					<RowDefinition Height="80"/>
@@ -125,7 +68,7 @@
 				</Grid.RowDefinitions>
 				<Label Content="BACKLOG" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" FontFamily="Source Sans Pro" FontSize="21.333"/>
 				<ScrollViewer x:Name="BacklogScroll" Margin="0" VerticalScrollBarVisibility="Hidden" Grid.RowSpan="2" Grid.Row="1">
-					<ListView x:Name="Backlog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="True" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Drop="Backlog_Drop" Margin="0,0,20,0" >
+					<ListView x:Name="Backlog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="True" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Drop="Backlog_Drop" Margin="0" >
 						<ListView.ItemContainerStyle>
 							<Style TargetType="{x:Type ListViewItem}">
 								<Setter Property="BorderThickness" Value="0"/>
@@ -137,5 +80,44 @@
 				</ScrollViewer>
 			</Grid>
 		</Grid>
+		<Grid x:Name="ScrollButtonsLeft" Margin="0" Background="Transparent">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="50*" />
+				<RowDefinition Height="50*" />
+			</Grid.RowDefinitions>
+			<Rectangle x:Name="ScrollUpButtonLeft" Margin="0" StrokeThickness="2" MouseEnter="ScrollUp_Start" MouseLeave="ScrollUp_Cancel" Style="{DynamicResource RectangleStyle1}" />
+			<Rectangle x:Name="ScrollDownButtonLeft" Style="{DynamicResource RectangleStyle1}" Margin="0" Grid.Row="1" StrokeThickness="2" MouseEnter="ScrollDown_Start" MouseLeave="ScrollDown_Cancel" />
+			<Image Grid.Row="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False"/>
+			<Image Grid.Row="1" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False" Margin="0,100" RenderTransformOrigin="0.5,0.5">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-180"/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+		</Grid>
+		<Grid x:Name="ScrollButtonsRight" Grid.Column="4" Background="Transparent">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="50*" />
+				<RowDefinition Height="50*" />
+			</Grid.RowDefinitions>
+			<Rectangle x:Name="ScrollUpButtonRight" Margin="0" StrokeThickness="2" MouseEnter="SprintBacklogScrollUp_Start" MouseLeave="ScrollUp_Cancel" Style="{DynamicResource RectangleStyle1}" />
+			<Rectangle x:Name="ScrollDownButtonRight" Style="{DynamicResource RectangleStyle1}" Margin="0" Grid.Row="1" StrokeThickness="2" MouseEnter="SprintBacklogScrollDown_Start" MouseLeave="ScrollDown_Cancel" />
+			<Image Grid.Row="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False"/>
+			<Image Grid.Row="1" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False" Margin="0,100" RenderTransformOrigin="0.5,0.5">
+				<Image.RenderTransform>
+					<TransformGroup>
+						<ScaleTransform/>
+						<SkewTransform/>
+						<RotateTransform Angle="-180"/>
+						<TranslateTransform/>
+					</TransformGroup>
+				</Image.RenderTransform>
+			</Image>
+		</Grid>
+		<Border BorderBrush="{DynamicResource Gray7Brush}" BorderThickness="0,0,1,0" Grid.Column="2" Background="{DynamicResource Gray7Brush}" Width="1" HorizontalAlignment="Center"/>
 	</Grid>
 </UserControl>
