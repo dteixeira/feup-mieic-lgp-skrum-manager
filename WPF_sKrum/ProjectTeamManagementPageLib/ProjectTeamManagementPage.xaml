@@ -35,10 +35,11 @@
     </UserControl.Resources>
     <Grid x:Name="GoodArea" Margin="0" Background="{StaticResource BackgroundBrush}">
         <Grid.ColumnDefinitions>
+        	<ColumnDefinition Width="100"/>
             <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="150"/>
         </Grid.ColumnDefinitions>
-        <Grid>
+        <Grid Grid.Column="1">
 
             <Grid x:Name="AllArea" Margin="0">
                 <Grid.RowDefinitions>
@@ -47,11 +48,11 @@
                 </Grid.RowDefinitions>
                 <Grid x:Name="CenterRowArea" Margin="0,30,0,50" Grid.Row="1">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="20"/>
                         <ColumnDefinition Width="100px"/>
-                        <ColumnDefinition Width="60*"/>
+                        <ColumnDefinition/>
                         <ColumnDefinition Width="100px"/>
-                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="20"/>
                     </Grid.ColumnDefinitions>
 
                     <Image x:Name="PanLeft" Focusable="True" IsHitTestVisible="False" Margin="10" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Source="Images/arrow.png" RenderTransformOrigin="0.5,0.5" Panel.ZIndex="10" >
@@ -94,20 +95,20 @@
                 </Grid>
             </Grid>
         </Grid>
-        <Grid x:Name="RightArea" Grid.Column="1" Margin="0">
+        <Grid x:Name="RightArea" Grid.Column="2" Margin="0">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
-            <Grid x:Name="ScrumMasterArea" Margin="0" Grid.Row="1">
+            <Grid x:Name="ScrumMasterArea" Margin="0,0,15,15" Grid.Row="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <TextBlock Margin="0" FontFamily="Source Sans Pro" FontSize="18.667" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="Scrum Master"/></TextBlock>
-                <Rectangle Panel.ZIndex="1" Height="auto" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0" Grid.Row="1" AllowDrop="True" Fill="Transparent" Drop="Rectangle_Drop"/>
-                <GenericControlLib:UserButtonVerticalControl Height="Auto" Width="Auto" Margin="0" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                <TextBlock Margin="0,0,0,10" FontFamily="Source Sans Pro" FontSize="18.667" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" TextWrapping="Wrap" HorizontalAlignment="Center" VerticalAlignment="Top"><Run Text="Scrum Master"/></TextBlock>
+                <Rectangle Panel.ZIndex="1" Width="auto" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0" Grid.Row="1" AllowDrop="True" Fill="Transparent" Drop="Rectangle_Drop"/>
             </Grid>
         </Grid>
+        <GenericControlLib:SideMenuControl Margin="0" VerticalAlignment="Center" FirstVisibility="Visible" FirstType="Add" ThirdVisibility="Visible" ThirdType="Remove" FirstMenuClickEvent="AddPerson_Click" ThirdMenuDropEvent="DeletePerson_Drop" />
     </Grid>
 </UserControl>

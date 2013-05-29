@@ -76,49 +76,89 @@ namespace ProjectTeamManagementPageLib
                 // Get team.
                 Project project = ApplicationController.Instance.CurrentProject;
 
-                ServiceLib.DataService.DataServiceClient connection = new ServiceLib.DataService.DataServiceClient();
-                List<Person> team = connection.GetAllPeople();
-                connection.Close();
+                ServiceLib.DataService.DataServiceClient client = new DataServiceClient();
+                List<Person> team = client.GetAllPeopleInProject(ApplicationController.Instance.CurrentProject.ProjectID);
+                client.Close();
 
+                // Remove existing scrum master control.
+                bool found = false;
                 this.Contents.Children.Clear();
+                foreach (UIElement child in this.ScrumMasterArea.Children)
+                {
+                    if (child is UserButtonVerticalControl)
+                    {
+                        this.ScrumMasterArea.Children.Remove(child);
+                        break;
+                    }
+                }
+
                 int row = 4;
                 int column = -1;
-                for (int qwe = 0; qwe < 10; qwe++)
+                foreach (Person p in team)
                 {
-                    foreach (Person p in team)
+                    foreach (Role r in p.Roles)
                     {
-                        // Create person control.
-                        GenericControlLib.UserButtonControl button = new GenericControlLib.UserButtonControl();
-                        button.UserName = p.Name;
-
-                        // Create proper grids.
-                        ++row;
-                        if (row > 3)
+                        if (r.RoleDescription == RoleDescription.ScrumMaster && r.ProjectID == ApplicationController.Instance.CurrentProject.ProjectID)
                         {
-                            row = 0;
-                            column++;
+                            UserButtonVerticalControl scrumMasterControl = new UserButtonVerticalControl();
+                            scrumMasterControl.UserName = p.Name;
+                            scrumMasterControl.UserPhoto = p.PhotoURL;
+                            scrumMasterControl.Width = Double.NaN;
+                            scrumMasterControl.Height = double.NaN;
+                            scrumMasterControl.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                            scrumMasterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                            scrumMasterControl.SetValue(Grid.RowProperty, 1);
+                            scrumMasterControl.IsHitTestVisible = false;
+                            this.ScrumMasterArea.Children.Add(scrumMasterControl);
+                            found = true;
+                            break;
                         }
-                        if (row == 0)
-                        {
-                            ColumnDefinition columnDef = new ColumnDefinition();
-                            columnDef.Width = new GridLength(1, GridUnitType.Star);
-                            this.Contents.ColumnDefinitions.Add(columnDef);
-                        }
-
-                        button.UserPhoto = p.PhotoURL;
-
-                        // Create persons control.
-                        button.Width = Double.NaN;
-                        button.Height = Double.NaN;
-                        button.VerticalAlignment = System.Windows.VerticalAlignment.Center;
-                        button.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-                        button.IsDraggable = true;
-                        button.Person = p;
-                        button.SetValue(Grid.ColumnProperty, column);
-                        button.SetValue(Grid.RowProperty, row);
-                        button.Margin = new Thickness(10, 10, 10, 10);
-                        this.Contents.Children.Add(button);
                     }
+
+                    // Create person control.
+                    GenericControlLib.UserButtonControl button = new GenericControlLib.UserButtonControl();
+                    button.UserName = p.Name;
+
+                    // Create proper grids.
+                    ++row;
+                    if (row > 3)
+                    {
+                        row = 0;
+                        column++;
+                    }
+                    if (row == 0)
+                    {
+                        ColumnDefinition columnDef = new ColumnDefinition();
+                        columnDef.Width = new GridLength(1, GridUnitType.Star);
+                        this.Contents.ColumnDefinitions.Add(columnDef);
+                    }
+                    button.UserPhoto = p.PhotoURL;
+
+                    // Create persons control.
+                    button.Width = Double.NaN;
+                    button.Height = Double.NaN;
+                    button.VerticalAlignment = System.Windows.VerticalAlignment.Center;
+                    button.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                    button.IsDraggable = true;
+                    button.Person = p;
+                    button.SetValue(Grid.ColumnProperty, column);
+                    button.SetValue(Grid.RowProperty, row);
+                    button.Margin = new Thickness(10, 10, 10, 10);
+                    this.Contents.Children.Add(button);
+                }
+
+                // Add default scrum master.
+                if (!found)
+                {
+                    UserButtonVerticalControl scrumMasterControl = new UserButtonVerticalControl();
+                    scrumMasterControl.UserName = "Utilizador";
+                    scrumMasterControl.Width = Double.NaN;
+                    scrumMasterControl.Height = double.NaN;
+                    scrumMasterControl.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                    scrumMasterControl.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+                    scrumMasterControl.SetValue(Grid.RowProperty, 1);
+                    scrumMasterControl.IsHitTestVisible = false;
+                    this.ScrumMasterArea.Children.Add(scrumMasterControl);
                 }
             }
             catch (Exception e)
@@ -230,9 +270,142 @@ namespace ProjectTeamManagementPageLib
 
         private void Rectangle_Drop(object sender, DragEventArgs e)
         {
-            //TODO make new ScrumMaster
-            System.Console.WriteLine("asd");
+            // Confirm deletion.
+            var dataObj = e.Data as DataObject;
+            GenericControlLib.UserButtonControl userControl = dataObj.GetData("UserButtonControl") as GenericControlLib.UserButtonControl;
+
+            // Define assigned time.
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            PopupFormControlLib.FormWindow workForm = new PopupFormControlLib.FormWindow();
+            PopupFormControlLib.SpinnerPage workPage = new PopupFormControlLib.SpinnerPage { PageName = "work", PageTitle = "Tempo Disponível", Min = 0.1, Max = 1, Increment = 0.1 };
+            workForm.FormPages.Add(workPage);
+            workForm.ShowDialog();
+            if (workForm.Success)
+            {
+                Role role = new Role
+                {
+                    AssignedTime = (double)workForm["work"].PageValue,
+                    PersonID = userControl.Person.PersonID,
+                    ProjectID = ApplicationController.Instance.CurrentProject.ProjectID,
+                    RoleDescription = RoleDescription.ScrumMaster
+                };
+                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(ChangeScrumMaster));
+                thread.Start(role);
+            }
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
         }
 
+        public void ChangeScrumMaster(object obj)
+        {
+            Role role = (Role)obj;
+            DataServiceClient client = new DataServiceClient();
+            var people = client.GetAllPeopleInProject(ApplicationController.Instance.CurrentProject.ProjectID);
+
+            // Remove current scrum master if any.
+            bool found = false;
+            foreach (Person p in people)
+            {
+                foreach (Role r in p.Roles)
+                {
+                    if (r.ProjectID == ApplicationController.Instance.CurrentProject.ProjectID && r.RoleDescription == RoleDescription.ScrumMaster)
+                    {
+                        ApplicationController.Instance.IgnoreNextProjectUpdate = true;
+                        client.DeleteRole(r.RoleID);
+                        found = true;
+                        break;
+                    }
+                }
+                if (found)
+                {
+                    break;
+                }
+            }
+
+            // Add new scrum master
+            client.CreateRole(role);
+            client.Close();
+        }
+
+        public void AddPerson_Click(object sender, MouseEventArgs e)
+        {
+            // Select a user.
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            PopupSelectionControlLib.SelectionWindow userForm = new PopupSelectionControlLib.SelectionWindow();
+            PopupSelectionControlLib.UserSelectionPage userPage = new PopupSelectionControlLib.UserSelectionPage();
+            userPage.PageTitle = "Escolha uma Pessoa";
+            userForm.FormPage = userPage;
+            userForm.ShowDialog();
+            if (userForm.Success)
+            {
+                ServiceLib.DataService.Person person = (ServiceLib.DataService.Person)userForm.Result;
+                foreach (Role r in person.Roles)
+                {
+                    // Return if the role already exists.
+                    if (r.RoleDescription == RoleDescription.TeamMember && r.ProjectID == ApplicationController.Instance.CurrentProject.ProjectID)
+                    {
+                        return;
+                    }
+                }
+
+                // Define assigned time.
+                PopupFormControlLib.FormWindow workForm = new PopupFormControlLib.FormWindow();
+                PopupFormControlLib.SpinnerPage workPage = new PopupFormControlLib.SpinnerPage { PageName = "work", PageTitle = "Tempo Disponível", Min = 0.1, Max = 1, Increment = 0.1 };
+                workForm.FormPages.Add(workPage);
+                workForm.ShowDialog();
+                if (workForm.Success)
+                {
+                    Role role = new Role
+                    {
+                        AssignedTime = (double)workForm["work"].PageValue,
+                        PersonID = person.PersonID,
+                        ProjectID = ApplicationController.Instance.CurrentProject.ProjectID,
+                        RoleDescription = RoleDescription.TeamMember
+                    };
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(AddPerson));
+                    thread.Start(role);
+                }
+            }
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+        }
+
+        public void AddPerson(object obj)
+        {
+            Role role = (Role)obj;
+            DataServiceClient client = new DataServiceClient();
+            client.CreateRole(role);
+            client.Close();
+        }
+
+        public void DeletePerson_Drop(object sender, DragEventArgs e)
+        {
+            // Confirm deletion.
+            var dataObj = e.Data as DataObject;
+            GenericControlLib.UserButtonControl userControl = dataObj.GetData("UserButtonControl") as GenericControlLib.UserButtonControl;
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            PopupFormControlLib.YesNoFormWindow form = new PopupFormControlLib.YesNoFormWindow();
+            form.FormTitle = "Apagar Membro da Equipa?";
+            form.ShowDialog();
+            if (form.Success)
+            {
+                // Remove role in this project.
+                foreach (Role role in userControl.Person.Roles)
+                {
+                    if (role.ProjectID == ApplicationController.Instance.CurrentProject.ProjectID)
+                    {
+                        System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(DeletePerson));
+                        thread.Start(role);
+                    }
+                }
+            }
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+        }
+
+        public void DeletePerson(object obj)
+        {
+            Role role = (Role)obj;
+            DataServiceClient client = new DataServiceClient();
+            client.DeleteRole(role.RoleID);
+            client.Close();
+        }
     }
 }

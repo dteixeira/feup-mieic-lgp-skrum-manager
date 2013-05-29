@@ -59,8 +59,7 @@
         </Grid.RowDefinitions>
         <Grid x:Name="UpperBar" Margin="0" Grid.Row="0" Background="{DynamicResource KinectOffBarBrush}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="30*" />
-                <ColumnDefinition Width="40*" />
+                <ColumnDefinition Width="70*" />
                 <ColumnDefinition Width="8*" />
                 <ColumnDefinition Width="8*" />
                 <ColumnDefinition Width="8*" />
