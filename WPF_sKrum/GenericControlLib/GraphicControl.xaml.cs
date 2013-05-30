@@ -20,10 +20,10 @@ namespace GenericControlLib
     /// </summary>
     public partial class GraphicControl : UserControl
     {
-        public GraphicControl(List<List<KeyValuePair<string, int>>> data, List<string> names)
+        public GraphicControl(List<List<KeyValuePair<string, int>>> data)
         {
             InitializeComponent();
-            showColumnChart(data,names);
+            showColumnChart(data);
         }
 
 
@@ -44,17 +44,15 @@ namespace GenericControlLib
             return style;
         }
 
-        private void showColumnChart(List<List<KeyValuePair<string,int>>> data, List<string> names)
+        private void showColumnChart(List<List<KeyValuePair<string,int>>> data)
         {
             if (data.Count > 0)
             {
-                this.Default_line_serie.Title = names[0];
                 lineChart.DataContext = data[0];
 
                 for (int i = 1; i < data.Count; i++)
                 {
                     LineSeries lineSeries1 = new LineSeries();
-                    lineSeries1.Title = names[i];
                     lineSeries1.DependentValuePath = "Value";
                     lineSeries1.IndependentValuePath = "Key";
                     lineSeries1.ItemsSource = data[i];

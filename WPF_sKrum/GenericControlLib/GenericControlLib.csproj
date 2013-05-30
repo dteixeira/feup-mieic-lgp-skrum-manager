@@ -60,6 +60,9 @@
     <Compile Include="ButtonControl.xaml.cs">
       <DependentUpon>ButtonControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="GraphicColumnControl.xaml.cs">
+      <DependentUpon>GraphicColumnControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GraphicControl.xaml.cs">
       <DependentUpon>GraphicControl.xaml</DependentUpon>
     </Compile>
@@ -126,6 +129,10 @@
     <Page Include="ButtonControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GraphicColumnControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="GraphicControl.xaml">
       <SubType>Designer</SubType>

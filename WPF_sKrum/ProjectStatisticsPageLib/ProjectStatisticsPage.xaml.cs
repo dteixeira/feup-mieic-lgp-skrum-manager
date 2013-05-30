@@ -102,8 +102,8 @@ namespace ProjectStatisticsPageLib
 
             List<KeyValuePair<string, int>> previsiondata = new List<KeyValuePair<string, int>>();
             List<KeyValuePair<string, int>> graphicdata = new List<KeyValuePair<string, int>>();
-            previsiondata.Add(new KeyValuePair<string, int>("0", estimatedWork));
-            graphicdata.Add(new KeyValuePair<string, int>("0", estimatedWork));
+            previsiondata.Add(new KeyValuePair<string, int>("1", estimatedWork));
+            graphicdata.Add(new KeyValuePair<string, int>("1", estimatedWork));
 
 
 
@@ -112,21 +112,27 @@ namespace ProjectStatisticsPageLib
 
             for (int i = 1; i < sprintdur; i++)
             {
-                previsiondata.Add(new KeyValuePair<string, int>(i.ToString(), (estimatedWork/sprintdur)*(sprintdur-i)));
+                previsiondata.Add(new KeyValuePair<string, int>((i+1).ToString(), (estimatedWork/sprintdur)*(sprintdur-i)));
                 if(i<= biggestkey)
-                    graphicdata.Add(new KeyValuePair<string, int>(i.ToString(), (graphicdata[i - 1].Value - graphicRawData[i])));
+                    graphicdata.Add(new KeyValuePair<string, int>((i+1).ToString(), (graphicdata[i - 1].Value - graphicRawData[i])));
             }
 
             List<List<KeyValuePair<string,int>>> data = new List<List<KeyValuePair<string,int>>> ();
             List<string> names = new List<string>();
-            names.Add("Previsão");
             data.Add(previsiondata);
-            names.Add("Real");
             data.Add(graphicdata);
-            GraphicControl graphic = new GraphicControl(data,names);
+
+            GraphicControl graphic = new GraphicControl(data);
             graphic.SetValue(Grid.RowProperty, 1);
             graphic.Margin = new Thickness(50);
             this.LeftArea.Children.Add(graphic);
+
+            /*GraphicColumnControl graphic2 = new GraphicColumnControl(data[1]);
+            graphic2.SetValue(Grid.RowProperty, 1);
+            graphic2.Margin = new Thickness(50);
+            this.LeftArea.Children.Add(graphic2);*/
+
+
         }
 
         public PageChange PageChangeTarget(PageChangeDirection direction)
