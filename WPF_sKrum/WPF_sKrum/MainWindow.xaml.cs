@@ -386,6 +386,28 @@ namespace WPFApplication
             if (projectForm.Success)
             {
                 ServiceLib.DataService.Project project = (ServiceLib.DataService.Project)projectForm.Result;
+                if (project.Password != null)
+                {
+                    PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+                    PopupFormControlLib.PasswordBoxPage passwordPage = new PopupFormControlLib.PasswordBoxPage { PageName = "password", PageTitle = "Password de Administrador" };
+                    form.FormPages.Add(passwordPage);
+                    form.ShowDialog();
+                    if (form.Success)
+                    {
+                        string password = (string)form["password"].PageValue;
+                        if (password != null && password != "")
+                        {
+                            DataServiceClient client = new DataServiceClient();
+                            bool login = client.LoginProject(project.ProjectID, password);
+                            client.Close();
+                            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+                            if (!login)
+                            {
+                                return;
+                            }
+                        }
+                    }
+                }
                 ApplicationController.Instance.CurrentProject = project;
                 this.UpperBar_ProjectName.Text = project.Name;
                 ApplicationController.Instance.AdminLogin = false;
