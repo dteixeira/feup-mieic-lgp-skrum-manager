@@ -62,6 +62,11 @@ namespace TaskboardRowLib
                 // Handle task drop.
                 if (taskControl != null)
                 {
+                    // Can't mode a task to todo again.
+                    if (this.State == TasksState.Todo)
+                    {
+                        return;
+                    }
                     if (this.State != taskControl.State)
                     {
                         // If no user is attributed to the task
