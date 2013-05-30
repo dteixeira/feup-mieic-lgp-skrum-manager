@@ -68,6 +68,8 @@ namespace SharedTypes
                     if (this.currentProject != null)
                     {
                         this.Notifications.Unsubscribe(this.currentProject.ProjectID);
+                        this.Notifications = new NotificationServiceClient(new System.ServiceModel.InstanceContext(this));
+                        this.Notifications.Subscribe(-1);
                     }
 
                     // Subscribe to a new project.
@@ -100,10 +102,6 @@ namespace SharedTypes
             // Get project and person info.
             this.Projects = this.Data.GetAllProjects();
             this.People = this.Data.GetAllPeople();
-            if (this.Projects.Count > 0)
-            {
-                this.CurrentProject = this.Projects[0];
-            }
 
             // Setup gestures if a sensor was found.
             if (this.KinectSensor.FoundSensor())

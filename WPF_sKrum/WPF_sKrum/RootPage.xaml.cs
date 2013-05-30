@@ -38,7 +38,7 @@ namespace WPFApplication
                 case PageChangeDirection.Left:
                     return new PageChange { Context = null, Page = ApplicationPages.ProjectManagementPage };
                 case PageChangeDirection.Right:
-                    return new PageChange { Context = null, Page = ApplicationPages.MainPage };
+                    return null;
                 case PageChangeDirection.Up:
                     return null;
                 default:
@@ -52,7 +52,7 @@ namespace WPFApplication
             directions[PageChangeDirection.Up] = null;
             directions[PageChangeDirection.Down] = null;
             directions[PageChangeDirection.Left] = "GESTÃO DE PROJECTOS";
-            directions[PageChangeDirection.Right] = "MENU INICIAL";
+            directions[PageChangeDirection.Right] = null;
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
         }
 
