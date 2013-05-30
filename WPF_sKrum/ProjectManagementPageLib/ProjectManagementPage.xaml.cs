@@ -301,7 +301,16 @@ namespace ProjectManagementPageLib
                 case PageChangeDirection.Left:
                     return null;
                 case PageChangeDirection.Right:
-                    return new PageChange { Context = null, Page = ApplicationPages.ProjectTeamManagementPage };
+                    if (ApplicationController.Instance.CurrentProject != null)
+                    {
+                        ApplicationController.Instance.AdminLogin = false;
+                        return new PageChange { Context = null, Page = ApplicationPages.ProjectTeamManagementPage };
+                    }
+                    else
+                    {
+                        ApplicationController.Instance.AdminLogin = false;
+                        return new PageChange { Context = null, Page = ApplicationPages.RootPage };
+                    }
                 case PageChangeDirection.Up:
                     return new PageChange { Context = null, Page = ApplicationPages.PeopleManagementPage };
                 default:
@@ -315,7 +324,14 @@ namespace ProjectManagementPageLib
             directions[PageChangeDirection.Up] = "GESTÃO DE UTILIZADORES";
             directions[PageChangeDirection.Down] = null;
             directions[PageChangeDirection.Left] = null;
-            directions[PageChangeDirection.Right] = "GESTÃO DE EQUIPA";
+            if (ApplicationController.Instance.CurrentProject != null)
+            {
+                directions[PageChangeDirection.Right] = "GESTÃO DE EQUIPA";
+            }
+            else
+            {
+                directions[PageChangeDirection.Right] = "PÁGINA INICIAL";
+            }
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
         }
 
@@ -506,7 +522,14 @@ namespace ProjectManagementPageLib
                     }
                 }
                 ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
-                ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.RootPage });
+                if (ApplicationController.Instance.CurrentProject != null)
+                {
+                    ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.MainPage });
+                }
+                else
+                {
+                    ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.RootPage });
+                }
             }
         }
     }

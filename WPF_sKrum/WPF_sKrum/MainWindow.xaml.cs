@@ -366,6 +366,7 @@ namespace WPFApplication
 
         private void UpperBar_Config_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
+            ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.ProjectManagementPage });
         }
 
         private void UpperBar_Close_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
@@ -387,6 +388,7 @@ namespace WPFApplication
                 ServiceLib.DataService.Project project = (ServiceLib.DataService.Project)projectForm.Result;
                 ApplicationController.Instance.CurrentProject = project;
                 this.UpperBar_ProjectName.Text = project.Name;
+                ApplicationController.Instance.AdminLogin = false;
                 ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.MainPage });
             }
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
