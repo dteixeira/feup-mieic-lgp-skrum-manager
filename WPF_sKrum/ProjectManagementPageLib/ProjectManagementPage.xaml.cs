@@ -406,7 +406,6 @@ namespace ProjectManagementPageLib
         {
             Project project = obj as Project;
             DataServiceClient client = new DataServiceClient();
-            ApplicationController.Instance.IgnoreNextProjectUpdate = true;
             client.CreateProject(project);
             client.Close();
         }
@@ -453,6 +452,7 @@ namespace ProjectManagementPageLib
                 ApplicationController.Instance.IgnoreNextProjectUpdate = true;
                 client.UpdateProjectPassword(project.ProjectID, project.Password == "" ? null : project.Password);
             }
+            ApplicationController.Instance.IgnoreNextProjectUpdate = false;
             client.UpdateProject(project);
             client.Close();
         }
@@ -481,7 +481,6 @@ namespace ProjectManagementPageLib
         {
             GenericControlLib.ProjectButtonControl projectControl = obj as GenericControlLib.ProjectButtonControl;
             DataServiceClient client = new DataServiceClient();
-            ApplicationController.Instance.IgnoreNextProjectUpdate = true;
             client.DeleteProject(projectControl.Project.ProjectID);
             client.Close();
         }

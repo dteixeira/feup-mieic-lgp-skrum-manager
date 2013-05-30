@@ -466,7 +466,6 @@ namespace PeopleManagementPageLib
             DataServiceClient client = new DataServiceClient();
             if (person.Password != null)
             {
-                ApplicationController.Instance.IgnoreNextGlobalPeopleUpdate = true;
                 client.UpdatePersonPassword(person.PersonID, person.Password == "" ? null : person.Password);
             }
             client.UpdatePerson(person);

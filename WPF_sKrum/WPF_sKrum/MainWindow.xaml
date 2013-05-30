@@ -69,7 +69,7 @@
                 <Grid x:Name="GridClose" Grid.Column="3" MouseLeftButtonDown="UpperBar_Close_MouseLeftButtonDown" Style="{StaticResource HoverStyle}">
                 	<Image x:Name="UpperBar_Close" Source="Images/cruz.png" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
-                <Grid x:Name="GridHome" Grid.Column="2" Style="{StaticResource HoverStyle}">
+                <Grid x:Name="GridHome" Grid.Column="2" Style="{StaticResource HoverStyle}" MouseLeftButtonDown="GridHome_MouseLeftButtonDown">
                 	<Image x:Name="UpperBar_Home" Source="Images/casa.png" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                 </Grid>
                 <Grid x:Name="GridConfig" Grid.Column="1" MouseLeftButtonDown="UpperBar_Config_MouseLeftButtonDown" Style="{StaticResource HoverStyle}">

@@ -309,7 +309,6 @@ namespace ProjectTeamManagementPageLib
                 {
                     if (r.ProjectID == ApplicationController.Instance.CurrentProject.ProjectID && r.RoleDescription == RoleDescription.ScrumMaster)
                     {
-                        ApplicationController.Instance.IgnoreNextProjectUpdate = true;
                         client.DeleteRole(r.RoleID);
                         found = true;
                         break;

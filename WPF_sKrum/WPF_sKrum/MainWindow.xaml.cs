@@ -374,6 +374,20 @@ namespace WPFApplication
             this.Close();
         }
 
+        private void GridHome_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (ApplicationController.Instance.CurrentProject != null)
+            {
+                ApplicationController.Instance.AdminLogin = false;
+                ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.MainPage });
+            }
+            else
+            {
+                ApplicationController.Instance.AdminLogin = false;
+                ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.RootPage });
+            }
+        }
+
         private void UpperBar_SelectProj_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             // Select a user.
