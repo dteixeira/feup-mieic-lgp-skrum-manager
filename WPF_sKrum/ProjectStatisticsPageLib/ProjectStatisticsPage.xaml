@@ -19,15 +19,15 @@
 			</Grid.RowDefinitions>
 			<Grid Grid.Row="2">
 				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Tasks" VerticalAlignment="Top" TextTrimming="WordEllipsis" FontSize="32" FontFamily="Source Sans Pro"/>
-				<GenericControlLib:PercentageShowerControl VerticalAlignment="Center" Margin="0,0,25,0" Todo="13" Done="1" Height="70"/>
+                <GenericControlLib:PercentageShowerControl x:Name="TasksExecuted" VerticalAlignment="Center" Margin="0,0,25,0" Todo="1" Done="1" Height="70"/>
 			</Grid>
 			<Grid Grid.Row="1">
 				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="UserStories" VerticalAlignment="Top" TextTrimming="WordEllipsis" FontSize="32" FontFamily="Source Sans Pro"/>
-				<GenericControlLib:PercentageShowerControl VerticalAlignment="Center" Margin="0,0,25,0" Done="11" Height="70"/>
+				<GenericControlLib:PercentageShowerControl x:Name="UserStoriesExecuted" VerticalAlignment="Center" Margin="0,0,25,0" Done="1" Todo="1" Height="70"/>
 			</Grid>
 			<Grid>
 				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Text="Trabalho Executado" TextTrimming="WordEllipsis" FontSize="32" FontFamily="Source Sans Pro"/>
-				<GenericControlLib:PercentageDualShowerControl VerticalAlignment="Center" Done="9" Expected="44" Margin="0,0,25,0"/>
+				<GenericControlLib:PercentageDualShowerControl x:Name="WorkExecuted" VerticalAlignment="Center" Done="1" Expected="1" Margin="0,0,25,0"/>
 			</Grid>
 		</Grid>
 		<Grid x:Name="LeftArea">
@@ -36,7 +36,6 @@
 				<RowDefinition Height="8*"/>
 			</Grid.RowDefinitions>
 			<GenericControlLib:ButtonControl VerticalAlignment="Bottom" ButtonText="ON TIME" IsHitTestVisible="False" Margin="50,0,0,20" HorizontalAlignment="Left"/>
-			<GenericControlLib:GraphicControl Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="50,50,50,50"/>
 		</Grid>
             
 	</Grid>

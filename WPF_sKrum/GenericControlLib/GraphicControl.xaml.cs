@@ -20,10 +20,10 @@ namespace GenericControlLib
     /// </summary>
     public partial class GraphicControl : UserControl
     {
-        public GraphicControl()
+        public GraphicControl(List<List<KeyValuePair<string, int>>> data, List<string> names)
         {
             InitializeComponent();
-            showColumnChart();
+            showColumnChart(data,names);
         }
 
 
@@ -44,18 +44,31 @@ namespace GenericControlLib
             return style;
         }
 
-        private void showColumnChart()
+        private void showColumnChart(List<List<KeyValuePair<string,int>>> data, List<string> names)
         {
+            if (data.Count > 0)
+            {
+                this.Default_line_serie.Title = names[0];
+                lineChart.DataContext = data[0];
 
-            //Adicionar valores a introduzir no gráfico
-            List<KeyValuePair<string, int>> valueList = new List<KeyValuePair<string, int>>();
-            valueList.Add(new KeyValuePair<string, int>("1", 60));
-            valueList.Add(new KeyValuePair<string, int>("2", 55));
-            valueList.Add(new KeyValuePair<string, int>("3", 20));
-            valueList.Add(new KeyValuePair<string, int>("4", 20));
-            valueList.Add(new KeyValuePair<string, int>("5", 10));
+                for (int i = 1; i < data.Count; i++)
+                {
+                    LineSeries lineSeries1 = new LineSeries();
+                    lineSeries1.Title = names[i];
+                    lineSeries1.DependentValuePath = "Value";
+                    lineSeries1.IndependentValuePath = "Key";
+                    lineSeries1.ItemsSource = data[i];
+                    lineChart.Series.Add(lineSeries1);
 
-            //Novos valores para a linha adicional
+                    Style dataPointStyle = GetNewDataPointStyle();
+                    lineSeries1.DataPointStyle = dataPointStyle;
+                }
+            }
+
+
+            
+
+            /*//Novos valores para a linha adicional
             List<KeyValuePair<string, int>> valueList2 = new List<KeyValuePair<string, int>>();
             valueList2.Add(new KeyValuePair<string, int>("1", 60));
             valueList2.Add(new KeyValuePair<string, int>("2", 48));
@@ -72,7 +85,7 @@ namespace GenericControlLib
             lineSeries1.DependentValuePath = "Value";
             lineSeries1.IndependentValuePath = "Key";
             lineSeries1.ItemsSource = valueList2;
-            lineChart.Series.Add(lineSeries1);
+            lineChart.Series.Add(lineSeries1);*/
 
             /*lineSeries2.Title = "Real";
             lineSeries2.DependentValuePath = "Value";
@@ -80,13 +93,13 @@ namespace GenericControlLib
             lineSeries2.ItemsSource = valueList;
             //lineChart.Series.Add(lineSeries2);*/
 
-            Style dataPointStyle = GetNewDataPointStyle();
-            lineSeries1.DataPointStyle = dataPointStyle;
+            /*Style dataPointStyle = GetNewDataPointStyle();
+            lineSeries1.DataPointStyle = dataPointStyle;*/
 
-            this.Default_line_serie.Title = "Real";
+            //this.Default_line_serie.Title = "Real";
 
             //Setting data for line chart
-            lineChart.DataContext = valueList;
+            //lineChart.DataContext = valueList;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using ServiceLib.NotificationService;
+﻿using GenericControlLib;
+using ServiceLib.DataService;
+using ServiceLib.NotificationService;
 using SharedTypes;
 using System;
 using System.Collections.Generic;
@@ -38,7 +40,93 @@ namespace ProjectStatisticsPageLib
 
         private void PopulateProjectStatisticsPage()
         {
-            //TODO
+            // Get current project if selected.
+            Project project = ApplicationController.Instance.CurrentProject;
+
+            // Get current sprint.
+            Sprint sprint = project.Sprints.FirstOrDefault(s => s.Closed == false);
+
+            int closedStories = 0;
+            int openedStories = 0;
+            int closedTasks = 0;
+            int openedTasks = 0;
+            int estimatedWork = 0;
+            double doneWork = 0;
+            
+
+            int sprintdur = project.SprintDuration * 7;
+            List<int> graphicRawData = new List<int>(sprintdur);
+            for (int i = 0; i < sprintdur; i++)
+            {
+                graphicRawData.Add(0);
+            }
+
+            // Iterate all user stories in the sprint.
+            foreach (var story in sprint.Stories)
+            {
+                if (story.State == StoryState.Completed)
+                    closedStories++;
+                else if (story.State == StoryState.Abandoned)
+                    closedStories++;
+                else
+                    openedStories++;
+                foreach(var task in story.Tasks)
+                {
+                    if (task.State == TaskState.Completed)
+                    {
+                        closedTasks++;
+                        try
+                        {
+                            DateTime lastworkedtime = task.PersonTasks.Max(pt => pt.CreationDate);
+                            TimeSpan diftime = lastworkedtime - sprint.BeginDate;
+                            int key = diftime.Days;
+                            graphicRawData[key] = graphicRawData[key] + task.Estimation;
+                        }
+                        catch (Exception){}
+                    }
+                    else
+                        openedTasks++;
+                    estimatedWork += task.Estimation;
+                    doneWork += task.PersonTasks.Sum(pt=>pt.SpentTime);
+                }
+            }
+
+            this.WorkExecuted.Done = (int)doneWork;
+            this.WorkExecuted.Expected = estimatedWork;
+
+            this.UserStoriesExecuted.Done = closedStories;
+            this.UserStoriesExecuted.Todo = openedStories;
+
+            this.TasksExecuted.Done = closedTasks;
+            this.TasksExecuted.Todo = openedTasks;
+
+            List<KeyValuePair<string, int>> previsiondata = new List<KeyValuePair<string, int>>();
+            List<KeyValuePair<string, int>> graphicdata = new List<KeyValuePair<string, int>>();
+            previsiondata.Add(new KeyValuePair<string, int>("0", estimatedWork));
+            graphicdata.Add(new KeyValuePair<string, int>("0", estimatedWork));
+
+
+
+            TimeSpan biggestDifTime = System.DateTime.Now - sprint.BeginDate;
+            int biggestkey = biggestDifTime.Days;
+
+            for (int i = 1; i < sprintdur; i++)
+            {
+                previsiondata.Add(new KeyValuePair<string, int>(i.ToString(), (estimatedWork/sprintdur)*(sprintdur-i)));
+                if(i<= biggestkey)
+                    graphicdata.Add(new KeyValuePair<string, int>(i.ToString(), (graphicdata[i - 1].Value - graphicRawData[i])));
+            }
+
+            List<List<KeyValuePair<string,int>>> data = new List<List<KeyValuePair<string,int>>> ();
+            List<string> names = new List<string>();
+            names.Add("Previsão");
+            data.Add(previsiondata);
+            names.Add("Real");
+            data.Add(graphicdata);
+            GraphicControl graphic = new GraphicControl(data,names);
+            graphic.SetValue(Grid.RowProperty, 1);
+            graphic.Margin = new Thickness(50);
+            this.LeftArea.Children.Add(graphic);
         }
 
         public PageChange PageChangeTarget(PageChangeDirection direction)
