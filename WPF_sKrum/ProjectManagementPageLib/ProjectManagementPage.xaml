@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:GenericControlLib="clr-namespace:GenericControlLib;assembly=GenericControlLib" x:Class="ProjectManagementPageLib.ProjectManagementPage" 
              mc:Ignorable="d" 
-             d:DesignHeight="1074" d:DesignWidth="1661" Background="{DynamicResource BackgroundBrush}">
+             d:DesignHeight="1074" d:DesignWidth="1661" Background="{DynamicResource BackgroundBrush}" Loaded="UserControl_Loaded">
     <UserControl.Resources>
         <Style x:Key="RectangleStyle1" TargetType="{x:Type Rectangle}">
         	<Setter Property="Fill" Value="{DynamicResource BackgroundBrush}"/>

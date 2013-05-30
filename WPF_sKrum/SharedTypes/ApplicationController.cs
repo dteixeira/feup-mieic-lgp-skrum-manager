@@ -57,6 +57,7 @@ namespace SharedTypes
         public bool IgnoreNextProjectUpdate { get; set; }
         public bool IgnoreNextGlobalProjectUpdate { get; set; }
         public bool IgnoreNextGlobalPeopleUpdate { get; set; }
+        public bool AdminLogin { get; set; }
         public Project CurrentProject
         {
             get { return this.currentProject; }
