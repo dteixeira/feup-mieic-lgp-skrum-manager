@@ -82,6 +82,7 @@
             <pageTransitions:PageTransition Grid.Row="1" Background="Transparent" x:Name="PageTransitionControl" TransitionType="Fade" />
         </Grid>
         <GenericControlLib:NavigationControl x:Name="NavigationLayer" Panel.ZIndex="1"/>
+        <GenericControlLib:NotificationControl x:Name="NotificationMessage" Panel.ZIndex="1"/>
         <Grid x:Name="BlurLayer" Panel.ZIndex="1" Opacity="0.8" Background="Black" Visibility="Hidden"/>
         <Canvas x:Name="kinectLayer" Visibility="Visible" Panel.ZIndex="100" Margin="0">
         	<Image x:Name="RightOpen" Source="Images/right_open.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
