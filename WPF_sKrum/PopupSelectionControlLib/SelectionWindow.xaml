@@ -51,6 +51,14 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <Style x:Key="HoverStyle" TargetType="{x:Type Grid}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource Gray5Brush}"/>
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
     </Window.Resources>
     <Grid x:Name="LayoutRoot" RenderTransformOrigin="0.5,0.5" Background="{DynamicResource BackgroundBrush}" Margin="50">
         <Grid.RowDefinitions>
@@ -64,7 +72,9 @@
                 <ColumnDefinition Width="8*" />
                 <ColumnDefinition Width="8*" />
             </Grid.ColumnDefinitions>
-            <Image HorizontalAlignment="Center" MouseLeftButtonDown="Close_MouseLeftButtonDown" VerticalAlignment="Center" Grid.Column="4" Source="Images/cruz.png" Margin="5" Style="{StaticResource HoverZoomStyle}" Panel.ZIndex="1"/>
+            <Grid Grid.Column="4" Margin="5" Panel.ZIndex="1" Style="{StaticResource HoverStyle}" MouseLeftButtonDown="Close_MouseLeftButtonDown">
+                <Image HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False" Source="Images/cruz.png"/>
+            </Grid>
             <Label x:Name="FieldNameLabel" Content="Nome do Projecto" VerticalContentAlignment="Center" Foreground="White" FontSize="32" Padding="40,5,5,5"/>
         </Grid>
         <Grid x:Name="FormContent" Grid.Row="1"/>
