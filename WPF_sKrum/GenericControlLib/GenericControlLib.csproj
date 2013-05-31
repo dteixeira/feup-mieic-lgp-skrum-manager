@@ -69,6 +69,9 @@
     <Compile Include="LetterControl.xaml.cs">
       <DependentUpon>LetterControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MeetingControl.xaml.cs">
+      <DependentUpon>MeetingControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NotificationControl.xaml.cs">
       <DependentUpon>NotificationControl.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,10 @@
     <Page Include="LetterControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MeetingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NotificationControl.xaml">
       <Generator>MSBuild:Compile</Generator>

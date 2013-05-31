@@ -69,6 +69,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Images\Thumbs.db" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -82,6 +83,14 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GenericControlLib\GenericControlLib.csproj">
+      <Project>{66c3f1e6-c160-47b7-8c0c-b53a975226ad}</Project>
+      <Name>GenericControlLib</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PopupFormControlLib\PopupFormControlLib.csproj">
+      <Project>{54d583d1-8112-4f51-ace4-53cc42e3fa4b}</Project>
+      <Name>PopupFormControlLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceLib\ServiceLib.csproj">
       <Project>{00f9c426-8516-404c-b085-de09790effc1}</Project>
       <Name>ServiceLib</Name>
@@ -90,6 +99,9 @@
       <Project>{aefd3bbd-4261-4c4f-ba8d-fb3668bb40be}</Project>
       <Name>SharedTypes</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
