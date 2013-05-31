@@ -32,6 +32,15 @@ namespace ProjectStatisticsPageLib
             InitializeComponent();
             this.PageType = ApplicationPages.PersonStatisticsPage;
             this.CurrentPerson = (Person)context;
+            UserButtonVerticalControl user = new UserButtonVerticalControl
+            {
+                UserName = this.CurrentPerson.Name,
+                UserPhoto = this.CurrentPerson.PhotoURL
+            };
+            user.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+            user.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+            user.Margin = new Thickness(50, 10, 50, 10);
+            this.LeftArea.Children.Add(user);
 
             // Register for project change notifications.
             this.DataChangeDelegate = new ApplicationController.DataModificationHandler(this.DataChangeHandler);
@@ -48,81 +57,41 @@ namespace ProjectStatisticsPageLib
             // Get current sprint.
             Sprint sprint = project.Sprints.FirstOrDefault(s => s.Closed == false);
 
-            int closedStories = 0;
-            int openedStories = 0;
-            int closedTasks = 0;
-            int openedTasks = 0;
             int estimatedWork = 0;
             double doneWork = 0;
             
 
-            int sprintdur = project.SprintDuration * 7;
-            List<int> graphicRawData = new List<int>(sprintdur);
-            for (int i = 0; i < sprintdur; i++)
-            {
-                graphicRawData.Add(0);
-            }
+            List<int> graphicRawData = new List<int>(project.SprintDuration * 7);
 
-            // Iterate all user stories in the sprint.
-            foreach (var story in sprint.Stories)
+            List<int> storyIDs = sprint.Stories.Select(st => st.StoryID).ToList<int>();
+            List<Task> tasks = this.CurrentPerson.Tasks.Where(t => storyIDs.Contains(t.StoryID)).ToList<Task>();
+            estimatedWork = tasks.Sum(t => t.Estimation);
+            for(int i = 0; i < project.SprintDuration * 7; ++i) 
             {
-                if (story.State == StoryState.Completed)
-                    closedStories++;
-                else if (story.State == StoryState.Abandoned)
-                    closedStories++;
-                else
-                    openedStories++;
-                foreach(var task in story.Tasks)
+                var workedTasks = tasks.Where(t => t.CreationDate.Date == sprint.BeginDate.Date.AddDays(i));
+                double sum = 0;
+                foreach (Task task in workedTasks)
                 {
-                    if (task.State == TaskState.Completed)
-                    {
-                        closedTasks++;
-                        try
-                        {
-                            DateTime lastworkedtime = task.PersonTasks.Max(pt => pt.CreationDate);
-                            TimeSpan diftime = lastworkedtime - sprint.BeginDate;
-                            int key = diftime.Days;
-                            graphicRawData[key] = graphicRawData[key] + task.Estimation;
-                        }
-                        catch (Exception){}
-                    }
-                    else
-                        openedTasks++;
-                    estimatedWork += task.Estimation;
-                    doneWork += task.PersonTasks.Sum(pt=>pt.SpentTime);
+                    sum += task.PersonTasks.Sum(pt => pt.SpentTime);
                 }
+                doneWork += sum;
+                graphicRawData.Add((int)sum);
             }
-
+            
             this.WorkExecuted.Done = (int)doneWork;
             this.WorkExecuted.Expected = estimatedWork;
 
-            this.UserStoriesExecuted.Done = closedStories;
-            this.UserStoriesExecuted.Todo = openedStories;
-
-            this.TasksExecuted.Done = closedTasks;
-            this.TasksExecuted.Todo = openedTasks;
-
             List<KeyValuePair<string, int>> graphicdata = new List<KeyValuePair<string, int>>();
-            graphicdata.Add(new KeyValuePair<string, int>("1", estimatedWork));
 
-
-
-            TimeSpan biggestDifTime = System.DateTime.Now - sprint.BeginDate;
-            int biggestkey = biggestDifTime.Days;
-
-            for (int i = 1; i < sprintdur; i++)
+            for (int i = 0; i < project.SprintDuration * 7; i++)
             {
-                if (i <= biggestkey)
-                    graphicdata.Add(new KeyValuePair<string, int>((i+1).ToString(), (graphicdata[i - 1].Value - graphicRawData[i])));
+                graphicdata.Add(new KeyValuePair<string, int>((i+1).ToString(), graphicRawData[i]));
             }
-
 
             GraphicColumnControl graphic = new GraphicColumnControl(graphicdata);
             graphic.SetValue(Grid.RowProperty, 1);
             graphic.Margin = new Thickness(50);
-            this.LeftArea.Children.Add(graphic);
-
-
+            this.RightArea.Children.Add(graphic);
         }
 
         public PageChange PageChangeTarget(PageChangeDirection direction)
@@ -146,7 +115,7 @@ namespace ProjectStatisticsPageLib
                         // First person of the list.
                         if (index == 0)
                         {
-                            return new PageChange { Context = null, Page = ApplicationPages.ProjectStatisticsPage };
+                            return new PageChange { Context = null, Page = ApplicationPages.TaskBoardPage };
                         }
                         else
                         {
