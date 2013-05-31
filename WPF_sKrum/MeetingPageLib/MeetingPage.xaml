@@ -96,7 +96,7 @@
         	</Image>
         </Grid>
         <ScrollViewer x:Name="NotesScroll" Grid.Column="5" VerticalScrollBarVisibility="Hidden" Background="Transparent" Margin="10,30">
-        	<TextBlock x:Name="MeetingNotes" TextWrapping="Wrap" FontFamily="Open Sans" FontSize="96" Foreground="{DynamicResource Gray7Brush}" VerticalAlignment="Top"/>
+        	<TextBlock x:Name="MeetingNotes" TextWrapping="Wrap" FontFamily="Open Sans" FontSize="32" Foreground="{DynamicResource Gray7Brush}" VerticalAlignment="Top"/>
         </ScrollViewer>
     </Grid>
 </UserControl>
