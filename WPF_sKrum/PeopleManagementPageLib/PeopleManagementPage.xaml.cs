@@ -403,6 +403,10 @@ namespace PeopleManagementPageLib
                     System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.AddPerson));
                     thread.Start(person);
                 }
+                else
+                {
+                    ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("Um utilizador deve ter nome e email.", new TimeSpan(0, 0, 3));
+                }
             }
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
         }
@@ -455,6 +459,10 @@ namespace PeopleManagementPageLib
                     // Launch thread to update the project.
                     System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.EditPerson));
                     thread.Start(person);
+                }
+                else
+                {
+                    ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("Um utilizador deve ter nome e email.", new TimeSpan(0, 0, 3));
                 }
             }
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);

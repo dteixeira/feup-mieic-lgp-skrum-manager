@@ -384,7 +384,7 @@ namespace ProjectManagementPageLib
                 string password = (string)form["password"].PageValue;
                 int duration = (int)((double)form["duration"].PageValue);
                 password = password == "" ? null : password;
-                if (name != "")
+                if (name != null && name != "")
                 {
                     Project project = new Project
                     {
@@ -397,6 +397,10 @@ namespace ProjectManagementPageLib
                     // Launch thread to update the project.
                     System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.AddProject));
                     thread.Start(project);
+                }
+                else
+                {
+                    ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("O projecto deve ter um nome.", new TimeSpan(0, 0, 3));
                 }
             }
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
@@ -429,7 +433,7 @@ namespace ProjectManagementPageLib
                 string name = (string)form["name"].PageValue;
                 string password = (string)form["password"].PageValue;
                 //int duration = (int)((double)form["duration"].PageValue);
-                if (name != "")
+                if (name != null && name != "")
                 {
                     project.Name = name;
                     //project.SprintDuration = duration;
@@ -438,6 +442,10 @@ namespace ProjectManagementPageLib
                     // Launch thread to update the project.
                     System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.EditProject));
                     thread.Start(project);
+                }
+                else
+                {
+                    ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("O projecto deve ter um nome.", new TimeSpan(0, 0, 3));
                 }
             }
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
@@ -522,10 +530,12 @@ namespace ProjectManagementPageLib
                 if (ApplicationController.Instance.CurrentProject != null)
                 {
                     ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.MainPage });
+                    ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("Não tem permissões para aceder a esta página.", new TimeSpan(0, 0, 3));
                 }
                 else
                 {
                     ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.RootPage });
+                    ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("Não tem permissões para aceder a esta página.", new TimeSpan(0, 0, 3));
                 }
             }
         }

@@ -203,7 +203,6 @@ namespace WPFApplication
             }
         }
 
-        // TODO REFACTOR.
         /// <summary>
         /// Callback for "gesture recognized" events.
         /// </summary>
@@ -449,7 +448,19 @@ namespace WPFApplication
                                 ApplicationController.Instance.AdminLogin = false;
                                 ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.MainPage });
                             }
+                            else
+                            {
+                                ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("Não tem permissões para aceder a este projecto.", new TimeSpan(0, 0, 3));
+                            }
                         }
+                        else
+                        {
+                            ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("Não tem permissões para aceder a este projecto.", new TimeSpan(0, 0, 3));
+                        }
+                    }
+                    else
+                    {
+                        ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("Não tem permissões para aceder a este projecto.", new TimeSpan(0, 0, 3));
                     }
                 }
                 else
