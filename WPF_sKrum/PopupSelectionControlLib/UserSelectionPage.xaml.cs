@@ -184,7 +184,7 @@ namespace PopupSelectionControlLib
                     button.SetValue(Grid.ColumnProperty, column);
                     button.SetValue(Grid.RowProperty, row);
                     button.Margin = new Thickness(10, 10, 10, 10);
-                    button.MouseLeftButtonDown += new MouseButtonEventHandler(personSelected);
+                    button.MouseLeftButtonUp += new MouseButtonEventHandler(personSelected);
 
                     this.Contents.Children.Add(button);
                 }

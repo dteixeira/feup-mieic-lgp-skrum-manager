@@ -422,19 +422,16 @@ namespace ProjectBacklogPageLib
                 ProjectID = ApplicationController.Instance.CurrentProject.ProjectID,
                 Number = number
             };
-            ApplicationController.Instance.IgnoreNextProjectUpdate = true;
             sprint = client.CreateSprint(sprint);
             
             // Force refresh if sprint creation failed.
             if (sprint == null)
             {
-                ApplicationController.Instance.IgnoreNextProjectUpdate = false;
                 ApplicationController.Instance.DataChanged(NotificationType.ProjectModification);
             }
             else
             {
                 storySprint.SprintID = sprint.SprintID;
-                ApplicationController.Instance.IgnoreNextProjectUpdate = false;
                 client.AddStoryInSprint(storySprint);
             }
             client.Close();
@@ -447,7 +444,6 @@ namespace ProjectBacklogPageLib
             Sprint currentSprint = project.Sprints.FirstOrDefault(sp => sp.Closed == false);
             currentSprint.Closed = true;
             currentSprint.EndDate = System.DateTime.Today;
-            ApplicationController.Instance.IgnoreNextProjectUpdate = true;
             client.UpdateSprint(currentSprint);
             int number = 1;
             if (project.Sprints.Count > 0)
@@ -463,7 +459,6 @@ namespace ProjectBacklogPageLib
                 ProjectID = ApplicationController.Instance.CurrentProject.ProjectID,
                 Number = number
             };
-            ApplicationController.Instance.IgnoreNextProjectUpdate = false;
             sprint = client.CreateSprint(sprint);
             client.Close();
         }

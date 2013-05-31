@@ -120,7 +120,6 @@ namespace GenericControlLib
         protected override void OnPreviewMouseUp(MouseButtonEventArgs e)
         {
             started_drag = false;
-            e.Handled = true;
         }
 
         protected override void OnGiveFeedback(GiveFeedbackEventArgs e)

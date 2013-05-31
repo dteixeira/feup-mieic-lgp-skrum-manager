@@ -95,11 +95,6 @@ namespace TaskboardRowLib
                         // Launch thread to update the project.
                         System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.UpdateTaskInService));
                         thread.Start(new object[] { this.State, taskControl.Task, person });
-
-                        // Update visualization.
-                        TaskboardRowControl.AllTasks[taskControl.USID][taskControl.State].Remove(taskControl);
-                        taskControl.State = this.State;
-                        TaskboardRowControl.AllTasks[taskControl.USID][this.State].Add(taskControl);
                     }
                 }
                 // Handle story drop.
@@ -148,7 +143,6 @@ namespace TaskboardRowLib
         {
             ServiceLib.DataService.Task task = (ServiceLib.DataService.Task)obj;
             ServiceLib.DataService.DataServiceClient client = new ServiceLib.DataService.DataServiceClient();
-            SharedTypes.ApplicationController.Instance.IgnoreNextProjectUpdate = true;
             task = client.CreateTask(task);
             client.Close();
             if (Dispatcher.Thread.Equals(System.Threading.Thread.CurrentThread))
@@ -205,13 +199,7 @@ namespace TaskboardRowLib
                 // Update the task and force a taskboard update if
                 // update fails.
                 ServiceLib.DataService.DataServiceClient client = new ServiceLib.DataService.DataServiceClient();
-                SharedTypes.ApplicationController.Instance.IgnoreNextProjectUpdate = true;
                 task = client.UpdateTask(task);
-                if (task == null)
-                {
-                    SharedTypes.ApplicationController.Instance.IgnoreNextProjectUpdate = false;
-                    SharedTypes.ApplicationController.Instance.DataChanged(ServiceLib.NotificationService.NotificationType.ProjectModification);
-                }
                 if (person != null)
                 {
                     ServiceLib.DataService.PersonTask personTask = new ServiceLib.DataService.PersonTask
@@ -222,8 +210,8 @@ namespace TaskboardRowLib
                         TaskID = task.TaskID
                     };
                     client.AddWorkInTask(personTask);
+                    client.Close();
                 }
-                client.Close();
             }
             catch (Exception e)
             {

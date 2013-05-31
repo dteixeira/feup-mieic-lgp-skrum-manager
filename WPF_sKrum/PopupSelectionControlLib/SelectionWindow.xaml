@@ -72,7 +72,7 @@
                 <ColumnDefinition Width="8*" />
                 <ColumnDefinition Width="8*" />
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="4" Panel.ZIndex="1" Style="{StaticResource HoverStyle}" MouseLeftButtonDown="Close_MouseLeftButtonDown">
+            <Grid Grid.Column="4" Panel.ZIndex="1" Style="{StaticResource HoverStyle}" MouseLeftButtonUp="Grid_MouseLeftButtonUp">
                 <Image HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False" Source="Images/cruz.png"/>
             </Grid>
             <Label x:Name="FieldNameLabel" Content="Nome do Projecto" VerticalContentAlignment="Center" Foreground="White" FontSize="32" Padding="40,5,5,5"/>

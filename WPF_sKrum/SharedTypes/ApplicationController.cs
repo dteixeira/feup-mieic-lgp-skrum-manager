@@ -55,9 +55,6 @@ namespace SharedTypes
         public List<Person> Team { get; private set; }
         public List<Person> People { get; private set; }
         public ApplicationWindow ApplicationWindow { get; set; }
-        public bool IgnoreNextProjectUpdate { get; set; }
-        public bool IgnoreNextGlobalProjectUpdate { get; set; }
-        public bool IgnoreNextGlobalPeopleUpdate { get; set; }
         public bool AdminLogin { get; set; }
         public Project CurrentProject
         {
@@ -139,19 +136,9 @@ namespace SharedTypes
             {
                 case NotificationType.GlobalPersonModification:
                     this.People = this.Data.GetAllPeople();
-                    if (this.IgnoreNextGlobalPeopleUpdate)
-                    {
-                        this.IgnoreNextGlobalPeopleUpdate = false;
-                        return;
-                    }
                     break;
                 case NotificationType.GlobalProjectModification:
                     this.Projects = this.Data.GetAllProjects();
-                    if (this.IgnoreNextGlobalProjectUpdate)
-                    {
-                        this.IgnoreNextGlobalProjectUpdate = false;
-                        return;
-                    }
                     break;
                 case NotificationType.ProjectModification:
                     if (currentProject != null)
@@ -160,11 +147,6 @@ namespace SharedTypes
                         int index = this.Projects.FindIndex(p => p.ProjectID == updated.ProjectID);
                         this.Projects[index] = updated;
                         this.CurrentProject = updated;
-                    }
-                    if (this.IgnoreNextProjectUpdate)
-                    {
-                        this.IgnoreNextProjectUpdate = false;
-                        return;
                     }
                     break;
             }

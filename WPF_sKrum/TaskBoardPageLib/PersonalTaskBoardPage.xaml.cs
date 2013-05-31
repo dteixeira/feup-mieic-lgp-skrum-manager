@@ -429,12 +429,10 @@ namespace TaskBoardPageLib
         {
             TaskControl taskControl = (TaskControl)obj;
             ServiceLib.DataService.DataServiceClient client = new ServiceLib.DataService.DataServiceClient();
-            SharedTypes.ApplicationController.Instance.IgnoreNextProjectUpdate = true;
             bool result = client.DeleteTask(taskControl.Task.TaskID);
             client.Close();
             if (!result)
             {
-                SharedTypes.ApplicationController.Instance.IgnoreNextProjectUpdate = false;
                 ApplicationController.Instance.DataChanged(NotificationType.ProjectModification);
             }
         }

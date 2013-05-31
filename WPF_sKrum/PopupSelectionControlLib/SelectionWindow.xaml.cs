@@ -60,11 +60,6 @@ namespace PopupSelectionControlLib
             }
         }
 
-        private void Close_MouseLeftButtonDown(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         private void KinectPointerMovedHandler(object sender, KinectPointerEventArgs e)
         {
             // Set correct hand visible.
@@ -121,6 +116,11 @@ namespace PopupSelectionControlLib
             {
                 this.FormPage.FormWindow = this;
             }
+        }
+
+        private void Grid_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+        	this.Close();
         }
     }
 }

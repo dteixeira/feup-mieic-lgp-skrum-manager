@@ -457,10 +457,8 @@ namespace ProjectManagementPageLib
             DataServiceClient client = new DataServiceClient();
             if (project.Password != null)
             {
-                ApplicationController.Instance.IgnoreNextProjectUpdate = true;
                 client.UpdateProjectPassword(project.ProjectID, project.Password == "" ? null : project.Password);
             }
-            ApplicationController.Instance.IgnoreNextProjectUpdate = false;
             client.UpdateProject(project);
             client.Close();
         }
