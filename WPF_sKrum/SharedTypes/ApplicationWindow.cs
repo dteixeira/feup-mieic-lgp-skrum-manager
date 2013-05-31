@@ -12,5 +12,6 @@ namespace SharedTypes
         void SetWindowFade(bool fade);
         void TryTransition(PageChange change, PageTransitionType transition = PageTransitionType.Fade);
         void TryTransition(PageChangeDirection direction, PageTransitionType transition = PageTransitionType.Fade);
+        void ShowNotificationMessage(string message, System.TimeSpan duration);
     }
 }

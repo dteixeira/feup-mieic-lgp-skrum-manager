@@ -364,6 +364,7 @@ namespace ProjectBacklogPageLib
                         // No open sprints, open new one.
                         if (current == null)
                         {
+                            ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("Um novo Sprint foi criado.", new TimeSpan(0, 0, 3));
                             System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.CreateSprint));
                             thread.Start(storySprint);
                             this.collection.Remove(dragged);
@@ -376,6 +377,7 @@ namespace ProjectBacklogPageLib
                             // notify the user and open a new one.
                             if (current.BeginDate.AddDays(7 * ApplicationController.Instance.CurrentProject.SprintDuration).Date <= System.DateTime.Today)
                             {
+                                ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("A data de conclusão do último Sprint foi ultrapassada. Um novo Sprint foi criado.", new TimeSpan(0, 0, 3));
                                 storySprint.SprintID = current.SprintID;
                                 System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.CloseSprint));
                                 thread.Start(storySprint);
@@ -408,7 +410,11 @@ namespace ProjectBacklogPageLib
             StorySprint storySprint = (StorySprint)obj;
             DataServiceClient client = new DataServiceClient();
             Project project = ApplicationController.Instance.CurrentProject;
-            int number = project.Sprints.Max(sp => sp.Number) + 1;
+            int number = 1;
+            if (project.Sprints.Count > 0)
+            {
+                number = project.Sprints.Max(sp => sp.Number) + 1;
+            }
 
             // Create a new sprint.
             Sprint sprint = new Sprint 
