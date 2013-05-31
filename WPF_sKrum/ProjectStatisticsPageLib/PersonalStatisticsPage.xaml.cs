@@ -40,7 +40,7 @@ namespace ProjectStatisticsPageLib
             user.VerticalAlignment = System.Windows.VerticalAlignment.Top;
             user.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
             user.Margin = new Thickness(50, 10, 50, 10);
-            this.LeftArea.Children.Add(user);
+            this.UtilArea.Children.Add(user);
 
             // Register for project change notifications.
             this.DataChangeDelegate = new ApplicationController.DataModificationHandler(this.DataChangeHandler);

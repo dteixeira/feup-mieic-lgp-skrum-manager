@@ -8,16 +8,16 @@
              d:DesignHeight="600" d:DesignWidth="800">
 	<Grid x:Name="WholeArea" Background="{DynamicResource BackgroundBrush}">
 		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="4*"/>
-			<ColumnDefinition Width="6*"/>
+			<ColumnDefinition Width="300"/>
+			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
-		<Grid x:Name="LeftArea" Margin="10,30" ClipToBounds="True">
-			<Grid.RowDefinitions>
-				<RowDefinition/>
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
-			<Grid Grid.Row="1" Margin="10">
-				<Grid>
+		<Grid x:Name="LeftArea" Margin="10,30">
+			<Grid x:Name="UtilArea" Margin="10">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="1*"/>
+					<RowDefinition Height="1*"/>
+				</Grid.RowDefinitions>
+				<Grid Margin="0,30,0,0" Grid.Row="1" VerticalAlignment="Bottom">
 					<Grid.RowDefinitions>
 						<RowDefinition Height="Auto"/>
 						<RowDefinition Height="Auto"/>

@@ -83,7 +83,8 @@ namespace MeetingPageLib
             try
             {
                 // Clears meetings.
-                collection.Clear();
+                this.collection.Clear();
+                this.MeetingNotes.Text = "";
 
                 // Biggest Meeting Number
                 biggestNumber = 0;
@@ -299,6 +300,38 @@ namespace MeetingPageLib
             client.Close();
         }
 
+
+
+        private void SideMenuControl_EditDropEvent(object obj, DragEventArgs e)
+        {
+            var dataObj = e.Data as DataObject;
+            MeetingControl meetingControl = dataObj.GetData("MeetingControl") as MeetingControl;
+            if (meetingControl != null)
+            {
+                PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+                PopupFormControlLib.TextAreaPage notesPage = new PopupFormControlLib.TextAreaPage { PageName = "notes", PageTitle = "Notas", DefaultValue = meetingControl.MeetingNotes };
+                form.FormPages.Add(notesPage);
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+                form.ShowDialog();
+                if (form.Success)
+                {
+                    string notes = (string)form["notes"].PageValue;
+                    Meeting meeting = meetingControl.Meeting;
+                    meeting.Notes = notes;
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(EditMeeting));
+                    thread.Start(meeting);
+                }
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+            }
+        }
+
+        public void EditMeeting(object obj)
+        {
+            DataServiceClient client = new DataServiceClient();
+            client.UpdateMeeting((Meeting)obj);
+            client.Close();
+        }
+
         private void SideMenuControl_RemoveDropEvent(object obj, DragEventArgs e)
         {
             var dataObj = e.Data as DataObject;
@@ -325,6 +358,5 @@ namespace MeetingPageLib
             client.DeleteMeeting(meeting.MeetingID);
             client.Close();
         }
-
     }
 }

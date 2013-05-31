@@ -43,7 +43,7 @@
             <ColumnDefinition/>
             <ColumnDefinition Width="80"/>
         </Grid.ColumnDefinitions>
-        <GenericControlLib:SideMenuControl Height="auto" VerticalAlignment="Center" FirstType="Add" SecondType="Remove" FirstVisibility="Visible" SecondVisibility="Visible" FirstMenuClickEvent="SideMenuControl_AddClickEvent" SecondMenuDropEvent="SideMenuControl_RemoveDropEvent" />
+        <GenericControlLib:SideMenuControl Height="auto" VerticalAlignment="Center" FirstType="Add" SecondType="Edit" ThirdType="Remove" FirstVisibility="Visible" SecondVisibility="Visible" ThirdVisibility="Visible" FirstMenuClickEvent="SideMenuControl_AddClickEvent" SecondMenuDropEvent="SideMenuControl_EditDropEvent" ThirdMenuDropEvent="SideMenuControl_RemoveDropEvent" />
         
         <Grid x:Name="ScrollButtons_Meetings" Grid.Column="2" Margin="0">
             <Grid.RowDefinitions>

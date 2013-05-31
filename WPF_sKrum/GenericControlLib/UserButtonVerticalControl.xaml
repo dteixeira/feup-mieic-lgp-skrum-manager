@@ -36,7 +36,7 @@
                 </Border.Effect>
             </Border>
         </Border>
-        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding UserName}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="0,10" IsHitTestVisible="False" TextTrimming="WordEllipsis" Grid.Row="1"/>
+        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding UserName}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Top" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="10" IsHitTestVisible="False" TextTrimming="WordEllipsis" Grid.Row="1"/>
         <Image Width="auto" Height="auto" Source="{Binding UserPhoto}" IsHitTestVisible="False" VerticalAlignment="Top" />
     </Grid>
 
