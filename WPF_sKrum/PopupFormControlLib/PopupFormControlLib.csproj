@@ -65,6 +65,9 @@
     <Compile Include="CollectionSpinnerPage.xaml.cs">
       <DependentUpon>CollectionSpinnerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StoryOrderPage.xaml.cs">
+      <DependentUpon>StoryOrderPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="YesNoFormWindow.xaml.cs">
       <DependentUpon>YesNoFormWindow.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="CollectionSpinnerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StoryOrderPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

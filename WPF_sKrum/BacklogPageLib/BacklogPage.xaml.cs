@@ -437,5 +437,61 @@ namespace BacklogPageLib
             client.DeleteStory(story.StoryID);
             client.Close();
         }
+
+        public void OrderStory_Drop(object sender, DragEventArgs e)
+        {
+            var dataObj = e.Data as DataObject;
+            TaskBoardControlLib.StoryControl storyControl = dataObj.GetData("StoryControl") as TaskBoardControlLib.StoryControl;
+            if (storyControl != null)
+            {
+                PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+                List<StoryControl> userstories = collection.ToList();
+                List<SimpleStoryControl> userstoriescloned = new List<SimpleStoryControl>();
+                SimpleStoryControl droppedStory = new SimpleStoryControl();
+                int droppedIndex = 0;
+                
+                foreach (var story in userstories.Select((s, i) => new { Value = s, Index = i }))
+                {
+                    SimpleStoryControl storycloned = new SimpleStoryControl{
+                        StoryDescription = story.Value.StoryDescription,
+                        StoryEstimation = story.Value.StoryEstimation,
+                        StoryNumber = story.Value.StoryNumber,
+                        StoryName = story.Value.StoryName,
+                        StoryPriority = story.Value.StoryPriority,
+                        StoryTextTrimming = story.Value.StoryTextTrimming,
+                        Story = story.Value.Story
+                    };
+                    storycloned.IsHitTestVisible = false;
+                    if (story.Value.StoryNumber != storyControl.StoryNumber)
+                        userstoriescloned.Add(storycloned);
+                    else
+                    {
+                        droppedStory = storycloned;
+                        droppedIndex = story.Index;
+                    }
+                }
+                PopupFormControlLib.StoryOrderPage orderPage = new PopupFormControlLib.StoryOrderPage(userstoriescloned, droppedStory, droppedIndex) { PageName = "order", PageTitle = "Ordenação"};
+                form.FormPages.Add(orderPage);
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+                form.ShowDialog();
+                if (form.Success)
+                {
+                    string description = (string)form["description"].PageValue;
+                    StoryPriority priority = (StoryPriority)form["priority"].PageValue;
+                    if (description != null && description != "")
+                    {
+                        Story story = storyControl.Story;
+                        story.Description = description;
+                        story.Priority = priority;
+                        System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(EditStory));
+                        thread.Start(story);
+                    }
+                }
+                ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+            }
+
+
+        }
+
     }
 }

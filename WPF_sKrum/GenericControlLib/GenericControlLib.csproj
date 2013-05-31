@@ -81,6 +81,9 @@
     <Compile Include="SprintControl.xaml.cs">
       <DependentUpon>SprintControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SimpleStoryControl.xaml.cs">
+      <DependentUpon>SimpleStoryControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ToogleButtonControl.xaml.cs">
       <DependentUpon>ToogleButtonControl.xaml</DependentUpon>
     </Compile>
@@ -161,6 +164,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="SimpleStoryControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="ToogleButtonControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -230,6 +237,8 @@
     <Resource Include="Images\edit.png" />
     <Resource Include="Images\remove.png" />
     <Resource Include="Images\arrow.png" />
+    <Resource Include="Images\check.png" />
+    <Resource Include="Images\order.png" />
     <Content Include="System.Windows.Controls.DataVisualization.Toolkit.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

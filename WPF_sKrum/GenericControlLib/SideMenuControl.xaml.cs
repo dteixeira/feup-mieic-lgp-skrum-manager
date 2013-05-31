@@ -19,26 +19,30 @@ namespace GenericControlLib
     /// </summary>
     public partial class SideMenuControl : UserControl
     {
-        public enum Options {Add, Edit, Remove, SpecialAdd, Close };
+        public enum Options {Add, Edit, Remove, SpecialAdd, Close, Order };
 
         private Visibility firstVisibility = Visibility.Collapsed;
         private Visibility secondVisibility = Visibility.Collapsed;
         private Visibility thirdVisibility = Visibility.Collapsed;
         private Visibility fourthVisibility = Visibility.Collapsed;
+        private Visibility fifthVisibility = Visibility.Collapsed;
         private Options firstType;
         private Options secondType;
         private Options thirdType;
         private Options fourthType;
+        private Options fifthType;
         public delegate void myDropDelegate(object obj, DragEventArgs e);
         public event myDropDelegate FirstMenuDropEvent;
         public event myDropDelegate SecondMenuDropEvent;
         public event myDropDelegate ThirdMenuDropEvent;
         public event myDropDelegate FourthMenuDropEvent;
+        public event myDropDelegate FifthMenuDropEvent;
         public delegate void myClickDelegate(object obj, MouseEventArgs e);
         public event myClickDelegate FirstMenuClickEvent;
         public event myClickDelegate SecondMenuClickEvent;
         public event myClickDelegate ThirdMenuClickEvent;
         public event myClickDelegate FourthMenuClickEvent;
+        public event myClickDelegate FifthMenuClickEvent;
 
         public SideMenuControl()
 		{
@@ -48,6 +52,7 @@ namespace GenericControlLib
             this.SecondIconBack.AllowDrop = true;
             this.ThirdIconBack.AllowDrop = true;
             this.FourthIconBack.AllowDrop = true;
+            this.FifthIconBack.AllowDrop = true;
 		}
 
         public Visibility FirstVisibility
@@ -74,6 +79,12 @@ namespace GenericControlLib
             set { this.fourthVisibility = value; }
         }
 
+        public Visibility FifthVisibility
+        {
+            get { return this.fifthVisibility; }
+            set { this.fifthVisibility = value; }
+        }
+
         public Options FirstType
         {
             get { return this.firstType; }
@@ -98,6 +109,12 @@ namespace GenericControlLib
             set { this.fourthType = value; }
         }
 
+        public Options FifthType
+        {
+            get { return this.fifthType; }
+            set { this.fifthType = value; }
+        }
+
         public string FirstIcon
         {
             get{ return this.convertTypetoIcon(firstType); }
@@ -118,6 +135,11 @@ namespace GenericControlLib
             get{ return this.convertTypetoIcon(fourthType); }
         }
 
+        public string FifthIcon
+        {
+            get { return this.convertTypetoIcon(fifthType); }
+        }
+
         private string convertTypetoIcon(Options type)
         {
             switch (type)
@@ -131,7 +153,9 @@ namespace GenericControlLib
                 case Options.SpecialAdd:
                     return "Images/add2.png";
                 case Options.Close:
-                    return "Images/noperson.png";
+                    return "Images/check.png";
+                case Options.Order:
+                    return "Images/order.png";
                 default:
                     return "Images/none.png";
             }
@@ -161,6 +185,12 @@ namespace GenericControlLib
                 this.FourthMenuDropEvent(sender, e);
         }
 
+        private void FifthIconBack_Drop(object sender, DragEventArgs e)
+        {
+            if (this.FifthMenuDropEvent != null)
+                this.FifthMenuDropEvent(sender, e);
+        }
+
         private void FirstIconBack_Click(object sender, MouseEventArgs e)
         {
             if (this.FirstMenuClickEvent != null)
@@ -183,6 +213,12 @@ namespace GenericControlLib
         {
             if (this.FourthMenuClickEvent != null)
                 this.FourthMenuClickEvent(sender, e);
+        }
+
+        private void FifthIconBack_Click(object sender, MouseEventArgs e)
+        {
+            if (this.FifthMenuClickEvent != null)
+                this.FifthMenuClickEvent(sender, e);
         }
     }
 }
