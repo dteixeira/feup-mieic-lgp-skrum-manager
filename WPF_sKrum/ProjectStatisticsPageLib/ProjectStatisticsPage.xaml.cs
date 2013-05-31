@@ -128,8 +128,8 @@ namespace ProjectStatisticsPageLib
             }
 
             GraphicControl graphic = new GraphicControl(data);
-            graphic.SetValue(Grid.RowProperty, 1);
-            graphic.Margin = new Thickness(50);
+            graphic.SetValue(Grid.RowProperty, 2);
+            graphic.Margin = new Thickness(40,10,40,40);
             this.LeftArea.Children.Add(graphic);
 
             /*GraphicColumnControl graphic2 = new GraphicColumnControl(data[1]);

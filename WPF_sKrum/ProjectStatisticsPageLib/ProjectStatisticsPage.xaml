@@ -32,10 +32,12 @@
 		</Grid>
 		<Grid x:Name="LeftArea">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="2*"/>
-				<RowDefinition Height="8*"/>
+				<RowDefinition/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="4*"/>
 			</Grid.RowDefinitions>
 			<GenericControlLib:ButtonControl x:Name="Global_status" VerticalAlignment="Bottom" ButtonText="ON TIME" IsHitTestVisible="False" Margin="50,0,0,20" HorizontalAlignment="Left"/>
+			<TextBlock HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="BurnDownChart" VerticalAlignment="Bottom" FontSize="32" Foreground="{DynamicResource Gray7Brush}"/>
 		</Grid>
             
 	</Grid>
