@@ -83,6 +83,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\GenericControlLib\GenericControlLib.csproj">
+      <Project>{66c3f1e6-c160-47b7-8c0c-b53a975226ad}</Project>
+      <Name>GenericControlLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PopupFormControlLib\PopupFormControlLib.csproj">
       <Project>{54d583d1-8112-4f51-ace4-53cc42e3fa4b}</Project>
       <Name>PopupFormControlLib</Name>

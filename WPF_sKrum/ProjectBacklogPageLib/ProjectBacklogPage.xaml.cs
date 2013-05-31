@@ -91,6 +91,18 @@ namespace ProjectBacklogPageLib
                 if (sprint != null)
                 {
                     sprintBacklog = sprint.Stories;
+                    if (sprint.BeginDate.AddDays(7 * ApplicationController.Instance.CurrentProject.SprintDuration).Date <= System.DateTime.Today)
+                    {
+                        // Show end sprint notification and shows end sprint button if needed.
+                        ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("A data de fecho para o Sprint actual foi atingida.", new TimeSpan(0, 0, 3));
+                        this.CloseButtonGrid.Visibility = System.Windows.Visibility.Visible;
+                        this.BacklogScroll.Visibility = System.Windows.Visibility.Hidden;
+                    }
+                    else
+                    {
+                        this.CloseButtonGrid.Visibility = System.Windows.Visibility.Hidden;
+                        this.BacklogScroll.Visibility = System.Windows.Visibility.Visible;
+                    }
                 }
                 else
                 {
@@ -373,26 +385,12 @@ namespace ProjectBacklogPageLib
                         // Has an open sprint, might be closed.
                         else
                         {
-                            // Check if sprint should be closed, and if so close it,
-                            // notify the user and open a new one.
-                            if (current.BeginDate.AddDays(7 * ApplicationController.Instance.CurrentProject.SprintDuration).Date <= System.DateTime.Today)
-                            {
-                                ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("A data de conclusão do último Sprint foi ultrapassada. Um novo Sprint foi criado.", new TimeSpan(0, 0, 3));
-                                storySprint.SprintID = current.SprintID;
-                                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.CloseSprint));
-                                thread.Start(storySprint);
-                                this.collection.Remove(dragged);
-                                this.collectionSprint.Add(dragged);
-                            }
                             // Current sprint still active, simple add the story to it.
-                            else
-                            {
-                                storySprint.SprintID = current.SprintID;
-                                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.AddStory));
-                                thread.Start(storySprint);
-                                this.collection.Remove(dragged);
-                                this.collectionSprint.Add(dragged);
-                            }
+                            storySprint.SprintID = current.SprintID;
+                            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.AddStory));
+                            thread.Start(storySprint);
+                            this.collection.Remove(dragged);
+                            this.collectionSprint.Add(dragged);
                         }
                     }
                     ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
@@ -442,9 +440,8 @@ namespace ProjectBacklogPageLib
             client.Close();
         }
 
-        public void CloseSprint(object obj)
+        public void CloseSprint()
         {
-            StorySprint storySprint = (StorySprint)obj;
             DataServiceClient client = new DataServiceClient();
             Project project = ApplicationController.Instance.CurrentProject;
             Sprint currentSprint = project.Sprints.FirstOrDefault(sp => sp.Closed == false);
@@ -452,8 +449,23 @@ namespace ProjectBacklogPageLib
             currentSprint.EndDate = System.DateTime.Today;
             ApplicationController.Instance.IgnoreNextProjectUpdate = true;
             client.UpdateSprint(currentSprint);
+            int number = 1;
+            if (project.Sprints.Count > 0)
+            {
+                number = project.Sprints.Max(sp => sp.Number) + 1;
+            }
+
+            // Create a new sprint.
+            Sprint sprint = new Sprint
+            {
+                BeginDate = System.DateTime.Today,
+                Closed = false,
+                ProjectID = ApplicationController.Instance.CurrentProject.ProjectID,
+                Number = number
+            };
+            ApplicationController.Instance.IgnoreNextProjectUpdate = false;
+            sprint = client.CreateSprint(sprint);
             client.Close();
-            this.CreateSprint(obj);
         }
 
         public void AddStory(object obj)
@@ -462,6 +474,25 @@ namespace ProjectBacklogPageLib
             DataServiceClient client = new DataServiceClient();
             client.AddStoryInSprint(storySprint);
             client.Close();
+        }
+
+        private void ButtonControl_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            try
+            {
+                PopupFormControlLib.YesNoFormWindow form = new PopupFormControlLib.YesNoFormWindow();
+                form.FormTitle = "Fechar o Sprint?";
+                form.ShowDialog();
+                if (form.Success)
+                {
+                    this.CloseButtonGrid.Visibility = System.Windows.Visibility.Hidden;
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ThreadStart(this.CloseSprint));
+                    thread.Start();
+                }
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }
