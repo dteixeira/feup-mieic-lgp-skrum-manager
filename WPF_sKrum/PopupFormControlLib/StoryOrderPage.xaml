@@ -7,20 +7,34 @@
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="800">
     <UserControl.Resources>
-        <Style x:Key="SpinnerButtonStyle" TargetType="{x:Type Rectangle}">
-            <Setter Property="Fill" Value="#00000000"/>
+        <Style x:Key="RectangleStyle1" TargetType="{x:Type Rectangle}">
+            <Setter Property="Fill" Value="Transparent"/>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Stroke" Value="{x:Null}"/>
-                    <Setter Property="Fill" Value="{DynamicResource Gray6Brush}"/>
+                    <Setter Property="Fill" Value="{DynamicResource Gray4Brush}"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#E2E2E2" />
+        <SolidColorBrush x:Key="KinectOnBarBrush" Color="#242424" />
+        <SolidColorBrush x:Key="KinectOffBarBrush" Color="#555555" />
+        <SolidColorBrush x:Key="MustPriorityBrush" Color="#242424" />
+        <SolidColorBrush x:Key="ShouldPriorityBrush" Color="#646464" />
+        <SolidColorBrush x:Key="CouldPriorityBrush" Color="#959595" />
+        <SolidColorBrush x:Key="WouldPriorityBrush" Color="#DADADA" />
+        <SolidColorBrush x:Key="Gray1Brush" Color="#E2E2E2" />
+        <SolidColorBrush x:Key="Gray2Brush" Color="#DADADA" />
+        <SolidColorBrush x:Key="Gray3Brush" Color="#C3C3C3" />
+        <SolidColorBrush x:Key="Gray4Brush" Color="#959595" />
+        <SolidColorBrush x:Key="Gray5Brush" Color="#646464" />
+        <SolidColorBrush x:Key="Gray6Brush" Color="#555555" />
+        <SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
     </UserControl.Resources>
+
     <Grid x:Name="LayoutRoot">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="8*"/>
+            <ColumnDefinition Width="10*"/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
@@ -30,25 +44,36 @@
         </Grid.RowDefinitions>
 
 
-        <Grid Background="{DynamicResource Gray7Brush}" Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Column="1" Grid.RowSpan="3" Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="80"/>
+                <ColumnDefinition Width="10"/>
                 <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="80"/>
             </Grid.ColumnDefinitions>
-            <Rectangle x:Name="MinusButton" Style="{DynamicResource SpinnerButtonStyle}" MouseEnter="MinusButton_MouseEnter" MouseLeave="MinusButton_MouseLeave" MouseLeftButtonDown="MinusButton_MouseLeftButtonDown" MouseLeftButtonUp="MinusButton_MouseLeftButtonUp"/>
-            <Rectangle x:Name="PlusButton" Style="{DynamicResource SpinnerButtonStyle}" Grid.Column="2" MouseEnter="PlusButton_MouseEnter" MouseLeave="PlusButton_MouseLeave" MouseLeftButtonDown="PlusButton_MouseLeftButtonDown" MouseLeftButtonUp="PlusButton_MouseLeftButtonUp"/>
-            <Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Source="Images/cruz.png" IsHitTestVisible="False"/>
-            <Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Source="Images/cruz.png" Margin="0" Grid.Column="2" IsHitTestVisible="False"/>
-            <Grid Grid.Column="1">
+            <Rectangle x:Name="MinusButton" Style="{DynamicResource RectangleStyle1}" MouseEnter="MinusButton_MouseEnter" MouseLeave="MinusButton_MouseLeave" MouseLeftButtonDown="MinusButton_MouseLeftButtonDown" MouseLeftButtonUp="MinusButton_MouseLeftButtonUp"/>
+            <Rectangle x:Name="PlusButton" Style="{DynamicResource RectangleStyle1}" Grid.Column="4" MouseEnter="PlusButton_MouseEnter" MouseLeave="PlusButton_MouseLeave" MouseLeftButtonDown="PlusButton_MouseLeftButtonDown" MouseLeftButtonUp="PlusButton_MouseLeftButtonUp"/>
+            <Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Source="Images/arrow.png" IsHitTestVisible="False"/>
+            <Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Source="Images/arrow.png" Margin="0" Grid.Column="4" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-180"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+            <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
-                <Grid x:Name="UpStoryContainer" Grid.Row="0"/>
-                <Grid x:Name="SelectedStoryContainer" Grid.Row="1"/>
-                <Grid x:Name="DownStoryContainer" Grid.Row="2"/>
+                <Grid x:Name="UpStoryContainer" Grid.Row="0" Margin="0,5"/>
+                <Grid x:Name="SelectedStoryContainer" Grid.Row="1" Margin="0,5"/>
+                <Grid x:Name="DownStoryContainer" Grid.Row="2" Margin="0,5"/>
 
             </Grid>
         </Grid>
