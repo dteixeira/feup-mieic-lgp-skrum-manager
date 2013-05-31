@@ -46,6 +46,8 @@ namespace ProjectBacklogPageLib
         {
             InitializeComponent();
             this.PageType = ApplicationPages.ProjectBacklogPage;
+            this.Backlog.ItemsSource = this.collection;
+            this.SprintBacklog.ItemsSource = this.collectionSprint;
 
             // Initialize scroll up delay timer.
             this.countdownTimerDelayScrollUp = new DispatcherTimer();
@@ -79,22 +81,46 @@ namespace ProjectBacklogPageLib
             try
             {
                 // Clears backlog.
-                this.Backlog.Items.Clear();
-                this.SprintBacklog.Items.Clear();
                 collection.Clear();
                 collectionSprint.Clear();
 
                 // Get current project if selected.
                 Project project = ApplicationController.Instance.CurrentProject;
+                List<Story> sprintBacklog;
+                Sprint sprint = project.Sprints.FirstOrDefault(sp => sp.Closed == false);
+                if (sprint != null)
+                {
+                    sprintBacklog = sprint.Stories;
+                }
+                else
+                {
+                    sprintBacklog = new List<Story>();
+                }
 
-                ServiceLib.DataService.DataServiceClient connection = new ServiceLib.DataService.DataServiceClient();
-                List<Story> storiesBacklog = connection.GetAllStoriesWithoutSprintInProject(project.ProjectID);
-                //TODO change to get current sprint
-                List<Story> storiesSprintBacklog = connection.GetAllStoriesInSprint(ApplicationController.Instance.CurrentProject.Sprints[0].SprintID);
-                connection.Close();
+                // Get all open tasks not in the current sprint and order them.
+                ServiceLib.DataService.DataServiceClient client = new ServiceLib.DataService.DataServiceClient();
+                List<Story> backlog = new List<Story>();
+                List<Story> tempStories = client.GetAllStoriesInProject(project.ProjectID);
+                client.Close();
+                Story firstStory = tempStories.FirstOrDefault(s => s.PreviousStory == null);
+                if (firstStory != null)
+                {
+                    backlog.Add(firstStory);
+                    tempStories.Remove(firstStory);
+                    while (tempStories.Count > 0)
+                    {
+                        Story tempStory = tempStories.FirstOrDefault(s => s.PreviousStory == backlog.Last().StoryID);
+                        if (tempStory != null)
+                        {
+                            backlog.Add(tempStory);
+                            tempStories.Remove(tempStory);
+                        }
+                    }
+                }
+                backlog = backlog.Where(s => s.State == StoryState.InProgress && !sprintBacklog.Select(st => st.StoryID).Contains(s.StoryID)).ToList<Story>();
 
-                // Iterate all user stories in the backlog.
-                foreach (var story in storiesBacklog.Select((s, i) => new { Value = s, Index = i }))
+                // Add all story controls to the backlog.
+                foreach (var story in backlog.Select((s, i) => new { Value = s, Index = i }))
                 {
                     // Create the story control.
                     StoryControl storyControl = new StoryControl
@@ -112,50 +138,47 @@ namespace ProjectBacklogPageLib
                     storyControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
                     storyControl.SetValue(Grid.ColumnProperty, 0);
                     storyControl.SetValue(Grid.RowProperty, story.Index);
-
-                    collection.Add(storyControl);
+                    this.collection.Add(storyControl);
                 }
-                this.Backlog.ItemsSource = collection;
 
-                // Iterate all user stories in the sprint.
-                foreach (var story in storiesSprintBacklog.Select((s, i) => new { Value = s, Index = i }))
+                if (sprint != null)
                 {
-                    // Create the story control.
-                    StoryControl storyControl = new StoryControl
+                    // Add all story controls to the sprint backlog.
+                    // Iterate all user stories in the sprint.
+                    foreach (var story in sprintBacklog.Select((s, i) => new { Value = s, Index = i }))
                     {
-                        StoryDescription = story.Value.Description,
-                        StoryName = "US" + story.Value.Number.ToString("D3"),
-                        StoryPriority = story.Value.Priority.ToString()[0].ToString(),
-                        StoryEstimation = "",
-                        StoryNumber = story.Value.Number,
-                        Story = story.Value,
-                        IsDraggable = true
-                    };
-                    storyControl.Width = Double.NaN;
-                    storyControl.Height = Double.NaN;
-                    storyControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
-                    storyControl.SetValue(Grid.ColumnProperty, 0);
-                    storyControl.SetValue(Grid.RowProperty, story.Index);
-
-                    collectionSprint.Add(storyControl);
+                        // Create the story control.
+                        StoryControl storyControl = new StoryControl
+                        {
+                            StoryDescription = story.Value.Description,
+                            StoryName = "US" + story.Value.Number.ToString("D3"),
+                            StoryPriority = story.Value.Priority.ToString()[0].ToString(),
+                            StoryEstimation = story.Value.StorySprints.FirstOrDefault(s => s.SprintID == sprint.SprintID).Points.ToString(),
+                            StoryNumber = story.Value.Number,
+                            Story = story.Value,
+                            IsDraggable = false
+                        };
+                        storyControl.Width = Double.NaN;
+                        storyControl.Height = Double.NaN;
+                        storyControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                        storyControl.SetValue(Grid.ColumnProperty, 0);
+                        storyControl.SetValue(Grid.RowProperty, story.Index);
+                        this.collectionSprint.Add(storyControl);
+                    }
+                    this.Sort();
                 }
-                this.SprintBacklog.ItemsSource = collectionSprint;
             }
             catch (Exception e)
             {
                 System.Console.WriteLine(e.Message);
             }
-            this.Sort();
         }
 
         private void Sort()
         {
-            ListCollectionView view = (ListCollectionView)CollectionViewSource.GetDefaultView(this.Backlog.ItemsSource);
             StorySorter sorter = new StorySorter();
-            view.CustomSort = sorter;
             ListCollectionView sprintview = (ListCollectionView)CollectionViewSource.GetDefaultView(this.SprintBacklog.ItemsSource);
             sprintview.CustomSort = sorter;
-            this.Backlog.Items.Refresh();
             this.SprintBacklog.Items.Refresh();
         }
 
@@ -309,32 +332,6 @@ namespace ProjectBacklogPageLib
             }
         }
 
-        private void Backlog_Drop(object sender, DragEventArgs e)
-        {
-            try
-            {
-                var dataObj = e.Data as DataObject;
-                StoryControl dragged = dataObj.GetData("StoryControl") as StoryControl;
-                
-                //check if it comes from sprint, if not ignore
-                if (collectionSprint.Contains(dragged))
-                {
-                    // Launch thread to update the project.
-                    //System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.UpdateStoryInService));
-                    //thread.Start(new object[] { dragged.Story });
-
-                    // Update visualization.
-                    collectionSprint.Remove(dragged);
-                    collection.Add(dragged);
-                }
-                e.Handled = true;
-            }
-            catch (Exception ex)
-            {
-                System.Console.WriteLine(ex.Message);
-            }
-        }
-
         private void SprintBacklog_Drop(object sender, DragEventArgs e)
         {
             try
@@ -342,16 +339,61 @@ namespace ProjectBacklogPageLib
                 var dataObj = e.Data as DataObject;
                 StoryControl dragged = dataObj.GetData("StoryControl") as StoryControl;
 
-                //check if it comes from sprint, if not ignore
-                if (collection.Contains(dragged))
+                // Check if it comes from sprint, if not ignore.
+                if (this.collection.Contains(dragged))
                 {
-                    // Launch thread to update the project.
-                    //System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.AddStoryToSprintInService));
-                    //thread.Start(new object[] { dragged.Story });
+                    // Obtain story points estimation.
+                    PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
+                    PopupFormControlLib.CollectionSpinnerPage pointsPage = new PopupFormControlLib.CollectionSpinnerPage { PageName = "points", PageTitle = "Estimativa de Esforço", ValueCollection = new List<double> { 1, 2, 3, 5, 8, 13 } };
+                    form.FormPages.Add(pointsPage);
+                    ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+                    form.ShowDialog();
+                    if (form.Success)
+                    {
+                        // Get story points.
+                        int points = (int)((double)form["points"].PageValue);
+                        StorySprint storySprint = new StorySprint
+                        {
+                            Points = points,
+                            StoryID = dragged.Story.StoryID
+                        };
 
-                    // Update visualization.
-                    collection.Remove(dragged);
-                    collectionSprint.Add(dragged);
+                        // Get current sprint.
+                        Sprint current = ApplicationController.Instance.CurrentProject.Sprints.FirstOrDefault(sp => sp.Closed == false);
+
+                        // No open sprints, open new one.
+                        if (current == null)
+                        {
+                            System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.CreateSprint));
+                            thread.Start(storySprint);
+                            this.collection.Remove(dragged);
+                            this.collectionSprint.Add(dragged);
+                        }
+                        // Has an open sprint, might be closed.
+                        else
+                        {
+                            // Check if sprint should be closed, and if so close it,
+                            // notify the user and open a new one.
+                            if (current.BeginDate.AddDays(7 * ApplicationController.Instance.CurrentProject.SprintDuration).Date <= System.DateTime.Today)
+                            {
+                                storySprint.SprintID = current.SprintID;
+                                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.CloseSprint));
+                                thread.Start(storySprint);
+                                this.collection.Remove(dragged);
+                                this.collectionSprint.Add(dragged);
+                            }
+                            // Current sprint still active, simple add the story to it.
+                            else
+                            {
+                                storySprint.SprintID = current.SprintID;
+                                System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.AddStory));
+                                thread.Start(storySprint);
+                                this.collection.Remove(dragged);
+                                this.collectionSprint.Add(dragged);
+                            }
+                        }
+                    }
+                    ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
                 }
                 e.Handled = true;
             }
@@ -361,14 +403,59 @@ namespace ProjectBacklogPageLib
             }
         }
 
-        public void AddStoryToSprintInService(object info)
+        public void CreateSprint(object obj)
         {
-            //TODO
+            StorySprint storySprint = (StorySprint)obj;
+            DataServiceClient client = new DataServiceClient();
+            Project project = ApplicationController.Instance.CurrentProject;
+            int number = project.Sprints.Max(sp => sp.Number) + 1;
+
+            // Create a new sprint.
+            Sprint sprint = new Sprint 
+            {
+                BeginDate = System.DateTime.Today,
+                Closed = false,
+                ProjectID = ApplicationController.Instance.CurrentProject.ProjectID,
+                Number = number
+            };
+            ApplicationController.Instance.IgnoreNextProjectUpdate = true;
+            sprint = client.CreateSprint(sprint);
+            
+            // Force refresh if sprint creation failed.
+            if (sprint == null)
+            {
+                ApplicationController.Instance.IgnoreNextProjectUpdate = false;
+                ApplicationController.Instance.DataChanged(NotificationType.ProjectModification);
+            }
+            else
+            {
+                storySprint.SprintID = sprint.SprintID;
+                ApplicationController.Instance.IgnoreNextProjectUpdate = false;
+                client.AddStoryInSprint(storySprint);
+            }
+            client.Close();
         }
-        
-        public void UpdateStoryInService(object info)
+
+        public void CloseSprint(object obj)
         {
-            //TODO
+            StorySprint storySprint = (StorySprint)obj;
+            DataServiceClient client = new DataServiceClient();
+            Project project = ApplicationController.Instance.CurrentProject;
+            Sprint currentSprint = project.Sprints.FirstOrDefault(sp => sp.Closed == false);
+            currentSprint.Closed = true;
+            currentSprint.EndDate = System.DateTime.Today;
+            ApplicationController.Instance.IgnoreNextProjectUpdate = true;
+            client.UpdateSprint(currentSprint);
+            client.Close();
+            this.CreateSprint(obj);
+        }
+
+        public void AddStory(object obj)
+        {
+            StorySprint storySprint = (StorySprint)obj;
+            DataServiceClient client = new DataServiceClient();
+            client.AddStoryInSprint(storySprint);
+            client.Close();
         }
     }
 }

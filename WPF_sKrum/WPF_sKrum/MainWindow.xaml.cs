@@ -364,6 +364,13 @@ namespace WPFApplication
             }
         }
 
+        public void ShowNotificationMessage(string message, TimeSpan duration)
+        {
+            this.NotificationMessage.NotificationText = message;
+            this.NotificationMessage.VisibleTimespan = duration;
+            this.NotificationMessage.StartAnimation();
+        }
+
         private void UpperBar_Config_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.ProjectManagementPage });
@@ -403,7 +410,7 @@ namespace WPFApplication
                 if (project.Password != null)
                 {
                     PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
-                    PopupFormControlLib.PasswordBoxPage passwordPage = new PopupFormControlLib.PasswordBoxPage { PageName = "password", PageTitle = "Password de Administrador" };
+                    PopupFormControlLib.PasswordBoxPage passwordPage = new PopupFormControlLib.PasswordBoxPage { PageName = "password", PageTitle = "Password do Projecto" };
                     form.FormPages.Add(passwordPage);
                     form.ShowDialog();
                     if (form.Success)
@@ -415,17 +422,23 @@ namespace WPFApplication
                             bool login = client.LoginProject(project.ProjectID, password);
                             client.Close();
                             ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
-                            if (!login)
+                            if (login)
                             {
-                                return;
+                                ApplicationController.Instance.CurrentProject = project;
+                                this.UpperBar_ProjectName.Text = project.Name;
+                                ApplicationController.Instance.AdminLogin = false;
+                                ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.MainPage });
                             }
                         }
                     }
                 }
-                ApplicationController.Instance.CurrentProject = project;
-                this.UpperBar_ProjectName.Text = project.Name;
-                ApplicationController.Instance.AdminLogin = false;
-                ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.MainPage });
+                else
+                {
+                    ApplicationController.Instance.CurrentProject = project;
+                    this.UpperBar_ProjectName.Text = project.Name;
+                    ApplicationController.Instance.AdminLogin = false;
+                    ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.MainPage });
+                }
             }
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
         }

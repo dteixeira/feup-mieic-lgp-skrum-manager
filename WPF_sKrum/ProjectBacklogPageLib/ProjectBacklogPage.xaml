@@ -68,7 +68,7 @@
 				</Grid.RowDefinitions>
 				<Label Content="BACKLOG" HorizontalAlignment="Left" Margin="0" VerticalAlignment="Center" Background="{x:Null}" Foreground="{DynamicResource Gray7Brush}" FontFamily="Open Sans" FontSize="21.333"/>
 				<ScrollViewer x:Name="BacklogScroll" Margin="0" VerticalScrollBarVisibility="Hidden" Grid.RowSpan="2" Grid.Row="1">
-					<ListView x:Name="Backlog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="True" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Drop="Backlog_Drop" Margin="0" >
+					<ListView x:Name="Backlog" Width="Auto" VirtualizingStackPanel.IsVirtualizing="True" HorizontalContentAlignment="Stretch" Height="Auto" AllowDrop="True" BorderBrush="Transparent" Background="Transparent" BorderThickness="0" Foreground="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Margin="0" >
 						<ListView.ItemContainerStyle>
 							<Style TargetType="{x:Type ListViewItem}">
 								<Setter Property="BorderThickness" Value="0"/>
