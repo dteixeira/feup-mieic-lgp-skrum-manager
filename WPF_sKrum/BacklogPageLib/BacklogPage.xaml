@@ -66,7 +66,7 @@
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="BorderThickness" Value="0" />
-                        <Setter Property="Margin" Value="0,3,0,3" />
+                        <Setter Property="Margin" Value="0,5,0,5" />
                         <Setter Property="Padding" Value="0" />
                     </Style>
                 </ListView.ItemContainerStyle>
@@ -96,7 +96,7 @@
                 <ListView.ItemContainerStyle>
                     <Style TargetType="{x:Type ListViewItem}">
                         <Setter Property="BorderThickness" Value="0" />
-                        <Setter Property="Margin" Value="0,3,0,3" />
+                        <Setter Property="Margin" Value="0,5,0,5" />
                         <Setter Property="Padding" Value="0" />
                     </Style>
                 </ListView.ItemContainerStyle>
