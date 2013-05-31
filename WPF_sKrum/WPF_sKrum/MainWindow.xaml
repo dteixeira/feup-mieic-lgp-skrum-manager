@@ -63,8 +63,17 @@
                     <ColumnDefinition Width="8*" />
                     <ColumnDefinition Width="8*" />
                 </Grid.ColumnDefinitions>
-                <Grid x:Name="GridProjName" Margin="0" MouseLeftButtonDown="UpperBar_SelectProj_MouseLeftButtonDown" Style="{StaticResource HoverStyle}" HorizontalAlignment="Left">
-                	<TextBlock x:Name="UpperBar_ProjectName" Grid.Column="0" FontSize="32" FontFamily="Open Sans" Foreground="White" TextAlignment="Center" TextWrapping="Wrap" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Selecção de Projecto" Margin="30,0,24,0" />
+                <Grid>
+                	<Grid.ColumnDefinitions>
+                		<ColumnDefinition Width="Auto"/>
+                		<ColumnDefinition Width="Auto"/>
+                	</Grid.ColumnDefinitions>
+                	<Grid x:Name="GridProjName" Margin="0" MouseLeftButtonDown="UpperBar_SelectProj_MouseLeftButtonDown" Style="{StaticResource HoverStyle}" HorizontalAlignment="Left">
+                		<TextBlock x:Name="UpperBar_ProjectName" Grid.Column="0" FontSize="32" FontFamily="Open Sans" Foreground="White" TextAlignment="Center" TextWrapping="Wrap" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Selecção de Projecto" Margin="30,0" />
+                	</Grid>
+                	<Grid x:Name="GridPersonName" Margin="0" MouseLeftButtonDown="GridPersonName_MouseLeftButtonDown" Style="{StaticResource HoverStyle}" HorizontalAlignment="Left" Grid.Column="1" Visibility="Collapsed">
+                		<TextBlock x:Name="UpperBar_PersonName" Grid.Column="0" FontSize="32" FontFamily="Open Sans" Foreground="White" TextAlignment="Center" TextWrapping="Wrap" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="30,0" />
+                	</Grid>
                 </Grid>
                 <Grid x:Name="GridClose" Grid.Column="3" MouseLeftButtonDown="UpperBar_Close_MouseLeftButtonDown" Style="{StaticResource HoverStyle}">
                 	<Image x:Name="UpperBar_Close" Source="Images/cruz.png" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -81,7 +90,7 @@
 
             <pageTransitions:PageTransition Grid.Row="1" Background="Transparent" x:Name="PageTransitionControl" TransitionType="Fade" />
         </Grid>
-        <GenericControlLib:NavigationControl x:Name="NavigationLayer" Panel.ZIndex="1"/>
+        <GenericControlLib:NavigationControl x:Name="NavigationLayer" Panel.ZIndex="2"/>
         <GenericControlLib:NotificationControl x:Name="NotificationMessage" Panel.ZIndex="1"/>
         <Grid x:Name="BlurLayer" Panel.ZIndex="1" Opacity="0.8" Background="Black" Visibility="Hidden"/>
         <Canvas x:Name="kinectLayer" Visibility="Visible" Panel.ZIndex="100" Margin="0">

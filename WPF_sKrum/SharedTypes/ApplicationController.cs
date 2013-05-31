@@ -52,6 +52,7 @@ namespace SharedTypes
         public ITargetPage CurrentPage { get; set; }
         public Skeleton[] Skeletons { get; set; }
         public List<Project> Projects { get; private set; }
+        public List<Person> Team { get; private set; }
         public List<Person> People { get; private set; }
         public ApplicationWindow ApplicationWindow { get; set; }
         public bool IgnoreNextProjectUpdate { get; set; }
@@ -75,14 +76,17 @@ namespace SharedTypes
 
                     // Subscribe to a new project.
                     this.currentProject = value;
+                    this.Team = null;
                     if (this.currentProject != null)
                     {
                         this.Notifications.Subscribe(this.currentProject.ProjectID);
+                        this.Team = this.Data.GetAllPeopleInProject(this.currentProject.ProjectID);
                     }
                 }
                 else
                 {
                     this.currentProject = value;
+                    this.Team = this.Data.GetAllPeopleInProject(this.currentProject.ProjectID);
                 }
             }
         }

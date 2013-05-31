@@ -20,7 +20,7 @@ namespace TaskBoardPageLib
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class TaskBoardPage : UserControl, ITargetPage
+    public partial class PersonalTaskBoardPage : UserControl, ITargetPage
     {
         private float scrollValue = 0.0f;
         private DispatcherTimer countdownTimerDelayScrollUp;
@@ -28,13 +28,15 @@ namespace TaskBoardPageLib
         private DispatcherTimer countdownTimerScrollUp;
         private DispatcherTimer countdownTimerScrollDown;
         public ApplicationPages PageType { get; set; }
+        private Person CurrentPerson { get; set; }
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
         private delegate void TaskBoardUpdate(TaskControl taskControl);
 
-        public TaskBoardPage(object context)
+        public PersonalTaskBoardPage(object context)
         {
             InitializeComponent();
-            this.PageType = ApplicationPages.TaskBoardPage;
+            this.PageType = ApplicationPages.PersonTaskBoardPage;
+            this.CurrentPerson = (Person)context;
             TaskboardRowControl.CurrentTaskBoard = this;
 
             // Initialize scroll up delay timer.
@@ -108,90 +110,98 @@ namespace TaskBoardPageLib
                 // Iterate all user stories in the sprint.
                 foreach (var story in sprint.Stories.Select((s, i) => new { Value = s, Index = i }))
                 {
-                    // Create a new grid line to old the story information.
-                    RowDefinition rowdef = new RowDefinition();
-                    rowdef.Height = GridLength.Auto;
-                    Taskboard.RowDefinitions.Add(rowdef);
-
-                    // Create the new line control.
-                    TaskBoardRowDesignControl TaskboardLine = new TaskBoardRowDesignControl();
-                    TaskboardLine.SetValue(Grid.RowProperty, story.Index);
-                    TaskboardLine.SetValue(Grid.ColumnProperty, 0);
-                    this.Taskboard.Children.Add(TaskboardLine);
-
-                    // Create the story control.
-                    StoryControl storyControl = new StoryControl
+                    // Get all tasks connected to this user.
+                    var tasks = this.CurrentPerson.Tasks.Where(t => t.StoryID == story.Value.StoryID);
+                    if (tasks.Count() > 0)
                     {
-                        StoryDescription = story.Value.Description,
-                        StoryName = "US" + story.Value.Number.ToString("D3"),
-                        StoryPriority = story.Value.Priority.ToString()[0].ToString(),
-                        StoryEstimation = story.Value.StorySprints.FirstOrDefault(s => s.SprintID == sprint.SprintID).Points.ToString(),
-                        Story = story.Value,
-                        IsDraggable = false
-                    };
-                    storyControl.IsDraggable = true;
-                    storyControl.Margin = new Thickness(0, 10, 0, 10);
-                    storyControl.Width = Double.NaN;
-                    storyControl.Height = Double.NaN;
-                    storyControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
-                    storyControl.SetValue(Grid.ColumnProperty, 1);
-                    TaskboardLine.ControlGrid.Children.Add(storyControl);
+                        // Create a new grid line to old the story information.
+                        RowDefinition rowdef = new RowDefinition();
+                        rowdef.Height = GridLength.Auto;
+                        Taskboard.RowDefinitions.Add(rowdef);
 
-                    // Create a row control to todo tasks.
-                    TaskboardRowControl.CreateLine(story.Value.StoryID);
-                    TaskboardRowControl todo = new TaskboardRowControl { Width = Double.NaN, Height = Double.NaN };
-                    todo.SetValue(Grid.ColumnProperty, 3);
-                    todo.Tasks = TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Todo];
-                    TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Todo].CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChangedMethod);
+                        // Create the new line control.
+                        TaskBoardRowDesignControl TaskboardLine = new TaskBoardRowDesignControl();
+                        TaskboardLine.SetValue(Grid.RowProperty, story.Index);
+                        TaskboardLine.SetValue(Grid.ColumnProperty, 0);
+                        this.Taskboard.Children.Add(TaskboardLine);
 
-                    // Create a row control to doing tasks.
-                    TaskboardRowControl doing = new TaskboardRowControl { Width = Double.NaN, Height = Double.NaN, State = TasksState.Doing };
-                    doing.SetValue(Grid.ColumnProperty, 5);
-                    doing.Tasks = TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Doing];
-
-                    // Create a row control to done tasks.
-                    TaskboardRowControl done = new TaskboardRowControl { Width = Double.NaN, Height = Double.NaN, State = TasksState.Done };
-                    done.SetValue(Grid.ColumnProperty, 7);
-                    done.Tasks = TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Done];
-
-                    // Add task controls to grid line.
-                    TaskboardLine.ControlGrid.Children.Add(todo);
-                    TaskboardLine.ControlGrid.Children.Add(doing);
-                    TaskboardLine.ControlGrid.Children.Add(done);
-
-                    // For each task add it to the respective state lists.
-                    foreach (Task task in story.Value.Tasks)
-                    {
-                        TaskControl taskControl = new TaskControl { USID = task.StoryID, TaskDescription = task.Description, Task = task };
-                        taskControl.Width = Double.NaN;
-                        taskControl.Height = Double.NaN;
-                        taskControl.StartDragEvent += new TaskControl.StartDragHandler(TaskDragStarted);
-                        taskControl.StopDragEvent += new TaskControl.StopDragHandler(TaskDragStopped);
-
-                        // Calculate total work in this task.
-                        double totalWork = 0.0;
-                        foreach (PersonTask personTask in task.PersonTasks)
+                        // Create the story control.
+                        StoryControl storyControl = new StoryControl
                         {
-                            totalWork += personTask.SpentTime;
-                        }
-                        taskControl.TaskEstimationWork = string.Format("{0:0.#} / {1}", totalWork, task.Estimation);
+                            StoryDescription = story.Value.Description,
+                            StoryName = "US" + story.Value.Number.ToString("D3"),
+                            StoryPriority = story.Value.Priority.ToString()[0].ToString(),
+                            StoryEstimation = story.Value.StorySprints.FirstOrDefault(s => s.SprintID == sprint.SprintID).Points.ToString(),
+                            Story = story.Value,
+                            IsDraggable = false
+                        };
+                        storyControl.IsDraggable = true;
+                        storyControl.Margin = new Thickness(0, 10, 0, 10);
+                        storyControl.Width = Double.NaN;
+                        storyControl.Height = Double.NaN;
+                        storyControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
+                        storyControl.SetValue(Grid.ColumnProperty, 1);
+                        TaskboardLine.ControlGrid.Children.Add(storyControl);
 
-                        switch (task.State)
+                        // Create a row control to todo tasks.
+                        TaskboardRowControl.CreateLine(story.Value.StoryID);
+                        TaskboardRowControl todo = new TaskboardRowControl { Width = Double.NaN, Height = Double.NaN };
+                        todo.SetValue(Grid.ColumnProperty, 3);
+                        todo.Tasks = TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Todo];
+                        TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Todo].CollectionChanged += new NotifyCollectionChangedEventHandler(CollectionChangedMethod);
+
+                        // Create a row control to doing tasks.
+                        TaskboardRowControl doing = new TaskboardRowControl { Width = Double.NaN, Height = Double.NaN, State = TasksState.Doing };
+                        doing.SetValue(Grid.ColumnProperty, 5);
+                        doing.Tasks = TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Doing];
+
+                        // Create a row control to done tasks.
+                        TaskboardRowControl done = new TaskboardRowControl { Width = Double.NaN, Height = Double.NaN, State = TasksState.Done };
+                        done.SetValue(Grid.ColumnProperty, 7);
+                        done.Tasks = TaskboardRowControl.AllTasks[story.Value.StoryID][TasksState.Done];
+
+                        // Add task controls to grid line.
+                        TaskboardLine.ControlGrid.Children.Add(todo);
+                        TaskboardLine.ControlGrid.Children.Add(doing);
+                        TaskboardLine.ControlGrid.Children.Add(done);
+
+                        // For each task add it to the respective state lists.
+                        foreach (Task task in tasks)
                         {
-                            case TaskState.Waiting:
-                                taskControl.State = TasksState.Todo;
-                                TaskboardRowControl.AllTasks[task.StoryID][TasksState.Todo].Add(taskControl);
-                                break;
-                            case TaskState.InProgress:
-                                taskControl.State = TasksState.Doing;
-                                TaskboardRowControl.AllTasks[task.StoryID][TasksState.Doing].Add(taskControl);
-                                break;
-                            case TaskState.Completed:
-                                taskControl.State = TasksState.Done;
-                                TaskboardRowControl.AllTasks[task.StoryID][TasksState.Done].Add(taskControl);
-                                break;
-                            default:
-                                break;
+                            TaskControl taskControl = new TaskControl { USID = task.StoryID, TaskDescription = task.Description, Task = task };
+                            taskControl.Width = Double.NaN;
+                            taskControl.Height = Double.NaN;
+                            taskControl.StartDragEvent += new TaskControl.StartDragHandler(TaskDragStarted);
+                            taskControl.StopDragEvent += new TaskControl.StopDragHandler(TaskDragStopped);
+
+                            // Calculate total work in this task.
+                            double totalWork = 0.0;
+                            foreach (PersonTask personTask in task.PersonTasks)
+                            {
+                                if (personTask.PersonID == this.CurrentPerson.PersonID)
+                                {
+                                    totalWork += personTask.SpentTime;
+                                }
+                            }
+                            taskControl.TaskEstimationWork = string.Format("{0:0.#} / {1}", totalWork, task.Estimation);
+
+                            switch (task.State)
+                            {
+                                case TaskState.Waiting:
+                                    taskControl.State = TasksState.Todo;
+                                    TaskboardRowControl.AllTasks[task.StoryID][TasksState.Todo].Add(taskControl);
+                                    break;
+                                case TaskState.InProgress:
+                                    taskControl.State = TasksState.Doing;
+                                    TaskboardRowControl.AllTasks[task.StoryID][TasksState.Doing].Add(taskControl);
+                                    break;
+                                case TaskState.Completed:
+                                    taskControl.State = TasksState.Done;
+                                    TaskboardRowControl.AllTasks[task.StoryID][TasksState.Done].Add(taskControl);
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
                     }
                 }
@@ -254,41 +264,74 @@ namespace TaskBoardPageLib
 
         public PageChange PageChangeTarget(PageChangeDirection direction)
         {
-            switch (direction)
+            int index = ApplicationController.Instance.Team.FindIndex(p => p.PersonID == this.CurrentPerson.PersonID);
+
+            // User was deleted, return to project main page.
+            if (index < 0)
             {
-                case PageChangeDirection.Down:
-                    return null;
-                case PageChangeDirection.Left:
-                    return new PageChange { Context = null, Page = ApplicationPages.MainPage };
-                case PageChangeDirection.Right:
-                    if (ApplicationController.Instance.Team.Count > 0)
-                    {
-                        return new PageChange { Context = ApplicationController.Instance.Team[0], Page = ApplicationPages.PersonTaskBoardPage };
-                    }
-                    else
-                    {
+                return new PageChange { Context = null, Page = ApplicationPages.MainPage };
+            }
+            else
+            {
+
+
+                switch (direction)
+                {
+                    case PageChangeDirection.Down:
                         return null;
-                    }
-                case PageChangeDirection.Up:
-                    return new PageChange { Context = null, Page = ApplicationPages.ProjectStatisticsPage };
-                default:
-                    return null;
+                    case PageChangeDirection.Left:
+                        // First person of the list.
+                        if (index == 0)
+                        {
+                            return new PageChange { Context = null, Page = ApplicationPages.TaskBoardPage };
+                        }
+                        else
+                        {
+                            return new PageChange { Context = ApplicationController.Instance.Team[index - 1], Page = ApplicationPages.PersonTaskBoardPage };
+                        }
+                    case PageChangeDirection.Right:
+                        // Last person of the list.
+                        if (index == ApplicationController.Instance.Team.Count - 1)
+                        {
+                            return new PageChange { Context = null, Page = ApplicationPages.ProjectStatisticsPage };
+                        }
+                        else
+                        {
+                            return new PageChange { Context = ApplicationController.Instance.Team[index + 1], Page = ApplicationPages.PersonTaskBoardPage };
+                        }
+                    case PageChangeDirection.Up:
+                        return new PageChange { Context = this.CurrentPerson, Page = ApplicationPages.PersonStatisticsPage };
+                    default:
+                        return null;
+                }
             }
         }
 
         public void SetupNavigation()
         {
+            int index = ApplicationController.Instance.Team.FindIndex(p => p.PersonID == this.CurrentPerson.PersonID);
             System.Collections.Generic.Dictionary<PageChangeDirection, string> directions = new System.Collections.Generic.Dictionary<PageChangeDirection, string>();
-            directions[PageChangeDirection.Up] = "ESTATÍSTICAS";
+            directions[PageChangeDirection.Up] = "ESTATÍSTICAS PESSOAIS";
             directions[PageChangeDirection.Down] = null;
-            directions[PageChangeDirection.Left] = "MENU INICIAL";
-            if (ApplicationController.Instance.Team.Count > 0)
+
+            // Variable left destination.
+            if (index == 0)
             {
-                directions[PageChangeDirection.Right] = "TASKBOARD PESSOAL";
+                directions[PageChangeDirection.Left] = "TASKBOARD";
             }
             else
             {
-                directions[PageChangeDirection.Right] = null;
+                directions[PageChangeDirection.Left] = "TASKBOARD PESSOAL";
+            }
+
+            // Variable right destination.
+            if (index == ApplicationController.Instance.Team.Count - 1)
+            {
+                directions[PageChangeDirection.Right] = "ESTATÍSTICAS";
+            }
+            else
+            {
+                directions[PageChangeDirection.Right] = "TASKBOARD PESSOAL";
             }
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
         }
@@ -325,24 +368,14 @@ namespace TaskBoardPageLib
             TaskControl taskControl = dataObj.GetData("TaskControl") as TaskControl;
             if (taskControl != null)
             {
-                // Select a user.
-                PopupSelectionControlLib.SelectionWindow userForm = new PopupSelectionControlLib.SelectionWindow();
-                PopupSelectionControlLib.UserSelectionPage userPage = new PopupSelectionControlLib.UserSelectionPage(true);
-                userPage.PageTitle = "Escolha uma Pessoa";
-                userForm.FormPage = userPage;
-                userForm.ShowDialog();
-                if (userForm.Success)
+                PopupFormControlLib.FormWindow workForm = new PopupFormControlLib.FormWindow();
+                PopupFormControlLib.SpinnerPage workPage = new PopupFormControlLib.SpinnerPage { PageName = "work", PageTitle = "Horas Trabalhadas", Min = 0.5, Max = 99999, Increment = 0.5 };
+                workForm.FormPages.Add(workPage);
+                workForm.ShowDialog();
+                if (workForm.Success)
                 {
-                    ServiceLib.DataService.Person person = (ServiceLib.DataService.Person)userForm.Result;
-                    PopupFormControlLib.FormWindow workForm = new PopupFormControlLib.FormWindow();
-                    PopupFormControlLib.SpinnerPage workPage = new PopupFormControlLib.SpinnerPage { PageName = "work", PageTitle = "Horas Trabalhadas", Min = 0.5, Max = 99999, Increment = 0.5 };
-                    workForm.FormPages.Add(workPage);
-                    workForm.ShowDialog();
-                    if (workForm.Success)
-                    {
-                        System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(AddWork));
-                        thread.Start(new object[] { person, taskControl.Task, (double)workForm["work"].PageValue });
-                    }
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(AddWork));
+                    thread.Start(new object[] { this.CurrentPerson, taskControl.Task, (double)workForm["work"].PageValue });
                 }
             }
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);

@@ -97,6 +97,16 @@ namespace WPFApplication
                     this.WindowEvery.Background = Brushes.Transparent;
                     this.Transition = transition;
                     this.PageTransitionControl.ShowPage((UserControl)targetPage);
+                    if (change.Page == ApplicationPages.PersonTaskBoardPage || change.Page == ApplicationPages.PersonStatisticsPage)
+                    {
+                        this.UpperBar_PersonName.Text = ((Person)change.Context).Name;
+                        this.GridPersonName.Visibility = System.Windows.Visibility.Visible;
+                    }
+                    else
+                    {
+                        this.UpperBar_PersonName.Text = "";
+                        this.GridPersonName.Visibility = System.Windows.Visibility.Collapsed;
+                    }
                 }
             }
             else
@@ -130,6 +140,16 @@ namespace WPFApplication
                         this.WindowEvery.Background = Brushes.Transparent;
                         this.Transition = transition;
                         this.PageTransitionControl.ShowPage((UserControl)targetPage);
+                        if (pageChange.Page == ApplicationPages.PersonTaskBoardPage || pageChange.Page == ApplicationPages.PersonStatisticsPage)
+                        {
+                            this.UpperBar_PersonName.Text = ((Person)pageChange.Context).Name;
+                            this.GridPersonName.Visibility = System.Windows.Visibility.Visible;
+                        }
+                        else
+                        {
+                            this.UpperBar_PersonName.Text = "";
+                            this.GridPersonName.Visibility = System.Windows.Visibility.Collapsed;
+                        }
                     }
                 }
             }
@@ -165,7 +185,7 @@ namespace WPFApplication
                 case ApplicationPages.PersonStatisticsPage:
                     return null;
                 case ApplicationPages.PersonTaskBoardPage:
-                    return null;
+                    return new TaskBoardPageLib.PersonalTaskBoardPage(page.Context);
                 case ApplicationPages.ProjectBacklogPage:
                     return new ProjectBacklogPageLib.ProjectBacklogPage(page.Context);
                 case ApplicationPages.ProjectManagementPage:
@@ -397,7 +417,7 @@ namespace WPFApplication
 
         private void UpperBar_SelectProj_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            // Select a user.
+            // Select a project.
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
             PopupSelectionControlLib.SelectionWindow projectForm = new PopupSelectionControlLib.SelectionWindow();
             PopupSelectionControlLib.ProjectSelectionPage projectPage = new PopupSelectionControlLib.ProjectSelectionPage();
@@ -446,6 +466,23 @@ namespace WPFApplication
         private void sKrum_Loaded(object sender, System.Windows.RoutedEventArgs e)
         {
             this.TryTransition(new PageChange { Context = null, Page = ApplicationPages.RootPage });
+        }
+
+        private void GridPersonName_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            // Select a project.
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
+            PopupSelectionControlLib.SelectionWindow userForm = new PopupSelectionControlLib.SelectionWindow();
+            PopupSelectionControlLib.UserSelectionPage userPage = new PopupSelectionControlLib.UserSelectionPage(true);
+            userPage.PageTitle = "Escolha uma Pessoa";
+            userForm.FormPage = userPage;
+            userForm.ShowDialog();
+            ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
+            if (userForm.Success)
+            {
+                Person person = (Person)userForm.Result;
+                this.TryTransition(new PageChange { Context = person, Page = ApplicationPages.PersonTaskBoardPage });
+            }
         }
     }
 }

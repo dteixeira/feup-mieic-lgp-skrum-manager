@@ -144,7 +144,14 @@ namespace ProjectStatisticsPageLib
                 case PageChangeDirection.Left:
                     return new PageChange { Context = null, Page = ApplicationPages.MainPage };
                 case PageChangeDirection.Right:
-                    return null;
+                    if (ApplicationController.Instance.Team.Count > 0)
+                    {
+                        return new PageChange { Context = ApplicationController.Instance.Team[0], Page = ApplicationPages.PersonTaskBoardPage };
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 case PageChangeDirection.Up:
                     return null;
                 default:
@@ -157,8 +164,15 @@ namespace ProjectStatisticsPageLib
             System.Collections.Generic.Dictionary<PageChangeDirection, string> directions = new System.Collections.Generic.Dictionary<PageChangeDirection, string>();
             directions[PageChangeDirection.Up] = null;
             directions[PageChangeDirection.Down] = "TASKBOARD";
-            directions[PageChangeDirection.Left] = "MENU INICIAL";
-            directions[PageChangeDirection.Right] = null;
+            directions[PageChangeDirection.Left] = "MENU INICIAL"; 
+            if (ApplicationController.Instance.Team.Count > 0)
+            {
+                directions[PageChangeDirection.Right] = "TASKBOARD PESSOAL";
+            }
+            else
+            {
+                directions[PageChangeDirection.Right] = null;
+            }
             ApplicationController.Instance.ApplicationWindow.SetupNavigation(directions);
         }
 

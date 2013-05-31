@@ -78,9 +78,7 @@ namespace PopupSelectionControlLib
                 List<Person> persons = null;
                 if (this.projectSelect)
                 {
-                    ServiceLib.DataService.DataServiceClient client = new DataServiceClient();
-                    persons = client.GetAllPeopleInProject(ApplicationController.Instance.CurrentProject.ProjectID);
-                    client.Close();
+                    persons = ApplicationController.Instance.Team;
                 }
                 else
                 {
