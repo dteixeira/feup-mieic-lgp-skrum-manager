@@ -22,6 +22,9 @@ namespace GenericControlLib
         private int meetingNumber;
         private string meetingNotes;
 
+        public delegate void myHoverDelegate(object obj, MouseEventArgs e);
+        public event myHoverDelegate MeetingHoverEvent;
+
         public MeetingControl()
         {
             InitializeComponent();
@@ -57,6 +60,7 @@ namespace GenericControlLib
         }
 
         public ServiceLib.DataService.Meeting Meeting { get; set; }
+
 
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {
@@ -106,6 +110,8 @@ namespace GenericControlLib
             }
             else if (e.LeftButton == MouseButtonState.Released)
             {
+                if (this.MeetingHoverEvent != null)
+                    this.MeetingHoverEvent(this, e);
                 started_drag = false;
             }
             e.Handled = true;

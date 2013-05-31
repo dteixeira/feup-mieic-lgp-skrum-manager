@@ -26,11 +26,16 @@ namespace MeetingPageLib
     public partial class MeetingPage : UserControl, ITargetPage
     {
         private float scrollValue = 0.0f;
+        private float scrollValueNotes = 0.0f;
 
         private DispatcherTimer countdownTimerDelayScrollUp;
         private DispatcherTimer countdownTimerDelayScrollDown;
         private DispatcherTimer countdownTimerScrollUp;
         private DispatcherTimer countdownTimerScrollDown;
+
+
+        private enum BacklogSelected { Meetings, Notes };
+        private BacklogSelected currentScroll;
 
         private int biggestNumber = 0;
 
@@ -98,8 +103,9 @@ namespace MeetingPageLib
                         MeetingDate = meeting.Date,
                         MeetingNumber = meeting.Number,
                         MeetingNotes = meeting.Notes,
-                        Meeting = meeting
+                        Meeting = meeting,
                     };
+                    meetingControl.MeetingHoverEvent += ShowMeeting_Hover;
                     meetingControl.Width = Double.NaN;
                     meetingControl.Height = Double.NaN;
                     meetingControl.VerticalAlignment = System.Windows.VerticalAlignment.Top;
@@ -116,6 +122,13 @@ namespace MeetingPageLib
 
         }
 
+        public void ShowMeeting_Hover(object sender, MouseEventArgs e)
+        {
+            this.MeetingNotes.Visibility = Visibility.Visible;
+            this.NotesScroll.ScrollToVerticalOffset(0);
+            this.MeetingNotes.Text = ((MeetingControl)sender).MeetingNotes;
+        }
+
         private void ScrollActionDelayUp(object sender, EventArgs e)
         {
             this.countdownTimerScrollUp.Start();
@@ -130,26 +143,50 @@ namespace MeetingPageLib
 
         private void ScrollActionUp(object sender, EventArgs e)
         {
-            scrollValue -= 10.0f;
-            if (scrollValue < 0.0f) scrollValue = 0.0f;
-            MeetingScroll.ScrollToVerticalOffset(scrollValue);
+            switch (currentScroll)
+            {
+                case BacklogSelected.Notes:
+                    scrollValueNotes -= 10.0f;
+                    if (scrollValueNotes < 0.0f) scrollValueNotes = 0.0f;
+                    NotesScroll.ScrollToVerticalOffset(scrollValueNotes);
+                    break;
+
+                default:
+                    scrollValue -= 10.0f;
+                    if (scrollValue < 0.0f) scrollValue = 0.0f;
+                    MeetingScroll.ScrollToVerticalOffset(scrollValue);
+                    break;
+            }
         }
 
         private void ScrollActionDown(object sender, EventArgs e)
         {
-            scrollValue += 10.0f;
-            if (scrollValue > MeetingScroll.ScrollableHeight) scrollValue = (float)MeetingScroll.ScrollableHeight;
-            MeetingScroll.ScrollToVerticalOffset(scrollValue);
+            switch (currentScroll)
+            {
+                case BacklogSelected.Notes:
+                    scrollValueNotes += 10.0f;
+                    if (scrollValueNotes > NotesScroll.ScrollableHeight) scrollValueNotes = (float)NotesScroll.ScrollableHeight;
+                    NotesScroll.ScrollToVerticalOffset(scrollValueNotes);
+                    break;
+
+                default:
+                    scrollValue += 10.0f;
+                    if (scrollValue > MeetingScroll.ScrollableHeight) scrollValue = (float)MeetingScroll.ScrollableHeight;
+                    MeetingScroll.ScrollToVerticalOffset(scrollValue);
+                    break;
+            }
         }
 
         private void ScrollUp_Start(object sender, MouseEventArgs e)
         {
+            currentScroll = BacklogSelected.Meetings;
             this.countdownTimerDelayScrollUp.Start();
             this.countdownTimerScrollUp.Stop();
         }
 
         private void ScrollDown_Start(object sender, MouseEventArgs e)
         {
+            currentScroll = BacklogSelected.Meetings;
             this.countdownTimerDelayScrollDown.Start();
             this.countdownTimerScrollDown.Stop();
         }
@@ -163,6 +200,20 @@ namespace MeetingPageLib
         private void ScrollDown_Cancel(object sender, MouseEventArgs e)
         {
             this.countdownTimerDelayScrollDown.Stop();
+            this.countdownTimerScrollDown.Stop();
+        }
+
+        private void NotesScrollUp_Start(object sender, MouseEventArgs e)
+        {
+            currentScroll = BacklogSelected.Notes;
+            this.countdownTimerDelayScrollUp.Start();
+            this.countdownTimerScrollUp.Stop();
+        }
+
+        private void NotesScrollDown_Start(object sender, MouseEventArgs e)
+        {
+            currentScroll = BacklogSelected.Notes;
+            this.countdownTimerDelayScrollDown.Start();
             this.countdownTimerScrollDown.Stop();
         }
 

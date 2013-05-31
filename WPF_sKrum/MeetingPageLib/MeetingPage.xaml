@@ -41,10 +41,11 @@
             <ColumnDefinition Width="300" />
             <ColumnDefinition Width="20"/>
             <ColumnDefinition/>
+            <ColumnDefinition Width="80"/>
         </Grid.ColumnDefinitions>
         <GenericControlLib:SideMenuControl Height="auto" VerticalAlignment="Center" FirstType="Add" SecondType="Remove" FirstVisibility="Visible" SecondVisibility="Visible" FirstMenuClickEvent="SideMenuControl_AddClickEvent" SecondMenuDropEvent="SideMenuControl_RemoveDropEvent" />
         
-        <Grid x:Name="ScrollButtons_Sprints" Grid.Column="2" Margin="0">
+        <Grid x:Name="ScrollButtons_Meetings" Grid.Column="2" Margin="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50*" />
                 <RowDefinition Height="50*" />
@@ -75,5 +76,27 @@
             </ListView>
         </ScrollViewer>
         <Border BorderBrush="{DynamicResource Gray7Brush}" BorderThickness="0,0,1,0" Grid.Column="4" Background="{DynamicResource Gray7Brush}" Width="1" Margin="0,20"/>
+        <Grid x:Name="ScrollButtons_Notes" Grid.Column="6" Margin="0">
+        	<Grid.RowDefinitions>
+        		<RowDefinition Height="50*" />
+        		<RowDefinition Height="50*" />
+        	</Grid.RowDefinitions>
+        	<Rectangle x:Name="ScrollUpButton2" Margin="0" StrokeThickness="2" MouseEnter="NotesScrollUp_Start" MouseLeave="ScrollUp_Cancel" Style="{DynamicResource RectangleStyle1}"/>
+        	<Rectangle x:Name="ScrollDownButton2" Style="{DynamicResource RectangleStyle1}" Margin="0" Grid.Row="1" StrokeThickness="2" MouseEnter="NotesScrollDown_Start" MouseLeave="ScrollDown_Cancel"/>
+        	<Image Grid.Row="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False"/>
+        	<Image Grid.Row="1" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False" RenderTransformOrigin="0.5,0.5">
+        		<Image.RenderTransform>
+        			<TransformGroup>
+        				<ScaleTransform/>
+        				<SkewTransform/>
+        				<RotateTransform Angle="-180"/>
+        				<TranslateTransform/>
+        			</TransformGroup>
+        		</Image.RenderTransform>
+        	</Image>
+        </Grid>
+        <ScrollViewer x:Name="NotesScroll" Grid.Column="5" VerticalScrollBarVisibility="Hidden" Background="Transparent" Margin="10,30">
+        	<TextBlock x:Name="MeetingNotes" TextWrapping="Wrap" FontFamily="Open Sans" FontSize="96" Foreground="{DynamicResource Gray7Brush}" VerticalAlignment="Top"/>
+        </ScrollViewer>
     </Grid>
 </UserControl>
