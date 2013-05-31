@@ -122,6 +122,11 @@ namespace ProjectStatisticsPageLib
             data.Add(previsiondata);
             data.Add(graphicdata);
 
+            if (graphicdata[graphicdata.Count - 1].Value > previsiondata[graphicdata.Count - 1].Value)
+            {
+                this.Global_status.ButtonText = "ATRASADO";
+            }
+
             GraphicControl graphic = new GraphicControl(data);
             graphic.SetValue(Grid.RowProperty, 1);
             graphic.Margin = new Thickness(50);

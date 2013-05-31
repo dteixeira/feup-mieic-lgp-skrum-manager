@@ -35,7 +35,7 @@
 				<RowDefinition Height="2*"/>
 				<RowDefinition Height="8*"/>
 			</Grid.RowDefinitions>
-			<GenericControlLib:ButtonControl VerticalAlignment="Bottom" ButtonText="ON TIME" IsHitTestVisible="False" Margin="50,0,0,20" HorizontalAlignment="Left"/>
+			<GenericControlLib:ButtonControl x:Name="Global_status" VerticalAlignment="Bottom" ButtonText="ON TIME" IsHitTestVisible="False" Margin="50,0,0,20" HorizontalAlignment="Left"/>
 		</Grid>
             
 	</Grid>
