@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GenericControlLib
 {
@@ -19,7 +9,7 @@ namespace GenericControlLib
     /// </summary>
     public partial class SideMenuControl : UserControl
     {
-        public enum Options {Add, Edit, Remove, SpecialAdd, Close, Order };
+        public enum Options { Add, Edit, Remove, SpecialAdd, Close, Order };
 
         private Visibility firstVisibility = Visibility.Collapsed;
         private Visibility secondVisibility = Visibility.Collapsed;
@@ -31,29 +21,41 @@ namespace GenericControlLib
         private Options thirdType;
         private Options fourthType;
         private Options fifthType;
+
         public delegate void myDropDelegate(object obj, DragEventArgs e);
+
         public event myDropDelegate FirstMenuDropEvent;
+
         public event myDropDelegate SecondMenuDropEvent;
+
         public event myDropDelegate ThirdMenuDropEvent;
+
         public event myDropDelegate FourthMenuDropEvent;
+
         public event myDropDelegate FifthMenuDropEvent;
+
         public delegate void myClickDelegate(object obj, MouseEventArgs e);
+
         public event myClickDelegate FirstMenuClickEvent;
+
         public event myClickDelegate SecondMenuClickEvent;
+
         public event myClickDelegate ThirdMenuClickEvent;
+
         public event myClickDelegate FourthMenuClickEvent;
+
         public event myClickDelegate FifthMenuClickEvent;
 
         public SideMenuControl()
-		{
-			this.InitializeComponent();
+        {
+            this.InitializeComponent();
             this.DataContext = this;
             this.FirstIconBack.AllowDrop = true;
             this.SecondIconBack.AllowDrop = true;
             this.ThirdIconBack.AllowDrop = true;
             this.FourthIconBack.AllowDrop = true;
             this.FifthIconBack.AllowDrop = true;
-		}
+        }
 
         public Visibility FirstVisibility
         {
@@ -117,22 +119,22 @@ namespace GenericControlLib
 
         public string FirstIcon
         {
-            get{ return this.convertTypetoIcon(firstType); }
+            get { return this.convertTypetoIcon(firstType); }
         }
-        
+
         public string SecondIcon
         {
-            get{ return this.convertTypetoIcon(secondType); }
+            get { return this.convertTypetoIcon(secondType); }
         }
 
         public string ThirdIcon
         {
-            get{ return this.convertTypetoIcon(thirdType); }
+            get { return this.convertTypetoIcon(thirdType); }
         }
 
         public string FourthIcon
         {
-            get{ return this.convertTypetoIcon(fourthType); }
+            get { return this.convertTypetoIcon(fourthType); }
         }
 
         public string FifthIcon

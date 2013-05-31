@@ -7,19 +7,19 @@
 	x:Class="GenericControlLib.NotificationControl"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
-	<UserControl.Resources>
-		<Storyboard x:Key="NotificationAnimation">
-			<DoubleAnimation Storyboard.TargetName="AnimatedGrid"
+    <UserControl.Resources>
+        <Storyboard x:Key="NotificationAnimation">
+            <DoubleAnimation Storyboard.TargetName="AnimatedGrid"
 				Storyboard.TargetProperty="Height" To="150"
-				Duration="0:0:0.5" BeginTime="0:0:0"/>
-			<DoubleAnimation Storyboard.TargetName="AnimatedGrid"
+				Duration="0:0:0.5" BeginTime="0:0:0" />
+            <DoubleAnimation Storyboard.TargetName="AnimatedGrid"
 				Storyboard.TargetProperty="Height" To="0"
-				Duration="0:0:0.5" BeginTime="0:0:3"/>
-		</Storyboard>
-	</UserControl.Resources>
-	<Grid x:Name="LayoutRoot">
-		<Grid x:Name="AnimatedGrid" Height="0" VerticalAlignment="Top" Background="{DynamicResource Gray6Brush}" Opacity="0.895">
-			<TextBlock x:Name="NotificationTextBlock" Margin="0" TextWrapping="Wrap" FontFamily="Open Sans" FontSize="40" Foreground="{DynamicResource Gray1Brush}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-		</Grid>
-	</Grid>
+				Duration="0:0:0.5" BeginTime="0:0:3" />
+        </Storyboard>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+        <Grid x:Name="AnimatedGrid" Height="0" VerticalAlignment="Top" Background="{DynamicResource Gray6Brush}" Opacity="0.895">
+            <TextBlock x:Name="NotificationTextBlock" Margin="0" TextWrapping="Wrap" FontFamily="Open Sans" FontSize="40" Foreground="{DynamicResource Gray1Brush}" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center" />
+        </Grid>
+    </Grid>
 </UserControl>

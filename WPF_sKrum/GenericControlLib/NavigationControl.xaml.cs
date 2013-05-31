@@ -1,28 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using SharedTypes;
+using System;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-using SharedTypes;
 
 namespace GenericControlLib
 {
-	/// <summary>
-	/// Interaction logic for NavigationControl.xaml
-	/// </summary>
-	public partial class NavigationControl : UserControl
-	{
+    /// <summary>
+    /// Interaction logic for NavigationControl.xaml
+    /// </summary>
+    public partial class NavigationControl : UserControl
+    {
         private DispatcherTimer pagesStatTimer;
 
         public delegate void NavigationHandler(PageChangeDirection direction);
+
         public event NavigationHandler NavigationEvent;
 
         public string UpBarText
@@ -49,14 +41,14 @@ namespace GenericControlLib
             set { this.RightText.Text = value; }
         }
 
-		public NavigationControl()
-		{
-			this.InitializeComponent();
+        public NavigationControl()
+        {
+            this.InitializeComponent();
             this.pagesStatTimer = new DispatcherTimer();
             this.pagesStatTimer.Tick += new EventHandler(PagesInfoAppearAction);
             this.pagesStatTimer.Interval = TimeSpan.FromSeconds(1);
             this.UpBarText = null;
-		}
+        }
 
         private void NotifyNavigationEvent(PageChangeDirection direction)
         {
@@ -176,5 +168,5 @@ namespace GenericControlLib
                 this.RightBar.SetValue(Panel.ZIndexProperty, 20);
             }
         }
-	}
+    }
 }

@@ -8,75 +8,81 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceLib.NotificationService {
-    using System.Runtime.Serialization;
-    
-    
+namespace ServiceLib.NotificationService
+{
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="NotificationType", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
-    public enum NotificationType : int {
-        
+    [System.Runtime.Serialization.DataContractAttribute(Name = "NotificationType", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    public enum NotificationType : int
+    {
         [System.Runtime.Serialization.EnumMemberAttribute()]
         ProjectModification = 0,
-        
+
         [System.Runtime.Serialization.EnumMemberAttribute()]
         GlobalProjectModification = 1,
-        
+
         [System.Runtime.Serialization.EnumMemberAttribute()]
         GlobalPersonModification = 2,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="NotificationService.INotificationService", CallbackContract=typeof(ServiceLib.NotificationService.INotificationServiceCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
-    public interface INotificationService {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/Subscribe", ReplyAction="http://tempuri.org/INotificationService/SubscribeResponse")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName = "NotificationService.INotificationService", CallbackContract = typeof(ServiceLib.NotificationService.INotificationServiceCallback), SessionMode = System.ServiceModel.SessionMode.Required)]
+    public interface INotificationService
+    {
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/INotificationService/Subscribe", ReplyAction = "http://tempuri.org/INotificationService/SubscribeResponse")]
         void Subscribe(int projectID);
-        
-        [System.ServiceModel.OperationContractAttribute(IsTerminating=true, IsInitiating=false, Action="http://tempuri.org/INotificationService/Unsubscribe", ReplyAction="http://tempuri.org/INotificationService/UnsubscribeResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(IsTerminating = true, IsInitiating = false, Action = "http://tempuri.org/INotificationService/Unsubscribe", ReplyAction = "http://tempuri.org/INotificationService/UnsubscribeResponse")]
         void Unsubscribe(int projectID);
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface INotificationServiceCallback {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/INotificationService/DataChanged", ReplyAction="http://tempuri.org/INotificationService/DataChangedResponse")]
+    public interface INotificationServiceCallback
+    {
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/INotificationService/DataChanged", ReplyAction = "http://tempuri.org/INotificationService/DataChangedResponse")]
         void DataChanged(ServiceLib.NotificationService.NotificationType notification);
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface INotificationServiceChannel : ServiceLib.NotificationService.INotificationService, System.ServiceModel.IClientChannel {
+    public interface INotificationServiceChannel : ServiceLib.NotificationService.INotificationService, System.ServiceModel.IClientChannel
+    {
     }
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class NotificationServiceClient : System.ServiceModel.DuplexClientBase<ServiceLib.NotificationService.INotificationService>, ServiceLib.NotificationService.INotificationService {
-        
-        public NotificationServiceClient(System.ServiceModel.InstanceContext callbackInstance) : 
-                base(callbackInstance) {
+    public partial class NotificationServiceClient : System.ServiceModel.DuplexClientBase<ServiceLib.NotificationService.INotificationService>, ServiceLib.NotificationService.INotificationService
+    {
+        public NotificationServiceClient(System.ServiceModel.InstanceContext callbackInstance) :
+            base(callbackInstance)
+        {
         }
-        
-        public NotificationServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) : 
-                base(callbackInstance, endpointConfigurationName) {
+
+        public NotificationServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName) :
+            base(callbackInstance, endpointConfigurationName)
+        {
         }
-        
-        public NotificationServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+
+        public NotificationServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, string remoteAddress) :
+            base(callbackInstance, endpointConfigurationName, remoteAddress)
+        {
         }
-        
-        public NotificationServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, endpointConfigurationName, remoteAddress) {
+
+        public NotificationServiceClient(System.ServiceModel.InstanceContext callbackInstance, string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) :
+            base(callbackInstance, endpointConfigurationName, remoteAddress)
+        {
         }
-        
-        public NotificationServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(callbackInstance, binding, remoteAddress) {
+
+        public NotificationServiceClient(System.ServiceModel.InstanceContext callbackInstance, System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) :
+            base(callbackInstance, binding, remoteAddress)
+        {
         }
-        
-        public void Subscribe(int projectID) {
+
+        public void Subscribe(int projectID)
+        {
             base.Channel.Subscribe(projectID);
         }
-        
-        public void Unsubscribe(int projectID) {
+
+        public void Unsubscribe(int projectID)
+        {
             base.Channel.Unsubscribe(projectID);
         }
     }

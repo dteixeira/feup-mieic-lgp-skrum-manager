@@ -8,20 +8,20 @@
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
 
-	<Grid x:Name="LayoutRoot" Margin="0">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="6"/>
-			<ColumnDefinition/>
-			<ColumnDefinition Width="25"/>
-			<ColumnDefinition/>
-			<ColumnDefinition Width="25"/>
-			<ColumnDefinition/>
-			<ColumnDefinition Width="25"/>
-			<ColumnDefinition/>
-			<ColumnDefinition Width="6"/>
-		</Grid.ColumnDefinitions>
-		<Border Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,0,0" Width="1"/>
-		<Border Grid.Column="4" BorderBrush="Black" BorderThickness="1,0,0,0" Width="1" Margin="5,0"/>
-		<Border Grid.Column="6" BorderBrush="Black" BorderThickness="1,0,0,0" Width="1" Margin="5,0"/>
-	</Grid>
+    <Grid x:Name="LayoutRoot" Margin="0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="25" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="25" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="25" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="6" />
+        </Grid.ColumnDefinitions>
+        <Border Grid.Column="2" BorderBrush="Black" BorderThickness="1,0,0,0" Width="1" />
+        <Border Grid.Column="4" BorderBrush="Black" BorderThickness="1,0,0,0" Width="1" Margin="5,0" />
+        <Border Grid.Column="6" BorderBrush="Black" BorderThickness="1,0,0,0" Width="1" Margin="5,0" />
+    </Grid>
 </UserControl>

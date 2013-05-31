@@ -6,12 +6,12 @@
       xmlns:GenericControlLib="clr-namespace:GenericControlLib;assembly=GenericControlLib" x:Class="MainPageLib.MainPage"
       mc:Ignorable="d"
       d:DesignWidth="1024" d:DesignHeight="768" Background="{DynamicResource BackgroundBrush}">
-	<UserControl.Resources>
-		<Style TargetType="{x:Type GenericControlLib:ButtonControl}">
-			<Setter Property="VerticalAlignment" Value="Stretch" />
-			<Setter Property="HorizontalAlignment" Value="Stretch" />
-			<Setter Property="Margin" Value="20" />
-		</Style>
+    <UserControl.Resources>
+        <Style TargetType="{x:Type GenericControlLib:ButtonControl}">
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="Margin" Value="20" />
+        </Style>
         <SolidColorBrush x:Key="BackgroundBrush" Color="#E2E2E2" />
         <SolidColorBrush x:Key="KinectOnBarBrush" Color="#242424" />
         <SolidColorBrush x:Key="KinectOffBarBrush" Color="#555555" />
@@ -26,19 +26,19 @@
         <SolidColorBrush x:Key="Gray5Brush" Color="#646464" />
         <SolidColorBrush x:Key="Gray6Brush" Color="#555555" />
         <SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
-	</UserControl.Resources>
-	<Grid Margin="40,80">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="1*" />
-			<ColumnDefinition Width="1*" />
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="1*" />
-			<RowDefinition Height="1*" />
-		</Grid.RowDefinitions>
-		<GenericControlLib:ButtonControl ButtonFontSize="40" ButtonText="BACKLOG" MouseLeftButtonDown="ButtonControl_MouseLeftButtonDown" />
-		<GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Column="2" ButtonText="SPRINT BACKLOG" MouseLeftButtonDown="ButtonControl_MouseLeftButtonDown_1"/>
-		<GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Row="1" ButtonText="TASKBOARD" MouseLeftButtonDown="ButtonControl_MouseLeftButtonDown_2"/>
-		<GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Row="1" Grid.Column="2" ButtonText="REUNIÕES" MouseLeftButtonDown="ButtonControl_MouseLeftButtonDown_3" />
-	</Grid>
+    </UserControl.Resources>
+    <Grid Margin="40,80">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+        <GenericControlLib:ButtonControl ButtonFontSize="40" ButtonText="BACKLOG" MouseLeftButtonDown="ButtonControl_MouseLeftButtonDown" />
+        <GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Column="2" ButtonText="SPRINT BACKLOG" MouseLeftButtonDown="ButtonControl_MouseLeftButtonDown_1" />
+        <GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Row="1" ButtonText="TASKBOARD" MouseLeftButtonDown="ButtonControl_MouseLeftButtonDown_2" />
+        <GenericControlLib:ButtonControl ButtonFontSize="40" Grid.Row="1" Grid.Column="2" ButtonText="REUNIÕES" MouseLeftButtonDown="ButtonControl_MouseLeftButtonDown_3" />
+    </Grid>
 </UserControl>

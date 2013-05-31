@@ -1,6 +1,5 @@
-﻿using System.Windows;
+﻿using SharedTypes;
 using System.Windows.Controls;
-using SharedTypes;
 
 namespace MainPageLib
 {
@@ -49,12 +48,10 @@ namespace MainPageLib
             // Nothing to do.
         }
 
-
         public void DataChangeHandler(object sender, ServiceLib.NotificationService.NotificationType notification)
         {
             // Nothing to do.
         }
-
 
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
 

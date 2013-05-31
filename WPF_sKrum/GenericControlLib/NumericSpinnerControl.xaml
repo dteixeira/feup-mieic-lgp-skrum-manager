@@ -7,28 +7,28 @@
 	x:Class="GenericControlLib.NumericSpinnerControl"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
-	<UserControl.Resources>
-		<Style x:Key="SpinnerButtonStyle" TargetType="{x:Type Rectangle}">
-			<Setter Property="Fill" Value="#00000000"/>
-			<Style.Triggers>
-				<Trigger Property="IsMouseOver" Value="True">
-					<Setter Property="Stroke" Value="{x:Null}"/>
-					<Setter Property="Fill" Value="{DynamicResource Gray6Brush}"/>
-				</Trigger>
-			</Style.Triggers>
-		</Style>
-	</UserControl.Resources>
+    <UserControl.Resources>
+        <Style x:Key="SpinnerButtonStyle" TargetType="{x:Type Rectangle}">
+            <Setter Property="Fill" Value="#00000000" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Stroke" Value="{x:Null}" />
+                    <Setter Property="Fill" Value="{DynamicResource Gray6Brush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
 
-	<Grid x:Name="LayoutRoot" Background="{DynamicResource Gray7Brush}">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="80"/>
-			<ColumnDefinition/>
-			<ColumnDefinition Width="80"/>
-		</Grid.ColumnDefinitions>
-		<Label x:Name="ValueLabel" Content="Label" Grid.Column="1" FontFamily="Open Sans" FontSize="48" Foreground="{DynamicResource Gray1Brush}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-		<Rectangle x:Name="MinusButton" Style="{DynamicResource SpinnerButtonStyle}" MouseEnter="MinusButton_MouseEnter" MouseLeave="MinusButton_MouseLeave" MouseLeftButtonDown="MinusButton_MouseLeftButtonDown" MouseLeftButtonUp="MinusButton_MouseLeftButtonUp"/>
-		<Rectangle x:Name="PlusButton" Style="{DynamicResource SpinnerButtonStyle}" Grid.Column="2" MouseEnter="PlusButton_MouseEnter" MouseLeave="PlusButton_MouseLeave" MouseLeftButtonDown="PlusButton_MouseLeftButtonDown" MouseLeftButtonUp="PlusButton_MouseLeftButtonUp"/>
-		<Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Source="Images/menos.png" IsHitTestVisible="False"/>
-		<Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Source="Images/mais.png" Margin="0" Grid.Column="2" IsHitTestVisible="False"/>
-	</Grid>
+    <Grid x:Name="LayoutRoot" Background="{DynamicResource Gray7Brush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="80" />
+        </Grid.ColumnDefinitions>
+        <Label x:Name="ValueLabel" Content="Label" Grid.Column="1" FontFamily="Open Sans" FontSize="48" Foreground="{DynamicResource Gray1Brush}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        <Rectangle x:Name="MinusButton" Style="{DynamicResource SpinnerButtonStyle}" MouseEnter="MinusButton_MouseEnter" MouseLeave="MinusButton_MouseLeave" MouseLeftButtonDown="MinusButton_MouseLeftButtonDown" MouseLeftButtonUp="MinusButton_MouseLeftButtonUp" />
+        <Rectangle x:Name="PlusButton" Style="{DynamicResource SpinnerButtonStyle}" Grid.Column="2" MouseEnter="PlusButton_MouseEnter" MouseLeave="PlusButton_MouseLeave" MouseLeftButtonDown="PlusButton_MouseLeftButtonDown" MouseLeftButtonUp="PlusButton_MouseLeftButtonUp" />
+        <Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Source="Images/menos.png" IsHitTestVisible="False" />
+        <Image HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Source="Images/mais.png" Margin="0" Grid.Column="2" IsHitTestVisible="False" />
+    </Grid>
 </UserControl>

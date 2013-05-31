@@ -1,20 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using PageTransitions;
-using SharedTypes;
+﻿using Kinect.Gestures;
 using Kinect.Pointers;
 using Microsoft.Kinect.Toolkit.Interaction;
-using Kinect.Gestures;
+using SharedTypes;
+using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace PopupFormControlLib
 {
@@ -84,6 +75,7 @@ namespace PopupFormControlLib
                     RightClosed.Visibility = Visibility.Collapsed;
                     Mouse.OverrideCursor = Cursors.Arrow;
                     break;
+
                 case KinectGestureType.WaveRightHand:
                     if (ApplicationController.Instance.Gripping)
                     {
@@ -97,6 +89,7 @@ namespace PopupFormControlLib
                     }
                     Mouse.OverrideCursor = Cursors.None;
                     break;
+
                 default:
                     break;
             }

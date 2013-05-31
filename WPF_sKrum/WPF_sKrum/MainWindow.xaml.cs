@@ -1,8 +1,10 @@
-﻿using Kinect.Gestures;
+﻿using GenericControlLib;
+using Kinect.Gestures;
 using Kinect.Pointers;
 using Microsoft.Kinect;
 using Microsoft.Kinect.Toolkit.Interaction;
-using PageTransitions;
+using ServiceLib.DataService;
+using SharedTypes;
 using System;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -11,9 +13,6 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
-using ServiceLib.DataService;
-using GenericControlLib;
-using SharedTypes;
 
 namespace WPFApplication
 {
@@ -39,6 +38,7 @@ namespace WPFApplication
         private const int MOUSEEVENTF_XUP = 0x00000100;
 
         private delegate void TryTransitionPageChangeDirectionHandler(PageChangeDirection direction, PageTransitionType transition);
+
         private delegate void TryTransitionPageChangeHandler(PageChange direction, PageTransitionType transition);
 
         public PageTransitionType Transition
@@ -126,7 +126,6 @@ namespace WPFApplication
                     PageChange pageChange = this.backdata.CurrentPage.PageChangeTarget(direction);
                     if (pageChange != null)
                     {
-
                         // Release previous page.
                         this.backdata.CurrentPage.UnloadPage();
                         this.backdata.CurrentPage = null;
@@ -352,12 +351,15 @@ namespace WPFApplication
                     case PageChangeDirection.Up:
                         this.Navigation.UpBarText = directions[key];
                         break;
+
                     case PageChangeDirection.Right:
                         this.Navigation.RightBarText = directions[key];
                         break;
+
                     case PageChangeDirection.Left:
                         this.Navigation.LeftBarText = directions[key];
                         break;
+
                     case PageChangeDirection.Down:
                         this.Navigation.DownBarText = directions[key];
                         break;

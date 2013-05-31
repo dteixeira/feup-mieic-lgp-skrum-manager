@@ -1,26 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 public enum TasksState { Todo, Doing, Testing, Done };
 
 namespace TaskBoardControlLib
 {
-	/// <summary>
-	/// Interaction logic for TaskControl.xaml
-	/// </summary>
-	public partial class TaskControl : UserControl
-	{
+    /// <summary>
+    /// Interaction logic for TaskControl.xaml
+    /// </summary>
+    public partial class TaskControl : UserControl
+    {
         private Point startpoint;
         private bool started_drag = false;
         private TaskControl _adorner;
@@ -30,16 +22,20 @@ namespace TaskBoardControlLib
         private string taskDescription;
         private TasksState state;
         private int usId;
+
         public delegate void StartDragHandler(TaskControl taskControl);
+
         public delegate void StopDragHandler(TaskControl taskControl);
+
         public event StartDragHandler StartDragEvent;
+
         public event StopDragHandler StopDragEvent;
 
-		public TaskControl()
-		{
-			this.InitializeComponent();
+        public TaskControl()
+        {
+            this.InitializeComponent();
             this.DataContext = this;
-		}
+        }
 
         public string TaskDescription
         {
@@ -77,7 +73,7 @@ namespace TaskBoardControlLib
                 started_drag = true;
 
                 Visual visual = e.OriginalSource as Visual;
-                Window _topWindow = (Window) SharedTypes.Utilities.FindAncestor(typeof(Window), visual);
+                Window _topWindow = (Window)SharedTypes.Utilities.FindAncestor(typeof(Window), visual);
                 _adornerLayer = (Canvas)LogicalTreeHelper.FindLogicalNode(_topWindow, AdornerLayer);
             }
             catch (Exception exc)
@@ -161,5 +157,5 @@ namespace TaskBoardControlLib
             p.Height = this.Height;
             return p;
         }
-	}
+    }
 }

@@ -1,25 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GenericControlLib
 {
-	/// <summary>
-	/// Interaction logic for StoryControl.xaml
-	/// </summary>
-	public partial class SimpleStoryControl : UserControl
-	{
+    /// <summary>
+    /// Interaction logic for StoryControl.xaml
+    /// </summary>
+    public partial class SimpleStoryControl : UserControl
+    {
         private TextTrimming storyTextTrimming = TextTrimming.None;
-
 
         private string storyDescription;
         private string storyName;
@@ -28,10 +18,10 @@ namespace GenericControlLib
         private int storyNumber;
 
         public SimpleStoryControl()
-		{
-			this.InitializeComponent();
+        {
+            this.InitializeComponent();
             this.DataContext = this;
-		}
+        }
 
         public string StoryDescription
         {
@@ -90,6 +80,5 @@ namespace GenericControlLib
             get { return this.storyTextTrimming; }
             set { this.storyTextTrimming = value; }
         }
-
-	}
+    }
 }

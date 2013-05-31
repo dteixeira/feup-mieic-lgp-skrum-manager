@@ -17,12 +17,12 @@ namespace GenericControlLib
         private string AdornerLayer = "dragdropadornerLayer";
         private Canvas _adornerLayer;
 
-
         private DateTime meetingDate;
         private int meetingNumber;
         private string meetingNotes;
 
         public delegate void myHoverDelegate(object obj, MouseEventArgs e);
+
         public event myHoverDelegate MeetingHoverEvent;
 
         public MeetingControl()
@@ -60,7 +60,6 @@ namespace GenericControlLib
         }
 
         public ServiceLib.DataService.Meeting Meeting { get; set; }
-
 
         protected override void OnPreviewMouseDown(MouseButtonEventArgs e)
         {

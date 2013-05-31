@@ -4,16 +4,10 @@ using SharedTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace ProjectManagementPageLib
@@ -24,6 +18,7 @@ namespace ProjectManagementPageLib
     public partial class ProjectManagementPage : UserControl, ITargetPage
     {
         private enum ScrollSelected { Letters, Content };
+
         private ScrollSelected currentScroll;
         private float scrollValueContent = 0.0f;
         private float scrollValueLetters = 0.0f;
@@ -33,11 +28,13 @@ namespace ProjectManagementPageLib
 
         //Timers for the content/letter scroll
         private DispatcherTimer countdownTimerDelayScrollLeft;
+
         private DispatcherTimer countdownTimerDelayScrollRight;
         private DispatcherTimer countdownTimerScrollLeft;
         private DispatcherTimer countdownTimerScrollRight;
 
         public ApplicationPages PageType { get; set; }
+
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
 
         public ProjectManagementPage(object context)
@@ -170,12 +167,12 @@ namespace ProjectManagementPageLib
 
                     // Set correct image.
                     if (p.Password != null)
-                    { 
-                        button.ProjectImageSource = "Images/aloquete.png"; 
+                    {
+                        button.ProjectImageSource = "Images/aloquete.png";
                     }
                     else
-                    { 
-                        button.ProjectImageSource = "Images/mala.png"; 
+                    {
+                        button.ProjectImageSource = "Images/mala.png";
                     }
 
                     // Create project control.
@@ -203,7 +200,6 @@ namespace ProjectManagementPageLib
             MessageBox.Show(project.ProjectName);
         }
 
-
         private void ScrollActionDelayLeft(object sender, EventArgs e)
         {
             this.countdownTimerScrollLeft.Start();
@@ -225,6 +221,7 @@ namespace ProjectManagementPageLib
                     if (scrollValueLetters < 0.0f) scrollValueLetters = 0.0f;
                     LetterScroll.ScrollToHorizontalOffset(scrollValueLetters);
                     break;
+
                 default:
                     scrollValueContent -= 10.0f;
                     if (scrollValueContent < 0.0f) scrollValueContent = 0.0f;
@@ -235,7 +232,6 @@ namespace ProjectManagementPageLib
 
         private void ScrollActionRight(object sender, EventArgs e)
         {
-
             switch (currentScroll)
             {
                 case ScrollSelected.Letters:
@@ -243,13 +239,13 @@ namespace ProjectManagementPageLib
                     if (scrollValueLetters > LetterScroll.ScrollableWidth) scrollValueLetters = (float)LetterScroll.ScrollableWidth;
                     LetterScroll.ScrollToHorizontalOffset(scrollValueLetters);
                     break;
+
                 default:
                     scrollValueContent += 10.0f;
                     if (scrollValueContent > ContentScroll.ScrollableWidth) scrollValueContent = (float)ContentScroll.ScrollableWidth;
                     ContentScroll.ScrollToHorizontalOffset(scrollValueContent);
                     break;
             }
-
         }
 
         private void ScrollLeft_Start(object sender, MouseEventArgs e)
@@ -353,8 +349,8 @@ namespace ProjectManagementPageLib
                     foreach (string letter in keys)
                     {
                         dic[letter] = (from p in projects
-                                where p.Name[0].ToString().ToUpper() == letter
-                                select p).ToList<Project>();
+                                       where p.Name[0].ToString().ToUpper() == letter
+                                       select p).ToList<Project>();
                     }
 
                     // Repopulate the taskboard with the current project.
@@ -394,6 +390,7 @@ namespace ProjectManagementPageLib
                         Speed = 1,
                         SprintDuration = duration
                     };
+
                     // Launch thread to update the project.
                     System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(this.AddProject));
                     thread.Start(project);
@@ -422,9 +419,11 @@ namespace ProjectManagementPageLib
             PopupFormControlLib.FormWindow form = new PopupFormControlLib.FormWindow();
             PopupFormControlLib.TextBoxPage namePage = new PopupFormControlLib.TextBoxPage { PageName = "name", PageTitle = "Nome do Projecto", DefaultValue = project.Name };
             PopupFormControlLib.PasswordBoxPage passwordPage = new PopupFormControlLib.PasswordBoxPage { PageName = "password", PageTitle = "Password do Projecto", DefaultValue = project.Password == null ? null : "aaaaaaaaaaaaaaaa" };
+
             //PopupFormControlLib.SpinnerPage durationPage = new PopupFormControlLib.SpinnerPage { PageName = "duration", PageTitle = "Duração do Sprint", Min = 1, Max = 9999, Increment = 1, DefaultValue = project.SprintDuration };
             form.FormPages.Add(namePage);
             form.FormPages.Add(passwordPage);
+
             //form.FormPages.Add(durationPage);
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
             form.ShowDialog();
@@ -432,10 +431,12 @@ namespace ProjectManagementPageLib
             {
                 string name = (string)form["name"].PageValue;
                 string password = (string)form["password"].PageValue;
+
                 //int duration = (int)((double)form["duration"].PageValue);
                 if (name != null && name != "")
                 {
                     project.Name = name;
+
                     //project.SprintDuration = duration;
                     project.Password = ((PopupFormControlLib.PasswordBoxPage)form["password"]).Changed ? password : null;
 

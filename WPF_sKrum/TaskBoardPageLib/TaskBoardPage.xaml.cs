@@ -1,19 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using ServiceLib.DataService;
+using ServiceLib.NotificationService;
+using SharedTypes;
+using System;
+using System.Collections.Specialized;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shapes;
 using System.Windows.Threading;
-using TaskboardRowLib;
 using TaskBoardControlLib;
-using System.Linq;
-using SharedTypes;
-using ServiceLib.DataService;
-using ServiceLib.NotificationService;
-using System.Collections.Specialized;
+using TaskboardRowLib;
 
 namespace TaskBoardPageLib
 {
@@ -27,8 +23,11 @@ namespace TaskBoardPageLib
         private DispatcherTimer countdownTimerDelayScrollDown;
         private DispatcherTimer countdownTimerScrollUp;
         private DispatcherTimer countdownTimerScrollDown;
+
         public ApplicationPages PageType { get; set; }
+
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
+
         private delegate void TaskBoardUpdate(TaskControl taskControl);
 
         public TaskBoardPage(object context)
@@ -104,7 +103,7 @@ namespace TaskBoardPageLib
 
                 // Get current sprint.
                 Sprint sprint = project.Sprints.FirstOrDefault(s => s.Closed == false);
-                
+
                 // Iterate all user stories in the sprint.
                 foreach (var story in sprint.Stories.Select((s, i) => new { Value = s, Index = i }))
                 {
@@ -182,14 +181,17 @@ namespace TaskBoardPageLib
                                 taskControl.State = TasksState.Todo;
                                 TaskboardRowControl.AllTasks[task.StoryID][TasksState.Todo].Add(taskControl);
                                 break;
+
                             case TaskState.InProgress:
                                 taskControl.State = TasksState.Doing;
                                 TaskboardRowControl.AllTasks[task.StoryID][TasksState.Doing].Add(taskControl);
                                 break;
+
                             case TaskState.Completed:
                                 taskControl.State = TasksState.Done;
                                 TaskboardRowControl.AllTasks[task.StoryID][TasksState.Done].Add(taskControl);
                                 break;
+
                             default:
                                 break;
                         }
@@ -298,7 +300,6 @@ namespace TaskBoardPageLib
             // Unregister for notifications.
             ApplicationController.Instance.DataChangedEvent -= this.DataChangeDelegate;
         }
-    
 
         public void DataChangeHandler(object sender, NotificationType notification)
         {

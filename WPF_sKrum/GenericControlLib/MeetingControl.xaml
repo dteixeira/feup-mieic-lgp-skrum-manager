@@ -1,38 +1,37 @@
 ﻿<UserControl x:Class="GenericControlLib.MeetingControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <Style x:Key="OuterGridStyle" TargetType="{x:Type Grid}">
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource Gray3Brush}"/>
+                    <Setter Property="Background" Value="{DynamicResource Gray3Brush}" />
                 </Trigger>
             </Style.Triggers>
-            <Setter Property="Background" Value="White"/>
+            <Setter Property="Background" Value="White" />
         </Style>
     </UserControl.Resources>
 
     <Grid Style="{DynamicResource OuterGridStyle}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid x:Name="WholeArea" Grid.Row="1" Margin="0,10">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Label HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" FontFamily="Open Sans" Grid.Column="1" Content="{Binding MeetingDateText}" Padding="0,0,20,0"/>
+            <Label HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16" FontFamily="Open Sans" Grid.Column="1" Content="{Binding MeetingDateText}" Padding="0,0,20,0" />
 
             <Label HorizontalAlignment="Left" Content="DATA" VerticalAlignment="Center" FontSize="16" FontFamily="Open Sans" Grid.Column="0" Panel.ZIndex="100" Padding="20,0,0,0" />
-
         </Grid>
         <Grid Background="{DynamicResource Gray7Brush}">
             <Label HorizontalAlignment="Left" VerticalAlignment="Center" Content="{Binding MeetingName}" Padding="20,0,0,0" FontSize="18.667" FontFamily="Open Sans" Panel.ZIndex="100" Foreground="{DynamicResource Gray1Brush}" VerticalContentAlignment="Center" />

@@ -8,17 +8,17 @@
 	x:Class="PopupFormControlLib.SpinnerPage"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
-	<Grid x:Name="LayoutRoot">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition/>
-			<ColumnDefinition Width="8*"/>
-			<ColumnDefinition/>
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition/>
-			<RowDefinition Height="8*"/>
-			<RowDefinition/>
-		</Grid.RowDefinitions>
-		<GenericControlLib:NumericSpinnerControl x:Name="NumericSpinner" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1"/>
-	</Grid>
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="8*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="8*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <GenericControlLib:NumericSpinnerControl x:Name="NumericSpinner" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" />
+    </Grid>
 </UserControl>

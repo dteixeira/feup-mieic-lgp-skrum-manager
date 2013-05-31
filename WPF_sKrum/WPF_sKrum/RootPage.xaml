@@ -1,12 +1,11 @@
 ﻿<UserControl x:Class="WPFApplication.RootPage"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
              d:DesignHeight="514" d:DesignWidth="775">
     <Grid Background="{DynamicResource BackgroundBrush}">
-    	<TextBlock x:Name="Logo" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="sKrum" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="150" Foreground="{DynamicResource Gray5Brush}" />
-            
+        <TextBlock x:Name="Logo" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="sKrum" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="150" Foreground="{DynamicResource Gray5Brush}" />
     </Grid>
 </UserControl>

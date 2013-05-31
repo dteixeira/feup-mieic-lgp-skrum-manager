@@ -23,19 +23,19 @@
         <SolidColorBrush x:Key="Gray6Brush" Color="#555555" />
         <SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
         <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
-            <Setter Property="Background" Value="{DynamicResource Gray7Brush}"/>
+            <Setter Property="Background" Value="{DynamicResource Gray7Brush}" />
         </Style>
         <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{DynamicResource Gray1Brush}"/>
+            <Setter Property="Foreground" Value="{DynamicResource Gray1Brush}" />
             <Style.Triggers>
                 <DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
                     <Setter Property="Foreground" Value="{DynamicResource Gray1Brush}" />
-                </DataTrigger >
+                </DataTrigger>
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
     <Grid x:Name="LayoutRoot">
-        <Border x:Name="OuterBorder" ClipToBounds="True" BorderThickness="1" Style="{DynamicResource BorderStyle}" MouseEnter="OuterBorder_MouseEnter" MouseLeave="OuterBorder_MouseLeave"/>
-        <TextBlock x:Name="TextValue" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="0" IsHitTestVisible="False"/>
+        <Border x:Name="OuterBorder" ClipToBounds="True" BorderThickness="1" Style="{DynamicResource BorderStyle}" MouseEnter="OuterBorder_MouseEnter" MouseLeave="OuterBorder_MouseLeave" />
+        <TextBlock x:Name="TextValue" TextAlignment="Center" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="0" IsHitTestVisible="False" />
     </Grid>
 </UserControl>

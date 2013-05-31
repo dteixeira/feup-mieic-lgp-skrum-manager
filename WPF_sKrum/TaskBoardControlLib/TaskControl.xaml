@@ -7,56 +7,56 @@
 	x:Class="TaskBoardControlLib.TaskControl"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480" Margin="0">
-	<UserControl.Resources>
-		<Style x:Key="BorderStyle" TargetType="{x:Type Border}">
-			<Style.Triggers>
-				<DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
-					<Setter Property="Background" Value="{StaticResource Gray4Brush}"/>
-				</DataTrigger>
-			</Style.Triggers>
-			<Setter Property="Background" Value="{StaticResource Gray3Brush}"/>
-		</Style>
-		<Style x:Key="BorderBarStyle" TargetType="{x:Type Border}">
-			<Setter Property="Height" Value="0" />
-			<Style.Triggers>
-				<DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
-					<DataTrigger.EnterActions>
-						<BeginStoryboard>
-							<Storyboard>
-								<DoubleAnimation
+    <UserControl.Resources>
+        <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
+                    <Setter Property="Background" Value="{StaticResource Gray4Brush}" />
+                </DataTrigger>
+            </Style.Triggers>
+            <Setter Property="Background" Value="{StaticResource Gray3Brush}" />
+        </Style>
+        <Style x:Key="BorderBarStyle" TargetType="{x:Type Border}">
+            <Setter Property="Height" Value="0" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
+                    <DataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
 									Storyboard.TargetProperty="Height"
 									To="40"
 									Duration="0:0:0.3" BeginTime="0:0:0" />
-							</Storyboard>
-						</BeginStoryboard>
-					</DataTrigger.EnterActions>
-					<DataTrigger.ExitActions>
-						<BeginStoryboard>
-							<Storyboard>
-								<DoubleAnimation
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.EnterActions>
+                    <DataTrigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation
 									Storyboard.TargetProperty="Height"
 									To="0"
 									Duration="0:0:0.3" BeginTime="0:0:0" />
-							</Storyboard>
-						</BeginStoryboard>
-					</DataTrigger.ExitActions>
-				</DataTrigger>
-			</Style.Triggers>
-		</Style>
-	</UserControl.Resources>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </DataTrigger.ExitActions>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" MinHeight="125" MinWidth="200" Margin="0">
         <Grid x:Name="OuterBorder">
-        	<Grid.RowDefinitions>
-        		<RowDefinition Height="Auto"/>
-        		<RowDefinition/>
-        	</Grid.RowDefinitions>
-        	<Border BorderThickness="0" Style="{DynamicResource BorderStyle}" Margin="0" Grid.Row="1">
-        		<TextBlock TextTrimming="{Binding TaskTextTrimming}" TextWrapping="Wrap" Foreground="Black" Margin="20,10" Text="{Binding TaskDescription}" Padding="0" FontSize="16" FontFamily="Open Sans" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
-        	</Border>
-        	<Border x:Name="BorderBar" Grid.Row="0" BorderThickness="0" Background="{DynamicResource Gray7Brush}" Style="{DynamicResource BorderBarStyle}">
-        		<TextBlock Text="{Binding TaskEstimationWork}" TextAlignment="Right" TextWrapping="Wrap" Foreground="White" Margin="0,0,10,0" FontFamily="Open Sans" FontSize="18.667" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-        	</Border>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Border BorderThickness="0" Style="{DynamicResource BorderStyle}" Margin="0" Grid.Row="1">
+                <TextBlock TextTrimming="{Binding TaskTextTrimming}" TextWrapping="Wrap" Foreground="Black" Margin="20,10" Text="{Binding TaskDescription}" Padding="0" FontSize="16" FontFamily="Open Sans" ScrollViewer.VerticalScrollBarVisibility="Disabled" />
+            </Border>
+            <Border x:Name="BorderBar" Grid.Row="0" BorderThickness="0" Background="{DynamicResource Gray7Brush}" Style="{DynamicResource BorderBarStyle}">
+                <TextBlock Text="{Binding TaskEstimationWork}" TextAlignment="Right" TextWrapping="Wrap" Foreground="White" Margin="0,0,10,0" FontFamily="Open Sans" FontSize="18.667" VerticalAlignment="Center" HorizontalAlignment="Right" />
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

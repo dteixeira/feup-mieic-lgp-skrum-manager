@@ -4,41 +4,41 @@
         xmlns:PageTransitions="clr-namespace:PageTransitions;assembly=WpfPageTransitions" xmlns:local="clr-namespace:PopupFormControlLib" xmlns:GenericControlLib="clr-namespace:GenericControlLib;assembly=GenericControlLib" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Name="window" x:Class="PopupFormControlLib.FormWindow"
         Title="FormWindow" Height="600" Width="800" WindowStyle="None" WindowState="Maximized" FontFamily="Open Sans" FontSize="18.667" Background="{x:Null}" AllowsTransparency="True" Loaded="window_Loaded">
     <Window.Resources>
-    	<SolidColorBrush x:Key="BackgroundBrush" Color="#E2E2E2" />
-    	<SolidColorBrush x:Key="KinectOnBarBrush" Color="#242424" />
-    	<SolidColorBrush x:Key="KinectOffBarBrush" Color="#555555" />
-    	<SolidColorBrush x:Key="MustPriorityBrush" Color="#242424" />
-    	<SolidColorBrush x:Key="ShouldPriorityBrush" Color="#646464" />
-    	<SolidColorBrush x:Key="CouldPriorityBrush" Color="#959595" />
-    	<SolidColorBrush x:Key="WouldPriorityBrush" Color="#DADADA" />
-    	<SolidColorBrush x:Key="Gray1Brush" Color="#E2E2E2" />
-    	<SolidColorBrush x:Key="Gray2Brush" Color="#DADADA" />
-    	<SolidColorBrush x:Key="Gray3Brush" Color="#C3C3C3" />
-    	<SolidColorBrush x:Key="Gray4Brush" Color="#959595" />
-    	<SolidColorBrush x:Key="Gray5Brush" Color="#646464" />
-    	<SolidColorBrush x:Key="Gray6Brush" Color="#555555" />
-    	<SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
+        <SolidColorBrush x:Key="BackgroundBrush" Color="#E2E2E2" />
+        <SolidColorBrush x:Key="KinectOnBarBrush" Color="#242424" />
+        <SolidColorBrush x:Key="KinectOffBarBrush" Color="#555555" />
+        <SolidColorBrush x:Key="MustPriorityBrush" Color="#242424" />
+        <SolidColorBrush x:Key="ShouldPriorityBrush" Color="#646464" />
+        <SolidColorBrush x:Key="CouldPriorityBrush" Color="#959595" />
+        <SolidColorBrush x:Key="WouldPriorityBrush" Color="#DADADA" />
+        <SolidColorBrush x:Key="Gray1Brush" Color="#E2E2E2" />
+        <SolidColorBrush x:Key="Gray2Brush" Color="#DADADA" />
+        <SolidColorBrush x:Key="Gray3Brush" Color="#C3C3C3" />
+        <SolidColorBrush x:Key="Gray4Brush" Color="#959595" />
+        <SolidColorBrush x:Key="Gray5Brush" Color="#646464" />
+        <SolidColorBrush x:Key="Gray6Brush" Color="#555555" />
+        <SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
         <Style x:Key="HoverZoomStyle" TargetType="{x:Type Image}">
-        	<Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
-        	<Setter Property="RenderTransform">
-        		<Setter.Value>
-        			<TransformGroup>
-        				<ScaleTransform/>
-        				<SkewTransform/>
-        				<RotateTransform/>
-        				<TranslateTransform/>
-        			</TransformGroup>
-        		</Setter.Value>
-        	</Setter>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Setter.Value>
+            </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
                     <Setter Property="RenderTransform">
                         <Setter.Value>
                             <TransformGroup>
-                                <ScaleTransform ScaleX="1.5" ScaleY="1.5"/>
-                                <SkewTransform/>
-                                <RotateTransform/>
-                                <TranslateTransform/>
+                                <ScaleTransform ScaleX="1.5" ScaleY="1.5" />
+                                <SkewTransform />
+                                <RotateTransform />
+                                <TranslateTransform />
                             </TransformGroup>
                         </Setter.Value>
                     </Setter>
@@ -48,50 +48,50 @@
         <Style x:Key="HoverStyle" TargetType="{x:Type Grid}">
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="{DynamicResource Gray5Brush}"/>
+                    <Setter Property="Background" Value="{DynamicResource Gray5Brush}" />
                 </Trigger>
             </Style.Triggers>
-            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Background" Value="Transparent" />
         </Style>
     </Window.Resources>
-	<Grid x:Name="LayoutRoot" RenderTransformOrigin="0.5,0.5" Background="{DynamicResource BackgroundBrush}" Margin="50">
-		<Grid.RowDefinitions>
-			<RowDefinition Height="80"/>
-			<RowDefinition/>
-		</Grid.RowDefinitions>
-		<Grid x:Name="UpperBar" Margin="0" Grid.Row="0" Background="{DynamicResource KinectOffBarBrush}">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="70*" />
-				<ColumnDefinition Width="8*" />
-				<ColumnDefinition Width="8*" />
-				<ColumnDefinition Width="8*" />
-			</Grid.ColumnDefinitions>
-            <Grid Style="{StaticResource HoverStyle}" Panel.ZIndex="1" Grid.Column="4" MouseLeftButtonUp="Close_MouseLeftButtonUp" >
-                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/cruz.png"/>
+    <Grid x:Name="LayoutRoot" RenderTransformOrigin="0.5,0.5" Background="{DynamicResource BackgroundBrush}" Margin="50">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid x:Name="UpperBar" Margin="0" Grid.Row="0" Background="{DynamicResource KinectOffBarBrush}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70*" />
+                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="8*" />
+                <ColumnDefinition Width="8*" />
+            </Grid.ColumnDefinitions>
+            <Grid Style="{StaticResource HoverStyle}" Panel.ZIndex="1" Grid.Column="4" MouseLeftButtonUp="Close_MouseLeftButtonUp">
+                <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="Images/cruz.png" />
             </Grid>
-			<Label x:Name="FieldNameLabel" Content="Nome do Projecto" VerticalContentAlignment="Center" Foreground="White" FontSize="32" Padding="40,5,5,5"/>
-		</Grid>
-		<Grid x:Name="FormContent" Grid.RowSpan="2" Grid.Row="1">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="2*"/>
-				<RowDefinition/>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-			</Grid.ColumnDefinitions>
-			<Grid x:Name="LeftButtonPlaceholder" Grid.Row="1" Margin="70,30,20,40">
-				<GenericControlLib:ButtonControl x:Name="PreviousButton" ButtonText="ANTERIOR" Visibility="Hidden" MouseLeftButtonUp="PreviousButton_MouseLeftButtonUp"/>
-			</Grid>
-			<Grid x:Name="RightButtonPlaceholder" Grid.Row="1" Grid.Column="1" Margin="20,30,70,40">
-				<GenericControlLib:ButtonControl x:Name="NextButton" ButtonText="SEGUINTE" Visibility="Hidden" MouseLeftButtonUp="NextButton_MouseLeftButtonUp"/>
-				<GenericControlLib:ButtonControl x:Name="OkButton" ButtonText="CONFIRMAR" Visibility="Hidden" Panel.ZIndex="10" MouseLeftButtonUp="OkButton_MouseLeftButtonUp"/>
-			</Grid>
-			<PageTransitions:PageTransition Background="Transparent" x:Name="PageTransitionLayer" Grid.ColumnSpan="2" Margin="0" />
-		</Grid>
-		<Canvas x:Name="kinectLayer" Visibility="Visible" Panel.ZIndex="100" Margin="0" Grid.RowSpan="2">
-			<Image x:Name="RightOpen" Source="Images/right_open.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
-			<Image x:Name="RightClosed" Source="Images/right_closed.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
-		</Canvas>
-	</Grid>
+            <Label x:Name="FieldNameLabel" Content="Nome do Projecto" VerticalContentAlignment="Center" Foreground="White" FontSize="32" Padding="40,5,5,5" />
+        </Grid>
+        <Grid x:Name="FormContent" Grid.RowSpan="2" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid x:Name="LeftButtonPlaceholder" Grid.Row="1" Margin="70,30,20,40">
+                <GenericControlLib:ButtonControl x:Name="PreviousButton" ButtonText="ANTERIOR" Visibility="Hidden" MouseLeftButtonUp="PreviousButton_MouseLeftButtonUp" />
+            </Grid>
+            <Grid x:Name="RightButtonPlaceholder" Grid.Row="1" Grid.Column="1" Margin="20,30,70,40">
+                <GenericControlLib:ButtonControl x:Name="NextButton" ButtonText="SEGUINTE" Visibility="Hidden" MouseLeftButtonUp="NextButton_MouseLeftButtonUp" />
+                <GenericControlLib:ButtonControl x:Name="OkButton" ButtonText="CONFIRMAR" Visibility="Hidden" Panel.ZIndex="10" MouseLeftButtonUp="OkButton_MouseLeftButtonUp" />
+            </Grid>
+            <PageTransitions:PageTransition Background="Transparent" x:Name="PageTransitionLayer" Grid.ColumnSpan="2" Margin="0" />
+        </Grid>
+        <Canvas x:Name="kinectLayer" Visibility="Visible" Panel.ZIndex="100" Margin="0" Grid.RowSpan="2">
+            <Image x:Name="RightOpen" Source="Images/right_open.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
+            <Image x:Name="RightClosed" Source="Images/right_closed.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
+        </Canvas>
+    </Grid>
 </Window>

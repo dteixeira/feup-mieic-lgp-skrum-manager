@@ -1,32 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GenericControlLib
 {
-	/// <summary>
-	/// Interaction logic for ButtonControl.xaml
-	/// </summary>
-	public partial class ToogleButtonControl : UserControl
-	{
+    /// <summary>
+    /// Interaction logic for ButtonControl.xaml
+    /// </summary>
+    public partial class ToogleButtonControl : UserControl
+    {
         private bool selected = false;
         private int buttonFontSize = 50;
         private string buttonText = "BUTTON";
 
         public ToogleButtonControl()
-		{
-			this.InitializeComponent();
+        {
+            this.InitializeComponent();
             this.DataContext = this;
-		}
+        }
 
         public int ButtonFontSize
         {
@@ -78,5 +68,5 @@ namespace GenericControlLib
                 this.TextValue.Foreground = new SolidColorBrush(Color.FromRgb(0xE2, 0xE2, 0xE2));
             }
         }
-	}
+    }
 }

@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
+﻿using System.Windows.Controls;
 using System.Windows.Shapes;
 
 namespace GenericControlLib
@@ -19,25 +8,26 @@ namespace GenericControlLib
     /// </summary>
     public partial class LetterControl : UserControl
     {
-		private string letterText="A";
-		private int letterSize=100;
+        private string letterText = "A";
+        private int letterSize = 100;
+
         public LetterControl()
         {
             InitializeComponent();
-			this.DataContext=this;
+            this.DataContext = this;
         }
-		
-		public string LetterText
-		{
-			get{return letterText;}
-			set{letterText=value;}
-		}
-		
-		public int LetterSize
-		{
-			get{return letterSize;}
-			set{letterSize=value;}
-		}
+
+        public string LetterText
+        {
+            get { return letterText; }
+            set { letterText = value; }
+        }
+
+        public int LetterSize
+        {
+            get { return letterSize; }
+            set { letterSize = value; }
+        }
 
         public string BackgroundRectangleStyle
         {

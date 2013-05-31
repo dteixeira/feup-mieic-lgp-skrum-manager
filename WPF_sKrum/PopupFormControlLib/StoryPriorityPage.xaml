@@ -9,7 +9,7 @@
 	x:Class="PopupFormControlLib.StoryPriorityPage"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
-	<UserControl.Resources>
+    <UserControl.Resources>
         <SolidColorBrush x:Key="BackgroundBrush" Color="#E2E2E2" />
         <SolidColorBrush x:Key="KinectOnBarBrush" Color="#242424" />
         <SolidColorBrush x:Key="KinectOffBarBrush" Color="#555555" />
@@ -24,42 +24,42 @@
         <SolidColorBrush x:Key="Gray5Brush" Color="#646464" />
         <SolidColorBrush x:Key="Gray6Brush" Color="#555555" />
         <SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
-		<Style x:Key="ButtonStyle" TargetType="{x:Type Grid}">
-			<Setter Property="HorizontalAlignment" Value="Stretch"/>
-			<Setter Property="VerticalAlignment" Value="Stretch"/>
-			<Setter Property="Width" Value="Auto"/>
-			<Setter Property="Background" Value="{DynamicResource Gray7Brush}"/>
-			<Style.Triggers>
-				<Trigger Property="IsMouseOver" Value="True">
-					<Setter Property="Background" Value="{DynamicResource Gray5Brush}"/>
-				</Trigger>
-			</Style.Triggers>
-		</Style>
-	</UserControl.Resources>
-	<Grid x:Name="LayoutRoot">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition/>
-			<ColumnDefinition Width="8*"/>
-			<ColumnDefinition/>
-		</Grid.ColumnDefinitions>
-		<Grid.RowDefinitions>
-			<RowDefinition/>
-			<RowDefinition Height="8*"/>
-			<RowDefinition/>
-		</Grid.RowDefinitions>
-		<Grid Grid.Row="1" Grid.Column="1">
-			<Grid.RowDefinitions>
-				<RowDefinition/>
-				<RowDefinition/>
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition/>
-				<ColumnDefinition/>
-			</Grid.ColumnDefinitions>
-			<GenericControlLib:ToogleButtonControl x:Name="MustButton" ButtonText="MUST" MouseLeftButtonDown="MustButton_MouseLeftButtonDown"/>
-			<GenericControlLib:ToogleButtonControl x:Name="ShouldButton" ButtonText="SHOULD" MouseLeftButtonDown="ShouldButton_MouseLeftButtonDown" Grid.Column="1"/>
-			<GenericControlLib:ToogleButtonControl x:Name="CouldButton" ButtonText="COULD" MouseLeftButtonDown="CouldButton_MouseLeftButtonDown" Grid.Row="1"/>
-			<GenericControlLib:ToogleButtonControl x:Name="WouldButton" ButtonText="WOULD" MouseLeftButtonDown="WouldButton_MouseLeftButtonDown" Grid.Row="1" Grid.Column="1"/>
-		</Grid>
-	</Grid>
+        <Style x:Key="ButtonStyle" TargetType="{x:Type Grid}">
+            <Setter Property="HorizontalAlignment" Value="Stretch" />
+            <Setter Property="VerticalAlignment" Value="Stretch" />
+            <Setter Property="Width" Value="Auto" />
+            <Setter Property="Background" Value="{DynamicResource Gray7Brush}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource Gray5Brush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+            <ColumnDefinition Width="8*" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="8*" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <GenericControlLib:ToogleButtonControl x:Name="MustButton" ButtonText="MUST" MouseLeftButtonDown="MustButton_MouseLeftButtonDown" />
+            <GenericControlLib:ToogleButtonControl x:Name="ShouldButton" ButtonText="SHOULD" MouseLeftButtonDown="ShouldButton_MouseLeftButtonDown" Grid.Column="1" />
+            <GenericControlLib:ToogleButtonControl x:Name="CouldButton" ButtonText="COULD" MouseLeftButtonDown="CouldButton_MouseLeftButtonDown" Grid.Row="1" />
+            <GenericControlLib:ToogleButtonControl x:Name="WouldButton" ButtonText="WOULD" MouseLeftButtonDown="WouldButton_MouseLeftButtonDown" Grid.Row="1" Grid.Column="1" />
+        </Grid>
+    </Grid>
 </UserControl>

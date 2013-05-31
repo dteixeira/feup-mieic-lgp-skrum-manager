@@ -1,15 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace GenericControlLib
 {
@@ -99,6 +92,7 @@ namespace GenericControlLib
                 _adorner = this.Clone();
                 _adorner.Opacity = 0.6;
                 _adorner.IsHitTestVisible = false;
+
                 //_adorner.MaxWidth = 300;
                 _adorner.MaxHeight = 125;
 

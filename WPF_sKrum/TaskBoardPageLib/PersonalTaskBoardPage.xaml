@@ -9,12 +9,12 @@
       d:DesignWidth="800" d:DesignHeight="600"
       Width="auto"
       Height="auto">
-	<UserControl.Resources>
+    <UserControl.Resources>
         <Style x:Key="RectangleStyle1" TargetType="{x:Type Rectangle}">
-        	<Setter Property="Fill" Value="{DynamicResource BackgroundBrush}"/>
+            <Setter Property="Fill" Value="{DynamicResource BackgroundBrush}" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Fill" Value="{DynamicResource Gray4Brush}"/>
+                    <Setter Property="Fill" Value="{DynamicResource Gray4Brush}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -32,60 +32,60 @@
         <SolidColorBrush x:Key="Gray5Brush" Color="#646464" />
         <SolidColorBrush x:Key="Gray6Brush" Color="#555555" />
         <SolidColorBrush x:Key="Gray7Brush" Color="#242424" />
-	</UserControl.Resources>
+    </UserControl.Resources>
 
-	<Grid x:Name="GoodArea" Margin="0" Background="{StaticResource BackgroundBrush}">
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="1*" />
-			<ColumnDefinition Width="80" />
-		</Grid.ColumnDefinitions>
-		<Grid x:Name="WholeTaskboard">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="80" />
-				<RowDefinition Height="1*" />
-			</Grid.RowDefinitions>
+    <Grid x:Name="GoodArea" Margin="0" Background="{StaticResource BackgroundBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="80" />
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="WholeTaskboard">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
 
-			<Grid x:Name="TopTaskboard" Margin="0,30,0,0" Grid.Row="0">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition />
-					<ColumnDefinition />
-					<ColumnDefinition />
-					<ColumnDefinition />
-				</Grid.ColumnDefinitions>
-				<TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="USER STORIES" VerticalAlignment="Center" FontSize="26.667" FontFamily="Open Sans" />
-				<TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="TO DO" VerticalAlignment="Center" FontSize="26.667" FontFamily="Open Sans" />
-				<TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="DOING" VerticalAlignment="Center" FontSize="26.667" FontFamily="Open Sans" />
-				<TextBlock Grid.Column="3" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="DONE" VerticalAlignment="Center" FontSize="26.667" FontFamily="Open Sans" />
-			</Grid>
-			<ScrollViewer x:Name="TaskboardScroll" Margin="0" VerticalScrollBarVisibility="Hidden" Grid.Row="1">
-				<Grid x:Name="Taskboard"/>
-			</ScrollViewer>
-		</Grid>
-		<Grid x:Name="ScrollButtons" Grid.Column="1" Margin="0" Background="{StaticResource Gray4Brush}">
-			<Grid.RowDefinitions>
-				<RowDefinition Height="50*" />
-				<RowDefinition Height="50*" />
-			</Grid.RowDefinitions>
-			<Rectangle x:Name="ScrollUpButton" Margin="0" StrokeThickness="0" MouseEnter="ScrollUp_Start" MouseLeave="ScrollUp_Cancel" Style="{DynamicResource RectangleStyle1}"/>
-			<Rectangle x:Name="ScrollDownButton" Style="{DynamicResource RectangleStyle1}" Margin="0" Grid.Row="1" StrokeThickness="0" MouseEnter="ScrollDown_Start" MouseLeave="ScrollDown_Cancel"/>
-			<Image Grid.Row="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False"/>
-			<Image Grid.Row="1" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False" Margin="0,100" RenderTransformOrigin="0.5,0.5">
-				<Image.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform/>
-						<SkewTransform/>
-						<RotateTransform Angle="-180"/>
-						<TranslateTransform/>
-					</TransformGroup>
-				</Image.RenderTransform>
-			</Image>
-		</Grid>
-		<Grid x:Name="MenuLayer" Grid.ColumnSpan="2" Visibility="Hidden">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="100"/>
-				<ColumnDefinition/>
-			</Grid.ColumnDefinitions>
-			<GenericControlLib:SideMenuControl Grid.Column="0" Margin="0" VerticalAlignment="Center" FirstVisibility="Visible" FirstType="SpecialAdd" SecondVisibility="Visible" SecondType="Edit" ThirdVisibility="Visible" ThirdType="Remove" FirstMenuDropEvent="AddWork_Drop" SecondMenuDropEvent="EditTask_Drop" ThirdMenuDropEvent="DeleteTask_Drop" />
-		</Grid>
-	</Grid>
+            <Grid x:Name="TopTaskboard" Margin="0,30,0,0" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <TextBlock HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="USER STORIES" VerticalAlignment="Center" FontSize="26.667" FontFamily="Open Sans" />
+                <TextBlock Grid.Column="1" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="TO DO" VerticalAlignment="Center" FontSize="26.667" FontFamily="Open Sans" />
+                <TextBlock Grid.Column="2" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="DOING" VerticalAlignment="Center" FontSize="26.667" FontFamily="Open Sans" />
+                <TextBlock Grid.Column="3" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="DONE" VerticalAlignment="Center" FontSize="26.667" FontFamily="Open Sans" />
+            </Grid>
+            <ScrollViewer x:Name="TaskboardScroll" Margin="0" VerticalScrollBarVisibility="Hidden" Grid.Row="1">
+                <Grid x:Name="Taskboard" />
+            </ScrollViewer>
+        </Grid>
+        <Grid x:Name="ScrollButtons" Grid.Column="1" Margin="0" Background="{StaticResource Gray4Brush}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*" />
+                <RowDefinition Height="50*" />
+            </Grid.RowDefinitions>
+            <Rectangle x:Name="ScrollUpButton" Margin="0" StrokeThickness="0" MouseEnter="ScrollUp_Start" MouseLeave="ScrollUp_Cancel" Style="{DynamicResource RectangleStyle1}" />
+            <Rectangle x:Name="ScrollDownButton" Style="{DynamicResource RectangleStyle1}" Margin="0" Grid.Row="1" StrokeThickness="0" MouseEnter="ScrollDown_Start" MouseLeave="ScrollDown_Cancel" />
+            <Image Grid.Row="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False" />
+            <Image Grid.Row="1" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="80" Focusable="True" Source="Images/arrow.png" IsHitTestVisible="False" Margin="0,100" RenderTransformOrigin="0.5,0.5">
+                <Image.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform />
+                        <SkewTransform />
+                        <RotateTransform Angle="-180" />
+                        <TranslateTransform />
+                    </TransformGroup>
+                </Image.RenderTransform>
+            </Image>
+        </Grid>
+        <Grid x:Name="MenuLayer" Grid.ColumnSpan="2" Visibility="Hidden">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <GenericControlLib:SideMenuControl Grid.Column="0" Margin="0" VerticalAlignment="Center" FirstVisibility="Visible" FirstType="SpecialAdd" SecondVisibility="Visible" SecondType="Edit" ThirdVisibility="Visible" ThirdType="Remove" FirstMenuDropEvent="AddWork_Drop" SecondMenuDropEvent="EditTask_Drop" ThirdMenuDropEvent="DeleteTask_Drop" />
+        </Grid>
+    </Grid>
 </UserControl>

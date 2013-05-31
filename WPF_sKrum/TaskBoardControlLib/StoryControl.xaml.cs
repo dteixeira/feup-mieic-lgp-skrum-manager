@@ -1,23 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TaskBoardControlLib
 {
-	/// <summary>
-	/// Interaction logic for StoryControl.xaml
-	/// </summary>
-	public partial class StoryControl : UserControl
-	{
+    /// <summary>
+    /// Interaction logic for StoryControl.xaml
+    /// </summary>
+    public partial class StoryControl : UserControl
+    {
         private Point startpoint;
         private bool allow_drag = false;
         private bool started_drag = false;
@@ -26,18 +19,17 @@ namespace TaskBoardControlLib
         private Canvas _adornerLayer;
         private TextTrimming storyTextTrimming = TextTrimming.None;
 
-
         private string storyDescription;
         private string storyName;
         private string storyPriority;
         private string storyEstimation;
         private int storyNumber;
 
-		public StoryControl()
-		{
-			this.InitializeComponent();
+        public StoryControl()
+        {
+            this.InitializeComponent();
             this.DataContext = this;
-		}
+        }
 
         public string StoryDescription
         {
@@ -190,5 +182,5 @@ namespace TaskBoardControlLib
             p.Height = this.Height;
             return p;
         }
-	}
+    }
 }

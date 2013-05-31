@@ -1,29 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows.Controls;
 
 namespace PopupFormControlLib
 {
-	/// <summary>
-	/// Interaction logic for StoryPriorityPage.xaml
-	/// </summary>
-	public partial class StoryPriorityPage : UserControl, IFormPage
-	{
-		public StoryPriorityPage()
-		{
-			this.InitializeComponent();
+    /// <summary>
+    /// Interaction logic for StoryPriorityPage.xaml
+    /// </summary>
+    public partial class StoryPriorityPage : UserControl, IFormPage
+    {
+        public StoryPriorityPage()
+        {
+            this.InitializeComponent();
             this.MustButton.Selected = true;
             this.PageValue = ServiceLib.DataService.StoryPriority.Must;
-		}
+        }
 
         public string PageName { get; set; }
 
@@ -40,12 +29,15 @@ namespace PopupFormControlLib
                     case ServiceLib.DataService.StoryPriority.Could:
                         this.CouldButton_MouseLeftButtonDown(null, null);
                         break;
+
                     case ServiceLib.DataService.StoryPriority.Must:
                         this.MustButton_MouseLeftButtonDown(null, null);
                         break;
+
                     case ServiceLib.DataService.StoryPriority.Should:
                         this.ShouldButton_MouseLeftButtonDown(null, null);
                         break;
+
                     case ServiceLib.DataService.StoryPriority.Wont:
                         this.WouldButton_MouseLeftButtonDown(null, null);
                         break;
@@ -88,6 +80,5 @@ namespace PopupFormControlLib
             this.WouldButton.Selected = true;
             this.PageValue = ServiceLib.DataService.StoryPriority.Wont;
         }
-
     }
 }

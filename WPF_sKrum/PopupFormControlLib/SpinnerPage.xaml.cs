@@ -1,34 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Linq;
+﻿using System.Windows.Controls;
 
 namespace PopupFormControlLib
 {
-	/// <summary>
-	/// Interaction logic for SpinnerPage.xaml
-	/// </summary>
-	public partial class SpinnerPage : UserControl, IFormPage
-	{
-		public SpinnerPage()
-		{
-			this.InitializeComponent();
+    /// <summary>
+    /// Interaction logic for SpinnerPage.xaml
+    /// </summary>
+    public partial class SpinnerPage : UserControl, IFormPage
+    {
+        public SpinnerPage()
+        {
+            this.InitializeComponent();
             this.PageValue = 0.0;
             this.NumericSpinner.SpinnerChangedEvent += new GenericControlLib.NumericSpinnerControl.SpinnerChangedHandler(this.SpinnerChangeHandler);
-		}
+        }
 
         public double Min
         {
-            set { 
+            set
+            {
                 this.NumericSpinner.Min = value;
                 this.PageValue = value;
             }
@@ -63,5 +52,5 @@ namespace PopupFormControlLib
         {
             this.PageValue = value;
         }
-	}
+    }
 }

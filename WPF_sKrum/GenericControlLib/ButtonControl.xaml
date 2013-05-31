@@ -7,32 +7,32 @@
 	x:Class="GenericControlLib.ButtonControl"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480">
-	<UserControl.Resources>
-		<Style x:Key="BorderStyle" TargetType="{x:Type Border}">
-			<Setter Property="Background" Value="{DynamicResource Gray7Brush}"/>
-			<Style.Triggers>
-				<Trigger Property="IsMouseOver" Value="True">
-					<Setter Property="Background" Value="{DynamicResource Gray1Brush}"/>
-				</Trigger>
-			</Style.Triggers>
-		</Style>
-		<Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
-			<Setter Property="Foreground" Value="{DynamicResource Gray1Brush}"/>
-			<Style.Triggers>
-				<DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
-					<Setter Property="Foreground" Value="{DynamicResource Gray7Brush}" />
-				</DataTrigger >
-			</Style.Triggers>
-		</Style>
-	</UserControl.Resources>
-	<Grid x:Name="LayoutRoot">
-		<Border x:Name="OuterBorder" ClipToBounds="True" BorderThickness="1" Style="{DynamicResource BorderStyle}">
-			<Border x:Name="ShadowBorder" Background="Transparent" BorderBrush="Black" BorderThickness="10" Margin="-15,-12,-15,-20">
-				<Border.Effect>
-					<DropShadowEffect BlurRadius="15" Direction="300" ShadowDepth="0"/>
-				</Border.Effect>
-			</Border>
-		</Border>
-		<TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="20,5,20,5" IsHitTestVisible="False"/>
-	</Grid>
+    <UserControl.Resources>
+        <Style x:Key="BorderStyle" TargetType="{x:Type Border}">
+            <Setter Property="Background" Value="{DynamicResource Gray7Brush}" />
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource Gray1Brush}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style x:Key="TextBlockStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource Gray1Brush}" />
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=OuterBorder, Path=IsMouseOver}" Value="True">
+                    <Setter Property="Foreground" Value="{DynamicResource Gray7Brush}" />
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot">
+        <Border x:Name="OuterBorder" ClipToBounds="True" BorderThickness="1" Style="{DynamicResource BorderStyle}">
+            <Border x:Name="ShadowBorder" Background="Transparent" BorderBrush="Black" BorderThickness="10" Margin="-15,-12,-15,-20">
+                <Border.Effect>
+                    <DropShadowEffect BlurRadius="15" Direction="300" ShadowDepth="0" />
+                </Border.Effect>
+            </Border>
+        </Border>
+        <TextBlock TextAlignment="Center" TextWrapping="Wrap" Text="{Binding ButtonText}" FontSize="{Binding ButtonFontSize}" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{DynamicResource TextBlockStyle}" FontFamily="Open Sans" Margin="20,5,20,5" IsHitTestVisible="False" />
+    </Grid>
 </UserControl>

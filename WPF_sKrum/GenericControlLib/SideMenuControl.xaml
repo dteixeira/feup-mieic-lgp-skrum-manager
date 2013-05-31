@@ -1,39 +1,39 @@
 ﻿<UserControl x:Class="GenericControlLib.SideMenuControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <Style x:Key="RectangleStyle" TargetType="{x:Type Rectangle}">
-            <Setter Property="Fill" Value="Transparent"/>
+            <Setter Property="Fill" Value="Transparent" />
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Fill" Value="{DynamicResource Gray4Brush}"/>
+                    <Setter Property="Fill" Value="{DynamicResource Gray4Brush}" />
                 </Trigger>
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    
+
     <Grid Background="{DynamicResource Gray7Brush}">
-    	<Grid.RowDefinitions>
-    		<RowDefinition Height="Auto"/>
-    		<RowDefinition Height="Auto"/>
-    		<RowDefinition Height="Auto"/>
-    		<RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Rectangle x:Name="FirstIconBack" Style="{DynamicResource RectangleStyle}" Drop="FirstIconBack_Drop" MouseLeftButtonDown="FirstIconBack_Click" />
-        <Rectangle x:Name="SecondIconBack" Grid.Row="1" Style="{DynamicResource RectangleStyle}" Drop="SecondIconBack_Drop" MouseLeftButtonDown="SecondIconBack_Click"/>
-        <Rectangle x:Name="ThirdIconBack" Grid.Row="2" Style="{DynamicResource RectangleStyle}" Drop="ThirdIconBack_Drop" MouseLeftButtonDown="ThirdIconBack_Click"/>
-        <Rectangle x:Name="FourthIconBack" Grid.Row="3" Style="{DynamicResource RectangleStyle}" Drop="FourthIconBack_Drop" MouseLeftButtonDown="FourthIconBack_Click"/>
-        <Rectangle x:Name="FifthIconBack" Grid.Row="4" Style="{DynamicResource RectangleStyle}" Drop="FifthIconBack_Drop" MouseLeftButtonDown="FifthIconBack_Click"/>
+        <Rectangle x:Name="SecondIconBack" Grid.Row="1" Style="{DynamicResource RectangleStyle}" Drop="SecondIconBack_Drop" MouseLeftButtonDown="SecondIconBack_Click" />
+        <Rectangle x:Name="ThirdIconBack" Grid.Row="2" Style="{DynamicResource RectangleStyle}" Drop="ThirdIconBack_Drop" MouseLeftButtonDown="ThirdIconBack_Click" />
+        <Rectangle x:Name="FourthIconBack" Grid.Row="3" Style="{DynamicResource RectangleStyle}" Drop="FourthIconBack_Drop" MouseLeftButtonDown="FourthIconBack_Click" />
+        <Rectangle x:Name="FifthIconBack" Grid.Row="4" Style="{DynamicResource RectangleStyle}" Drop="FifthIconBack_Drop" MouseLeftButtonDown="FifthIconBack_Click" />
 
-        <Image x:Name="FirstIconImage" Visibility="{Binding FirstVisibility}" Source="{Binding FirstIcon}" IsHitTestVisible="False" Margin="10"/>
-        <Image x:Name="SecondIconImage" Grid.Row="1" Visibility="{Binding SecondVisibility}"  Source="{Binding SecondIcon}" IsHitTestVisible="False" Margin="10"/>
-        <Image x:Name="ThirdIconImage" Grid.Row="2" Visibility="{Binding ThirdVisibility}"  Source="{Binding ThirdIcon}" IsHitTestVisible="False" Margin="10"/>
-        <Image x:Name="FourthIconImage" Grid.Row="3" Visibility="{Binding FourthVisibility}"  Source="{Binding FourthIcon}" IsHitTestVisible="False" Margin="10"/>
-        <Image x:Name="FifthIconImage" Grid.Row="4" Visibility="{Binding FifthVisibility}"  Source="{Binding FifthIcon}" IsHitTestVisible="False" Margin="10"/>
+        <Image x:Name="FirstIconImage" Visibility="{Binding FirstVisibility}" Source="{Binding FirstIcon}" IsHitTestVisible="False" Margin="10" />
+        <Image x:Name="SecondIconImage" Grid.Row="1" Visibility="{Binding SecondVisibility}"  Source="{Binding SecondIcon}" IsHitTestVisible="False" Margin="10" />
+        <Image x:Name="ThirdIconImage" Grid.Row="2" Visibility="{Binding ThirdVisibility}"  Source="{Binding ThirdIcon}" IsHitTestVisible="False" Margin="10" />
+        <Image x:Name="FourthIconImage" Grid.Row="3" Visibility="{Binding FourthVisibility}"  Source="{Binding FourthIcon}" IsHitTestVisible="False" Margin="10" />
+        <Image x:Name="FifthIconImage" Grid.Row="4" Visibility="{Binding FifthVisibility}"  Source="{Binding FifthIcon}" IsHitTestVisible="False" Margin="10" />
     </Grid>
 </UserControl>

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using ServiceLib.DataService;
+﻿using ServiceLib.DataService;
+using System.ComponentModel;
 
 namespace DatabasePopulator
 {

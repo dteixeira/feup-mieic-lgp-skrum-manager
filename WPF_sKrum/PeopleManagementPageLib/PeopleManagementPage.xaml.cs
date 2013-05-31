@@ -4,16 +4,10 @@ using SharedTypes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace PeopleManagementPageLib
@@ -24,6 +18,7 @@ namespace PeopleManagementPageLib
     public partial class PeopleManagementPage : UserControl, ITargetPage
     {
         private enum ScrollSelected { Letters, Content };
+
         private ScrollSelected currentScroll;
         private float scrollValueContent = 0.0f;
         private float scrollValueLetters = 0.0f;
@@ -33,11 +28,13 @@ namespace PeopleManagementPageLib
 
         //Timers for the content/letter scroll
         private DispatcherTimer countdownTimerDelayScrollLeft;
+
         private DispatcherTimer countdownTimerDelayScrollRight;
         private DispatcherTimer countdownTimerScrollLeft;
         private DispatcherTimer countdownTimerScrollRight;
 
         public ApplicationPages PageType { get; set; }
+
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
 
         public PeopleManagementPage(object context)
@@ -136,7 +133,6 @@ namespace PeopleManagementPageLib
             // Fill with people.
             this.currentLetter = letter.LetterText;
             FillPersons(dic[letter.LetterText]);
-
         }
 
         /// <summary>
@@ -197,7 +193,6 @@ namespace PeopleManagementPageLib
             MessageBox.Show(person.UserName);
         }
 
-
         private void ScrollActionDelayLeft(object sender, EventArgs e)
         {
             this.countdownTimerScrollLeft.Start();
@@ -219,6 +214,7 @@ namespace PeopleManagementPageLib
                     if (scrollValueLetters < 0.0f) scrollValueLetters = 0.0f;
                     LetterScroll.ScrollToHorizontalOffset(scrollValueLetters);
                     break;
+
                 default:
                     scrollValueContent -= 10.0f;
                     if (scrollValueContent < 0.0f) scrollValueContent = 0.0f;
@@ -229,7 +225,6 @@ namespace PeopleManagementPageLib
 
         private void ScrollActionRight(object sender, EventArgs e)
         {
-
             switch (currentScroll)
             {
                 case ScrollSelected.Letters:
@@ -237,13 +232,13 @@ namespace PeopleManagementPageLib
                     if (scrollValueLetters > LetterScroll.ScrollableWidth) scrollValueLetters = (float)LetterScroll.ScrollableWidth;
                     LetterScroll.ScrollToHorizontalOffset(scrollValueLetters);
                     break;
+
                 default:
                     scrollValueContent += 10.0f;
                     if (scrollValueContent > ContentScroll.ScrollableWidth) scrollValueContent = (float)ContentScroll.ScrollableWidth;
                     ContentScroll.ScrollToHorizontalOffset(scrollValueContent);
                     break;
             }
-
         }
 
         private void ScrollLeft_Start(object sender, MouseEventArgs e)

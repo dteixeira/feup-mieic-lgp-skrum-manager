@@ -3,12 +3,9 @@ using Kinect.Gestures.Swipes;
 using Kinect.Gestures.Waves;
 using Kinect.Sensor;
 using Microsoft.Kinect;
-using System.Collections.Generic;
-using ServiceLib.NotificationService;
 using ServiceLib.DataService;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Windows;
+using ServiceLib.NotificationService;
+using System.Collections.Generic;
 
 namespace SharedTypes
 {
@@ -44,18 +41,31 @@ namespace SharedTypes
         public event DataModificationHandler DataChangedEvent;
 
         private Project currentProject = null;
+
         public KinectSensorController KinectSensor { get; private set; }
+
         private NotificationServiceClient Notifications { get; set; }
+
         private DataServiceClient Data { get; set; }
+
         public int TrackingID { get; set; }
+
         public bool Gripping { get; set; }
+
         public ITargetPage CurrentPage { get; set; }
+
         public Skeleton[] Skeletons { get; set; }
+
         public List<Project> Projects { get; private set; }
+
         public List<Person> Team { get; private set; }
+
         public List<Person> People { get; private set; }
+
         public ApplicationWindow ApplicationWindow { get; set; }
+
         public bool AdminLogin { get; set; }
+
         public Project CurrentProject
         {
             get { return this.currentProject; }
@@ -137,9 +147,11 @@ namespace SharedTypes
                 case NotificationType.GlobalPersonModification:
                     this.People = this.Data.GetAllPeople();
                     break;
+
                 case NotificationType.GlobalProjectModification:
                     this.Projects = this.Data.GetAllProjects();
                     break;
+
                 case NotificationType.ProjectModification:
                     if (currentProject != null)
                     {

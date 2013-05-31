@@ -8,1686 +8,2022 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceLib.DataService {
-    using System.Runtime.Serialization;
-    using System;
-    
-    
+namespace ServiceLib.DataService
+{
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Person", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    [System.Runtime.Serialization.DataContractAttribute(Name = "Person", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
     [System.SerializableAttribute()]
-    public partial class Person : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
+    public partial class Person : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
+    {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string JobDescriptionField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PersonIDField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PhotoURLField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<ServiceLib.DataService.Role> RolesField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<ServiceLib.DataService.Task> TasksField;
-        
+
         [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
                 return this.extensionDataField;
             }
-            set {
+            set
+            {
                 this.extensionDataField = value;
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Email {
-            get {
+        public string Email
+        {
+            get
+            {
                 return this.EmailField;
             }
-            set {
-                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.EmailField, value) != true))
+                {
                     this.EmailField = value;
                     this.RaisePropertyChanged("Email");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string JobDescription {
-            get {
+        public string JobDescription
+        {
+            get
+            {
                 return this.JobDescriptionField;
             }
-            set {
-                if ((object.ReferenceEquals(this.JobDescriptionField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.JobDescriptionField, value) != true))
+                {
                     this.JobDescriptionField = value;
                     this.RaisePropertyChanged("JobDescription");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
+        public string Name
+        {
+            get
+            {
                 return this.NameField;
             }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.NameField, value) != true))
+                {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Password {
-            get {
+        public string Password
+        {
+            get
+            {
                 return this.PasswordField;
             }
-            set {
-                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true))
+                {
                     this.PasswordField = value;
                     this.RaisePropertyChanged("Password");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int PersonID {
-            get {
+        public int PersonID
+        {
+            get
+            {
                 return this.PersonIDField;
             }
-            set {
-                if ((this.PersonIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.PersonIDField.Equals(value) != true))
+                {
                     this.PersonIDField = value;
                     this.RaisePropertyChanged("PersonID");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string PhotoURL {
-            get {
+        public string PhotoURL
+        {
+            get
+            {
                 return this.PhotoURLField;
             }
-            set {
-                if ((object.ReferenceEquals(this.PhotoURLField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.PhotoURLField, value) != true))
+                {
                     this.PhotoURLField = value;
                     this.RaisePropertyChanged("PhotoURL");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<ServiceLib.DataService.Role> Roles {
-            get {
+        public System.Collections.Generic.List<ServiceLib.DataService.Role> Roles
+        {
+            get
+            {
                 return this.RolesField;
             }
-            set {
-                if ((object.ReferenceEquals(this.RolesField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.RolesField, value) != true))
+                {
                     this.RolesField = value;
                     this.RaisePropertyChanged("Roles");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<ServiceLib.DataService.Task> Tasks {
-            get {
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> Tasks
+        {
+            get
+            {
                 return this.TasksField;
             }
-            set {
-                if ((object.ReferenceEquals(this.TasksField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.TasksField, value) != true))
+                {
                     this.TasksField = value;
                     this.RaisePropertyChanged("Tasks");
                 }
             }
         }
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
+            if ((propertyChanged != null))
+            {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Role", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    [System.Runtime.Serialization.DataContractAttribute(Name = "Role", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
     [System.SerializableAttribute()]
-    public partial class Role : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
+    public partial class Role : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
+    {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double AssignedTimeField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PersonIDField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ProjectIDField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private ServiceLib.DataService.RoleDescription RoleDescriptionField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int RoleIDField;
-        
+
         [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
                 return this.extensionDataField;
             }
-            set {
+            set
+            {
                 this.extensionDataField = value;
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double AssignedTime {
-            get {
+        public double AssignedTime
+        {
+            get
+            {
                 return this.AssignedTimeField;
             }
-            set {
-                if ((this.AssignedTimeField.Equals(value) != true)) {
+            set
+            {
+                if ((this.AssignedTimeField.Equals(value) != true))
+                {
                     this.AssignedTimeField = value;
                     this.RaisePropertyChanged("AssignedTime");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Password {
-            get {
+        public string Password
+        {
+            get
+            {
                 return this.PasswordField;
             }
-            set {
-                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true))
+                {
                     this.PasswordField = value;
                     this.RaisePropertyChanged("Password");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int PersonID {
-            get {
+        public int PersonID
+        {
+            get
+            {
                 return this.PersonIDField;
             }
-            set {
-                if ((this.PersonIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.PersonIDField.Equals(value) != true))
+                {
                     this.PersonIDField = value;
                     this.RaisePropertyChanged("PersonID");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ProjectID {
-            get {
+        public int ProjectID
+        {
+            get
+            {
                 return this.ProjectIDField;
             }
-            set {
-                if ((this.ProjectIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.ProjectIDField.Equals(value) != true))
+                {
                     this.ProjectIDField = value;
                     this.RaisePropertyChanged("ProjectID");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceLib.DataService.RoleDescription RoleDescription {
-            get {
+        public ServiceLib.DataService.RoleDescription RoleDescription
+        {
+            get
+            {
                 return this.RoleDescriptionField;
             }
-            set {
-                if ((this.RoleDescriptionField.Equals(value) != true)) {
+            set
+            {
+                if ((this.RoleDescriptionField.Equals(value) != true))
+                {
                     this.RoleDescriptionField = value;
                     this.RaisePropertyChanged("RoleDescription");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int RoleID {
-            get {
+        public int RoleID
+        {
+            get
+            {
                 return this.RoleIDField;
             }
-            set {
-                if ((this.RoleIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.RoleIDField.Equals(value) != true))
+                {
                     this.RoleIDField = value;
                     this.RaisePropertyChanged("RoleID");
                 }
             }
         }
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
+            if ((propertyChanged != null))
+            {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Task", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    [System.Runtime.Serialization.DataContractAttribute(Name = "Task", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
     [System.SerializableAttribute()]
-    public partial class Task : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
+    public partial class Task : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
+    {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime CreationDateField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DescriptionField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int EstimationField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<ServiceLib.DataService.PersonTask> PersonTasksField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private ServiceLib.DataService.TaskState StateField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StoryIDField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int TaskIDField;
-        
+
         [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
                 return this.extensionDataField;
             }
-            set {
+            set
+            {
                 this.extensionDataField = value;
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime CreationDate {
-            get {
+        public System.DateTime CreationDate
+        {
+            get
+            {
                 return this.CreationDateField;
             }
-            set {
-                if ((this.CreationDateField.Equals(value) != true)) {
+            set
+            {
+                if ((this.CreationDateField.Equals(value) != true))
+                {
                     this.CreationDateField = value;
                     this.RaisePropertyChanged("CreationDate");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description {
-            get {
+        public string Description
+        {
+            get
+            {
                 return this.DescriptionField;
             }
-            set {
-                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true))
+                {
                     this.DescriptionField = value;
                     this.RaisePropertyChanged("Description");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Estimation {
-            get {
+        public int Estimation
+        {
+            get
+            {
                 return this.EstimationField;
             }
-            set {
-                if ((this.EstimationField.Equals(value) != true)) {
+            set
+            {
+                if ((this.EstimationField.Equals(value) != true))
+                {
                     this.EstimationField = value;
                     this.RaisePropertyChanged("Estimation");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<ServiceLib.DataService.PersonTask> PersonTasks {
-            get {
+        public System.Collections.Generic.List<ServiceLib.DataService.PersonTask> PersonTasks
+        {
+            get
+            {
                 return this.PersonTasksField;
             }
-            set {
-                if ((object.ReferenceEquals(this.PersonTasksField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.PersonTasksField, value) != true))
+                {
                     this.PersonTasksField = value;
                     this.RaisePropertyChanged("PersonTasks");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceLib.DataService.TaskState State {
-            get {
+        public ServiceLib.DataService.TaskState State
+        {
+            get
+            {
                 return this.StateField;
             }
-            set {
-                if ((this.StateField.Equals(value) != true)) {
+            set
+            {
+                if ((this.StateField.Equals(value) != true))
+                {
                     this.StateField = value;
                     this.RaisePropertyChanged("State");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int StoryID {
-            get {
+        public int StoryID
+        {
+            get
+            {
                 return this.StoryIDField;
             }
-            set {
-                if ((this.StoryIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.StoryIDField.Equals(value) != true))
+                {
                     this.StoryIDField = value;
                     this.RaisePropertyChanged("StoryID");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int TaskID {
-            get {
+        public int TaskID
+        {
+            get
+            {
                 return this.TaskIDField;
             }
-            set {
-                if ((this.TaskIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.TaskIDField.Equals(value) != true))
+                {
                     this.TaskIDField = value;
                     this.RaisePropertyChanged("TaskID");
                 }
             }
         }
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
+            if ((propertyChanged != null))
+            {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="RoleDescription", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
-    public enum RoleDescription : int {
-        
+    [System.Runtime.Serialization.DataContractAttribute(Name = "RoleDescription", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    public enum RoleDescription : int
+    {
         [System.Runtime.Serialization.EnumMemberAttribute()]
         ProjectManager = 0,
-        
+
         [System.Runtime.Serialization.EnumMemberAttribute()]
         ScrumMaster = 1,
-        
+
         [System.Runtime.Serialization.EnumMemberAttribute()]
         ProductOwner = 2,
-        
+
         [System.Runtime.Serialization.EnumMemberAttribute()]
         TeamMember = 3,
     }
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="PersonTask", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    [System.Runtime.Serialization.DataContractAttribute(Name = "PersonTask", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
     [System.SerializableAttribute()]
-    public partial class PersonTask : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
+    public partial class PersonTask : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
+    {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime CreationDateField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PersonIDField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double SpentTimeField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int TaskIDField;
-        
+
         [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
                 return this.extensionDataField;
             }
-            set {
+            set
+            {
                 this.extensionDataField = value;
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime CreationDate {
-            get {
+        public System.DateTime CreationDate
+        {
+            get
+            {
                 return this.CreationDateField;
             }
-            set {
-                if ((this.CreationDateField.Equals(value) != true)) {
+            set
+            {
+                if ((this.CreationDateField.Equals(value) != true))
+                {
                     this.CreationDateField = value;
                     this.RaisePropertyChanged("CreationDate");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int PersonID {
-            get {
+        public int PersonID
+        {
+            get
+            {
                 return this.PersonIDField;
             }
-            set {
-                if ((this.PersonIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.PersonIDField.Equals(value) != true))
+                {
                     this.PersonIDField = value;
                     this.RaisePropertyChanged("PersonID");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public double SpentTime {
-            get {
+        public double SpentTime
+        {
+            get
+            {
                 return this.SpentTimeField;
             }
-            set {
-                if ((this.SpentTimeField.Equals(value) != true)) {
+            set
+            {
+                if ((this.SpentTimeField.Equals(value) != true))
+                {
                     this.SpentTimeField = value;
                     this.RaisePropertyChanged("SpentTime");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int TaskID {
-            get {
+        public int TaskID
+        {
+            get
+            {
                 return this.TaskIDField;
             }
-            set {
-                if ((this.TaskIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.TaskIDField.Equals(value) != true))
+                {
                     this.TaskIDField = value;
                     this.RaisePropertyChanged("TaskID");
                 }
             }
         }
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
+            if ((propertyChanged != null))
+            {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="TaskState", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
-    public enum TaskState : int {
-        
+    [System.Runtime.Serialization.DataContractAttribute(Name = "TaskState", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    public enum TaskState : int
+    {
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Waiting = 0,
-        
+
         [System.Runtime.Serialization.EnumMemberAttribute()]
         InProgress = 1,
-        
+
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Testing = 2,
-        
+
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Completed = 3,
     }
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Project", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    [System.Runtime.Serialization.DataContractAttribute(Name = "Project", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
     [System.SerializableAttribute()]
-    public partial class Project : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
+    public partial class Project : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
+    {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int AlertLimitField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<ServiceLib.DataService.Meeting> MeetingsField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PasswordField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ProjectIDField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int SpeedField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int SprintDurationField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<ServiceLib.DataService.Sprint> SprintsField;
-        
+
         [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
                 return this.extensionDataField;
             }
-            set {
+            set
+            {
                 this.extensionDataField = value;
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int AlertLimit {
-            get {
+        public int AlertLimit
+        {
+            get
+            {
                 return this.AlertLimitField;
             }
-            set {
-                if ((this.AlertLimitField.Equals(value) != true)) {
+            set
+            {
+                if ((this.AlertLimitField.Equals(value) != true))
+                {
                     this.AlertLimitField = value;
                     this.RaisePropertyChanged("AlertLimit");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<ServiceLib.DataService.Meeting> Meetings {
-            get {
+        public System.Collections.Generic.List<ServiceLib.DataService.Meeting> Meetings
+        {
+            get
+            {
                 return this.MeetingsField;
             }
-            set {
-                if ((object.ReferenceEquals(this.MeetingsField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.MeetingsField, value) != true))
+                {
                     this.MeetingsField = value;
                     this.RaisePropertyChanged("Meetings");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Name {
-            get {
+        public string Name
+        {
+            get
+            {
                 return this.NameField;
             }
-            set {
-                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.NameField, value) != true))
+                {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Password {
-            get {
+        public string Password
+        {
+            get
+            {
                 return this.PasswordField;
             }
-            set {
-                if ((object.ReferenceEquals(this.PasswordField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.PasswordField, value) != true))
+                {
                     this.PasswordField = value;
                     this.RaisePropertyChanged("Password");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ProjectID {
-            get {
+        public int ProjectID
+        {
+            get
+            {
                 return this.ProjectIDField;
             }
-            set {
-                if ((this.ProjectIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.ProjectIDField.Equals(value) != true))
+                {
                     this.ProjectIDField = value;
                     this.RaisePropertyChanged("ProjectID");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Speed {
-            get {
+        public int Speed
+        {
+            get
+            {
                 return this.SpeedField;
             }
-            set {
-                if ((this.SpeedField.Equals(value) != true)) {
+            set
+            {
+                if ((this.SpeedField.Equals(value) != true))
+                {
                     this.SpeedField = value;
                     this.RaisePropertyChanged("Speed");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SprintDuration {
-            get {
+        public int SprintDuration
+        {
+            get
+            {
                 return this.SprintDurationField;
             }
-            set {
-                if ((this.SprintDurationField.Equals(value) != true)) {
+            set
+            {
+                if ((this.SprintDurationField.Equals(value) != true))
+                {
                     this.SprintDurationField = value;
                     this.RaisePropertyChanged("SprintDuration");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<ServiceLib.DataService.Sprint> Sprints {
-            get {
+        public System.Collections.Generic.List<ServiceLib.DataService.Sprint> Sprints
+        {
+            get
+            {
                 return this.SprintsField;
             }
-            set {
-                if ((object.ReferenceEquals(this.SprintsField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.SprintsField, value) != true))
+                {
                     this.SprintsField = value;
                     this.RaisePropertyChanged("Sprints");
                 }
             }
         }
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
+            if ((propertyChanged != null))
+            {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Meeting", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    [System.Runtime.Serialization.DataContractAttribute(Name = "Meeting", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
     [System.SerializableAttribute()]
-    public partial class Meeting : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
+    public partial class Meeting : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
+    {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime DateField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int MeetingIDField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NotesField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int NumberField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ProjectIDField;
-        
+
         [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
                 return this.extensionDataField;
             }
-            set {
+            set
+            {
                 this.extensionDataField = value;
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime Date {
-            get {
+        public System.DateTime Date
+        {
+            get
+            {
                 return this.DateField;
             }
-            set {
-                if ((this.DateField.Equals(value) != true)) {
+            set
+            {
+                if ((this.DateField.Equals(value) != true))
+                {
                     this.DateField = value;
                     this.RaisePropertyChanged("Date");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int MeetingID {
-            get {
+        public int MeetingID
+        {
+            get
+            {
                 return this.MeetingIDField;
             }
-            set {
-                if ((this.MeetingIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.MeetingIDField.Equals(value) != true))
+                {
                     this.MeetingIDField = value;
                     this.RaisePropertyChanged("MeetingID");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Notes {
-            get {
+        public string Notes
+        {
+            get
+            {
                 return this.NotesField;
             }
-            set {
-                if ((object.ReferenceEquals(this.NotesField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.NotesField, value) != true))
+                {
                     this.NotesField = value;
                     this.RaisePropertyChanged("Notes");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Number {
-            get {
+        public int Number
+        {
+            get
+            {
                 return this.NumberField;
             }
-            set {
-                if ((this.NumberField.Equals(value) != true)) {
+            set
+            {
+                if ((this.NumberField.Equals(value) != true))
+                {
                     this.NumberField = value;
                     this.RaisePropertyChanged("Number");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ProjectID {
-            get {
+        public int ProjectID
+        {
+            get
+            {
                 return this.ProjectIDField;
             }
-            set {
-                if ((this.ProjectIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.ProjectIDField.Equals(value) != true))
+                {
                     this.ProjectIDField = value;
                     this.RaisePropertyChanged("ProjectID");
                 }
             }
         }
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
+            if ((propertyChanged != null))
+            {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Sprint", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    [System.Runtime.Serialization.DataContractAttribute(Name = "Sprint", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
     [System.SerializableAttribute()]
-    public partial class Sprint : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
+    public partial class Sprint : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
+    {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime BeginDateField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool ClosedField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<System.DateTime> EndDateField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int NumberField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ProjectIDField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int SprintIDField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<ServiceLib.DataService.Story> StoriesField;
-        
+
         [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
                 return this.extensionDataField;
             }
-            set {
+            set
+            {
                 this.extensionDataField = value;
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime BeginDate {
-            get {
+        public System.DateTime BeginDate
+        {
+            get
+            {
                 return this.BeginDateField;
             }
-            set {
-                if ((this.BeginDateField.Equals(value) != true)) {
+            set
+            {
+                if ((this.BeginDateField.Equals(value) != true))
+                {
                     this.BeginDateField = value;
                     this.RaisePropertyChanged("BeginDate");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Closed {
-            get {
+        public bool Closed
+        {
+            get
+            {
                 return this.ClosedField;
             }
-            set {
-                if ((this.ClosedField.Equals(value) != true)) {
+            set
+            {
+                if ((this.ClosedField.Equals(value) != true))
+                {
                     this.ClosedField = value;
                     this.RaisePropertyChanged("Closed");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<System.DateTime> EndDate {
-            get {
+        public System.Nullable<System.DateTime> EndDate
+        {
+            get
+            {
                 return this.EndDateField;
             }
-            set {
-                if ((this.EndDateField.Equals(value) != true)) {
+            set
+            {
+                if ((this.EndDateField.Equals(value) != true))
+                {
                     this.EndDateField = value;
                     this.RaisePropertyChanged("EndDate");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Number {
-            get {
+        public int Number
+        {
+            get
+            {
                 return this.NumberField;
             }
-            set {
-                if ((this.NumberField.Equals(value) != true)) {
+            set
+            {
+                if ((this.NumberField.Equals(value) != true))
+                {
                     this.NumberField = value;
                     this.RaisePropertyChanged("Number");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ProjectID {
-            get {
+        public int ProjectID
+        {
+            get
+            {
                 return this.ProjectIDField;
             }
-            set {
-                if ((this.ProjectIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.ProjectIDField.Equals(value) != true))
+                {
                     this.ProjectIDField = value;
                     this.RaisePropertyChanged("ProjectID");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SprintID {
-            get {
+        public int SprintID
+        {
+            get
+            {
                 return this.SprintIDField;
             }
-            set {
-                if ((this.SprintIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.SprintIDField.Equals(value) != true))
+                {
                     this.SprintIDField = value;
                     this.RaisePropertyChanged("SprintID");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<ServiceLib.DataService.Story> Stories {
-            get {
+        public System.Collections.Generic.List<ServiceLib.DataService.Story> Stories
+        {
+            get
+            {
                 return this.StoriesField;
             }
-            set {
-                if ((object.ReferenceEquals(this.StoriesField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.StoriesField, value) != true))
+                {
                     this.StoriesField = value;
                     this.RaisePropertyChanged("Stories");
                 }
             }
         }
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
+            if ((propertyChanged != null))
+            {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Story", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    [System.Runtime.Serialization.DataContractAttribute(Name = "Story", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
     [System.SerializableAttribute()]
-    public partial class Story : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
+    public partial class Story : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
+    {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime CreationDateField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DescriptionField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int NumberField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Nullable<int> PreviousStoryField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private ServiceLib.DataService.StoryPriority PriorityField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int ProjectIDField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private ServiceLib.DataService.StoryState StateField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StoryIDField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<ServiceLib.DataService.StorySprint> StorySprintsField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Collections.Generic.List<ServiceLib.DataService.Task> TasksField;
-        
+
         [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
                 return this.extensionDataField;
             }
-            set {
+            set
+            {
                 this.extensionDataField = value;
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime CreationDate {
-            get {
+        public System.DateTime CreationDate
+        {
+            get
+            {
                 return this.CreationDateField;
             }
-            set {
-                if ((this.CreationDateField.Equals(value) != true)) {
+            set
+            {
+                if ((this.CreationDateField.Equals(value) != true))
+                {
                     this.CreationDateField = value;
                     this.RaisePropertyChanged("CreationDate");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description {
-            get {
+        public string Description
+        {
+            get
+            {
                 return this.DescriptionField;
             }
-            set {
-                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true))
+                {
                     this.DescriptionField = value;
                     this.RaisePropertyChanged("Description");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Number {
-            get {
+        public int Number
+        {
+            get
+            {
                 return this.NumberField;
             }
-            set {
-                if ((this.NumberField.Equals(value) != true)) {
+            set
+            {
+                if ((this.NumberField.Equals(value) != true))
+                {
                     this.NumberField = value;
                     this.RaisePropertyChanged("Number");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Nullable<int> PreviousStory {
-            get {
+        public System.Nullable<int> PreviousStory
+        {
+            get
+            {
                 return this.PreviousStoryField;
             }
-            set {
-                if ((this.PreviousStoryField.Equals(value) != true)) {
+            set
+            {
+                if ((this.PreviousStoryField.Equals(value) != true))
+                {
                     this.PreviousStoryField = value;
                     this.RaisePropertyChanged("PreviousStory");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceLib.DataService.StoryPriority Priority {
-            get {
+        public ServiceLib.DataService.StoryPriority Priority
+        {
+            get
+            {
                 return this.PriorityField;
             }
-            set {
-                if ((this.PriorityField.Equals(value) != true)) {
+            set
+            {
+                if ((this.PriorityField.Equals(value) != true))
+                {
                     this.PriorityField = value;
                     this.RaisePropertyChanged("Priority");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ProjectID {
-            get {
+        public int ProjectID
+        {
+            get
+            {
                 return this.ProjectIDField;
             }
-            set {
-                if ((this.ProjectIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.ProjectIDField.Equals(value) != true))
+                {
                     this.ProjectIDField = value;
                     this.RaisePropertyChanged("ProjectID");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceLib.DataService.StoryState State {
-            get {
+        public ServiceLib.DataService.StoryState State
+        {
+            get
+            {
                 return this.StateField;
             }
-            set {
-                if ((this.StateField.Equals(value) != true)) {
+            set
+            {
+                if ((this.StateField.Equals(value) != true))
+                {
                     this.StateField = value;
                     this.RaisePropertyChanged("State");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int StoryID {
-            get {
+        public int StoryID
+        {
+            get
+            {
                 return this.StoryIDField;
             }
-            set {
-                if ((this.StoryIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.StoryIDField.Equals(value) != true))
+                {
                     this.StoryIDField = value;
                     this.RaisePropertyChanged("StoryID");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<ServiceLib.DataService.StorySprint> StorySprints {
-            get {
+        public System.Collections.Generic.List<ServiceLib.DataService.StorySprint> StorySprints
+        {
+            get
+            {
                 return this.StorySprintsField;
             }
-            set {
-                if ((object.ReferenceEquals(this.StorySprintsField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.StorySprintsField, value) != true))
+                {
                     this.StorySprintsField = value;
                     this.RaisePropertyChanged("StorySprints");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.Collections.Generic.List<ServiceLib.DataService.Task> Tasks {
-            get {
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> Tasks
+        {
+            get
+            {
                 return this.TasksField;
             }
-            set {
-                if ((object.ReferenceEquals(this.TasksField, value) != true)) {
+            set
+            {
+                if ((object.ReferenceEquals(this.TasksField, value) != true))
+                {
                     this.TasksField = value;
                     this.RaisePropertyChanged("Tasks");
                 }
             }
         }
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
+            if ((propertyChanged != null))
+            {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StoryPriority", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
-    public enum StoryPriority : int {
-        
+    [System.Runtime.Serialization.DataContractAttribute(Name = "StoryPriority", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    public enum StoryPriority : int
+    {
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Must = 0,
-        
+
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Should = 1,
-        
+
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Could = 2,
-        
+
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Wont = 3,
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StoryState", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
-    public enum StoryState : int {
-        
+    [System.Runtime.Serialization.DataContractAttribute(Name = "StoryState", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    public enum StoryState : int
+    {
         [System.Runtime.Serialization.EnumMemberAttribute()]
         InProgress = 0,
-        
+
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Completed = 1,
-        
+
         [System.Runtime.Serialization.EnumMemberAttribute()]
         Abandoned = 2,
     }
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="StorySprint", Namespace="http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
+    [System.Runtime.Serialization.DataContractAttribute(Name = "StorySprint", Namespace = "http://schemas.datacontract.org/2004/07/ServiceDataTypes")]
     [System.SerializableAttribute()]
-    public partial class StorySprint : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
+    public partial class StorySprint : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged
+    {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int PointsField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int SprintIDField;
-        
+
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int StoryIDField;
-        
+
         [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData
+        {
+            get
+            {
                 return this.extensionDataField;
             }
-            set {
+            set
+            {
                 this.extensionDataField = value;
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Points {
-            get {
+        public int Points
+        {
+            get
+            {
                 return this.PointsField;
             }
-            set {
-                if ((this.PointsField.Equals(value) != true)) {
+            set
+            {
+                if ((this.PointsField.Equals(value) != true))
+                {
                     this.PointsField = value;
                     this.RaisePropertyChanged("Points");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int SprintID {
-            get {
+        public int SprintID
+        {
+            get
+            {
                 return this.SprintIDField;
             }
-            set {
-                if ((this.SprintIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.SprintIDField.Equals(value) != true))
+                {
                     this.SprintIDField = value;
                     this.RaisePropertyChanged("SprintID");
                 }
             }
         }
-        
+
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int StoryID {
-            get {
+        public int StoryID
+        {
+            get
+            {
                 return this.StoryIDField;
             }
-            set {
-                if ((this.StoryIDField.Equals(value) != true)) {
+            set
+            {
+                if ((this.StoryIDField.Equals(value) != true))
+                {
                     this.StoryIDField = value;
                     this.RaisePropertyChanged("StoryID");
                 }
             }
         }
-        
+
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
             System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
+            if ((propertyChanged != null))
+            {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="DataService.IDataService")]
-    public interface IDataService {
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetPersonByEmail", ReplyAction="http://tempuri.org/IDataService/GetPersonByEmailResponse")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName = "DataService.IDataService")]
+    public interface IDataService
+    {
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetPersonByEmail", ReplyAction = "http://tempuri.org/IDataService/GetPersonByEmailResponse")]
         ServiceLib.DataService.Person GetPersonByEmail(string email);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateRole", ReplyAction="http://tempuri.org/IDataService/CreateRoleResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/CreateRole", ReplyAction = "http://tempuri.org/IDataService/CreateRoleResponse")]
         ServiceLib.DataService.Role CreateRole(ServiceLib.DataService.Role role);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateRole", ReplyAction="http://tempuri.org/IDataService/UpdateRoleResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/UpdateRole", ReplyAction = "http://tempuri.org/IDataService/UpdateRoleResponse")]
         ServiceLib.DataService.Role UpdateRole(ServiceLib.DataService.Role role);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateRolePassword", ReplyAction="http://tempuri.org/IDataService/UpdateRolePasswordResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/UpdateRolePassword", ReplyAction = "http://tempuri.org/IDataService/UpdateRolePasswordResponse")]
         ServiceLib.DataService.Role UpdateRolePassword(int roleID, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/DeleteRole", ReplyAction="http://tempuri.org/IDataService/DeleteRoleResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/DeleteRole", ReplyAction = "http://tempuri.org/IDataService/DeleteRoleResponse")]
         bool DeleteRole(int roleID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetRoleByID", ReplyAction="http://tempuri.org/IDataService/GetRoleByIDResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetRoleByID", ReplyAction = "http://tempuri.org/IDataService/GetRoleByIDResponse")]
         ServiceLib.DataService.Role GetRoleByID(int roleID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllPeopleInProject", ReplyAction="http://tempuri.org/IDataService/GetAllPeopleInProjectResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllPeopleInProject", ReplyAction = "http://tempuri.org/IDataService/GetAllPeopleInProjectResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeopleInProject(int projectID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllRolesInProject", ReplyAction="http://tempuri.org/IDataService/GetAllRolesInProjectResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllRolesInProject", ReplyAction = "http://tempuri.org/IDataService/GetAllRolesInProjectResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Role> GetAllRolesInProject(int projectID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllPeople", ReplyAction="http://tempuri.org/IDataService/GetAllPeopleResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllPeople", ReplyAction = "http://tempuri.org/IDataService/GetAllPeopleResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeople();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/LoginAdmin", ReplyAction="http://tempuri.org/IDataService/LoginAdminResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/LoginAdmin", ReplyAction = "http://tempuri.org/IDataService/LoginAdminResponse")]
         bool LoginAdmin(int personID, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllTasksInPerson", ReplyAction="http://tempuri.org/IDataService/GetAllTasksInPersonResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllTasksInPerson", ReplyAction = "http://tempuri.org/IDataService/GetAllTasksInPersonResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInPerson(int personID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllRolesInPerson", ReplyAction="http://tempuri.org/IDataService/GetAllRolesInPersonResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllRolesInPerson", ReplyAction = "http://tempuri.org/IDataService/GetAllRolesInPersonResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Role> GetAllRolesInPerson(int personID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/LoginProjectAdmin", ReplyAction="http://tempuri.org/IDataService/LoginProjectAdminResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/LoginProjectAdmin", ReplyAction = "http://tempuri.org/IDataService/LoginProjectAdminResponse")]
         bool LoginProjectAdmin(int roleID, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllPeopleWorkingInTask", ReplyAction="http://tempuri.org/IDataService/GetAllPeopleWorkingInTaskResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllPeopleWorkingInTask", ReplyAction = "http://tempuri.org/IDataService/GetAllPeopleWorkingInTaskResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeopleWorkingInTask(int taskID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateProject", ReplyAction="http://tempuri.org/IDataService/CreateProjectResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/CreateProject", ReplyAction = "http://tempuri.org/IDataService/CreateProjectResponse")]
         ServiceLib.DataService.Project CreateProject(ServiceLib.DataService.Project project);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateProject", ReplyAction="http://tempuri.org/IDataService/UpdateProjectResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/UpdateProject", ReplyAction = "http://tempuri.org/IDataService/UpdateProjectResponse")]
         ServiceLib.DataService.Project UpdateProject(ServiceLib.DataService.Project project);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateProjectPassword", ReplyAction="http://tempuri.org/IDataService/UpdateProjectPasswordResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/UpdateProjectPassword", ReplyAction = "http://tempuri.org/IDataService/UpdateProjectPasswordResponse")]
         ServiceLib.DataService.Project UpdateProjectPassword(int projectID, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/DeleteProject", ReplyAction="http://tempuri.org/IDataService/DeleteProjectResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/DeleteProject", ReplyAction = "http://tempuri.org/IDataService/DeleteProjectResponse")]
         bool DeleteProject(int projectID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetProjectByID", ReplyAction="http://tempuri.org/IDataService/GetProjectByIDResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetProjectByID", ReplyAction = "http://tempuri.org/IDataService/GetProjectByIDResponse")]
         ServiceLib.DataService.Project GetProjectByID(int projectID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetProjectByName", ReplyAction="http://tempuri.org/IDataService/GetProjectByNameResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetProjectByName", ReplyAction = "http://tempuri.org/IDataService/GetProjectByNameResponse")]
         ServiceLib.DataService.Project GetProjectByName(string name);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateSprint", ReplyAction="http://tempuri.org/IDataService/CreateSprintResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/CreateSprint", ReplyAction = "http://tempuri.org/IDataService/CreateSprintResponse")]
         ServiceLib.DataService.Sprint CreateSprint(ServiceLib.DataService.Sprint sprint);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/DeleteSprint", ReplyAction="http://tempuri.org/IDataService/DeleteSprintResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/DeleteSprint", ReplyAction = "http://tempuri.org/IDataService/DeleteSprintResponse")]
         bool DeleteSprint(int sprintID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateSprint", ReplyAction="http://tempuri.org/IDataService/UpdateSprintResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/UpdateSprint", ReplyAction = "http://tempuri.org/IDataService/UpdateSprintResponse")]
         ServiceLib.DataService.Sprint UpdateSprint(ServiceLib.DataService.Sprint sprint);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetSprintByID", ReplyAction="http://tempuri.org/IDataService/GetSprintByIDResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetSprintByID", ReplyAction = "http://tempuri.org/IDataService/GetSprintByIDResponse")]
         ServiceLib.DataService.Sprint GetSprintByID(int sprintID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateStory", ReplyAction="http://tempuri.org/IDataService/CreateStoryResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/CreateStory", ReplyAction = "http://tempuri.org/IDataService/CreateStoryResponse")]
         ServiceLib.DataService.Story CreateStory(ServiceLib.DataService.Story story);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/DeleteStory", ReplyAction="http://tempuri.org/IDataService/DeleteStoryResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/DeleteStory", ReplyAction = "http://tempuri.org/IDataService/DeleteStoryResponse")]
         bool DeleteStory(int storyID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateStory", ReplyAction="http://tempuri.org/IDataService/UpdateStoryResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/UpdateStory", ReplyAction = "http://tempuri.org/IDataService/UpdateStoryResponse")]
         ServiceLib.DataService.Story UpdateStory(ServiceLib.DataService.Story story);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetStoryByID", ReplyAction="http://tempuri.org/IDataService/GetStoryByIDResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetStoryByID", ReplyAction = "http://tempuri.org/IDataService/GetStoryByIDResponse")]
         ServiceLib.DataService.Story GetStoryByID(int storyID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateTask", ReplyAction="http://tempuri.org/IDataService/CreateTaskResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/CreateTask", ReplyAction = "http://tempuri.org/IDataService/CreateTaskResponse")]
         ServiceLib.DataService.Task CreateTask(ServiceLib.DataService.Task task);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/DeleteTask", ReplyAction="http://tempuri.org/IDataService/DeleteTaskResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/DeleteTask", ReplyAction = "http://tempuri.org/IDataService/DeleteTaskResponse")]
         bool DeleteTask(int taskID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateTask", ReplyAction="http://tempuri.org/IDataService/UpdateTaskResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/UpdateTask", ReplyAction = "http://tempuri.org/IDataService/UpdateTaskResponse")]
         ServiceLib.DataService.Task UpdateTask(ServiceLib.DataService.Task task);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetTaskByID", ReplyAction="http://tempuri.org/IDataService/GetTaskByIDResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetTaskByID", ReplyAction = "http://tempuri.org/IDataService/GetTaskByIDResponse")]
         ServiceLib.DataService.Task GetTaskByID(int taskID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreateMeeting", ReplyAction="http://tempuri.org/IDataService/CreateMeetingResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/CreateMeeting", ReplyAction = "http://tempuri.org/IDataService/CreateMeetingResponse")]
         ServiceLib.DataService.Meeting CreateMeeting(ServiceLib.DataService.Meeting meeting);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/DeleteMeeting", ReplyAction="http://tempuri.org/IDataService/DeleteMeetingResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/DeleteMeeting", ReplyAction = "http://tempuri.org/IDataService/DeleteMeetingResponse")]
         bool DeleteMeeting(int meetingID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateMeeting", ReplyAction="http://tempuri.org/IDataService/UpdateMeetingResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/UpdateMeeting", ReplyAction = "http://tempuri.org/IDataService/UpdateMeetingResponse")]
         ServiceLib.DataService.Meeting UpdateMeeting(ServiceLib.DataService.Meeting meeting);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetMeetingByID", ReplyAction="http://tempuri.org/IDataService/GetMeetingByIDResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetMeetingByID", ReplyAction = "http://tempuri.org/IDataService/GetMeetingByIDResponse")]
         ServiceLib.DataService.Meeting GetMeetingByID(int meetingID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllProjects", ReplyAction="http://tempuri.org/IDataService/GetAllProjectsResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllProjects", ReplyAction = "http://tempuri.org/IDataService/GetAllProjectsResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Project> GetAllProjects();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/LoginProject", ReplyAction="http://tempuri.org/IDataService/LoginProjectResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/LoginProject", ReplyAction = "http://tempuri.org/IDataService/LoginProjectResponse")]
         bool LoginProject(int projectID, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllSprintsInProject", ReplyAction="http://tempuri.org/IDataService/GetAllSprintsInProjectResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllSprintsInProject", ReplyAction = "http://tempuri.org/IDataService/GetAllSprintsInProjectResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Sprint> GetAllSprintsInProject(int projectID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllStoriesInProject", ReplyAction="http://tempuri.org/IDataService/GetAllStoriesInProjectResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllStoriesInProject", ReplyAction = "http://tempuri.org/IDataService/GetAllStoriesInProjectResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInProject(int projectID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllTasksInProject", ReplyAction="http://tempuri.org/IDataService/GetAllTasksInProjectResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllTasksInProject", ReplyAction = "http://tempuri.org/IDataService/GetAllTasksInProjectResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInProject(int projectID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllStoriesWithoutSprintInProject", ReplyAction="http://tempuri.org/IDataService/GetAllStoriesWithoutSprintInProjectResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllStoriesWithoutSprintInProject", ReplyAction = "http://tempuri.org/IDataService/GetAllStoriesWithoutSprintInProjectResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesWithoutSprintInProject(int projectID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllMeetingsInProject", ReplyAction="http://tempuri.org/IDataService/GetAllMeetingsInProjectResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllMeetingsInProject", ReplyAction = "http://tempuri.org/IDataService/GetAllMeetingsInProjectResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Meeting> GetAllMeetingsInProject(int projectID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllTasksInProjectByState", ReplyAction="http://tempuri.org/IDataService/GetAllTasksInProjectByStateResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllTasksInProjectByState", ReplyAction = "http://tempuri.org/IDataService/GetAllTasksInProjectByStateResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInProjectByState(int projectID, ServiceLib.DataService.TaskState state);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllStoriesInProjectByState", ReplyAction="http://tempuri.org/IDataService/GetAllStoriesInProjectByStateResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllStoriesInProjectByState", ReplyAction = "http://tempuri.org/IDataService/GetAllStoriesInProjectByStateResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInProjectByState(int projectID, ServiceLib.DataService.StoryState state);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllStoriesInSprint", ReplyAction="http://tempuri.org/IDataService/GetAllStoriesInSprintResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllStoriesInSprint", ReplyAction = "http://tempuri.org/IDataService/GetAllStoriesInSprintResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInSprint(int sprintID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllTasksInSprint", ReplyAction="http://tempuri.org/IDataService/GetAllTasksInSprintResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllTasksInSprint", ReplyAction = "http://tempuri.org/IDataService/GetAllTasksInSprintResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInSprint(int sprintID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/AddStoryInSprint", ReplyAction="http://tempuri.org/IDataService/AddStoryInSprintResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/AddStoryInSprint", ReplyAction = "http://tempuri.org/IDataService/AddStoryInSprintResponse")]
         ServiceLib.DataService.StorySprint AddStoryInSprint(ServiceLib.DataService.StorySprint storySprint);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetAllTasksInStory", ReplyAction="http://tempuri.org/IDataService/GetAllTasksInStoryResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetAllTasksInStory", ReplyAction = "http://tempuri.org/IDataService/GetAllTasksInStoryResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInStory(int storyID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdateStoryOrder", ReplyAction="http://tempuri.org/IDataService/UpdateStoryOrderResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/UpdateStoryOrder", ReplyAction = "http://tempuri.org/IDataService/UpdateStoryOrderResponse")]
         System.Collections.Generic.List<ServiceLib.DataService.Story> UpdateStoryOrder(int projectID, System.Collections.Generic.List<int> ordered);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/AddWorkInTask", ReplyAction="http://tempuri.org/IDataService/AddWorkInTaskResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/AddWorkInTask", ReplyAction = "http://tempuri.org/IDataService/AddWorkInTaskResponse")]
         ServiceLib.DataService.PersonTask AddWorkInTask(ServiceLib.DataService.PersonTask personTask);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/CreatePerson", ReplyAction="http://tempuri.org/IDataService/CreatePersonResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/CreatePerson", ReplyAction = "http://tempuri.org/IDataService/CreatePersonResponse")]
         ServiceLib.DataService.Person CreatePerson(ServiceLib.DataService.Person person);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdatePerson", ReplyAction="http://tempuri.org/IDataService/UpdatePersonResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/UpdatePerson", ReplyAction = "http://tempuri.org/IDataService/UpdatePersonResponse")]
         ServiceLib.DataService.Person UpdatePerson(ServiceLib.DataService.Person person);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/UpdatePersonPassword", ReplyAction="http://tempuri.org/IDataService/UpdatePersonPasswordResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/UpdatePersonPassword", ReplyAction = "http://tempuri.org/IDataService/UpdatePersonPasswordResponse")]
         ServiceLib.DataService.Person UpdatePersonPassword(int personID, string password);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/DeletePerson", ReplyAction="http://tempuri.org/IDataService/DeletePersonResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/DeletePerson", ReplyAction = "http://tempuri.org/IDataService/DeletePersonResponse")]
         bool DeletePerson(int personID);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IDataService/GetPersonByID", ReplyAction="http://tempuri.org/IDataService/GetPersonByIDResponse")]
+
+        [System.ServiceModel.OperationContractAttribute(Action = "http://tempuri.org/IDataService/GetPersonByID", ReplyAction = "http://tempuri.org/IDataService/GetPersonByIDResponse")]
         ServiceLib.DataService.Person GetPersonByID(int personID);
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IDataServiceChannel : ServiceLib.DataService.IDataService, System.ServiceModel.IClientChannel {
+    public interface IDataServiceChannel : ServiceLib.DataService.IDataService, System.ServiceModel.IClientChannel
+    {
     }
-    
+
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class DataServiceClient : System.ServiceModel.ClientBase<ServiceLib.DataService.IDataService>, ServiceLib.DataService.IDataService {
-        
-        public DataServiceClient() {
+    public partial class DataServiceClient : System.ServiceModel.ClientBase<ServiceLib.DataService.IDataService>, ServiceLib.DataService.IDataService
+    {
+        public DataServiceClient()
+        {
         }
-        
-        public DataServiceClient(string endpointConfigurationName) : 
-                base(endpointConfigurationName) {
+
+        public DataServiceClient(string endpointConfigurationName) :
+            base(endpointConfigurationName)
+        {
         }
-        
-        public DataServiceClient(string endpointConfigurationName, string remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+
+        public DataServiceClient(string endpointConfigurationName, string remoteAddress) :
+            base(endpointConfigurationName, remoteAddress)
+        {
         }
-        
-        public DataServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(endpointConfigurationName, remoteAddress) {
+
+        public DataServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) :
+            base(endpointConfigurationName, remoteAddress)
+        {
         }
-        
-        public DataServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(binding, remoteAddress) {
+
+        public DataServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) :
+            base(binding, remoteAddress)
+        {
         }
-        
-        public ServiceLib.DataService.Person GetPersonByEmail(string email) {
+
+        public ServiceLib.DataService.Person GetPersonByEmail(string email)
+        {
             return base.Channel.GetPersonByEmail(email);
         }
-        
-        public ServiceLib.DataService.Role CreateRole(ServiceLib.DataService.Role role) {
+
+        public ServiceLib.DataService.Role CreateRole(ServiceLib.DataService.Role role)
+        {
             return base.Channel.CreateRole(role);
         }
-        
-        public ServiceLib.DataService.Role UpdateRole(ServiceLib.DataService.Role role) {
+
+        public ServiceLib.DataService.Role UpdateRole(ServiceLib.DataService.Role role)
+        {
             return base.Channel.UpdateRole(role);
         }
-        
-        public ServiceLib.DataService.Role UpdateRolePassword(int roleID, string password) {
+
+        public ServiceLib.DataService.Role UpdateRolePassword(int roleID, string password)
+        {
             return base.Channel.UpdateRolePassword(roleID, password);
         }
-        
-        public bool DeleteRole(int roleID) {
+
+        public bool DeleteRole(int roleID)
+        {
             return base.Channel.DeleteRole(roleID);
         }
-        
-        public ServiceLib.DataService.Role GetRoleByID(int roleID) {
+
+        public ServiceLib.DataService.Role GetRoleByID(int roleID)
+        {
             return base.Channel.GetRoleByID(roleID);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeopleInProject(int projectID) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeopleInProject(int projectID)
+        {
             return base.Channel.GetAllPeopleInProject(projectID);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Role> GetAllRolesInProject(int projectID) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Role> GetAllRolesInProject(int projectID)
+        {
             return base.Channel.GetAllRolesInProject(projectID);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeople() {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeople()
+        {
             return base.Channel.GetAllPeople();
         }
-        
-        public bool LoginAdmin(int personID, string password) {
+
+        public bool LoginAdmin(int personID, string password)
+        {
             return base.Channel.LoginAdmin(personID, password);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInPerson(int personID) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInPerson(int personID)
+        {
             return base.Channel.GetAllTasksInPerson(personID);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Role> GetAllRolesInPerson(int personID) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Role> GetAllRolesInPerson(int personID)
+        {
             return base.Channel.GetAllRolesInPerson(personID);
         }
-        
-        public bool LoginProjectAdmin(int roleID, string password) {
+
+        public bool LoginProjectAdmin(int roleID, string password)
+        {
             return base.Channel.LoginProjectAdmin(roleID, password);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeopleWorkingInTask(int taskID) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Person> GetAllPeopleWorkingInTask(int taskID)
+        {
             return base.Channel.GetAllPeopleWorkingInTask(taskID);
         }
-        
-        public ServiceLib.DataService.Project CreateProject(ServiceLib.DataService.Project project) {
+
+        public ServiceLib.DataService.Project CreateProject(ServiceLib.DataService.Project project)
+        {
             return base.Channel.CreateProject(project);
         }
-        
-        public ServiceLib.DataService.Project UpdateProject(ServiceLib.DataService.Project project) {
+
+        public ServiceLib.DataService.Project UpdateProject(ServiceLib.DataService.Project project)
+        {
             return base.Channel.UpdateProject(project);
         }
-        
-        public ServiceLib.DataService.Project UpdateProjectPassword(int projectID, string password) {
+
+        public ServiceLib.DataService.Project UpdateProjectPassword(int projectID, string password)
+        {
             return base.Channel.UpdateProjectPassword(projectID, password);
         }
-        
-        public bool DeleteProject(int projectID) {
+
+        public bool DeleteProject(int projectID)
+        {
             return base.Channel.DeleteProject(projectID);
         }
-        
-        public ServiceLib.DataService.Project GetProjectByID(int projectID) {
+
+        public ServiceLib.DataService.Project GetProjectByID(int projectID)
+        {
             return base.Channel.GetProjectByID(projectID);
         }
-        
-        public ServiceLib.DataService.Project GetProjectByName(string name) {
+
+        public ServiceLib.DataService.Project GetProjectByName(string name)
+        {
             return base.Channel.GetProjectByName(name);
         }
-        
-        public ServiceLib.DataService.Sprint CreateSprint(ServiceLib.DataService.Sprint sprint) {
+
+        public ServiceLib.DataService.Sprint CreateSprint(ServiceLib.DataService.Sprint sprint)
+        {
             return base.Channel.CreateSprint(sprint);
         }
-        
-        public bool DeleteSprint(int sprintID) {
+
+        public bool DeleteSprint(int sprintID)
+        {
             return base.Channel.DeleteSprint(sprintID);
         }
-        
-        public ServiceLib.DataService.Sprint UpdateSprint(ServiceLib.DataService.Sprint sprint) {
+
+        public ServiceLib.DataService.Sprint UpdateSprint(ServiceLib.DataService.Sprint sprint)
+        {
             return base.Channel.UpdateSprint(sprint);
         }
-        
-        public ServiceLib.DataService.Sprint GetSprintByID(int sprintID) {
+
+        public ServiceLib.DataService.Sprint GetSprintByID(int sprintID)
+        {
             return base.Channel.GetSprintByID(sprintID);
         }
-        
-        public ServiceLib.DataService.Story CreateStory(ServiceLib.DataService.Story story) {
+
+        public ServiceLib.DataService.Story CreateStory(ServiceLib.DataService.Story story)
+        {
             return base.Channel.CreateStory(story);
         }
-        
-        public bool DeleteStory(int storyID) {
+
+        public bool DeleteStory(int storyID)
+        {
             return base.Channel.DeleteStory(storyID);
         }
-        
-        public ServiceLib.DataService.Story UpdateStory(ServiceLib.DataService.Story story) {
+
+        public ServiceLib.DataService.Story UpdateStory(ServiceLib.DataService.Story story)
+        {
             return base.Channel.UpdateStory(story);
         }
-        
-        public ServiceLib.DataService.Story GetStoryByID(int storyID) {
+
+        public ServiceLib.DataService.Story GetStoryByID(int storyID)
+        {
             return base.Channel.GetStoryByID(storyID);
         }
-        
-        public ServiceLib.DataService.Task CreateTask(ServiceLib.DataService.Task task) {
+
+        public ServiceLib.DataService.Task CreateTask(ServiceLib.DataService.Task task)
+        {
             return base.Channel.CreateTask(task);
         }
-        
-        public bool DeleteTask(int taskID) {
+
+        public bool DeleteTask(int taskID)
+        {
             return base.Channel.DeleteTask(taskID);
         }
-        
-        public ServiceLib.DataService.Task UpdateTask(ServiceLib.DataService.Task task) {
+
+        public ServiceLib.DataService.Task UpdateTask(ServiceLib.DataService.Task task)
+        {
             return base.Channel.UpdateTask(task);
         }
-        
-        public ServiceLib.DataService.Task GetTaskByID(int taskID) {
+
+        public ServiceLib.DataService.Task GetTaskByID(int taskID)
+        {
             return base.Channel.GetTaskByID(taskID);
         }
-        
-        public ServiceLib.DataService.Meeting CreateMeeting(ServiceLib.DataService.Meeting meeting) {
+
+        public ServiceLib.DataService.Meeting CreateMeeting(ServiceLib.DataService.Meeting meeting)
+        {
             return base.Channel.CreateMeeting(meeting);
         }
-        
-        public bool DeleteMeeting(int meetingID) {
+
+        public bool DeleteMeeting(int meetingID)
+        {
             return base.Channel.DeleteMeeting(meetingID);
         }
-        
-        public ServiceLib.DataService.Meeting UpdateMeeting(ServiceLib.DataService.Meeting meeting) {
+
+        public ServiceLib.DataService.Meeting UpdateMeeting(ServiceLib.DataService.Meeting meeting)
+        {
             return base.Channel.UpdateMeeting(meeting);
         }
-        
-        public ServiceLib.DataService.Meeting GetMeetingByID(int meetingID) {
+
+        public ServiceLib.DataService.Meeting GetMeetingByID(int meetingID)
+        {
             return base.Channel.GetMeetingByID(meetingID);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Project> GetAllProjects() {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Project> GetAllProjects()
+        {
             return base.Channel.GetAllProjects();
         }
-        
-        public bool LoginProject(int projectID, string password) {
+
+        public bool LoginProject(int projectID, string password)
+        {
             return base.Channel.LoginProject(projectID, password);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Sprint> GetAllSprintsInProject(int projectID) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Sprint> GetAllSprintsInProject(int projectID)
+        {
             return base.Channel.GetAllSprintsInProject(projectID);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInProject(int projectID) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInProject(int projectID)
+        {
             return base.Channel.GetAllStoriesInProject(projectID);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInProject(int projectID) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInProject(int projectID)
+        {
             return base.Channel.GetAllTasksInProject(projectID);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesWithoutSprintInProject(int projectID) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesWithoutSprintInProject(int projectID)
+        {
             return base.Channel.GetAllStoriesWithoutSprintInProject(projectID);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Meeting> GetAllMeetingsInProject(int projectID) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Meeting> GetAllMeetingsInProject(int projectID)
+        {
             return base.Channel.GetAllMeetingsInProject(projectID);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInProjectByState(int projectID, ServiceLib.DataService.TaskState state) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInProjectByState(int projectID, ServiceLib.DataService.TaskState state)
+        {
             return base.Channel.GetAllTasksInProjectByState(projectID, state);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInProjectByState(int projectID, ServiceLib.DataService.StoryState state) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInProjectByState(int projectID, ServiceLib.DataService.StoryState state)
+        {
             return base.Channel.GetAllStoriesInProjectByState(projectID, state);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInSprint(int sprintID) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Story> GetAllStoriesInSprint(int sprintID)
+        {
             return base.Channel.GetAllStoriesInSprint(sprintID);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInSprint(int sprintID) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInSprint(int sprintID)
+        {
             return base.Channel.GetAllTasksInSprint(sprintID);
         }
-        
-        public ServiceLib.DataService.StorySprint AddStoryInSprint(ServiceLib.DataService.StorySprint storySprint) {
+
+        public ServiceLib.DataService.StorySprint AddStoryInSprint(ServiceLib.DataService.StorySprint storySprint)
+        {
             return base.Channel.AddStoryInSprint(storySprint);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInStory(int storyID) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Task> GetAllTasksInStory(int storyID)
+        {
             return base.Channel.GetAllTasksInStory(storyID);
         }
-        
-        public System.Collections.Generic.List<ServiceLib.DataService.Story> UpdateStoryOrder(int projectID, System.Collections.Generic.List<int> ordered) {
+
+        public System.Collections.Generic.List<ServiceLib.DataService.Story> UpdateStoryOrder(int projectID, System.Collections.Generic.List<int> ordered)
+        {
             return base.Channel.UpdateStoryOrder(projectID, ordered);
         }
-        
-        public ServiceLib.DataService.PersonTask AddWorkInTask(ServiceLib.DataService.PersonTask personTask) {
+
+        public ServiceLib.DataService.PersonTask AddWorkInTask(ServiceLib.DataService.PersonTask personTask)
+        {
             return base.Channel.AddWorkInTask(personTask);
         }
-        
-        public ServiceLib.DataService.Person CreatePerson(ServiceLib.DataService.Person person) {
+
+        public ServiceLib.DataService.Person CreatePerson(ServiceLib.DataService.Person person)
+        {
             return base.Channel.CreatePerson(person);
         }
-        
-        public ServiceLib.DataService.Person UpdatePerson(ServiceLib.DataService.Person person) {
+
+        public ServiceLib.DataService.Person UpdatePerson(ServiceLib.DataService.Person person)
+        {
             return base.Channel.UpdatePerson(person);
         }
-        
-        public ServiceLib.DataService.Person UpdatePersonPassword(int personID, string password) {
+
+        public ServiceLib.DataService.Person UpdatePersonPassword(int personID, string password)
+        {
             return base.Channel.UpdatePersonPassword(personID, password);
         }
-        
-        public bool DeletePerson(int personID) {
+
+        public bool DeletePerson(int personID)
+        {
             return base.Channel.DeletePerson(personID);
         }
-        
-        public ServiceLib.DataService.Person GetPersonByID(int personID) {
+
+        public ServiceLib.DataService.Person GetPersonByID(int personID)
+        {
             return base.Channel.GetPersonByID(personID);
         }
     }

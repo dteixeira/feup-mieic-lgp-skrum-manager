@@ -7,45 +7,45 @@
 	x:Class="GenericControlLib.SimpleStoryControl"
 	x:Name="UserControl"
 	d:DesignWidth="640" d:DesignHeight="480" Margin="0">
-	<UserControl.Resources>
-		<Style x:Key="OuterGridStyle" TargetType="{x:Type Grid}">
-			<Style.Triggers>
-				<Trigger Property="IsMouseOver" Value="True">
-					<Setter Property="Background" Value="{DynamicResource Gray3Brush}"/>
-				</Trigger>
-			</Style.Triggers>
-			<Setter Property="Background" Value="White"/>
-		</Style>
-	</UserControl.Resources>
+    <UserControl.Resources>
+        <Style x:Key="OuterGridStyle" TargetType="{x:Type Grid}">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{DynamicResource Gray3Brush}" />
+                </Trigger>
+            </Style.Triggers>
+            <Setter Property="Background" Value="White" />
+        </Style>
+    </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" MinHeight="146" MinWidth="200">
         <Grid Margin="1" Style="{DynamicResource OuterGridStyle}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition Width="25"/>
+                <ColumnDefinition />
+                <ColumnDefinition Width="25" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"/>
-                <RowDefinition/>
+                <RowDefinition Height="40" />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid Grid.Column="0" Grid.Row="1" Margin="0">
                 <TextBlock Grid.Column="0" x:Name="StoryDescriptionTextBlock" TextWrapping="Wrap" Text="{Binding StoryDescription}" FontSize="16" Padding="20,10" Foreground="Black" FontFamily="Open Sans" TextTrimming="WordEllipsis" />
             </Grid>
             <Grid Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" Background="{Binding StoryPriorityColor}">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="40" />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <Label Grid.Row="0" x:Name="StoryPriorityLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding StoryPriority}" Foreground="White" FontSize="18.667" UseLayoutRounding="False" Background="{Binding StoryPriorityColor}" BorderThickness="0" Margin="0" Padding="0" FontFamily="Open Sans" />
             </Grid>
             <Border Grid.Row="0" BorderBrush="#FF959595" BorderThickness="0,0,0,1">
                 <Grid UseLayoutRounding="False" Margin="0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition/>
+                        <ColumnDefinition Width="5*" />
+                        <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <Label Grid.Column="0" x:Name="StoryNameLabel" VerticalContentAlignment="Center" Content="{Binding StoryName}" Foreground="Black" FontSize="18.667" Margin="0" Padding="20,0,0,0" FontFamily="Open Sans"/>
-                    <Label Grid.Column="1" x:Name="StoryEstimationLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="{Binding StoryEstimation}" Foreground="Black" FontSize="18.667" Padding="0,0,10,0" Margin="0" FontFamily="Open Sans"/>
+                    <Label Grid.Column="0" x:Name="StoryNameLabel" VerticalContentAlignment="Center" Content="{Binding StoryName}" Foreground="Black" FontSize="18.667" Margin="0" Padding="20,0,0,0" FontFamily="Open Sans" />
+                    <Label Grid.Column="1" x:Name="StoryEstimationLabel" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="{Binding StoryEstimation}" Foreground="Black" FontSize="18.667" Padding="0,0,10,0" Margin="0" FontFamily="Open Sans" />
                 </Grid>
             </Border>
         </Grid>

@@ -5,17 +5,10 @@ using SharedTypes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace MeetingPageLib
@@ -33,16 +26,16 @@ namespace MeetingPageLib
         private DispatcherTimer countdownTimerScrollUp;
         private DispatcherTimer countdownTimerScrollDown;
 
-
         private enum BacklogSelected { Meetings, Notes };
+
         private BacklogSelected currentScroll;
 
         private int biggestNumber = 0;
 
-
         private ObservableCollection<MeetingControl> collection = new ObservableCollection<MeetingControl>();
 
         public ApplicationPages PageType { get; set; }
+
         public ApplicationController.DataModificationHandler DataChangeDelegate { get; set; }
 
         public MeetingPage(object context)
@@ -69,7 +62,6 @@ namespace MeetingPageLib
             this.countdownTimerScrollDown = new DispatcherTimer();
             this.countdownTimerScrollDown.Tick += new EventHandler(ScrollActionDown);
             this.countdownTimerScrollDown.Interval = TimeSpan.FromSeconds(0.01);
-
 
             // Register for project change notifications.
             this.DataChangeDelegate = new ApplicationController.DataModificationHandler(this.DataChangeHandler);
@@ -120,7 +112,6 @@ namespace MeetingPageLib
             {
                 System.Console.WriteLine(e.Message);
             }
-
         }
 
         public void ShowMeeting_Hover(object sender, MouseEventArgs e)
@@ -251,7 +242,6 @@ namespace MeetingPageLib
             ApplicationController.Instance.DataChangedEvent -= this.DataChangeDelegate;
         }
 
-
         public void DataChangeHandler(object sender, NotificationType notification)
         {
             try
@@ -290,7 +280,6 @@ namespace MeetingPageLib
                 thread.Start(meeting);
             }
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
-
         }
 
         public void AddMeeting(object obj)
@@ -299,8 +288,6 @@ namespace MeetingPageLib
             client.CreateMeeting((Meeting)obj);
             client.Close();
         }
-
-
 
         private void SideMenuControl_EditDropEvent(object obj, DragEventArgs e)
         {
