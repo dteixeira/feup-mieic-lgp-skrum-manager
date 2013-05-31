@@ -476,21 +476,24 @@ namespace BacklogPageLib
                 form.ShowDialog();
                 if (form.Success)
                 {
-                    string description = (string)form["description"].PageValue;
-                    StoryPriority priority = (StoryPriority)form["priority"].PageValue;
-                    if (description != null && description != "")
-                    {
-                        Story story = storyControl.Story;
-                        story.Description = description;
-                        story.Priority = priority;
-                        System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(EditStory));
-                        thread.Start(story);
-                    }
+                    int newindex = (int)form["order"].PageValue;
+                    userstoriescloned.Insert(newindex, droppedStory);
+                    List<int> serverids = userstoriescloned.Select(pt => pt.Story.StoryID).ToList();
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(OrderStory));
+                    thread.Start(serverids);
+
                 }
                 ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
             }
+        }
 
 
+        private void OrderStory(object ids)
+        {
+            List<int> storyIds = (List<int>)ids;
+            DataServiceClient client = new DataServiceClient();
+            client.UpdateStoryOrder(ApplicationController.Instance.CurrentProject.ProjectID, storyIds);
+            client.Close();
         }
 
     }

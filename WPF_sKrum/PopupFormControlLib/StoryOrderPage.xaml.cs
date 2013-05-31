@@ -42,7 +42,7 @@ namespace PopupFormControlLib
             this.increment = 1;
 
             this.SpinnerValue = selectedIndex;
-            this.PageValue = 1;
+            this.PageValue = selectedIndex;
 
             this.minusTimer = new DispatcherTimer();
             this.minusTimer.Interval = TimeSpan.FromSeconds(1);
@@ -61,7 +61,6 @@ namespace PopupFormControlLib
             set
             {
                 this.min = value;
-                this.PageValue = value;
             }
         }
 
@@ -82,6 +81,7 @@ namespace PopupFormControlLib
             set
             {
                 this.spinnerValue = value;
+                this.PageValue = value;
                 if (this.stories != null)
                 {
                     this.UpStoryContainer.Children.Clear();
@@ -99,11 +99,6 @@ namespace PopupFormControlLib
         public string PageTitle { get; set; }
 
         public object PageValue { get; set; }
-
-        public void SpinnerChangeHandler(int value)
-        {
-            this.PageValue = value;
-        }
 
         private void MinusButton_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
