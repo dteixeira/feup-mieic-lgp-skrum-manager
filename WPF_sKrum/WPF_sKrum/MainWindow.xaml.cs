@@ -183,7 +183,7 @@ namespace WPFApplication
                 case ApplicationPages.PeopleManagementPage:
                     return new PeopleManagementPageLib.PeopleManagementPage(page.Context);
                 case ApplicationPages.PersonStatisticsPage:
-                    return null;
+                    return new ProjectStatisticsPageLib.PersonalStatisticsPage(page.Context);
                 case ApplicationPages.PersonTaskBoardPage:
                     return new TaskBoardPageLib.PersonalTaskBoardPage(page.Context);
                 case ApplicationPages.ProjectBacklogPage:
