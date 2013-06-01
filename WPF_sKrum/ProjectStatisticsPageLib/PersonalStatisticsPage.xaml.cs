@@ -32,15 +32,14 @@ namespace ProjectStatisticsPageLib
             InitializeComponent();
             this.PageType = ApplicationPages.PersonStatisticsPage;
             this.CurrentPerson = (Person)context;
-            UserButtonVerticalControl user = new UserButtonVerticalControl
+            UserButtonControl user = new UserButtonControl
             {
                 UserName = this.CurrentPerson.Name,
                 UserPhoto = this.CurrentPerson.PhotoURL
             };
-            user.VerticalAlignment = System.Windows.VerticalAlignment.Top;
-            user.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
-            user.Margin = new Thickness(50, 10, 50, 10);
-            this.UtilArea.Children.Add(user);
+            user.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+            user.HorizontalAlignment = System.Windows.HorizontalAlignment.Left;
+            this.PersonGrid.Children.Add(user);
 
             // Register for project change notifications.
             this.DataChangeDelegate = new ApplicationController.DataModificationHandler(this.DataChangeHandler);
@@ -60,9 +59,7 @@ namespace ProjectStatisticsPageLib
             int estimatedWork = 0;
             double doneWork = 0;
             
-
             List<int> graphicRawData = new List<int>(project.SprintDuration * 7);
-
             List<int> storyIDs = sprint.Stories.Select(st => st.StoryID).ToList<int>();
             List<Task> tasks = this.CurrentPerson.Tasks.Where(t => storyIDs.Contains(t.StoryID)).ToList<Task>();
             estimatedWork = tasks.Sum(t => t.Estimation);
@@ -80,18 +77,27 @@ namespace ProjectStatisticsPageLib
             
             this.WorkExecuted.Done = (int)doneWork;
             this.WorkExecuted.Expected = estimatedWork;
-
             List<KeyValuePair<string, int>> graphicdata = new List<KeyValuePair<string, int>>();
-
             for (int i = 0; i < project.SprintDuration * 7; i++)
             {
                 graphicdata.Add(new KeyValuePair<string, int>((i+1).ToString(), graphicRawData[i]));
             }
 
+            // Completed tasks statistics.
+            this.TasksExecuted.Todo = tasks.Count(t => t.State == TaskState.InProgress || t.State == TaskState.InProgress);
+            this.TasksExecuted.Done = tasks.Count(t => t.State == TaskState.Completed);
+
+            // Completed stories statistics.
+            var involvedStories = sprint.Stories.Where(s => tasks.Select(t => t.StoryID).Contains(s.StoryID));
+            this.UserStoriesExecuted.Todo = involvedStories.Count();
+            this.UserStoriesExecuted.Done = involvedStories.Count(s => s.State == StoryState.Completed);
+
             GraphicColumnControl graphic = new GraphicColumnControl(graphicdata);
             graphic.SetValue(Grid.RowProperty, 1);
-            graphic.Margin = new Thickness(50);
-            this.RightArea.Children.Add(graphic);
+            graphic.Margin = new Thickness(0, 0, 0, 0);
+            graphic.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+            graphic.Height = double.NaN;
+            this.LeftArea.Children.Add(graphic);
         }
 
         public PageChange PageChangeTarget(PageChangeDirection direction)
