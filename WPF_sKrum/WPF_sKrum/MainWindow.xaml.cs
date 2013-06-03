@@ -392,31 +392,7 @@ namespace WPFApplication
             this.NotificationMessage.StartAnimation();
         }
 
-        private void UpperBar_Config_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.ProjectManagementPage });
-        }
-
-        private void UpperBar_Close_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            this.Close();
-        }
-
-        private void GridHome_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            if (ApplicationController.Instance.CurrentProject != null)
-            {
-                ApplicationController.Instance.AdminLogin = false;
-                ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.MainPage });
-            }
-            else
-            {
-                ApplicationController.Instance.AdminLogin = false;
-                ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.RootPage });
-            }
-        }
-
-        private void UpperBar_SelectProj_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void UpperBar_SelectProj_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             // Select a project.
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
@@ -481,7 +457,7 @@ namespace WPFApplication
             this.TryTransition(new PageChange { Context = null, Page = ApplicationPages.RootPage });
         }
 
-        private void GridPersonName_MouseLeftButtonDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void GridPersonName_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             // Select a project.
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(true);
@@ -496,6 +472,30 @@ namespace WPFApplication
                 Person person = (Person)userForm.Result;
                 this.TryTransition(new PageChange { Context = person, Page = ApplicationPages.PersonTaskBoardPage });
             }
+        }
+
+        private void GridClose_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void GridHome_MouseLeftButtonUp_1(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            if (ApplicationController.Instance.CurrentProject != null)
+            {
+                ApplicationController.Instance.AdminLogin = false;
+                ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.MainPage });
+            }
+            else
+            {
+                ApplicationController.Instance.AdminLogin = false;
+                ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.RootPage });
+            }
+        }
+
+        private void GridConfig_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.ProjectManagementPage });
         }
     }
 }
