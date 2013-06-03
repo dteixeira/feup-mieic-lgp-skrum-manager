@@ -24,11 +24,11 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Rectangle x:Name="FirstIconBack" Style="{DynamicResource RectangleStyle}" Drop="FirstIconBack_Drop" MouseLeftButtonDown="FirstIconBack_Click" />
-        <Rectangle x:Name="SecondIconBack" Grid.Row="1" Style="{DynamicResource RectangleStyle}" Drop="SecondIconBack_Drop" MouseLeftButtonDown="SecondIconBack_Click" />
-        <Rectangle x:Name="ThirdIconBack" Grid.Row="2" Style="{DynamicResource RectangleStyle}" Drop="ThirdIconBack_Drop" MouseLeftButtonDown="ThirdIconBack_Click" />
-        <Rectangle x:Name="FourthIconBack" Grid.Row="3" Style="{DynamicResource RectangleStyle}" Drop="FourthIconBack_Drop" MouseLeftButtonDown="FourthIconBack_Click" />
-        <Rectangle x:Name="FifthIconBack" Grid.Row="4" Style="{DynamicResource RectangleStyle}" Drop="FifthIconBack_Drop" MouseLeftButtonDown="FifthIconBack_Click" />
+        <Rectangle x:Name="FirstIconBack" Style="{DynamicResource RectangleStyle}" Drop="FirstIconBack_Drop" MouseLeftButtonUp="FirstIconBack_Click" />
+        <Rectangle x:Name="SecondIconBack" Grid.Row="1" Style="{DynamicResource RectangleStyle}" Drop="SecondIconBack_Drop" MouseLeftButtonUp="SecondIconBack_Click" />
+        <Rectangle x:Name="ThirdIconBack" Grid.Row="2" Style="{DynamicResource RectangleStyle}" Drop="ThirdIconBack_Drop" MouseLeftButtonUp="ThirdIconBack_Click" />
+        <Rectangle x:Name="FourthIconBack" Grid.Row="3" Style="{DynamicResource RectangleStyle}" Drop="FourthIconBack_Drop" MouseLeftButtonUp="FourthIconBack_Click" />
+        <Rectangle x:Name="FifthIconBack" Grid.Row="4" Style="{DynamicResource RectangleStyle}" Drop="FifthIconBack_Drop" />
 
         <Image x:Name="FirstIconImage" Visibility="{Binding FirstVisibility}" Source="{Binding FirstIcon}" IsHitTestVisible="False" Margin="10" />
         <Image x:Name="SecondIconImage" Grid.Row="1" Visibility="{Binding SecondVisibility}"  Source="{Binding SecondIcon}" IsHitTestVisible="False" Margin="10" />
