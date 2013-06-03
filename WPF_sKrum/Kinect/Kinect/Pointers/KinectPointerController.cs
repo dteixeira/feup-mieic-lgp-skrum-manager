@@ -112,7 +112,7 @@ namespace Kinect.Pointers
                             if (currentSkeleton.Joints[JointType.HandLeft].Position.Y > currentSkeleton.Joints[JointType.ElbowLeft].Position.Y)
                             {
                                 // Right hand should be above right elbow.
-                                if (currentSkeleton.Joints[JointType.HandRight].Position.Y > currentSkeleton.Joints[JointType.ElbowRight].Position.Y)
+                                if (currentSkeleton.Joints[JointType.HandRight].Position.Y > currentSkeleton.Joints[JointType.HipRight].Position.Y)
                                 {
                                     // Left hand data.
                                     KinectPointerHand leftHand = new KinectPointerHand();
