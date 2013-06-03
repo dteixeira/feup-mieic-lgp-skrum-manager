@@ -27,7 +27,7 @@
 					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
 				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="TASKS COMPLETAS" VerticalAlignment="Center" TextTrimming="WordEllipsis" FontSize="32" FontFamily="Open Sans" Margin="0,0,0,10"/>
-                <GenericControlLib:PercentageShowerControl x:Name="TasksExecuted" VerticalAlignment="Top" Margin="0" Todo="1" Done="1" Height="70" Grid.Row="1"/>
+                <GenericControlLib:PercentageShowerControl x:Name="TasksExecuted" VerticalAlignment="Top" Margin="0" Total="1" Done="1" Height="70" Grid.Row="1"/>
 			</Grid>
 			<Grid Grid.Row="1" VerticalAlignment="Center">
 				<Grid.RowDefinitions>
@@ -35,7 +35,7 @@
 					<RowDefinition Height="Auto"/>
 				</Grid.RowDefinitions>
 				<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="STORIES COMPLETAS" VerticalAlignment="Center" TextTrimming="WordEllipsis" FontSize="32" FontFamily="Open Sans" Margin="0,0,0,10"/>
-				<GenericControlLib:PercentageShowerControl x:Name="UserStoriesExecuted" VerticalAlignment="Top" Margin="0" Done="1" Todo="1" Height="70" Grid.Row="1"/>
+                <GenericControlLib:PercentageShowerControl x:Name="UserStoriesExecuted" VerticalAlignment="Top" Margin="0" Done="1" Total="1" Height="70" Grid.Row="1"/>
 			</Grid>
 			<Grid VerticalAlignment="Top">
 				<Grid.RowDefinitions>

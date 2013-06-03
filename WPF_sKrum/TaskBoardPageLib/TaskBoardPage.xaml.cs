@@ -174,6 +174,10 @@ namespace TaskBoardPageLib
                             totalWork += personTask.SpentTime;
                         }
                         taskControl.TaskEstimationWork = string.Format("{0:0.#} / {1}", totalWork, task.Estimation);
+                        if (task.TaskID == 89)
+                        {
+                            System.Console.WriteLine("");
+                        }
 
                         switch (task.State)
                         {

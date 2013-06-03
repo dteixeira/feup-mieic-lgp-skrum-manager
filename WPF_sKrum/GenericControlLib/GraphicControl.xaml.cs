@@ -11,7 +11,7 @@ namespace GenericControlLib
     /// </summary>
     public partial class GraphicControl : UserControl
     {
-        public GraphicControl(List<List<KeyValuePair<string, int>>> data)
+        public GraphicControl(List<List<KeyValuePair<string, double>>> data)
         {
             InitializeComponent();
             showColumnChart(data);
@@ -35,7 +35,7 @@ namespace GenericControlLib
             return style;
         }
 
-        private void showColumnChart(List<List<KeyValuePair<string, int>>> data)
+        private void showColumnChart(List<List<KeyValuePair<string, double>>> data)
         {
             if (data.Count > 0)
             {
@@ -53,41 +53,6 @@ namespace GenericControlLib
                     lineSeries1.DataPointStyle = dataPointStyle;
                 }
             }
-
-            /*//Novos valores para a linha adicional
-            List<KeyValuePair<string, int>> valueList2 = new List<KeyValuePair<string, int>>();
-            valueList2.Add(new KeyValuePair<string, int>("1", 60));
-            valueList2.Add(new KeyValuePair<string, int>("2", 48));
-            valueList2.Add(new KeyValuePair<string, int>("3", 36));
-            valueList2.Add(new KeyValuePair<string, int>("4", 24));
-            valueList2.Add(new KeyValuePair<string, int>("5", 12));
-            valueList2.Add(new KeyValuePair<string, int>("6", 0));
-
-            //Teste-Adicionar mais uma linha ao ultimo grafico de linhas
-            LineSeries lineSeries1 = new LineSeries();
-
-            //LineSeries lineSeries2 = new LineSeries();
-
-            lineSeries1.Title = "Estimativa";
-            lineSeries1.DependentValuePath = "Value";
-            lineSeries1.IndependentValuePath = "Key";
-            lineSeries1.ItemsSource = valueList2;
-            lineChart.Series.Add(lineSeries1);*/
-
-            /*lineSeries2.Title = "Real";
-            lineSeries2.DependentValuePath = "Value";
-            lineSeries2.IndependentValuePath = "Key";
-            lineSeries2.ItemsSource = valueList;
-
-            //lineChart.Series.Add(lineSeries2);*/
-
-            /*Style dataPointStyle = GetNewDataPointStyle();
-            lineSeries1.DataPointStyle = dataPointStyle;*/
-
-            //this.Default_line_serie.Title = "Real";
-
-            //Setting data for line chart
-            //lineChart.DataContext = valueList;
         }
     }
 }

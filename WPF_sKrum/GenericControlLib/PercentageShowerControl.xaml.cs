@@ -8,7 +8,7 @@ namespace GenericControlLib
     public partial class PercentageShowerControl : UserControl
     {
         private int done;
-        private int todo;
+        private int total;
 
         public int Done
         {
@@ -16,28 +16,20 @@ namespace GenericControlLib
             set { this.done = value; }
         }
 
-        public int Todo
+        public int Total
         {
-            get { return this.todo; }
-            set { this.todo = value; }
+            get { return this.total; }
+            set { this.total = value; }
         }
 
         public double Percentage
         {
             get
             {
-                if (todo + done > 0)
-                    return (((double)done) / (todo + done));
+                if(total > 0)
+                    return (((double)this.done) / this.total);
                 else
                     return 0;
-            }
-        }
-
-        public string PercentageText
-        {
-            get
-            {
-                return ((int)(Percentage * 100)).ToString() + "%";
             }
         }
 
@@ -45,7 +37,7 @@ namespace GenericControlLib
         {
             get
             {
-                return (done.ToString() + "/" + ((todo + done).ToString()));
+                return string.Format("{0:0.#} / {1:0.#}", this.done, this.total);
             }
         }
 

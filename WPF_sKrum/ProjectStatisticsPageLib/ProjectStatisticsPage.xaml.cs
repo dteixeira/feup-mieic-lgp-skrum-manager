@@ -45,15 +45,7 @@ namespace ProjectStatisticsPageLib
 
             // Get current sprint.
             Sprint sprint = project.Sprints.FirstOrDefault(s => s.Closed == false);
-
-            int closedStories = 0;
-            int openedStories = 0;
-            int closedTasks = 0;
-            int openedTasks = 0;
-            int estimatedWork = 0;
-            double doneWork = 0;
             
-
             int sprintdur = project.SprintDuration * 7;
             List<int> graphicRawData = new List<int>(sprintdur);
             for (int i = 0; i < sprintdur; i++)
@@ -61,64 +53,55 @@ namespace ProjectStatisticsPageLib
                 graphicRawData.Add(0);
             }
 
-            // Iterate all user stories in the sprint.
-            foreach (var story in sprint.Stories)
+            // Total work statistics.
+            this.WorkExecuted.Done = ( 
+                from s in sprint.Stories
+                from t in s.Tasks
+                from pt in t.PersonTasks
+                select pt.SpentTime).Sum();
+            this.WorkExecuted.Expected = (
+                from s in sprint.Stories
+                from t in s.Tasks
+                select t.Estimation).Sum();
+
+            // User story statitics.
+            this.UserStoriesExecuted.Done = sprint.Stories.Count(s => s.State == StoryState.Completed || s.State == StoryState.Abandoned);
+            this.UserStoriesExecuted.Total = sprint.Stories.Count();
+
+            // Task statistics.
+            this.TasksExecuted.Done = (
+                from s in sprint.Stories
+                from t in s.Tasks
+                where t.State == TaskState.Completed
+                select t).Count();
+            this.TasksExecuted.Total = (
+                from s in sprint.Stories
+                from t in s.Tasks
+                select t).Count();
+
+            // Create the burndown chart.
+            List<KeyValuePair<string, double>> previsiondata = new List<KeyValuePair<string, double>>();
+            List<KeyValuePair<string, double>> graphicdata = new List<KeyValuePair<string, double>>();
+            previsiondata.Add(new KeyValuePair<string, double>("0", this.WorkExecuted.Expected));
+            graphicdata.Add(new KeyValuePair<string, double>("0", this.WorkExecuted.Expected));
+
+            double expectedDayWork = this.WorkExecuted.Expected / sprintdur;
+            for (int i = 1; i <= sprintdur; ++i)
             {
-                if (story.State == StoryState.Completed)
-                    closedStories++;
-                else if (story.State == StoryState.Abandoned)
-                    closedStories++;
-                else
-                    openedStories++;
-                foreach(var task in story.Tasks)
+                DateTime day = sprint.BeginDate.Date.AddDays(i - 1);
+                previsiondata.Add(new KeyValuePair<string, double>(i.ToString(), this.WorkExecuted.Expected - i * expectedDayWork));
+                if (System.DateTime.Today >= day.Date)
                 {
-                    if (task.State == TaskState.Completed)
-                    {
-                        closedTasks++;
-                        try
-                        {
-                            DateTime lastworkedtime = task.PersonTasks.Max(pt => pt.CreationDate);
-                            TimeSpan diftime = lastworkedtime - sprint.BeginDate;
-                            int key = diftime.Days;
-                            graphicRawData[key] = graphicRawData[key] + task.Estimation;
-                        }
-                        catch (Exception){}
-                    }
-                    else
-                        openedTasks++;
-                    estimatedWork += task.Estimation;
-                    doneWork += task.PersonTasks.Sum(pt=>pt.SpentTime);
+                    double workInDay = (
+                        from s in sprint.Stories
+                        from t in s.Tasks
+                        from pt in t.PersonTasks
+                        where pt.CreationDate.Date <= day.Date
+                        select pt.SpentTime > t.Estimation ? t.Estimation : pt.SpentTime).Sum();
+                    graphicdata.Add(new KeyValuePair<string, double>(i.ToString(), this.WorkExecuted.Expected - workInDay < 0 ? 0 : this.WorkExecuted.Expected - workInDay));
                 }
             }
-
-            this.WorkExecuted.Done = (int)doneWork;
-            this.WorkExecuted.Expected = estimatedWork;
-
-            this.UserStoriesExecuted.Done = closedStories;
-            this.UserStoriesExecuted.Todo = openedStories;
-
-            this.TasksExecuted.Done = closedTasks;
-            this.TasksExecuted.Todo = openedTasks;
-
-            List<KeyValuePair<string, int>> previsiondata = new List<KeyValuePair<string, int>>();
-            List<KeyValuePair<string, int>> graphicdata = new List<KeyValuePair<string, int>>();
-            previsiondata.Add(new KeyValuePair<string, int>("1", estimatedWork));
-            graphicdata.Add(new KeyValuePair<string, int>("1", estimatedWork));
-
-
-
-            TimeSpan biggestDifTime = System.DateTime.Now - sprint.BeginDate;
-            int biggestkey = biggestDifTime.Days;
-
-            for (int i = 1; i < sprintdur; i++)
-            {
-                previsiondata.Add(new KeyValuePair<string, int>((i+1).ToString(), (estimatedWork/sprintdur)*(sprintdur-i)));
-                if(i<= biggestkey)
-                    graphicdata.Add(new KeyValuePair<string, int>((i+1).ToString(), (graphicdata[i - 1].Value - graphicRawData[i])));
-            }
-
-            List<List<KeyValuePair<string,int>>> data = new List<List<KeyValuePair<string,int>>> ();
-            List<string> names = new List<string>();
+            List<List<KeyValuePair<string, double>>> data = new List<List<KeyValuePair<string, double>>>();
             data.Add(previsiondata);
             data.Add(graphicdata);
 
@@ -131,13 +114,6 @@ namespace ProjectStatisticsPageLib
             graphic.SetValue(Grid.RowProperty, 1);
             graphic.Margin = new Thickness(0,0,0,0);
             this.LeftArea.Children.Add(graphic);
-
-            /*GraphicColumnControl graphic2 = new GraphicColumnControl(data[1]);
-            graphic2.SetValue(Grid.RowProperty, 1);
-            graphic2.Margin = new Thickness(50);
-            this.LeftArea.Children.Add(graphic2);*/
-
-
         }
 
         public PageChange PageChangeTarget(PageChangeDirection direction)

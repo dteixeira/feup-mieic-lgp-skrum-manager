@@ -11,7 +11,6 @@ namespace PopupFormControlLib
         {
             this.InitializeComponent();
             this.PageValue = 0.0;
-            this.NumericSpinner.SpinnerChangedEvent += new GenericControlLib.NumericSpinnerControl.SpinnerChangedHandler(this.SpinnerChangeHandler);
         }
 
         public double Min
@@ -37,7 +36,11 @@ namespace PopupFormControlLib
 
         public string PageTitle { get; set; }
 
-        public object PageValue { get; set; }
+        public object PageValue
+        {
+            get { return (double)this.NumericSpinner.SpinnerValue; }
+            set { this.NumericSpinner.SpinnerValue = (double)value; }
+        }
 
         public double DefaultValue
         {
@@ -46,11 +49,6 @@ namespace PopupFormControlLib
                 this.PageValue = value;
                 this.NumericSpinner.SpinnerValue = value;
             }
-        }
-
-        public void SpinnerChangeHandler(double value)
-        {
-            this.PageValue = value;
         }
     }
 }

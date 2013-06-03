@@ -56,41 +56,36 @@ namespace ProjectStatisticsPageLib
             // Get current sprint.
             Sprint sprint = project.Sprints.FirstOrDefault(s => s.Closed == false);
 
-            int estimatedWork = 0;
-            double doneWork = 0;
-            
             List<int> graphicRawData = new List<int>(project.SprintDuration * 7);
             List<int> storyIDs = sprint.Stories.Select(st => st.StoryID).ToList<int>();
             List<Task> tasks = this.CurrentPerson.Tasks.Where(t => storyIDs.Contains(t.StoryID)).ToList<Task>();
-            estimatedWork = tasks.Sum(t => t.Estimation);
-            for(int i = 0; i < project.SprintDuration * 7; ++i) 
+            List<KeyValuePair<string, double>> graphicdata = new List<KeyValuePair<string, double>>();
+            double estimatedWork = tasks.Sum(t => t.Estimation);
+            double totalWork = 0;
+            for (int i = 1; i <= project.SprintDuration * 7; ++i)
             {
-                var workedTasks = tasks.Where(t => t.CreationDate.Date == sprint.BeginDate.Date.AddDays(i));
-                double sum = 0;
-                foreach (Task task in workedTasks)
-                {
-                    sum += task.PersonTasks.Sum(pt => pt.SpentTime);
-                }
-                doneWork += sum;
-                graphicRawData.Add((int)sum);
-            }
-            
-            this.WorkExecuted.Done = (int)doneWork;
-            this.WorkExecuted.Expected = estimatedWork;
-            List<KeyValuePair<string, int>> graphicdata = new List<KeyValuePair<string, int>>();
-            for (int i = 0; i < project.SprintDuration * 7; i++)
-            {
-                graphicdata.Add(new KeyValuePair<string, int>((i+1).ToString(), graphicRawData[i]));
+                DateTime day = sprint.BeginDate.Date.AddDays(i - 1);
+                double workDone = (
+                    from t in tasks
+                    from pt in t.PersonTasks
+                    where pt.CreationDate.Date == day.Date
+                    select pt.SpentTime).Sum();
+                totalWork += workDone;
+                graphicdata.Add(new KeyValuePair<string, double>(i.ToString(), workDone));
             }
 
             // Completed tasks statistics.
-            this.TasksExecuted.Todo = tasks.Count(t => t.State == TaskState.InProgress || t.State == TaskState.InProgress);
+            this.TasksExecuted.Total = tasks.Count();
             this.TasksExecuted.Done = tasks.Count(t => t.State == TaskState.Completed);
 
             // Completed stories statistics.
             var involvedStories = sprint.Stories.Where(s => tasks.Select(t => t.StoryID).Contains(s.StoryID));
-            this.UserStoriesExecuted.Todo = involvedStories.Count();
-            this.UserStoriesExecuted.Done = involvedStories.Count(s => s.State == StoryState.Completed);
+            this.UserStoriesExecuted.Total = involvedStories.Count();
+            this.UserStoriesExecuted.Done = involvedStories.Count(s => s.State == StoryState.Completed || s.State == StoryState.Abandoned);
+
+            // Worked statistics.
+            this.WorkExecuted.Done = totalWork;
+            this.WorkExecuted.Expected = estimatedWork;
 
             GraphicColumnControl graphic = new GraphicColumnControl(graphicdata);
             graphic.SetValue(Grid.RowProperty, 1);

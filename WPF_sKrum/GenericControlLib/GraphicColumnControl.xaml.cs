@@ -11,7 +11,7 @@ namespace GenericControlLib
     /// </summary>
     public partial class GraphicColumnControl : UserControl
     {
-        public GraphicColumnControl(List<KeyValuePair<string, int>> data)
+        public GraphicColumnControl(List<KeyValuePair<string, double>> data)
         {
             InitializeComponent();
             showColumnChart(data);
@@ -35,7 +35,7 @@ namespace GenericControlLib
             return style;
         }
 
-        private void showColumnChart(List<KeyValuePair<string, int>> data)
+        private void showColumnChart(List<KeyValuePair<string, double>> data)
         {
             columnChart.DataContext = data;
         }

@@ -7,16 +7,16 @@ namespace GenericControlLib
     /// </summary>
     public partial class PercentageDualShowerControl : UserControl
     {
-        private int done;
-        private int expected;
+        private double done;
+        private double expected;
 
-        public int Done
+        public double Done
         {
             get { return this.done; }
             set { this.done = value; }
         }
 
-        public int Expected
+        public double Expected
         {
             get { return this.expected; }
             set { this.expected = value; }
@@ -48,7 +48,7 @@ namespace GenericControlLib
         {
             get
             {
-                return (done.ToString());
+                return string.Format("{0:0.#}", this.done);
             }
         }
 
@@ -56,7 +56,7 @@ namespace GenericControlLib
         {
             get
             {
-                return (expected.ToString());
+                return string.Format("{0:0.#}", this.expected);
             }
         }
 

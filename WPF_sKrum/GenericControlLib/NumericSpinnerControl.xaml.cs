@@ -126,12 +126,12 @@ namespace GenericControlLib
 
             if (this.plusPressed && this.spinnerValue + this.increment <= this.max)
             {
-                this.SpinnerValue += this.Increment;
+                this.SpinnerValue = this.SpinnerValue + this.Increment;
                 this.Notify(this.spinnerValue);
             }
             else if (!this.plusPressed && this.spinnerValue - this.increment >= this.min)
             {
-                this.SpinnerValue -= this.Increment;
+                this.SpinnerValue = this.SpinnerValue - this.Increment;
                 this.Notify(this.spinnerValue);
             }
         }
