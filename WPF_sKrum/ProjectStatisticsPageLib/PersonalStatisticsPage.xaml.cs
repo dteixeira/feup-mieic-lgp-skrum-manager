@@ -184,6 +184,12 @@ namespace ProjectStatisticsPageLib
                 if (notification == NotificationType.ProjectModification)
                 {
                     // Repopulate the taskboard with the current project.
+                    // Repopulate the taskboard with the current project.
+                    Person updated = ApplicationController.Instance.Team.FirstOrDefault(p => p.PersonID == this.CurrentPerson.PersonID);
+                    if (updated != null)
+                    {
+                        this.CurrentPerson = updated;
+                    }
                     this.PopulatePersonalStatisticsPage();
                 }
             }
