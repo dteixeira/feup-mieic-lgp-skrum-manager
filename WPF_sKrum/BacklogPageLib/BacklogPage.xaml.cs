@@ -334,6 +334,10 @@ namespace BacklogPageLib
                     System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(AddStory));
                     thread.Start(story);
                 }
+                else
+                {
+                    ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("Uma Story deve ter uma descrição.", new TimeSpan(0, 0, 3));
+                }
             }
             ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
         }
@@ -369,6 +373,10 @@ namespace BacklogPageLib
                         story.Priority = priority;
                         System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(EditStory));
                         thread.Start(story);
+                    }
+                    else
+                    {
+                        ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("Uma Story deve ter uma descrição.", new TimeSpan(0, 0, 3));
                     }
                 }
                 ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);

@@ -472,6 +472,10 @@ namespace TaskBoardPageLib
                     System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(EditTask));
                     thread.Start(task);
                 }
+                else
+                {
+                    ApplicationController.Instance.ApplicationWindow.ShowNotificationMessage("Uma Task deve ter uma descrição.", new TimeSpan(0, 0, 3));
+                }
             }
             SharedTypes.ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
         }
