@@ -100,7 +100,7 @@ namespace SharedTypes
 
         private ApplicationController()
         {
-            this.KinectSensor = new KinectSensorController(KinectSensorType.Xbox360Sensor);
+            this.KinectSensor = new KinectSensorController(KinectSensorType.WindowsSensor);
             this.TrackingID = -1;
             this.Gripping = false;
 

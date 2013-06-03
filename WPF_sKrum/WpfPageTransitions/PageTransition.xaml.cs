@@ -62,6 +62,7 @@ namespace PageTransitions
 
         private void ShowNextPage()
         {
+            contentPresenter.Margin = new Thickness(0, 0, 0, 0);
             UserControl newPage = pages.Pop();
             newPage.Loaded += newPage_Loaded;
             contentPresenter.Content = newPage;

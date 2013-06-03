@@ -95,6 +95,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ServiceLib\ServiceLib.csproj">
+      <Project>{00f9c426-8516-404c-b085-de09790effc1}</Project>
+      <Name>ServiceLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharedTypes\SharedTypes.csproj">
       <Project>{aefd3bbd-4261-4c4f-ba8d-fb3668bb40be}</Project>
       <Name>SharedTypes</Name>
