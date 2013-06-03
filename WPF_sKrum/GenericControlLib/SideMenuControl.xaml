@@ -28,7 +28,7 @@
         <Rectangle x:Name="SecondIconBack" Grid.Row="1" Style="{DynamicResource RectangleStyle}" Drop="SecondIconBack_Drop" MouseLeftButtonUp="SecondIconBack_Click" />
         <Rectangle x:Name="ThirdIconBack" Grid.Row="2" Style="{DynamicResource RectangleStyle}" Drop="ThirdIconBack_Drop" MouseLeftButtonUp="ThirdIconBack_Click" />
         <Rectangle x:Name="FourthIconBack" Grid.Row="3" Style="{DynamicResource RectangleStyle}" Drop="FourthIconBack_Drop" MouseLeftButtonUp="FourthIconBack_Click" />
-        <Rectangle x:Name="FifthIconBack" Grid.Row="4" Style="{DynamicResource RectangleStyle}" Drop="FifthIconBack_Drop" />
+        <Rectangle x:Name="FifthIconBack" Grid.Row="4" Style="{DynamicResource RectangleStyle}" Drop="FifthIconBack_Drop" MouseLeftButtonUp="FifthIconBack_Click" />
 
         <Image x:Name="FirstIconImage" Visibility="{Binding FirstVisibility}" Source="{Binding FirstIcon}" IsHitTestVisible="False" Margin="10" />
         <Image x:Name="SecondIconImage" Grid.Row="1" Visibility="{Binding SecondVisibility}"  Source="{Binding SecondIcon}" IsHitTestVisible="False" Margin="10" />
