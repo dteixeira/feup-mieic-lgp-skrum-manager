@@ -213,6 +213,7 @@
     <Resource Include="Images\aloquete.png" />
     <Resource Include="Images\darkarrow.png" />
     <Resource Include="Images\mala.png" />
+    <Resource Include="Images\logo.png" />
     <Content Include="KinectInteraction170_32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

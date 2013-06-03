@@ -6,6 +6,6 @@
              mc:Ignorable="d"
              d:DesignHeight="514" d:DesignWidth="775">
     <Grid Background="{DynamicResource BackgroundBrush}">
-        <TextBlock x:Name="Logo" HorizontalAlignment="Center" Margin="0" TextWrapping="Wrap" Text="sKrum" VerticalAlignment="Center" FontFamily="Open Sans" FontSize="150" Foreground="{DynamicResource Gray5Brush}" />
+    	<Image Source="Images/logo.png" Margin="0,0,23,0" Width="350"/>
     </Grid>
 </UserControl>
