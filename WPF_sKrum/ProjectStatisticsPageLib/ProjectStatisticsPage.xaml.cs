@@ -40,80 +40,86 @@ namespace ProjectStatisticsPageLib
 
         private void PopulateProjectStatisticsPage()
         {
-            // Get current project if selected.
-            Project project = ApplicationController.Instance.CurrentProject;
-
-            // Get current sprint.
-            Sprint sprint = project.Sprints.FirstOrDefault(s => s.Closed == false);
-            
-            int sprintdur = project.SprintDuration * 7;
-            List<int> graphicRawData = new List<int>(sprintdur);
-            for (int i = 0; i < sprintdur; i++)
+            try
             {
-                graphicRawData.Add(0);
-            }
+                // Get current project if selected.
+                Project project = ApplicationController.Instance.CurrentProject;
 
-            // Total work statistics.
-            this.WorkExecuted.Done = ( 
-                from s in sprint.Stories
-                from t in s.Tasks
-                from pt in t.PersonTasks
-                select pt.SpentTime).Sum();
-            this.WorkExecuted.Expected = (
-                from s in sprint.Stories
-                from t in s.Tasks
-                select t.Estimation).Sum();
+                // Get current sprint.
+                Sprint sprint = project.Sprints.FirstOrDefault(s => s.Closed == false);
 
-            // User story statitics.
-            this.UserStoriesExecuted.Done = sprint.Stories.Count(s => s.State == StoryState.Completed || s.State == StoryState.Abandoned);
-            this.UserStoriesExecuted.Total = sprint.Stories.Count();
-
-            // Task statistics.
-            this.TasksExecuted.Done = (
-                from s in sprint.Stories
-                from t in s.Tasks
-                where t.State == TaskState.Completed
-                select t).Count();
-            this.TasksExecuted.Total = (
-                from s in sprint.Stories
-                from t in s.Tasks
-                select t).Count();
-
-            // Create the burndown chart.
-            List<KeyValuePair<string, double>> previsiondata = new List<KeyValuePair<string, double>>();
-            List<KeyValuePair<string, double>> graphicdata = new List<KeyValuePair<string, double>>();
-            previsiondata.Add(new KeyValuePair<string, double>("0", this.WorkExecuted.Expected));
-            graphicdata.Add(new KeyValuePair<string, double>("0", this.WorkExecuted.Expected));
-
-            double expectedDayWork = this.WorkExecuted.Expected / sprintdur;
-            for (int i = 1; i <= sprintdur; ++i)
-            {
-                DateTime day = sprint.BeginDate.Date.AddDays(i - 1);
-                previsiondata.Add(new KeyValuePair<string, double>(i.ToString(), this.WorkExecuted.Expected - i * expectedDayWork));
-                if (System.DateTime.Today >= day.Date)
+                int sprintdur = project.SprintDuration * 7;
+                List<int> graphicRawData = new List<int>(sprintdur);
+                for (int i = 0; i < sprintdur; i++)
                 {
-                    double workInDay = (
-                        from s in sprint.Stories
-                        from t in s.Tasks
-                        from pt in t.PersonTasks
-                        where pt.CreationDate.Date <= day.Date
-                        select pt.SpentTime > t.Estimation ? t.Estimation : pt.SpentTime).Sum();
-                    graphicdata.Add(new KeyValuePair<string, double>(i.ToString(), this.WorkExecuted.Expected - workInDay < 0 ? 0 : this.WorkExecuted.Expected - workInDay));
+                    graphicRawData.Add(0);
                 }
-            }
-            List<List<KeyValuePair<string, double>>> data = new List<List<KeyValuePair<string, double>>>();
-            data.Add(previsiondata);
-            data.Add(graphicdata);
 
-            if (graphicdata[graphicdata.Count - 1].Value > previsiondata[graphicdata.Count - 1].Value)
+                // Total work statistics.
+                this.WorkExecuted.Done = (
+                    from s in sprint.Stories
+                    from t in s.Tasks
+                    from pt in t.PersonTasks
+                    select pt.SpentTime).Sum();
+                this.WorkExecuted.Expected = (
+                    from s in sprint.Stories
+                    from t in s.Tasks
+                    select t.Estimation).Sum();
+
+                // User story statitics.
+                this.UserStoriesExecuted.Done = sprint.Stories.Count(s => s.State == StoryState.Completed || s.State == StoryState.Abandoned);
+                this.UserStoriesExecuted.Total = sprint.Stories.Count();
+
+                // Task statistics.
+                this.TasksExecuted.Done = (
+                    from s in sprint.Stories
+                    from t in s.Tasks
+                    where t.State == TaskState.Completed
+                    select t).Count();
+                this.TasksExecuted.Total = (
+                    from s in sprint.Stories
+                    from t in s.Tasks
+                    select t).Count();
+
+                // Create the burndown chart.
+                List<KeyValuePair<string, double>> previsiondata = new List<KeyValuePair<string, double>>();
+                List<KeyValuePair<string, double>> graphicdata = new List<KeyValuePair<string, double>>();
+                previsiondata.Add(new KeyValuePair<string, double>("0", this.WorkExecuted.Expected));
+                graphicdata.Add(new KeyValuePair<string, double>("0", this.WorkExecuted.Expected));
+
+                double expectedDayWork = this.WorkExecuted.Expected / sprintdur;
+                for (int i = 1; i <= sprintdur; ++i)
+                {
+                    DateTime day = sprint.BeginDate.Date.AddDays(i - 1);
+                    previsiondata.Add(new KeyValuePair<string, double>(i.ToString(), this.WorkExecuted.Expected - i * expectedDayWork));
+                    if (System.DateTime.Today >= day.Date)
+                    {
+                        double workInDay = (
+                            from s in sprint.Stories
+                            from t in s.Tasks
+                            from pt in t.PersonTasks
+                            where pt.CreationDate.Date <= day.Date
+                            select pt.SpentTime > t.Estimation ? t.Estimation : pt.SpentTime).Sum();
+                        graphicdata.Add(new KeyValuePair<string, double>(i.ToString(), this.WorkExecuted.Expected - workInDay < 0 ? 0 : this.WorkExecuted.Expected - workInDay));
+                    }
+                }
+                List<List<KeyValuePair<string, double>>> data = new List<List<KeyValuePair<string, double>>>();
+                data.Add(previsiondata);
+                data.Add(graphicdata);
+
+                if (graphicdata[graphicdata.Count - 1].Value > previsiondata[graphicdata.Count - 1].Value)
+                {
+                    this.Global_status.ButtonText = "ATRASADO";
+                }
+
+                GraphicControl graphic = new GraphicControl(data);
+                graphic.SetValue(Grid.RowProperty, 1);
+                graphic.Margin = new Thickness(0, 0, 0, 0);
+                this.LeftArea.Children.Add(graphic);
+            }
+            catch (Exception)
             {
-                this.Global_status.ButtonText = "ATRASADO";
             }
-
-            GraphicControl graphic = new GraphicControl(data);
-            graphic.SetValue(Grid.RowProperty, 1);
-            graphic.Margin = new Thickness(0,0,0,0);
-            this.LeftArea.Children.Add(graphic);
         }
 
         public PageChange PageChangeTarget(PageChangeDirection direction)

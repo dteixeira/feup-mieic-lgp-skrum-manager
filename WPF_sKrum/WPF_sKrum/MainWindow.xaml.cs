@@ -56,11 +56,14 @@ namespace WPFApplication
             get { return this.Dispatcher; }
         }
 
+        private DateTime LastGestureTimestamp { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
             this.backdata = ApplicationController.Instance;
             this.backdata.ApplicationWindow = this;
+            this.LastGestureTimestamp = DateTime.Now;
 
             // Setup navigation controls.
             this.backdata.CurrentPage = new RootPage(null);
@@ -234,6 +237,17 @@ namespace WPFApplication
             // Recognize transition gestures.
             else if (this.backdata.TrackingID != -1)
             {
+                // Prevent several gestures triggered very close.
+                DateTime now = DateTime.Now;
+                if (LastGestureTimestamp.AddSeconds(1) > now)
+                {
+                    return;
+                }
+                else
+                {
+                    LastGestureTimestamp = now;
+                }
+
                 // Process event modifications.
                 switch (e.GestureType)
                 {

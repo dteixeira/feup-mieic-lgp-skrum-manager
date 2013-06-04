@@ -50,49 +50,55 @@ namespace ProjectStatisticsPageLib
 
         private void PopulatePersonalStatisticsPage()
         {
-            // Get current project if selected.
-            Project project = ApplicationController.Instance.CurrentProject;
-
-            // Get current sprint.
-            Sprint sprint = project.Sprints.FirstOrDefault(s => s.Closed == false);
-
-            List<int> graphicRawData = new List<int>(project.SprintDuration * 7);
-            List<int> storyIDs = sprint.Stories.Select(st => st.StoryID).ToList<int>();
-            List<Task> tasks = this.CurrentPerson.Tasks.Where(t => storyIDs.Contains(t.StoryID)).ToList<Task>();
-            List<KeyValuePair<string, double>> graphicdata = new List<KeyValuePair<string, double>>();
-            double estimatedWork = tasks.Sum(t => t.Estimation);
-            double totalWork = 0;
-            for (int i = 1; i <= project.SprintDuration * 7; ++i)
+            try
             {
-                DateTime day = sprint.BeginDate.Date.AddDays(i - 1);
-                double workDone = (
-                    from t in tasks
-                    from pt in t.PersonTasks
-                    where pt.CreationDate.Date == day.Date
-                    select pt.SpentTime).Sum();
-                totalWork += workDone;
-                graphicdata.Add(new KeyValuePair<string, double>(i.ToString(), workDone));
+                // Get current project if selected.
+                Project project = ApplicationController.Instance.CurrentProject;
+
+                // Get current sprint.
+                Sprint sprint = project.Sprints.FirstOrDefault(s => s.Closed == false);
+
+                List<int> graphicRawData = new List<int>(project.SprintDuration * 7);
+                List<int> storyIDs = sprint.Stories.Select(st => st.StoryID).ToList<int>();
+                List<Task> tasks = this.CurrentPerson.Tasks.Where(t => storyIDs.Contains(t.StoryID)).ToList<Task>();
+                List<KeyValuePair<string, double>> graphicdata = new List<KeyValuePair<string, double>>();
+                double estimatedWork = tasks.Sum(t => t.Estimation);
+                double totalWork = 0;
+                for (int i = 1; i <= project.SprintDuration * 7; ++i)
+                {
+                    DateTime day = sprint.BeginDate.Date.AddDays(i - 1);
+                    double workDone = (
+                        from t in tasks
+                        from pt in t.PersonTasks
+                        where pt.CreationDate.Date == day.Date
+                        select pt.SpentTime).Sum();
+                    totalWork += workDone;
+                    graphicdata.Add(new KeyValuePair<string, double>(i.ToString(), workDone));
+                }
+
+                // Completed tasks statistics.
+                this.TasksExecuted.Total = tasks.Count();
+                this.TasksExecuted.Done = tasks.Count(t => t.State == TaskState.Completed);
+
+                // Completed stories statistics.
+                var involvedStories = sprint.Stories.Where(s => tasks.Select(t => t.StoryID).Contains(s.StoryID));
+                this.UserStoriesExecuted.Total = involvedStories.Count();
+                this.UserStoriesExecuted.Done = involvedStories.Count(s => s.State == StoryState.Completed || s.State == StoryState.Abandoned);
+
+                // Worked statistics.
+                this.WorkExecuted.Done = totalWork;
+                this.WorkExecuted.Expected = estimatedWork;
+
+                GraphicColumnControl graphic = new GraphicColumnControl(graphicdata);
+                graphic.SetValue(Grid.RowProperty, 1);
+                graphic.Margin = new Thickness(0, 0, 0, 0);
+                graphic.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+                graphic.Height = double.NaN;
+                this.LeftArea.Children.Add(graphic);
             }
-
-            // Completed tasks statistics.
-            this.TasksExecuted.Total = tasks.Count();
-            this.TasksExecuted.Done = tasks.Count(t => t.State == TaskState.Completed);
-
-            // Completed stories statistics.
-            var involvedStories = sprint.Stories.Where(s => tasks.Select(t => t.StoryID).Contains(s.StoryID));
-            this.UserStoriesExecuted.Total = involvedStories.Count();
-            this.UserStoriesExecuted.Done = involvedStories.Count(s => s.State == StoryState.Completed || s.State == StoryState.Abandoned);
-
-            // Worked statistics.
-            this.WorkExecuted.Done = totalWork;
-            this.WorkExecuted.Expected = estimatedWork;
-
-            GraphicColumnControl graphic = new GraphicColumnControl(graphicdata);
-            graphic.SetValue(Grid.RowProperty, 1);
-            graphic.Margin = new Thickness(0, 0, 0, 0);
-            graphic.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
-            graphic.Height = double.NaN;
-            this.LeftArea.Children.Add(graphic);
+            catch (Exception)
+            {
+            }
         }
 
         public PageChange PageChangeTarget(PageChangeDirection direction)
