@@ -334,6 +334,7 @@ namespace ProjectTeamManagementPageLib
                     // Return if the role already exists.
                     if (r.RoleDescription == RoleDescription.TeamMember && r.ProjectID == ApplicationController.Instance.CurrentProject.ProjectID)
                     {
+                        ApplicationController.Instance.ApplicationWindow.SetWindowFade(false);
                         return;
                     }
                 }
