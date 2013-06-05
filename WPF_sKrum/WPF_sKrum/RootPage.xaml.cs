@@ -1,7 +1,7 @@
 ﻿using SharedTypes;
 using System.Windows.Controls;
 
-namespace WPFApplication
+namespace sKrum
 {
     /// <summary>
     /// Interaction logic for RootPage.xaml

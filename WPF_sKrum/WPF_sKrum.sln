@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPFApplication", "WPF_sKrum\WPFApplication.csproj", "{46C1FD7C-4FC3-46EB-A532-DA79B0D83231}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "sKrum", "WPF_sKrum\sKrum.csproj", "{46C1FD7C-4FC3-46EB-A532-DA79B0D83231}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kinect", "Kinect\Kinect.csproj", "{7041AF5B-AD01-4E03-AD77-1202A3BEFE12}"
 EndProject

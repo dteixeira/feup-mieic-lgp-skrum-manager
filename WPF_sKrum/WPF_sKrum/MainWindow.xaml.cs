@@ -14,7 +14,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
-namespace WPFApplication
+namespace sKrum
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
