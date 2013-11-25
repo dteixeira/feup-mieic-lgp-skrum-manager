@@ -43,8 +43,16 @@ namespace PopupFormControlLib
             if (ApplicationController.Instance.TrackingID != -1)
             {
                 Mouse.OverrideCursor = Cursors.None;
-                RightOpen.Visibility = Visibility.Visible;
-                RightClosed.Visibility = Visibility.Collapsed;
+                if (ApplicationController.Instance.UserHandedness == KinectGestureUserHandedness.RightHanded)
+                {
+                    RightOpen.Visibility = Visibility.Visible;
+                    RightClosed.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    LeftOpen.Visibility = Visibility.Visible;
+                    LeftClosed.Visibility = Visibility.Collapsed;
+                }
             }
         }
 
@@ -58,48 +66,136 @@ namespace PopupFormControlLib
             // Set correct hand visible.
             if (e.RightHand.HandEventType == InteractionHandEventType.GripRelease)
             {
-                RightOpen.Visibility = Visibility.Visible;
-                RightClosed.Visibility = Visibility.Collapsed;
+                if (ApplicationController.Instance.UserHandedness == KinectGestureUserHandedness.RightHanded)
+                {
+                    RightOpen.Visibility = Visibility.Visible;
+                    RightClosed.Visibility = Visibility.Collapsed;
+                }
+                else
+                {
+                    LeftOpen.Visibility = Visibility.Visible;
+                    LeftClosed.Visibility = Visibility.Collapsed;
+                }
+
             }
             else if (e.RightHand.HandEventType == InteractionHandEventType.Grip)
             {
-                RightOpen.Visibility = Visibility.Collapsed;
-                RightClosed.Visibility = Visibility.Visible;
+                if (ApplicationController.Instance.UserHandedness == KinectGestureUserHandedness.RightHanded)
+                {
+                    RightOpen.Visibility = Visibility.Collapsed;
+                    RightClosed.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    LeftOpen.Visibility = Visibility.Collapsed;
+                    LeftClosed.Visibility = Visibility.Visible;
+                }
             }
 
-            // Position right hand.
-            Canvas.SetLeft(RightOpen, (e.RightHand.X * this.RenderSize.Width) - (RightOpen.RenderSize.Width / 2) - this.LayoutRoot.Margin.Left);
-            Canvas.SetTop(RightOpen, (e.RightHand.Y * this.RenderSize.Height) - (RightOpen.RenderSize.Height / 2) - this.LayoutRoot.Margin.Top);
-            Canvas.SetLeft(RightClosed, (e.RightHand.X * this.RenderSize.Width) - (RightClosed.RenderSize.Width / 2) - this.LayoutRoot.Margin.Left);
-            Canvas.SetTop(RightClosed, (e.RightHand.Y * this.RenderSize.Height) - (RightClosed.RenderSize.Height / 2) - this.LayoutRoot.Margin.Top);
+            // Position hand.
+            if (ApplicationController.Instance.UserHandedness == KinectGestureUserHandedness.RightHanded)
+            {
+                // Set correct hand visible.
+                if (e.RightHand.HandEventType == InteractionHandEventType.GripRelease)
+                {
+                    RightOpen.Visibility = Visibility.Visible;
+                    RightClosed.Visibility = Visibility.Collapsed;
+                }
+                else if (e.RightHand.HandEventType == InteractionHandEventType.Grip)
+                {
+                    RightOpen.Visibility = Visibility.Collapsed;
+                    RightClosed.Visibility = Visibility.Visible;
+                }
+
+                // Normalize pointer coordinates.
+                double normalizedX = Math.Max(0, Math.Min(e.RightHand.X, 1.0));
+                double normalizedY = Math.Max(0, Math.Min(e.RightHand.Y, 1.0));
+
+                Canvas.SetLeft(RightOpen, (normalizedX * this.RenderSize.Width) - (RightOpen.RenderSize.Width / 2) - this.LayoutRoot.Margin.Left);
+                Canvas.SetTop(RightOpen, (normalizedY * this.RenderSize.Height) - (RightOpen.RenderSize.Height / 2) - this.LayoutRoot.Margin.Top);
+
+                Canvas.SetLeft(RightClosed, (normalizedX * this.RenderSize.Width) - (RightClosed.RenderSize.Width / 2) - this.LayoutRoot.Margin.Left);
+                Canvas.SetTop(RightClosed, (normalizedY * this.RenderSize.Height) - (RightClosed.RenderSize.Height / 2) - this.LayoutRoot.Margin.Top);
+            }
+            else
+            {
+                // Set correct hand visible.
+                if (e.LeftHand.HandEventType == InteractionHandEventType.GripRelease)
+                {
+                    LeftOpen.Visibility = Visibility.Visible;
+                    LeftClosed.Visibility = Visibility.Collapsed;
+                }
+                else if (e.LeftHand.HandEventType == InteractionHandEventType.Grip)
+                {
+                    LeftOpen.Visibility = Visibility.Collapsed;
+                    LeftClosed.Visibility = Visibility.Visible;
+                }
+
+                // Normalize pointer coordinates.
+                double normalizedX = Math.Max(0, Math.Min(e.LeftHand.X, 1.0));
+                double normalizedY = Math.Max(0, Math.Min(e.LeftHand.Y, 1.0));
+
+                Canvas.SetLeft(LeftOpen, (normalizedX * this.RenderSize.Width) - (LeftOpen.RenderSize.Width / 2) - this.LayoutRoot.Margin.Left);
+                Canvas.SetTop(LeftOpen, (normalizedY * this.RenderSize.Height) - (LeftOpen.RenderSize.Height / 2) - this.LayoutRoot.Margin.Top);
+
+                Canvas.SetLeft(LeftClosed, (normalizedX * this.RenderSize.Width) - (LeftClosed.RenderSize.Width / 2) - this.LayoutRoot.Margin.Left);
+                Canvas.SetTop(LeftClosed, (normalizedY * this.RenderSize.Height) - (LeftClosed.RenderSize.Height / 2) - this.LayoutRoot.Margin.Top);
+            }
         }
 
         private void KinectGestureRecognizedHandler(object sender, KinectGestureEventArgs e)
         {
-            switch (e.GestureType)
+            if (ApplicationController.Instance.UserHandedness == KinectGestureUserHandedness.RightHanded)
             {
-                case KinectGestureType.WaveLeftHand:
-                    RightOpen.Visibility = Visibility.Collapsed;
-                    RightClosed.Visibility = Visibility.Collapsed;
-                    Mouse.OverrideCursor = Cursors.Arrow;
-                    break;
-
-                case KinectGestureType.WaveRightHand:
-                    if (ApplicationController.Instance.Gripping)
-                    {
+                switch (e.GestureType)
+                {
+                    case KinectGestureType.WaveLeftHand:
                         RightOpen.Visibility = Visibility.Collapsed;
-                        RightClosed.Visibility = Visibility.Visible;
-                    }
-                    else
-                    {
-                        RightOpen.Visibility = Visibility.Visible;
                         RightClosed.Visibility = Visibility.Collapsed;
-                    }
-                    Mouse.OverrideCursor = Cursors.None;
-                    break;
-
-                default:
-                    break;
+                        Mouse.OverrideCursor = Cursors.Arrow;
+                        break;
+                    case KinectGestureType.WaveRightHand:
+                        if (ApplicationController.Instance.Gripping)
+                        {
+                            RightOpen.Visibility = Visibility.Collapsed;
+                            RightClosed.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            RightOpen.Visibility = Visibility.Visible;
+                            RightClosed.Visibility = Visibility.Collapsed;
+                        }
+                        Mouse.OverrideCursor = Cursors.None;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            else
+            {
+                switch (e.GestureType)
+                {
+                    case KinectGestureType.WaveLeftHand:
+                        if (ApplicationController.Instance.Gripping)
+                        {
+                            LeftOpen.Visibility = Visibility.Collapsed;
+                            LeftClosed.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            LeftOpen.Visibility = Visibility.Visible;
+                            LeftClosed.Visibility = Visibility.Collapsed;
+                        }
+                        Mouse.OverrideCursor = Cursors.None;
+                        break;
+                    case KinectGestureType.WaveRightHand:
+                        LeftOpen.Visibility = Visibility.Collapsed;
+                        LeftClosed.Visibility = Visibility.Collapsed;
+                        Mouse.OverrideCursor = Cursors.Arrow;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
 

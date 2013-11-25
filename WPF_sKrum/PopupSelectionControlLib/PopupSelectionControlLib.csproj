@@ -142,6 +142,8 @@
     <Resource Include="Images\right_open.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\left_closed.png" />
+    <Resource Include="Images\left_open.png" />
     <Content Include="KinectInteraction170_32.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

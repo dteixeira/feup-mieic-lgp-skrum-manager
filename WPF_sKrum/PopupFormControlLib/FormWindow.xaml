@@ -92,6 +92,8 @@
         <Canvas x:Name="kinectLayer" Visibility="Visible" Panel.ZIndex="100" Margin="0" Grid.RowSpan="2">
             <Image x:Name="RightOpen" Source="Images/right_open.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
             <Image x:Name="RightClosed" Source="Images/right_closed.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
+            <Image x:Name="LeftOpen" Source="Images/left_open.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
+            <Image x:Name="LeftClosed" Source="Images/left_closed.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
         </Canvas>
     </Grid>
 </Window>

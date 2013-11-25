@@ -81,34 +81,6 @@ namespace GenericControlLib
             this.CenterStopAction.Visibility = System.Windows.Visibility.Visible;
         }
 
-        private void UpBar_MouseLeftButtonDown(object sender, MouseEventArgs e)
-        {
-            this.pagesStatTimer.Stop();
-            this.HideEverything();
-            this.NotifyNavigationEvent(PageChangeDirection.Up);
-        }
-
-        private void DownBar_MouseLeftButtonDown(object sender, MouseEventArgs e)
-        {
-            this.pagesStatTimer.Stop();
-            this.HideEverything();
-            this.NotifyNavigationEvent(PageChangeDirection.Down);
-        }
-
-        private void RightBar_MouseLeftButtonDown(object sender, MouseEventArgs e)
-        {
-            this.pagesStatTimer.Stop();
-            this.HideEverything();
-            this.NotifyNavigationEvent(PageChangeDirection.Right);
-        }
-
-        private void LeftBar_MouseLeftButtonDown(object sender, MouseEventArgs e)
-        {
-            this.pagesStatTimer.Stop();
-            this.HideEverything();
-            this.NotifyNavigationEvent(PageChangeDirection.Left);
-        }
-
         private void ActionStop_MouseEnter(object sender, MouseEventArgs e)
         {
             this.pagesStatTimer.Stop();
@@ -167,6 +139,34 @@ namespace GenericControlLib
                 this.RightBar.Visibility = System.Windows.Visibility.Visible;
                 this.RightBar.SetValue(Panel.ZIndexProperty, 20);
             }
+        }
+
+        private void UpBar_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.pagesStatTimer.Stop();
+            this.HideEverything();
+            this.NotifyNavigationEvent(PageChangeDirection.Up);
+        }
+
+        private void DownBar_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.pagesStatTimer.Stop();
+            this.HideEverything();
+            this.NotifyNavigationEvent(PageChangeDirection.Down);
+        }
+
+        private void LeftBar_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.pagesStatTimer.Stop();
+            this.HideEverything();
+            this.NotifyNavigationEvent(PageChangeDirection.Left);
+        }
+
+        private void RightBar_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            this.pagesStatTimer.Stop();
+            this.HideEverything();
+            this.NotifyNavigationEvent(PageChangeDirection.Right);
         }
     }
 }

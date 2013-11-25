@@ -50,6 +50,8 @@ namespace SharedTypes
 
         public int TrackingID { get; set; }
 
+        public Kinect.Gestures.KinectGestureUserHandedness UserHandedness { get; set; }
+
         public bool Gripping { get; set; }
 
         public ITargetPage CurrentPage { get; set; }

@@ -1,7 +1,8 @@
 ﻿using Microsoft.Kinect;
 using Microsoft.Kinect.Toolkit.Interaction;
-using System.Linq;
 using System;
+using System.Linq;
+using Kinect.Gestures;
 
 namespace Kinect.Pointers
 {
@@ -14,6 +15,7 @@ namespace Kinect.Pointers
         private InteractionStream interactionStream;
         private int trackingId;
         private Skeleton[] skeletons = new Skeleton[0];
+        private Kinect.Gestures.KinectGestureUserHandedness userHandedness;
 
         /// <summary>
         /// Creates a new pointer controller instance.
@@ -24,7 +26,8 @@ namespace Kinect.Pointers
             this.interactionClient = new KinectPointerInteractionClient();
             this.interactionStream = new InteractionStream(sensor, this.interactionClient);
             this.interactionStream.InteractionFrameReady += new EventHandler<InteractionFrameReadyEventArgs>(KinectPointer_InteractionFrameReady);
-            this.trackingId = 0;
+            this.trackingId = -1;
+            this.userHandedness = Gestures.KinectGestureUserHandedness.RightHanded;
         }
 
         /// <summary>
@@ -38,10 +41,11 @@ namespace Kinect.Pointers
         /// <param name="e">AllFramesReady event arguments</param>
         /// <param name="accelerometerInfo">Accelerometer information of the sensor</param>
         /// <param name="trackingId">Id of the skeleton that should be tracked in the next frame</param>
-        public void UpdatePointer(AllFramesReadyEventArgs e, Vector4 accelerometerInfo, int trackingId)
+        public void UpdatePointer(AllFramesReadyEventArgs e, Vector4 accelerometerInfo, int trackingId, Kinect.Gestures.KinectGestureUserHandedness userHandedness)
         {
-            // Updates who should the controller be tracking.
+            // Updates who should the controller be tracking, and the correct hand.
             this.trackingId = trackingId;
+            this.userHandedness = userHandedness;
 
             // Processes image depth data.
             using (DepthImageFrame depthFrame = e.OpenDepthImageFrame())
@@ -105,14 +109,20 @@ namespace Kinect.Pointers
                     Skeleton currentSkeleton = skeletons.FirstOrDefault(s => s.TrackingId == this.trackingId);
                     if (currentSkeleton != null)
                     {
-                        // Left shoulder should be right of the left elbow.
-                        if (currentSkeleton.Joints[JointType.ShoulderLeft].Position.X > currentSkeleton.Joints[JointType.ElbowLeft].Position.X)
+                        // Left hand should be left of the left shoulder if user is right handed,
+                        // or right hand should be right of right shoulder, if user is left handed.
+                        if ((currentSkeleton.Joints[JointType.HandLeft].Position.X < currentSkeleton.Joints[JointType.ShoulderLeft].Position.X && this.userHandedness == KinectGestureUserHandedness.RightHanded) ||
+                            (currentSkeleton.Joints[JointType.HandRight].Position.X > currentSkeleton.Joints[JointType.ShoulderRight].Position.X && this.userHandedness == KinectGestureUserHandedness.LeftHanded))
                         {
-                            // Left hand should be above left elbow.
-                            if (currentSkeleton.Joints[JointType.HandLeft].Position.Y > currentSkeleton.Joints[JointType.ElbowLeft].Position.Y)
+                            // Left hand should be above left elbow if user is right handed,
+                            // or right hand should be above right elbow if user is left handed.
+                            if ((currentSkeleton.Joints[JointType.HandLeft].Position.Y > currentSkeleton.Joints[JointType.ElbowLeft].Position.Y && this.userHandedness == KinectGestureUserHandedness.RightHanded) ||
+                                (currentSkeleton.Joints[JointType.HandRight].Position.Y > currentSkeleton.Joints[JointType.ElbowRight].Position.Y && this.userHandedness == KinectGestureUserHandedness.LeftHanded))
                             {
-                                // Right hand should be above right elbow.
-                                if (currentSkeleton.Joints[JointType.HandRight].Position.Y > currentSkeleton.Joints[JointType.HipRight].Position.Y)
+                                // Right hand should be above right elbow if user is right handed,
+                                // or left hand should be above left elbow if user is left handed.
+                                if ((currentSkeleton.Joints[JointType.HandRight].Position.Y > currentSkeleton.Joints[JointType.ElbowRight].Position.Y && this.userHandedness == KinectGestureUserHandedness.RightHanded) ||
+                                    (currentSkeleton.Joints[JointType.HandLeft].Position.Y > currentSkeleton.Joints[JointType.ElbowLeft].Position.Y && this.userHandedness == KinectGestureUserHandedness.LeftHanded))
                                 {
                                     // Left hand data.
                                     KinectPointerHand leftHand = new KinectPointerHand();

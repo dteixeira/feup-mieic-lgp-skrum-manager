@@ -14,6 +14,7 @@ namespace Kinect.Sensor
         private KinectPointerController pointerController;
         private KinectSensor sensor;
         private int trackingId;
+        private Kinect.Gestures.KinectGestureUserHandedness userHandedness;
 
         /// <summary>
         /// Builds a new sensor controller instance.
@@ -25,6 +26,7 @@ namespace Kinect.Sensor
             {
                 this.sensor = KinectSensor.KinectSensors[0];
                 this.trackingId = -1;
+                this.userHandedness = KinectGestureUserHandedness.RightHanded;
                 this.ConfigureSensor(type);
                 this.ConfigureGestureController();
                 this.ConfigurePointerController();
@@ -79,8 +81,9 @@ namespace Kinect.Sensor
         /// Set a specific skeleton to track.
         /// </summary>
         /// <param name="trackingId">TrackingId of the skeleton</param>
-        public void StartTrackingSkeleton(int trackingId)
+        public void StartTrackingSkeleton(int trackingId, KinectGestureUserHandedness userHandedness)
         {
+            this.userHandedness = userHandedness;
             this.trackingId = trackingId;
             this.sensor.SkeletonStream.AppChoosesSkeletons = true;
             this.sensor.SkeletonStream.ChooseSkeletons(this.trackingId);
@@ -117,7 +120,7 @@ namespace Kinect.Sensor
         private void callback_AllFramesReady(object sender, AllFramesReadyEventArgs e)
         {
             // Updates the pointer controller.
-            this.pointerController.UpdatePointer(e, this.sensor.AccelerometerGetCurrentReading(), this.trackingId);
+            this.pointerController.UpdatePointer(e, this.sensor.AccelerometerGetCurrentReading(), this.trackingId, this.userHandedness);
 
             // Update the gesture controller.
             using (SkeletonFrame skeletonFrame = e.OpenSkeletonFrame())

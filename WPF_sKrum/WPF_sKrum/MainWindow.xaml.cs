@@ -58,6 +58,8 @@ namespace sKrum
 
         private DateTime LastGestureTimestamp { get; set; }
 
+        private object SensorTiltLock { get; set; }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -78,6 +80,62 @@ namespace sKrum
                 this.backdata.KinectSensor.Pointers.KinectPointerMoved += new EventHandler<KinectPointerEventArgs>(this.PointerMoved);
                 this.backdata.KinectSensor.Sensor.SkeletonFrameReady += new EventHandler<SkeletonFrameReadyEventArgs>(this.runtime_SkeletonFrameReady);
                 this.backdata.KinectSensor.StartSensor();
+            }
+
+            // Registers key up handler to manage the sensor tilt.
+            this.SensorTiltLock = new object();
+            this.KeyUp += MainWindow_KeyUp;
+        }
+
+        private void MainWindow_KeyUp(object sender, KeyEventArgs e)
+        {
+            // Tilt should only be available if sensor is active.
+            if (this.backdata.KinectSensor.FoundSensor())
+            {
+                if (e.Key == Key.Up || e.Key == Key.Down)
+                {
+                    System.Threading.Thread thread = new System.Threading.Thread(new System.Threading.ParameterizedThreadStart(TiltSensor));
+                    thread.Start(e);
+                }
+                e.Handled = true;
+            }
+        }
+
+        public void TiltSensor(object obj)
+        {
+            // A new tilt command cannot be issued if previous tilt is still locked;
+            KeyEventArgs e = (KeyEventArgs)obj;
+            // at least 1200ms should pass between tilts.
+            if (System.Threading.Monitor.TryEnter(this.SensorTiltLock))
+            {
+                try
+                {
+                    // Increase the tilt.
+                    if (e.Key == Key.Up)
+                    {
+                        if (ApplicationController.Instance.KinectSensor.Sensor.ElevationAngle <= 20)
+                        {
+                            ApplicationController.Instance.KinectSensor.Sensor.ElevationAngle += 5;
+                        }
+                    }
+                    else if (e.Key == Key.Down)
+                    {
+                        // Decrease the tilt.
+                        if (ApplicationController.Instance.KinectSensor.Sensor.ElevationAngle >= -20)
+                        {
+                            ApplicationController.Instance.KinectSensor.Sensor.ElevationAngle -= 5;
+                        }
+                    }
+                    System.Threading.Thread.Sleep(1200);
+                }
+                catch (Exception)
+                {
+                    // No exception handling needed, just catching.
+                }
+                finally
+                {
+                    System.Threading.Monitor.Exit(this.SensorTiltLock);
+                }
             }
         }
 
@@ -178,28 +236,40 @@ namespace sKrum
             {
                 case ApplicationPages.BacklogPage:
                     return new BacklogPageLib.BacklogPage(page.Context);
+
                 case ApplicationPages.MainPage:
                     return new MainPageLib.MainPage(page.Context);
+
                 case ApplicationPages.MeetingPage:
                     return new MeetingPageLib.MeetingPage(page.Context);
+
                 case ApplicationPages.PeopleManagementPage:
                     return new PeopleManagementPageLib.PeopleManagementPage(page.Context);
+
                 case ApplicationPages.PersonStatisticsPage:
                     return new ProjectStatisticsPageLib.PersonalStatisticsPage(page.Context);
+
                 case ApplicationPages.PersonTaskBoardPage:
                     return new TaskBoardPageLib.PersonalTaskBoardPage(page.Context);
+
                 case ApplicationPages.ProjectBacklogPage:
                     return new ProjectBacklogPageLib.ProjectBacklogPage(page.Context);
+
                 case ApplicationPages.ProjectManagementPage:
                     return new ProjectManagementPageLib.ProjectManagementPage(page.Context);
+
                 case ApplicationPages.ProjectStatisticsPage:
                     return new ProjectStatisticsPageLib.ProjectStatisticsPage(page.Context);
+
                 case ApplicationPages.ProjectTeamManagementPage:
                     return new ProjectTeamManagementPageLib.ProjectTeamManagementPage(page.Context);
+
                 case ApplicationPages.RootPage:
                     return new RootPage(page.Context);
+
                 case ApplicationPages.TaskBoardPage:
                     return new TaskBoardPageLib.TaskBoardPage(page.Context);
+
                 default:
                     return null;
             }
@@ -212,30 +282,39 @@ namespace sKrum
         /// <param name="e">Event arguments</param>
         public void GestureRegognized(object sender, KinectGestureEventArgs e)
         {
-            // Engage new skeleton.
-            if (e.GestureType == KinectGestureType.WaveRightHand && backdata.TrackingID == -1)
+            if (backdata.TrackingID == -1)
             {
-                Mouse.OverrideCursor = Cursors.None;
-                this.backdata.TrackingID = e.TrackingId;
-                this.backdata.KinectSensor.StartTrackingSkeleton(backdata.TrackingID);
-                this.RightOpen.Visibility = Visibility.Visible;
-                this.RightClosed.Visibility = Visibility.Collapsed;
-                this.UpperBar.Background = (Brush)Application.Current.FindResource("KinectOnBarBrush");
+                // Engage new skeleton.
+                if (e.GestureType == KinectGestureType.WaveRightHand)
+                {
+                    Mouse.OverrideCursor = Cursors.None;
+                    this.backdata.TrackingID = e.TrackingId;
+                    this.backdata.UserHandedness = KinectGestureUserHandedness.RightHanded;
+                    this.backdata.KinectSensor.StartTrackingSkeleton(backdata.TrackingID, backdata.UserHandedness);
+                    this.LastGestureTimestamp = DateTime.Now;
+                    this.RightOpen.Visibility = Visibility.Visible;
+                    this.RightClosed.Visibility = Visibility.Collapsed;
+                    this.LeftClosed.Visibility = System.Windows.Visibility.Collapsed;
+                    this.LeftOpen.Visibility = System.Windows.Visibility.Collapsed;
+                    this.UpperBar.Background = (Brush)Application.Current.FindResource("KinectOnBarBrush");
+                }
+                else if (e.GestureType == KinectGestureType.WaveLeftHand)
+                {
+                    Mouse.OverrideCursor = Cursors.None;
+                    this.backdata.TrackingID = e.TrackingId;
+                    this.backdata.UserHandedness = KinectGestureUserHandedness.LeftHanded;
+                    this.backdata.KinectSensor.StartTrackingSkeleton(backdata.TrackingID, backdata.UserHandedness);
+                    this.LastGestureTimestamp = DateTime.Now;
+                    this.RightOpen.Visibility = Visibility.Collapsed;
+                    this.RightClosed.Visibility = Visibility.Collapsed;
+                    this.LeftClosed.Visibility = Visibility.Collapsed;
+                    this.LeftOpen.Visibility = Visibility.Visible;
+                    this.UpperBar.Background = (Brush)Application.Current.FindResource("KinectOnBarBrush");
+                }
             }
 
             // Disengage previous skeleton.
-            else if (e.GestureType == KinectGestureType.WaveLeftHand && backdata.TrackingID == e.TrackingId)
-            {
-                Mouse.OverrideCursor = Cursors.Arrow;
-                this.backdata.TrackingID = -1;
-                this.backdata.KinectSensor.StopTrackingSkeleton();
-                this.RightOpen.Visibility = Visibility.Collapsed;
-                this.RightClosed.Visibility = Visibility.Collapsed;
-                this.UpperBar.Background = (Brush)Application.Current.FindResource("KinectOffBarBrush");
-            }
-
-            // Recognize transition gestures.
-            else if (this.backdata.TrackingID != -1)
+            else if (backdata.TrackingID == e.TrackingId)
             {
                 // Prevent several gestures triggered very close.
                 DateTime now = DateTime.Now;
@@ -248,27 +327,42 @@ namespace sKrum
                     LastGestureTimestamp = now;
                 }
 
-                // Process event modifications.
-                switch (e.GestureType)
+                if ((e.GestureType == KinectGestureType.WaveLeftHand && this.backdata.UserHandedness == KinectGestureUserHandedness.RightHanded) ||
+                    (e.GestureType == KinectGestureType.WaveRightHand && this.backdata.UserHandedness == KinectGestureUserHandedness.LeftHanded))
                 {
-                    case KinectGestureType.SwipeRightToLeft:
-                        this.TryTransition(PageChangeDirection.Right, PageTransitionType.SlideRight);
-                        break;
+                    Mouse.OverrideCursor = Cursors.Arrow;
+                    this.backdata.TrackingID = -1;
+                    this.backdata.KinectSensor.StopTrackingSkeleton();
+                    this.RightOpen.Visibility = Visibility.Collapsed;
+                    this.RightClosed.Visibility = Visibility.Collapsed;
+                    this.LeftOpen.Visibility = Visibility.Collapsed;
+                    this.LeftClosed.Visibility = Visibility.Collapsed;
+                    this.UpperBar.Background = (Brush)Application.Current.FindResource("KinectOffBarBrush");
+                }
+                else
+                {
+                    // Process event modifications.
+                    switch (e.GestureType)
+                    {
+                        case KinectGestureType.SwipeRightToLeft:
+                            this.TryTransition(PageChangeDirection.Right, PageTransitionType.SlideRight);
+                            break;
 
-                    case KinectGestureType.SwipeLeftToRight:
-                        this.TryTransition(PageChangeDirection.Left, PageTransitionType.SlideLeft);
-                        break;
+                        case KinectGestureType.SwipeLeftToRight:
+                            this.TryTransition(PageChangeDirection.Left, PageTransitionType.SlideLeft);
+                            break;
 
-                    case KinectGestureType.CircleLeftHand:
-                        this.TryTransition(PageChangeDirection.Down, PageTransitionType.SlideDown);
-                        break;
+                        case KinectGestureType.CircleLeftHand:
+                            this.TryTransition(PageChangeDirection.Down, PageTransitionType.SlideDown);
+                            break;
 
-                    case KinectGestureType.CircleRightHand:
-                        this.TryTransition(PageChangeDirection.Up, PageTransitionType.SlideUp);
-                        break;
+                        case KinectGestureType.CircleRightHand:
+                            this.TryTransition(PageChangeDirection.Up, PageTransitionType.SlideUp);
+                            break;
 
-                    default:
-                        break;
+                        default:
+                            break;
+                    }
                 }
             }
         }
@@ -316,39 +410,77 @@ namespace sKrum
         public void PointerMoved(object sender, KinectPointerEventArgs e)
         {
             uint flag = MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE;
-
-            // Position right hand.
-            if (e.RightHand.HandEventType == InteractionHandEventType.GripRelease)
-            {
-                backdata.Gripping = false;
-                flag = flag | MOUSEEVENTF_LEFTUP;
-                RightOpen.Visibility = Visibility.Visible;
-                RightClosed.Visibility = Visibility.Collapsed;
-            }
-            else if (e.RightHand.HandEventType == InteractionHandEventType.Grip)
-            {
-                backdata.Gripping = true;
-                flag = flag | MOUSEEVENTF_LEFTDOWN;
-                RightOpen.Visibility = Visibility.Collapsed;
-                RightClosed.Visibility = Visibility.Visible;
-            }
-
             if (backdata.Gripping)
             {
                 flag |= MOUSEEVENTF_LEFTDOWN;
             }
 
-            //TODO nao deixar sair do ecra a imagem
-            Canvas.SetLeft(RightOpen, (e.RightHand.X * this.RenderSize.Width) - (RightOpen.RenderSize.Width / 2));
-            Canvas.SetTop(RightOpen, (e.RightHand.Y * this.RenderSize.Height) - (RightOpen.RenderSize.Height / 2));
+            // Render hand cursor for right handed users.
+            if (this.backdata.UserHandedness == KinectGestureUserHandedness.RightHanded)
+            {
+                if (e.RightHand.HandEventType == InteractionHandEventType.GripRelease)
+                {
+                    backdata.Gripping = false;
+                    flag = flag | MOUSEEVENTF_LEFTUP;
+                    RightOpen.Visibility = Visibility.Visible;
+                    RightClosed.Visibility = Visibility.Collapsed;
+                }
+                else if (e.RightHand.HandEventType == InteractionHandEventType.Grip)
+                {
+                    backdata.Gripping = true;
+                    flag = flag | MOUSEEVENTF_LEFTDOWN;
+                    RightOpen.Visibility = Visibility.Collapsed;
+                    RightClosed.Visibility = Visibility.Visible;
+                }
 
-            Canvas.SetLeft(RightClosed, (e.RightHand.X * this.RenderSize.Width) - (RightClosed.RenderSize.Width / 2));
-            Canvas.SetTop(RightClosed, (e.RightHand.Y * this.RenderSize.Height) - (RightClosed.RenderSize.Height / 2));
+                // Normalize pointer coordinates.
+                double normalizedX = Math.Max(0, Math.Min(e.RightHand.X, 1.0));
+                double normalizedY = Math.Max(0, Math.Min(e.RightHand.Y, 1.0));
 
-            //Call the imported function with the cursor's current position
-            uint X = (uint)(e.RightHand.X * 65535);
-            uint Y = (uint)(e.RightHand.Y * 65535);
-            mouse_event(flag, X, Y, 0, 0);
+                Canvas.SetLeft(RightOpen, (normalizedX * this.RenderSize.Width) - (RightOpen.RenderSize.Width / 2));
+                Canvas.SetTop(RightOpen, (normalizedY * this.RenderSize.Height) - (RightOpen.RenderSize.Height / 2));
+
+                Canvas.SetLeft(RightClosed, (normalizedX * this.RenderSize.Width) - (RightClosed.RenderSize.Width / 2));
+                Canvas.SetTop(RightClosed, (normalizedY * this.RenderSize.Height) - (RightClosed.RenderSize.Height / 2));
+
+                // Call the imported function with the cursor's current position
+                uint x = (uint)(normalizedX * 65535);
+                uint y = (uint)(normalizedY * 65535);
+                mouse_event(flag, x, y, 0, 0);
+            }
+            // Render hand cursor for left handed users.
+            else
+            {
+                if (e.LeftHand.HandEventType == InteractionHandEventType.GripRelease)
+                {
+                    backdata.Gripping = false;
+                    flag = flag | MOUSEEVENTF_LEFTUP;
+                    LeftOpen.Visibility = Visibility.Visible;
+                    LeftClosed.Visibility = Visibility.Collapsed;
+                }
+                else if (e.LeftHand.HandEventType == InteractionHandEventType.Grip)
+                {
+                    backdata.Gripping = true;
+                    flag = flag | MOUSEEVENTF_LEFTDOWN;
+                    LeftOpen.Visibility = Visibility.Collapsed;
+                    LeftClosed.Visibility = Visibility.Visible;
+                }
+
+                // Normalize pointer coordinates.
+                double normalizedX = Math.Max(0, Math.Min(e.LeftHand.X, 1.0));
+                double normalizedY = Math.Max(0, Math.Min(e.LeftHand.Y, 1.0));
+
+                Canvas.SetLeft(LeftOpen, (normalizedX * this.RenderSize.Width) - (LeftOpen.RenderSize.Width / 2));
+                Canvas.SetTop(LeftOpen, (normalizedY * this.RenderSize.Height) - (LeftOpen.RenderSize.Height / 2));
+
+                Canvas.SetLeft(LeftClosed, (normalizedX * this.RenderSize.Width) - (LeftClosed.RenderSize.Width / 2));
+                Canvas.SetTop(LeftClosed, (normalizedY * this.RenderSize.Height) - (LeftClosed.RenderSize.Height / 2));
+
+                // Call the imported function with the cursor's current position
+                uint x = (uint)(normalizedX * 65535);
+                uint y = (uint)(normalizedY * 65535);
+                mouse_event(flag, x, y, 0, 0);
+            }
         }
 
         /// <summary>
@@ -510,6 +642,14 @@ namespace sKrum
         private void GridConfig_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             ApplicationController.Instance.ApplicationWindow.TryTransition(new PageChange { Context = null, Page = ApplicationPages.ProjectManagementPage });
+        }
+
+        private void sKrum_Unloaded(object sender, RoutedEventArgs e)
+        {
+            if (ApplicationController.Instance.KinectSensor.FoundSensor())
+            {
+                ApplicationController.Instance.KinectSensor.StopSensor();
+            }
         }
     }
 }

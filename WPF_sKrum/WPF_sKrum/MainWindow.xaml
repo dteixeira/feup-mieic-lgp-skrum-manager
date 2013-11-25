@@ -8,7 +8,7 @@
         WindowStyle = "None"
         WindowState="Maximized"
         x:Name="sKrum"
-        Background="{DynamicResource BackgroundBrush}" Loaded="sKrum_Loaded">
+        Background="{DynamicResource BackgroundBrush}" Loaded="sKrum_Loaded" Unloaded="sKrum_Unloaded">
     <Window.Resources>
         <Style x:Key="HoverZoomStyle" TargetType="{x:Type Image}">
             <Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
@@ -55,7 +55,7 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Grid x:Name="UpperBar" Margin="0" Grid.Row="0" Background="{DynamicResource KinectOffBarBrush}">
+            <Grid x:Name="UpperBar" Margin="0" Grid.Row="0" Background="{DynamicResource KinectOffBarBrush}" Panel.ZIndex="3">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70*" />
                     <ColumnDefinition Width="8*" />
@@ -95,6 +95,8 @@
         <Canvas x:Name="kinectLayer" Visibility="Visible" Panel.ZIndex="100" Margin="0">
             <Image x:Name="RightOpen" Source="Images/right_open.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
             <Image x:Name="RightClosed" Source="Images/right_closed.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
+            <Image x:Name="LeftClosed" Source="Images/left_closed.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
+            <Image x:Name="LeftOpen" Source="Images/left_open.png" Visibility="Collapsed" Width="Auto" Height="Auto" IsHitTestVisible="False" />
         </Canvas>
     </Grid>
 </Window>

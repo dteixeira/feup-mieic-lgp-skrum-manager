@@ -18,29 +18,33 @@ namespace Kinect.Gestures.Swipes.Frames
         /// </returns>
         public KinectGestureResult ProcessFrame(Skeleton skeleton)
         {
-            // Checks if left hand is below the left shoulder.
-            if (skeleton.Joints[JointType.HandLeft].Position.Y < skeleton.Joints[JointType.ShoulderLeft].Position.Y)
+            // Checks if right hand is down.
+            if (skeleton.Joints[JointType.HandRight].Position.Y < skeleton.Joints[JointType.ElbowRight].Position.Y)
             {
-                // Checks if left hand is above the hip
-                if (skeleton.Joints[JointType.HandLeft].Position.Y > skeleton.Joints[JointType.HipCenter].Position.Y)
+                // Checks if left hand is below the left shoulder.
+                if (skeleton.Joints[JointType.HandLeft].Position.Y < skeleton.Joints[JointType.ShoulderLeft].Position.Y)
                 {
-                    // Checks if the left hand is at the right of the left elbow.
-                    if (skeleton.Joints[JointType.HandLeft].Position.X > skeleton.Joints[JointType.ElbowLeft].Position.X)
+                    // Checks if left hand is above the hip
+                    if (skeleton.Joints[JointType.HandLeft].Position.Y > skeleton.Joints[JointType.HipLeft].Position.Y)
                     {
-                        // The second part of the gesture was completed.
-                        return KinectGestureResult.Success;
+                        // Checks if the left hand is at the right of the left elbow.
+                        if (skeleton.Joints[JointType.HandLeft].Position.X > skeleton.Joints[JointType.ElbowLeft].Position.X)
+                        {
+                            // The second part of the gesture was completed.
+                            return KinectGestureResult.Success;
+                        }
+
+                        // Gesture was not completed, but it's still possible to achieve.
+                        else
+                        {
+                            // Will pause recognition and try later.
+                            return KinectGestureResult.Waiting;
+                        }
                     }
 
-                    // Gesture was not completed, but it's still possible to achieve.
-                    else
-                    {
-                        // Will pause recognition and try later.
-                        return KinectGestureResult.Waiting;
-                    }
+                    // The standard result is failure.
+                    return KinectGestureResult.Fail;
                 }
-
-                // The standard result is failure.
-                return KinectGestureResult.Fail;
             }
 
             // The standard result is failure.

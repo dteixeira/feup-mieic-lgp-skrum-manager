@@ -23,7 +23,7 @@
             <ColumnDefinition Width="150" />
             <ColumnDefinition Width="5" />
         </Grid.ColumnDefinitions>
-        <Grid x:Name="UpBar" MouseLeftButtonDown="UpBar_MouseLeftButtonDown" Grid.Column="2" Grid.RowSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden">
+        <Grid x:Name="UpBar" Grid.Column="2" Grid.RowSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden" MouseLeftButtonUp="UpBar_MouseLeftButtonUp">
             <Grid HorizontalAlignment="Center" Grid.RowSpan="2" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -33,7 +33,7 @@
                 <Image Grid.Row="0" Grid.Column="0" x:Name="UpArrow" Margin="0" Source="Images/arrow.png" Stretch="Fill" Width="80" Height="80" VerticalAlignment="Center" HorizontalAlignment="Center" />
             </Grid>
         </Grid>
-        <Grid x:Name="DownBar" MouseLeftButtonDown="DownBar_MouseLeftButtonDown" Grid.Row="3" Grid.Column="2" Grid.RowSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden">
+        <Grid x:Name="DownBar" Grid.Row="3" Grid.Column="2" Grid.RowSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden" MouseLeftButtonUp="DownBar_MouseLeftButtonUp">
             <Grid HorizontalAlignment="Center" Grid.RowSpan="2" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -52,7 +52,7 @@
                 </Image>
             </Grid>
         </Grid>
-        <Grid x:Name="LeftBar" MouseLeftButtonDown="LeftBar_MouseLeftButtonDown" Grid.Row="2" Grid.ColumnSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden">
+        <Grid x:Name="LeftBar" Grid.Row="2" Grid.ColumnSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden" MouseLeftButtonUp="LeftBar_MouseLeftButtonUp">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center" ScrollViewer.CanContentScroll="True">
                 <Grid.RowDefinitions>
                     <RowDefinition />
@@ -71,7 +71,7 @@
                 </Image>
             </Grid>
         </Grid>
-        <Grid x:Name="RightBar" MouseLeftButtonDown="RightBar_MouseLeftButtonDown" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden">
+        <Grid x:Name="RightBar" Grid.Row="2" Grid.Column="3" Grid.ColumnSpan="2" Background="{DynamicResource Gray3Brush}" Opacity="0.795" Panel.ZIndex="1" Visibility="Hidden" MouseLeftButtonUp="RightBar_MouseLeftButtonUp">
             <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
                 <Grid.RowDefinitions>
                     <RowDefinition />

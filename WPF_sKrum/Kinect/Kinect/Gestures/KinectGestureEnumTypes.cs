@@ -26,4 +26,10 @@
         SwipeTopToBottom,
         UserGenerated
     }
+
+    public enum KinectGestureUserHandedness
+    {
+        RightHanded,
+        LeftHanded
+    }
 }

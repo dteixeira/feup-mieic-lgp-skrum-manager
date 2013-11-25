@@ -19,7 +19,14 @@ namespace DatabasePopulator
         public static void Main(string[] args)
         {
             Populator populator = new Populator();
-            Project project = populator.Data.GetProjectByName("sKrum");
+            populator.Data.CreateProject(new Project { 
+                AlertLimit = 1,
+                Name = "sKrum",
+                Speed = 1,
+                SprintDuration = 1
+            });
+
+            /*Project project = populator.Data.GetProjectByName("sKrum");
             Person person = populator.Data.GetPersonByEmail("amir@email.com");
             Role role = new Role
             {
@@ -28,7 +35,7 @@ namespace DatabasePopulator
                 ProjectID = project.ProjectID,
                 RoleDescription = RoleDescription.TeamMember
             };
-            populator.Data.CreateRole(role);
+            populator.Data.CreateRole(role);*/
 
             /*Story story = populator.Data.GetStoryByID(1);
             StorySprint storySprint = story.StorySprints[0];

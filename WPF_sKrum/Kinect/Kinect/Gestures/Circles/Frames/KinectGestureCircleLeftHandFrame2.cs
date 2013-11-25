@@ -18,19 +18,23 @@ namespace Kinect.Gestures.Circles.Frames
         /// </returns>
         public KinectGestureResult ProcessFrame(Skeleton skeleton)
         {
-            // Checks if the left hand is left of the left elbow
-            if (skeleton.Joints[JointType.HandLeft].Position.X < skeleton.Joints[JointType.ElbowLeft].Position.X)
+            // Checks if right hand is down.
+            if (skeleton.Joints[JointType.HandRight].Position.Y < skeleton.Joints[JointType.ElbowRight].Position.Y)
             {
-                // Checks if the left hand is below the left elbow
-                if (skeleton.Joints[JointType.HandLeft].Position.Y < skeleton.Joints[JointType.ElbowLeft].Position.Y)
+                // Checks if the left hand is left of the left elbow
+                if (skeleton.Joints[JointType.HandLeft].Position.X < skeleton.Joints[JointType.ElbowLeft].Position.X)
                 {
-                    // The second part of the gesture was completed.
-                    return KinectGestureResult.Success;
-                }
-                else
-                {
-                    // Gesture recognition will pause.
-                    return KinectGestureResult.Waiting;
+                    // Checks if the left hand is below the left elbow
+                    if (skeleton.Joints[JointType.HandLeft].Position.Y < skeleton.Joints[JointType.ElbowLeft].Position.Y)
+                    {
+                        // The second part of the gesture was completed.
+                        return KinectGestureResult.Success;
+                    }
+                    else
+                    {
+                        // Gesture recognition will pause.
+                        return KinectGestureResult.Waiting;
+                    }
                 }
             }
 
